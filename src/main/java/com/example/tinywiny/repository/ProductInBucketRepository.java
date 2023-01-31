@@ -15,6 +15,6 @@ public interface ProductInBucketRepository extends JpaRepository<ProductInBucket
   void deleteProductInBucketById(@Param("id")Long id);
 
   @Query( value="select product_id from product_in_bucket where bucket_id =:bucketId?", nativeQuery = true)
-  List<Long> findAllProductInBucket(Long bucketId);
+  List<Product> findAllProductInBucket(Long bucketId);
 }
 

@@ -17,7 +17,7 @@ public class ProductInBucketService {
   private final ProductInBucketRepository productInBucketRepository;
 
   public List<Product> findAllProductInBucket(Long bucketId) {
-    return productInBucketRepository.findAllProductInBucket(bucketId);
+        return productInBucketRepository.findAllProductInBucket(bucketId);
   }
   public void save(ProductInBucket product) {
    productInBucketRepository.save(product);

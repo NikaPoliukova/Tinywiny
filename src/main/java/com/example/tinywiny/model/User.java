@@ -48,7 +48,6 @@ public class User {
   @OneToMany(mappedBy = "user")
   private List<DeliveryInformation> deliveryInformation = new ArrayList<>();
 
-  @OneToOne( cascade = CascadeType.ALL)
-  @JoinColumn(name = "bucket_id")
+  @OneToOne(mappedBy = "user")
   private Bucket bucket;
 }

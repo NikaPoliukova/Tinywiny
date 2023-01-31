@@ -18,7 +18,8 @@ public class Bucket {
   @Column(name = "bucket_id")
   private Long bucketId;
 
-  @OneToOne(mappedBy = "bucket")
+  @OneToOne( cascade = CascadeType.ALL)
+  @JoinColumn(name = "user_id")
   private User user;
 
   @OneToMany(mappedBy = "bucket", fetch = FetchType.LAZY, cascade = {CascadeType.ALL})

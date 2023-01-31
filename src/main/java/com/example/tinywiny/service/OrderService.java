@@ -17,42 +17,33 @@ public class OrderService {
 
   private final OrderRepository orderRepository;
 
-  public Order save (Order order){
+  public Order save(Order order) {
     return orderRepository.save(order);
   }
-  public String findOrderByOrderId(Long orderId) {
+
+  public Order findOrderByOrderId(Long orderId) {
     return orderRepository.findOrderByOrderId(orderId);
   }
+  public String getStatusByOrderId(Long orderId) {
+    return orderRepository.getStatusByOrderId(orderId);
+  }
+
 
   public Page<Order> findAll(Pageable page) {
     return orderRepository.findAll(page);
   }
-  public Order addOrder(Order order) {
-    return orderRepository.save(order);
+
+  public void updateOrderStatus(long orderNumber, String status) {
+    orderRepository.updateOrderStatus(orderNumber, status);
   }
 
-  public void updateOrderStatus(long orderNumber,String status) {
-    orderRepository.updateOrderStatus(orderNumber,status);
-  }
-
-
-
-
-
-
-  /*
-
-
-
-  //FOR ADMIN
-  public Page<Order> filterOrders(String status, int pageNumber, int pageSize) {
-    Pageable page = PageRequest.of(pageNumber, pageSize);
+  public Page<Order> filterOrderByStatus(String status, Pageable page) {
     if (status != null) {
-      return orderRepository.findAllOrdersByPageAndStatus(status, page);
+      return orderRepository.findAllOrdersByStatusOrder(status, page);
     } else {
       return orderRepository.findAllBy(page);
     }
   }
 
-  */
+
 }

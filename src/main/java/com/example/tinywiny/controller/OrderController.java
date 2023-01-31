@@ -25,37 +25,34 @@ import java.util.List;
 
 @Slf4j
 @RestController
-@RequestMapping("/api/v1/order")
+@RequestMapping("/api/v1/orders")
 @AllArgsConstructor
 public class OrderController {
   private final OrderService orderService;
   //КОГДА ДЕЛАЕТСЯ ЗАКАЗ ЧИСЛО НА СКЛАДЕ ДОЛЖНО УМЕНЬШАТЬСЯ
 
-  @GetMapping()
+  @GetMapping
   public Page<Order> findAll(Pageable page) {
     return orderService.findAll(page);
   }
-/*
-
-
-  @GetMapping()
-  public String filterOrdersByPage(final Model model,
-                                   @RequestParam(name = "status", required = false) String status,
-                                   @RequestParam(value = "pageNumber", required = false, defaultValue = "1") Integer pageNumber,
-                                   @RequestParam(value = "pageSize", required = false, defaultValue = "5") Integer pageSize) {
-    Page<Order> page = orderService.filterOrders(status, pageNumber - 1, pageSize);
-    List<Order> orders = page.getContent();
-    model.addAttribute("currentPage", pageNumber);
-    model.addAttribute("totalItems", page.getTotalElements());
-    model.addAttribute("totalPages", page.getTotalPages());
-    model.addAttribute("orders", orders);
-    model.addAttribute("pageSize", pageSize);
-    return "page-all-orders";
-  }
 
   @PostMapping("/update-status")
-  public String updateOrderStatus(long orderNumber, String status) {
+  public void updateOrderStatus(long orderNumber, String status) {
     orderService.updateOrderStatus(orderNumber, status);
-    return "order";
-  }*/
+  }
+
+  @PostMapping
+  public void addOrder(Order order) {
+    orderService.save(order);
+  }
+
+  @GetMapping("/{orderId}")
+  public Order findOrderByOrderId(@PathVariable Long orderId) {
+    return orderService.findOrderByOrderId(orderId);
+  }
+
+  @GetMapping("/status")
+  public String findStatusOrder(@PathVariable Long orderId) {
+    return orderService.getStatusByOrderId(orderId);
+  }
 }

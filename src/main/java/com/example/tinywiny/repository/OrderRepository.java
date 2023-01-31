@@ -14,18 +14,18 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface OrderRepository extends JpaRepository<Order, Product> {
 
-  String findOrderByOrderId(@Param("orderId") Long orderId);
+  Order findOrderByOrderId(@Param("orderId") Long orderId);
+  @Query(value =" select status_order from orders where order_id =:orderNumber ", nativeQuery = true)
+  String getStatusByOrderId(Long orderNumber);
 
-  String getOrderStatus(Long orderNumber);
-
-  Order getAllOrdersByUserId(Long userId);
+  Order getAllOrdersByOrderId(@Param("orderId")Long userId);
 
   DeliveryInformation getInformation();
 
 
   Page<Order> findAllBy(Pageable page);
 
-  Page<Order> findAllOrdersByPageAndStatus(String status, Pageable page);
+  Page<Order> findAllOrdersByStatusOrder(String status,Pageable page);
 
   @Modifying
   @Query(value ="update orders set status_order =:status where order_id =:orderNumber ", nativeQuery = true)

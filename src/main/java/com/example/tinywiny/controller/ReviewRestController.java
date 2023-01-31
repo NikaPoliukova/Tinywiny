@@ -6,6 +6,7 @@ import com.example.tinywiny.service.ReviewService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,16 +31,12 @@ public class ReviewRestController {
   }
 
   @GetMapping
-  protected List<Review> findAlReviews(@RequestParam(value = "pageNumber", required = false, defaultValue = "1") Integer pageNumber,
-                                       @RequestParam(value = "pageSize", required = false, defaultValue = "20") Integer pageSize) {
-    Page<Review> page = reviewService.getReviewsByPage(pageNumber - 1, pageSize);
-    List<Review> reviews = page.getContent();
-    return reviews;
-  }
-  //+
+  protected Page<Review> findAlReviews(Pageable page) {
+    return reviewService.findReviewsByPage(page);
+   }
+
     @DeleteMapping
   protected void deleteReview(Long id){
     reviewService.deleteReviewById(id);
   }
-
 }

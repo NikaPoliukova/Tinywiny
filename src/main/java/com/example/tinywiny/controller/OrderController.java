@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,17 +25,19 @@ import java.util.List;
 
 @Slf4j
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping("/api/v1/order")
 @AllArgsConstructor
 public class OrderController {
   private final OrderService orderService;
   //КОГДА ДЕЛАЕТСЯ ЗАКАЗ ЧИСЛО НА СКЛАДЕ ДОЛЖНО УМЕНЬШАТЬСЯ
+
+  @GetMapping()
+  public Page<Order> findAll(Pageable page) {
+    return orderService.findAll(page);
+  }
 /*
 
 
-
-
-  //for ADMIN
   @GetMapping()
   public String filterOrdersByPage(final Model model,
                                    @RequestParam(name = "status", required = false) String status,

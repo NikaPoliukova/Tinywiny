@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @Slf4j
 @RequestMapping("/api/v1/bucket")
 @RestController
@@ -29,21 +31,18 @@ public class BucketController {
   private final ProductInBucketService productInBucketService;
 
   @GetMapping("/products-in-bucket")
-  public Bucket findAllProductsInBucket(Long productInBucketId) {
-    return;
+  public List<Product> findAllProductsInBucket(Long bucketId) {
+    return productInBucketService.findAllProductInBucket(bucketId);
   }
 
   @PostMapping
-  public ProductInBucket addProductInBucket(@RequestBody Product product) {
-        return productInBucketService.save(product);
+  public void addProductInBucket(@RequestBody ProductInBucket productInBucket) {
+    productInBucketService.save(productInBucket);
   }
-
 
   @DeleteMapping("/delete")
   public void deleteProductInBucket(Long productInBucketId) {
     productInBucketService.deleteProductInBucket(productInBucketId);
   }
-
-}
 
 }

@@ -49,7 +49,6 @@ public class UserService {
       user.setPassword(passwordEncoder.encode(userDto.getPassword()));
       userRepository.save(user);
     }
-
     bucketService.createBucket(user.getUserId());
     return user;
   }
@@ -62,8 +61,7 @@ public class UserService {
     return user.get();
   }
 
-  public Page<User> getUserByPage(int pageNumber, int pageSize) {
-    Pageable page = PageRequest.of(pageNumber, pageSize);
+  public Page<User> getUserByPage(Pageable page) {
     return userRepository.findAllBy(page);
   }
 

@@ -49,6 +49,6 @@ public class User {
   private List<DeliveryInformation> deliveryInformation = new ArrayList<>();
 
   @OneToOne( cascade = CascadeType.ALL)
-  @JoinColumn(name = "bucket_id", referencedColumnName = "bucket_id")
+  @JoinColumn(name = "bucket_id")
   private Bucket bucket;
 }

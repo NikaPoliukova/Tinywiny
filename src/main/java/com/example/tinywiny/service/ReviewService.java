@@ -1,5 +1,6 @@
 package com.example.tinywiny.service;
 
+import com.example.tinywiny.converter.ReviewConverter;
 import com.example.tinywiny.dto.ReviewDto;
 import com.example.tinywiny.model.Review;
 import com.example.tinywiny.model.User;
@@ -23,29 +24,27 @@ import java.util.Optional;
 public class ReviewService {
 
   private final ReviewRepository reviewRepository;
-  private final UserRepository userRepository;
+  private final ReviewConverter converter;
 
   @Modifying
   public Review save(ReviewDto review) {
-        if (review.getTextReview().isEmpty()) {
+    if (review.getTextReview().isEmpty()) {
       throw new RuntimeException("You didn't write anything");
     }
-    //review.setUserId(userRepository.findUserByUserId(userId).get());
-    //return reviewRepository.createReview(text, userId);
-    return save(review);
+    return reviewRepository.save(converter.toReview(review));
+  }
+  public Page<Review> findReviewsByPage(Pageable page) {
+    return reviewRepository.findAllBy(page);
   }
 
-  public List<Review> findAll() {
+  /*public List<Review> findAll() {
     return reviewRepository.findAll();
-  }
+  }*/
 
   @Modifying
   public void deleteReviewById(Long reviewId) {
     reviewRepository.deleteReviewById(reviewId);
   }
 
-  public Page<Review> getReviewsByPage(int pageNumber, int pageSize) {
-    Pageable page = PageRequest.of(pageNumber, pageSize);
-    return reviewRepository.findAllBy(page);
-  }
+
 }

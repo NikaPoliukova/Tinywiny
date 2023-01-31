@@ -7,7 +7,7 @@ CREATE TABLE users
   email        VARCHAR,
   phone_number VARCHAR,
   role         VARCHAR NOT NULL DEFAULT 'USER',
-  bucket_id    BIGSERIAL NOT NULL references bucket(bucket_id),
+
   PRIMARY KEY (user_id)
   );
 

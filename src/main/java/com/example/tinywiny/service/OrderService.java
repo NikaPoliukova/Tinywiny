@@ -24,18 +24,23 @@ public class OrderService {
     return orderRepository.findOrderByOrderId(orderId);
   }
 
-
-
-
-
-
-
-
-
-  /*public Order addOrder(String commentOrder, long statusOrder, String productName, String paymentStatus,
-                        String userId) { //если лист заказов?
-    return orderRepository.addOrder(customerId, productName, commentOrder, customerAddress, phoneNumber, email);
+  public Page<Order> findAll(Pageable page) {
+    return orderRepository.findAll(page);
   }
+  public Order addOrder(Order order) {
+    return orderRepository.save(order);
+  }
+
+  public void updateOrderStatus(long orderNumber,String status) {
+    orderRepository.updateOrderStatus(orderNumber,status);
+  }
+
+
+
+
+
+
+  /*
 
 
 
@@ -49,7 +54,5 @@ public class OrderService {
     }
   }
 
-  public void updateOrderStatus(long orderNumber,String status) {
-  orderRepository.updateOrderStatus(orderNumber,status);
-  }*/
+  */
 }

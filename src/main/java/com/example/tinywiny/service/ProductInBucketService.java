@@ -16,15 +16,16 @@ public class ProductInBucketService {
 
   private final ProductInBucketRepository productInBucketRepository;
 
-  public List<Product> findAll(Long bucketId) {
-    productInBucketRepository.findAllByB(bucketId);
+  public List<Product> findAllProductInBucket(Long bucketId) {
+    return productInBucketRepository.findAllProductInBucket(bucketId);
   }
+  public void save(ProductInBucket product) {
+   productInBucketRepository.save(product);
 
+  }
   public void deleteProductInBucket(Long productInBucketId) {
     productInBucketRepository.deleteProductInBucketById(productInBucketId);
   }
 
-  public ProductInBucket save(ProductInBucket product) {
-    return productInBucketRepository.save(product);
-  }
+
 }

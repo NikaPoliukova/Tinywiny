@@ -1,6 +1,5 @@
 package com.example.tinywiny.repository;
 
-import com.example.tinywiny.model.Bucket;
 import com.example.tinywiny.model.Product;
 import com.example.tinywiny.model.ProductInBucket;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -15,9 +14,7 @@ public interface ProductInBucketRepository extends JpaRepository<ProductInBucket
   @Modifying
   void deleteProductInBucketById(@Param("id")Long id);
 
- // @Query( value="select product_id from product_in_bucket where bucket_id =:bucketId?", nativeQuery = true)
-  List<Long> getProductInBucketByBucket(@Param("bucketId") Long bucketId);
-
-
+  @Query( value="select product_id from product_in_bucket where bucket_id =:bucketId?", nativeQuery = true)
+  List<Long> findAllProductInBucket(Long bucketId);
 }
 

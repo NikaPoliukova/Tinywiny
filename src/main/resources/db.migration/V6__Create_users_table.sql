@@ -3,11 +3,11 @@ CREATE TABLE users
   user_id      BIGSERIAL NOT NULL UNIQUE,
   username     VARCHAR NOT NULL,
   password     VARCHAR NOT NULL,
-  created_at   TIMESTAMP DEFAULT now(),
+  created_at   TIMESTAMP NOT NULL DEFAULT now(),
   email        VARCHAR,
   phone_number VARCHAR,
-  role         VARCHAR DEFAULT 'USER',
-  bucket_id    BIGINT references bucket(bucket_id),
+  role         VARCHAR NOT NULL DEFAULT 'USER',
+  bucket_id    BIGSERIAL NOT NULL references bucket(bucket_id),
   PRIMARY KEY (user_id)
   );
 

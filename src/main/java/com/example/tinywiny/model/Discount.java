@@ -1,4 +1,4 @@
-package com.example.tinywiny.dto;
+package com.example.tinywiny.model;
 
 
 import com.example.tinywiny.model.Order;

@@ -1,4 +1,4 @@
-package com.example.tinywiny.dto;
+package com.example.tinywiny.model;
 
 import com.example.tinywiny.model.Bucket;
 import com.example.tinywiny.model.Product;
@@ -20,7 +20,7 @@ import javax.persistence.Table;
 @Entity
 @Data
 @NoArgsConstructor
-@Table(name = "bucket_has_order")
+@Table(name = "product_in_bucket")
 public class ProductInBucket {
 
   @Id

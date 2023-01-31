@@ -1,4 +1,4 @@
-package com.example.users.handler;
+package com.example.tinywiny.handler;
 
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;

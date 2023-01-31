@@ -1,4 +1,4 @@
-package com.example.tinywiny.dto;
+package com.example.tinywiny.model;
 
 
 import lombok.Data;

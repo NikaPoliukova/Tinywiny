@@ -1,8 +1,12 @@
-package com.example.users.security.filter;
+package com.example.tinywiny.security.filter;
+
+
 
 import com.auth0.jwt.algorithms.Algorithm;
-import com.example.users.dto.TokensDto;
+import com.example.tinywiny.dto.TokensDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+
 import lombok.extern.log4j.Log4j2;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -11,13 +15,15 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+
 import javax.servlet.FilterChain;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-import static com.example.users.security.jwt.JwtUtils.generateAccessToken;
-import static com.example.users.security.jwt.JwtUtils.generateRefreshToken;
+
+import static com.example.tinywiny.security.jwt.JwtUtils.generateAccessToken;
+import static com.example.tinywiny.security.jwt.JwtUtils.generateRefreshToken;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @Log4j2
@@ -52,6 +58,6 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
     dto.setAccess_token(accessToken);
     dto.setRefreshToken(refreshToken);
     response.setContentType(APPLICATION_JSON_VALUE);
-     new ObjectMapper().writeValue(response.getOutputStream(), dto);
+    new ObjectMapper().writeValue(response.getOutputStream(), dto);
   }
 }

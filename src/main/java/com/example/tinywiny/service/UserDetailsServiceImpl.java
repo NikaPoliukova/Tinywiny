@@ -1,7 +1,8 @@
-package com.example.users.service;
+package com.example.tinywiny.service;
 
-import com.example.users.model.User;
-import com.example.users.repository.UserRepository;
+
+import com.example.tinywiny.model.User;
+import com.example.tinywiny.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -22,7 +23,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
   @Override
   public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-    User user = userRepository.findUserByUserName(username);
+    User user = userRepository.getUserByUserName(username);
     if (user == null) {
       throw new RuntimeException("username not found in database");
     } else {

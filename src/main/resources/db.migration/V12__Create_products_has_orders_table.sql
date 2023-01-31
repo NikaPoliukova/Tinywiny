@@ -1,6 +1,7 @@
-CREATE TABLE products_in_orders (
+CREATE TABLE product_in_bucket (
 
   id                     BIGSERIAL NOT NULL PRIMARY KEY,
-  product_id             BIGINT references products(product_id),
-  order_id               BIGINT references orders(order_id)
+  bucket_id             BIGINT references bucket(bucket_id),
+  product_id               BIGINT references products(product_id),
+  count                 INT NOT NULL
   );

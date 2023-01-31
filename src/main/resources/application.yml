@@ -1,0 +1,24 @@
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    username: postgres
+    password: postgres
+    url: jdbc:postgresql://localhost:35432/tinywiny_network
+  jpa:
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+jwt:
+  secretKey: secretKeyNika
+
+logging:
+  level:
+    org:
+      hibernate:
+        type: trace

@@ -1,4 +1,5 @@
-package com.example.users.security.jwt;
+package com.example.tinywiny.security.jwt;
+
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
@@ -16,7 +17,7 @@ public class JwtUtils {
   public static String generateAccessToken(User user, String requestUrl, Algorithm algorithm) {
     return JWT.create()
         .withSubject(user.getUsername())
-        .withExpiresAt(new Date(System.currentTimeMillis() + 60 * 1000))
+        .withExpiresAt(new Date(System.currentTimeMillis() + 60 * 60 * 1000))
         .withIssuer(requestUrl)
         .withClaim("roles", user.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList()))
         .sign(algorithm);

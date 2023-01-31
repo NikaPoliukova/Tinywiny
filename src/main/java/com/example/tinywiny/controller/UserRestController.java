@@ -14,14 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -36,7 +29,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @RequestMapping("/api/v1/users")
 @RestController
 @RequiredArgsConstructor
-public class UserController {
+public class UserRestController {
 
   @Value("${jwt.secretKey}")
   private String secretKey;
@@ -45,11 +38,10 @@ public class UserController {
   private final UserConverter userConverter;
 
 
-  @PatchMapping(consumes = MediaType.APPLICATION_JSON_VALUE, value = "/correct-user")
-  protected User correctUser(@RequestBody User user) {
-    return userService.save(user);
+  @PutMapping("/update/user/{userId}")
+  protected void updateUser(@PathVariable Long userId, @RequestBody UserDto userDto) {
+   userService.updateUser(userDto);
   }
-
 
   @GetMapping
   protected List<UserDto> findAllUsersByPage(@RequestParam(value = "pageNumber", required = false, defaultValue = "1") Integer pageNumber,
@@ -59,12 +51,13 @@ public class UserController {
     return userConverter.toDto(users);
   }
 
-  @GetMapping(consumes = MediaType.APPLICATION_JSON_VALUE, value = "/user/{userId}")
-  protected User findUser(@RequestBody User user) {
-    return userService.findUserByUserId(user.getUserId());
-
+  @GetMapping("/user/{userId}")
+  protected UserDto findUser(@PathVariable Long userId) {
+    User user = userService.findUserByUserId(userId);
+    return userConverter.toDto(user);
 
   }
+
   @GetMapping("/token/refresh")
   public void refreshToken(HttpServletRequest request, HttpServletResponse response,
                            @RequestHeader(AUTHORIZATION) String authorizationHeader) {

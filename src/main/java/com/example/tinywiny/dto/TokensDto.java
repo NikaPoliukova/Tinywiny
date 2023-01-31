@@ -1,4 +1,4 @@
-package com.example.users.dto;
+package com.example.tinywiny.dto;
 
 import lombok.Data;
 

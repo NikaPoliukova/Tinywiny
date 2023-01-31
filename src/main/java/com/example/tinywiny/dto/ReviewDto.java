@@ -1,23 +1,21 @@
 package com.example.tinywiny.dto;
 
-
+import com.example.tinywiny.model.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
+
+import java.util.Date;
 
 @Getter
-@Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserDto {
-
-  String userName;
-  String password;
-  String email;
-  String phoneNumber;
-
+public class ReviewDto {
+  Long id;
+  String textReview;
+  Date createdDate;
+  Long user_id;
 }

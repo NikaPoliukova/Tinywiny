@@ -1,7 +1,8 @@
-package com.example.users.config;
+package com.example.tinywiny.config;
 
-import com.example.users.security.filter.CustomAuthenticationFilter;
-import com.example.users.security.filter.CustomAuthorizationFilter;
+
+import com.example.tinywiny.security.filter.CustomAuthenticationFilter;
+import com.example.tinywiny.security.filter.CustomAuthorizationFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
@@ -27,7 +28,6 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
     http.authorizeRequests().antMatchers("/api/v1/login").permitAll();
 
 
-    //http.authorizeRequests().antMatchers(GET, "/api/**").hasAuthority("USER");
     http.authorizeRequests().antMatchers("/**").permitAll();
     http.addFilter(customAuthenticationFilter);
     http.addFilterBefore(new CustomAuthorizationFilter(secretKey), UsernamePasswordAuthenticationFilter.class);

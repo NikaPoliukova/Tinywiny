@@ -28,8 +28,6 @@ public class BucketService {
   @Modifying
   public Bucket createBucket(Long userId) {
     Optional<User> user = userRepository.findUserByUserId(userId);
-    entityManager.refresh(user);
-    return bucketRepository.save(user.get().getBucket());
-   // return bucketRepository.createBucket(userId);
-  }
+    return bucketRepository.createBucket(user.get().getUserId());
+   }
 }

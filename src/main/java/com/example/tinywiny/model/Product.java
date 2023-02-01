@@ -31,16 +31,16 @@ public class Product {
     private String description;
 
     @ManyToOne
-    @JoinColumn(name = "typeProduct", referencedColumnName = "id_type")
+    @JoinColumn(name = "id_type")
     private TypeProduct typeProduct;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "image", referencedColumnName = "image_id")
+    @JoinColumn(name = "image_id")
     private Image image;
 
     @OneToMany(mappedBy = "product", fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     private List<ProductInBucket> productInBuckets = new ArrayList<>();
 
-    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "product")
     private List<ProductInOrder> productInOrders = new ArrayList<>();
    }

@@ -8,6 +8,7 @@ import com.example.tinywiny.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -39,12 +40,18 @@ public class ProductService {
     return product.get();
   }
 
-  public Page<Product> findAllByType(TypeProduct type, Pageable page) {
+  public Page<Product> getProductByPage(TypeProduct type,int pageNumber, int pageSize) {
+    Pageable page = PageRequest.of(pageNumber, pageSize);
     return productRepository.getAllByTypeProduct(type, page);
   }
 
   public void deleteProduct(Long productId) {
     productRepository.deleteProductByProductId(productId);
+  }
+
+  public Page<Product> findAllProducts(int pageNumber, int pageSize) {
+    Pageable page = PageRequest.of(pageNumber, pageSize);
+   return productRepository.findAllBy(page);
   }
 }
 

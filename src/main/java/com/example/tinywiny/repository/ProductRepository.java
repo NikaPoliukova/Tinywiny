@@ -14,17 +14,15 @@ import java.util.Optional;
 @Repository
 public interface ProductRepository extends JpaRepository<Product, String> {
 
-  Optional<Product> findProductByProductId(@Param("productId")Long productId);
-
-  Page<Product> getAllByTypeProduct(TypeProduct type, Pageable page);
+  Optional<Product> findProductByProductId(@Param("productId") Long productId);
 
   Optional<Product> findProductByProductName(@Param("name") String name);
 
   @Modifying
-  void deleteProductByProductId(@Param("productId")Long productId);
+  void deleteProductByProductId(@Param("productId") Long productId);
 
+  Page<Product> getAllByTypeProduct(TypeProduct type, Pageable page);
 
+  Page<Product> findAllBy(Pageable page);
 
-   /* Page<Product> findAllBy(Pageable page);
-    }*/
 }

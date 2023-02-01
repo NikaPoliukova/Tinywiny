@@ -1,7 +1,9 @@
 package com.example.tinywiny.controller;
 
+import com.example.tinywiny.converter.ReviewConverter;
 import com.example.tinywiny.dto.ReviewDto;
 import com.example.tinywiny.model.Review;
+import com.example.tinywiny.model.User;
 import com.example.tinywiny.service.ReviewService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -24,15 +26,18 @@ import java.util.List;
 public class ReviewRestController {
 
   private final ReviewService reviewService;
-
+  private final ReviewConverter converter;
   @PostMapping("/create")
   protected Review createReview(@RequestBody ReviewDto review){
     return reviewService.save(review);
   }
-
+//не отображает userId
   @GetMapping
-  protected Page<Review> findAlReviews(Pageable page) {
-    return reviewService.findReviewsByPage(page);
+  protected List<ReviewDto> findAlReviews(@RequestParam(value = "pageNumber", required = false, defaultValue = "1") Integer pageNumber,
+                                          @RequestParam(value = "pageSize", required = false, defaultValue = "20") Integer pageSize) {
+    Page<Review> page = reviewService.findReviewsByPage(pageNumber - 1, pageSize);
+    List<Review> reviews = page.getContent();
+    return converter.toReviewDto(reviews);
    }
 
     @DeleteMapping

@@ -8,7 +8,7 @@ import org.springframework.data.repository.query.Param;
 
 public interface BucketRepository extends JpaRepository<Bucket, Long> {
   @Modifying
-  @Query(value = "insert into bucket (user_id) values (:userId)", nativeQuery = true)
+  @Query(value = "insert into bucket (user_id) value (:userId)", nativeQuery = true)
   Bucket createBucket(@Param("userId")Long userId);
 
 

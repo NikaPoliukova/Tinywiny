@@ -12,6 +12,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Log4j2
@@ -31,6 +32,10 @@ public class UserService {
       throw new RuntimeException("enter incorrect password or login");
     }
     return user.get();
+  }
+
+  public List<User> findAll() {
+    return userRepository.findAll();
   }
 
   public User updateUser(UserDto userDto) {
@@ -61,7 +66,8 @@ public class UserService {
     return user.get();
   }
 
-  public Page<User> getUserByPage(Pageable page) {
+  public Page<User> getUserByPage(int pageNumber, int pageSize) {
+    Pageable page = PageRequest.of(pageNumber, pageSize);
     return userRepository.findAllBy(page);
   }
 

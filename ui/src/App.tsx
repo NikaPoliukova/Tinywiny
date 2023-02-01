@@ -1,23 +1,22 @@
 import React from 'react';
-import { Route, Routes } from 'react-router-dom';
+import {Route, Routes} from 'react-router-dom';
 import UsersPage from './pages/UsersPage/UsersPage';
-import LoginPage from "./pages/LoginPage/LoginPage";
 import HomePage from "./pages/HomePage/HomePage";
-import Registry from "./pages/RegistrationPage/RegistryPage";
-
-
+import {Registry} from "./pages/RegistrationPage/RegistryPage";
+import {SignIn} from "./pages/LoginPage/LoginPage";
+import ReviewsPage from "./pages/ReviewsPage/ReviewsPage";
 
 
 function App() {
-  return (
-      <Routes>
-          <Route path={'/login'} element={<LoginPage/>} />
-          <Route path={'/users'} element={<UsersPage/>} />
-          <Route path={'/'} element={<HomePage/>} />
-          <Route path={'/registration'} element={<Registry/>} />
-
-      </Routes>
-  );
+    return (
+        <Routes>
+            <Route path={'/login'} element={<SignIn/>}/>
+            <Route path={'/users'} element={<UsersPage/>}/>
+            <Route path={'/'} element={<HomePage/>}/>
+            <Route path={'/registration'} element={<Registry/>}/>
+            <Route path={'/reviews'} element={<ReviewsPage/>}/>
+        </Routes>
+    );
 }
 
 export default App;

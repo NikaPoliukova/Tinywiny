@@ -52,7 +52,7 @@ public class OrderController {
   }
 
   @GetMapping("/status")
-  public String findStatusOrder(@PathVariable Long orderId) {
+  public String findStatusOrder( Long orderId) {
     return orderService.getStatusByOrderId(orderId);
   }
 }

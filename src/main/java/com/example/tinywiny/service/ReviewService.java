@@ -33,14 +33,11 @@ public class ReviewService {
     }
     return reviewRepository.save(converter.toReview(review));
   }
-  public Page<Review> findReviewsByPage(Pageable page) {
+
+  public Page<Review> findReviewsByPage(int pageNumber, int pageSize) {
+    Pageable page = PageRequest.of(pageNumber, pageSize);
     return reviewRepository.findAllBy(page);
   }
-
-  /*public List<Review> findAll() {
-    return reviewRepository.findAll();
-  }*/
-
   @Modifying
   public void deleteReviewById(Long reviewId) {
     reviewRepository.deleteReviewById(reviewId);

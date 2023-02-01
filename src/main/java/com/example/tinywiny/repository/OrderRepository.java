@@ -15,13 +15,12 @@ import org.springframework.stereotype.Repository;
 public interface OrderRepository extends JpaRepository<Order, Product> {
 
   Order findOrderByOrderId(@Param("orderId") Long orderId);
+
   @Query(value =" select status_order from orders where order_id =:orderNumber ", nativeQuery = true)
   String getStatusByOrderId(Long orderNumber);
 
-  Order getAllOrdersByOrderId(@Param("orderId")Long userId);
-
-  DeliveryInformation getInformation();
-
+  @Query(value =" select * from orders where user_id =:userId ", nativeQuery = true)
+  Order findAllByUserId(@Param("userId")Long userId);
 
   Page<Order> findAllBy(Pageable page);
 

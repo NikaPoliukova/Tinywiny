@@ -16,4 +16,5 @@ public class ProductDto {
   String description;
   int countInStock;
   Long idType;
+  Long imageId;
 }

@@ -1,8 +1,6 @@
 package com.example.tinywiny.repository;
 
-import com.example.tinywiny.model.Review;
 import com.example.tinywiny.model.User;
-import org.apache.catalina.valves.rewrite.RewriteCond;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

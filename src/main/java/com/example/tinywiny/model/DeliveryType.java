@@ -15,7 +15,7 @@ public class DeliveryType {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long idType;
+  private int idType;
 
   @Column(name = "post_name")
   private String postName;

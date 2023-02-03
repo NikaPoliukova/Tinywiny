@@ -26,11 +26,11 @@ public class Discount {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name ="discount_id")
-  private Long id;
+  private int id;
 
   private int size;
 
-  private String sum;
+  private int sum;
 
   @OneToMany(mappedBy = "discount", fetch = FetchType.LAZY,cascade = {CascadeType.ALL})
   private List<Order> orders = new ArrayList<>();

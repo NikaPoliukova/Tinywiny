@@ -11,12 +11,11 @@ import lombok.Setter;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ProductDto {
+public class OrderDto {
 
-  String productName;
-  int price;
-  String description;
-  int countInStock;
-  int idType;
-  Long imageId;
+  String commentOrder;
+  Long userId;
+  Long deliveryInformationId;
+  int deliveryTypeId;
+  int discountId;
 }

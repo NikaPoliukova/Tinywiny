@@ -14,6 +14,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -26,6 +27,7 @@ public class ReviewService {
   private final ReviewRepository reviewRepository;
   private final ReviewConverter converter;
 
+  @Transactional
   @Modifying
   public Review save(ReviewDto review) {
     if (review.getTextReview().isEmpty()) {
@@ -38,7 +40,7 @@ public class ReviewService {
     Pageable page = PageRequest.of(pageNumber, pageSize);
     return reviewRepository.findAllBy(page);
   }
-  @Modifying
+
   public void deleteReviewById(Long reviewId) {
     reviewRepository.deleteReviewById(reviewId);
   }

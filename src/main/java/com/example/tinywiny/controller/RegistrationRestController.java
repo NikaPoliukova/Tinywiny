@@ -20,9 +20,9 @@ public class RegistrationRestController {
   private final UserService userService;
   private final UserConverter userConverter;
 
-
+//WORK
   @PostMapping
   protected UserDto createUser(@RequestBody UserDto user) {
-      return userConverter.toDto(userService.save(user));
+  return userConverter.toDto(userService.save(user));
   }
 }

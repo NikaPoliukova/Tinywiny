@@ -11,12 +11,9 @@ import lombok.Setter;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ProductDto {
+public class ProductInBucketDto {
 
-  String productName;
-  int price;
-  String description;
-  int countInStock;
-  int idType;
-  Long imageId;
+  int count;
+  Long productId;
+
 }

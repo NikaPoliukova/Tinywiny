@@ -12,8 +12,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ReviewDto {
-  Long id;
+
   String textReview;
-  Date createdDate;
   Long userId;
 }

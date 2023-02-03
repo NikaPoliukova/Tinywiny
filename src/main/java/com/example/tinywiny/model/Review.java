@@ -3,12 +3,14 @@ package com.example.tinywiny.model;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.DynamicInsert;
 
 import javax.persistence.*;
 import java.util.Date;
 
 @NoArgsConstructor
 @Entity
+@DynamicInsert
 @Data
 @Table(name = "review")
 public class Review {
@@ -22,7 +24,7 @@ public class Review {
   @Column(name = "created_at")
   private Date createdDate;
 
-  @ManyToOne(cascade = CascadeType.ALL)
+  @ManyToOne
   @JoinColumn(name = "user_id")
   private User user;
 }

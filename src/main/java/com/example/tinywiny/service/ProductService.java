@@ -10,7 +10,9 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -21,15 +23,32 @@ public class ProductService {
   private final ProductRepository productRepository;
   private final ProductConverter converter;
 
-  public Product save(ProductDto productDto) {
+
+  @Transactional
+  @Modifying
+  public Product save(ProductDto productDto, TypeProduct type) {
     if (productRepository.findProductByProductName(productDto.getProductName()).isPresent()) {
       throw new RuntimeException("User already exists");
     }
-    return productRepository.save(converter.toProduct(productDto));
+    Product product = converter.toProduct(productDto);
+    product.setTypeProduct(type);
+    return productRepository.save(product);
   }
 
+  @Transactional
+  @Modifying
   public void updateProduct(ProductDto productDto) {
     productRepository.save(converter.toProduct(productDto));
+  }
+
+  @Transactional
+  @Modifying
+  public void updateCountInStock(int count, Long productId) {
+    Optional<Product> product = productRepository.findProductByProductId(productId);
+    if (product.isPresent() && count >= 0) {
+      product.get().setCountInStock(count);
+      productRepository.save(product.get());
+    }
   }
 
   public Product findProductByProductId(Long productId) {
@@ -40,7 +59,7 @@ public class ProductService {
     return product.get();
   }
 
-  public Page<Product> getProductByPage(TypeProduct type,int pageNumber, int pageSize) {
+  public Page<Product> getProductByPage(TypeProduct type, int pageNumber, int pageSize) {
     Pageable page = PageRequest.of(pageNumber, pageSize);
     return productRepository.getAllByTypeProduct(type, page);
   }
@@ -51,7 +70,7 @@ public class ProductService {
 
   public Page<Product> findAllProducts(int pageNumber, int pageSize) {
     Pageable page = PageRequest.of(pageNumber, pageSize);
-   return productRepository.findAllBy(page);
+    return productRepository.findAllBy(page);
   }
 }
 

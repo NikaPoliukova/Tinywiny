@@ -18,7 +18,7 @@ public class Bucket {
   @Column(name = "bucket_id")
   private Long bucketId;
 
-  @OneToOne( cascade = CascadeType.ALL)
+  @OneToOne
   @JoinColumn(name = "user_id")
   private User user;
 

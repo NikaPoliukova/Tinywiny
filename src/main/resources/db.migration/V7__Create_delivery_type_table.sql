@@ -1,6 +1,6 @@
 CREATE TABLE delivery_type
  (
-  id_type   BIGSERIAL NOT NULL PRIMARY KEY,
+  id_type   SERIAL NOT NULL PRIMARY KEY,
   post_name VARCHAR NOT NULL
   );
 

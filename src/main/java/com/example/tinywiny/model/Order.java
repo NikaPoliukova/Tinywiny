@@ -2,6 +2,7 @@ package com.example.tinywiny.model;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.DynamicInsert;
 
 
 import javax.persistence.*;
@@ -10,6 +11,7 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
+@DynamicInsert
 @Data
 @NoArgsConstructor
 @Table(name = "orders")

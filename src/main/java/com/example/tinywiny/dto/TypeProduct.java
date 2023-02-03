@@ -19,11 +19,11 @@ public class TypeProduct {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "id_type")
-  private Long id;
+  private int id;
 
   @Column(name = "type_name")
   private String name;
 
-  @OneToMany(mappedBy = "typeProduct",cascade = CascadeType.ALL)
+  @OneToMany(mappedBy = "typeProduct")
   private List<Product> products = new ArrayList<>();
 }

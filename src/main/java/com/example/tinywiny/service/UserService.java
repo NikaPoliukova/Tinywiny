@@ -9,8 +9,10 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -38,12 +40,13 @@ public class UserService {
     return userRepository.findAll();
   }
 
-  public User updateUser(UserDto userDto) {
-    String hashPass = hashPassService.hashPass(userDto.getPassword());
-    userDto.setPassword(hashPass);
-    return userRepository.save(userConverter.toUser(userDto));
+  @Transactional
+  @Modifying
+  public User updateUser(UserDto userDto, User user) {
+    return userRepository.save(prepareUserForUpdate(userDto, user));
   }
 
+  @Transactional
   public User save(UserDto userDto) {
     Optional<User> userOptional = userRepository.findUserByUserName(userDto.getUserName());
     User user;
@@ -71,9 +74,13 @@ public class UserService {
     return userRepository.findAllBy(page);
   }
 
-  /*private void prepareUserForUpdate(UserDto userDto, User user) {
+  private User prepareUserForUpdate(UserDto userDto, User user) {
     if (userDto.getUserName() != null) {
-      user.setUserName(userDto.getUserName());
+      if (userRepository.findUserByUserName(userDto.getUserName()).isPresent()) {
+        throw new RuntimeException("this name already exist");
+      } else {
+        user.setUserName(userDto.getUserName());
+      }
     }
     if (userDto.getPassword() != null) {
       String hashPass = hashPassService.hashPass(userDto.getPassword());
@@ -85,7 +92,8 @@ public class UserService {
     if (userDto.getPhoneNumber() != null) {
       user.setPhoneNumber(userDto.getPhoneNumber());
     }
-  }*/
+    return user;
+  }
 }
 
 

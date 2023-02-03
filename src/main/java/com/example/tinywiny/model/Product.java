@@ -25,10 +25,10 @@ public class Product {
 
     private int price;
 
-    @Column(name = "count_in_stock")
-    private Long countInStock;
-
     private String description;
+
+    @Column(name = "count_in_stock")
+    private int countInStock;
 
     @ManyToOne
     @JoinColumn(name = "id_type")

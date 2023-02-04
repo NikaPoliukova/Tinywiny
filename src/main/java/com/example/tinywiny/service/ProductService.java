@@ -35,7 +35,7 @@ public class ProductService {
     }
     TypeProduct typeProduct = typeProductService.getType(productDto.getIdType());
     TypeProductDto typeProductDto = typeProductConverter.toDto(typeProduct);
-    Product product = converter.toProduct(productDto,typeProductDto);
+    Product product = converter.toProduct(productDto, typeProductDto);
 
     return productRepository.save(product);
   }
@@ -56,6 +56,12 @@ public class ProductService {
     }
   }
 
+  public Page<Product> findAllProductsByTypeAndPage(TypeProductDto type, int pageNumber, int pageSize) {
+    TypeProduct typeProduct = typeProductService.getType(type.getId());
+    Pageable page = PageRequest.of(pageNumber, pageSize);
+    return productRepository.findAllByTypeProduct(typeProduct, page);
+  }
+
   public Product findProductByProductId(Long productId) {
     Optional<Product> product = productRepository.findProductByProductId(productId);
     if (product.isEmpty()) {
@@ -64,27 +70,7 @@ public class ProductService {
     return product.get();
   }
 
-  public Page<Product> getProductByPage(TypeProduct type, int pageNumber, int pageSize) {
-    Pageable page = PageRequest.of(pageNumber, pageSize);
-    return productRepository.getAllByTypeProduct(type, page);
-  }
-
   public void deleteProduct(Long productId) {
     productRepository.deleteProductByProductId(productId);
   }
-
-  public Page<Product> findAllProducts(int pageNumber, int pageSize) {
-    Pageable page = PageRequest.of(pageNumber, pageSize);
-    return productRepository.findAllBy(page);
-  }
 }
-
-
-   /* public Page<Product> findAllProductsByPage ( int pageNumber, int pageSize){
-      Pageable page = PageRequest.of(pageNumber, pageSize);
-      return productRepository.findAllBy(page);
-
-  public Page<Product> findAllByPage(Pageable page) {
-    return productRepository.findAllBy(page);
-  }
-    }*/

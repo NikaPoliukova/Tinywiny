@@ -10,4 +10,6 @@ public interface TypeProductConverter {
 
   TypeProductDto toDto(TypeProduct typeProduct);
 
+  TypeProduct toTypeProduct(TypeProductDto type);
+
 }

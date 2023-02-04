@@ -3,6 +3,7 @@ package com.example.tinywiny.controller;
 import com.example.tinywiny.converter.ProductConverter;
 import com.example.tinywiny.dto.ProductDto;
 import com.example.tinywiny.dto.TypeProduct;
+import com.example.tinywiny.dto.TypeProductDto;
 import com.example.tinywiny.model.Product;
 import com.example.tinywiny.service.ProductService;
 import com.example.tinywiny.service.TypeProductService;
@@ -61,12 +62,12 @@ public class ProductsRestController {
     return converter.toProductDto(products);
   }*/
 
-  //DON'T WORK(НЕТУ ТИПА)
+  //WORK
   @GetMapping("/type")
-  public List<ProductDto> findAllProductsByTypeAndPage(@RequestBody TypeProduct type,
+  public List<ProductDto> findAllProductsByTypeAndPage(@RequestBody TypeProductDto type,
                                                        @RequestParam(value = "pageNumber", required = false, defaultValue = "1") Integer pageNumber,
                                                        @RequestParam(value = "pageSize", required = false, defaultValue = "20") Integer pageSize) {
-    Page<Product> page = productService.getProductByPage(type, pageNumber - 1, pageSize);
+    Page<Product> page = productService.findAllProductsByTypeAndPage(type, pageNumber - 1, pageSize);
     List<Product> products = page.getContent();
     return converter.toProductDto(products);
   }

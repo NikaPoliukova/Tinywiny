@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -43,24 +44,16 @@ public class ProductsRestController {
     Product savedProduct = productService.save(product);
         return converter.toProductDto(savedProduct);
   }
-
-  @PostMapping("/update/{productId}")
-  public void updateProduct(@RequestBody ProductDto productDto, @PathVariable Long productId) {
+  //WORK
+  @PutMapping("/update")
+  public void updateProduct(@RequestBody ProductDto productDto) {
     productService.updateProduct(productDto);
   }
-  @PostMapping("/update/count-in-stock")
-  public void updateCountInStock(@RequestBody int countInStock,@RequestBody  Long productId) {
-    productService.updateCountInStock(countInStock, productId);
+  //WORK
+  @PutMapping("/update/count-in-stock")
+  public void updateCountInStock(@RequestBody ProductDto product) {
+    productService.updateCountInStock(product.getCountInStock(),product.getId());
   }
-
-  // WORK incorrect (Не отображает тип айди)
- /* @GetMapping
-  public List<ProductDto> findAllProductsByPage(@RequestParam(value = "pageNumber", required = false, defaultValue = "1") Integer pageNumber,
-                                                @RequestParam(value = "pageSize", required = false, defaultValue = "20") Integer pageSize) {
-    Page<Product> page = productService.findAllProducts(pageNumber - 1, pageSize);
-    List<Product> products = page.getContent();
-    return converter.toProductDto(products);
-  }*/
 
   //WORK
   @GetMapping("/type")

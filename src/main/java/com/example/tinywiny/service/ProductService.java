@@ -5,7 +5,9 @@ import com.example.tinywiny.converter.TypeProductConverter;
 import com.example.tinywiny.dto.ProductDto;
 import com.example.tinywiny.dto.TypeProduct;
 import com.example.tinywiny.dto.TypeProductDto;
+import com.example.tinywiny.dto.UserDto;
 import com.example.tinywiny.model.Product;
+import com.example.tinywiny.model.User;
 import com.example.tinywiny.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -43,7 +45,30 @@ public class ProductService {
   @Transactional
   @Modifying
   public void updateProduct(ProductDto productDto) {
-    //productRepository.save(converter.toProduct(productDto));
+    Optional<Product> product = productRepository.findProductByProductId(productDto.getId());
+    if (product.isPresent()) {
+      prepareProductForUpdate(productDto,product.get());
+      productRepository.save(product.get());
+    }
+  }
+
+  private Product prepareProductForUpdate(ProductDto productDto, Product product) {
+    if (productDto.getProductName() != null) {
+      product.setProductName(productDto.getProductName());
+    }
+    if (productDto.getPrice() != 0) {
+      product.setPrice(productDto.getPrice());
+    }
+    if (productDto.getDescription() != null) {
+      product.setDescription(productDto.getDescription());
+    }
+    if (productDto.getCountInStock() != 0) {
+      product.setCountInStock(productDto.getCountInStock());
+    }
+    if (productDto.getIdType() != 0) {
+      product.setTypeProduct(typeProductService.getType(productDto.getIdType()));
+    }
+  return product;
   }
 
   @Transactional

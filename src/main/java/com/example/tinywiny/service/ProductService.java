@@ -45,7 +45,7 @@ public class ProductService {
   @Transactional
   @Modifying
   public void updateProduct(ProductDto productDto) {
-    Optional<Product> product = productRepository.findProductByProductId(productDto.getId());
+    Optional<Product> product = productRepository.findProductByProductId(productDto.getProductId());
     if (product.isPresent()) {
       prepareProductForUpdate(productDto,product.get());
       productRepository.save(product.get());

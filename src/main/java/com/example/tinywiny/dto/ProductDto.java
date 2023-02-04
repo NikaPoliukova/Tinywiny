@@ -12,7 +12,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ProductDto {
-  Long id;
+  Long productId;
   String productName;
   int price;
   String description;

@@ -31,7 +31,7 @@ public class ProductsRestController {
   private final ProductConverter converter;
   private final TypeProductService typeProductService;
 
-  // WORK incorrect (Не отображает тип айди =0)
+  // WORK
   @GetMapping("/{productId}")
   public ProductDto showProduct(@PathVariable Long productId) {
     Product product = productService.findProductByProductId(productId);
@@ -52,7 +52,7 @@ public class ProductsRestController {
   //WORK
   @PutMapping("/update/count-in-stock")
   public void updateCountInStock(@RequestBody ProductDto product) {
-    productService.updateCountInStock(product.getCountInStock(),product.getId());
+    productService.updateCountInStock(product.getCountInStock(),product.getProductId());
   }
 
   //WORK

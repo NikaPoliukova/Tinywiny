@@ -10,7 +10,7 @@ import java.util.List;
 @Mapper
 public interface ProductInBucketConverter {
 
-  ProductInBucket toProductInBucket(ProductInBucketDto productDto);
+  /*ProductInBucket toProductInBucket(ProductInBucketDto productDto);
 
-  List<ProductInBucketDto> toProductInBucketDto(ProductInBucket product);
+  List<ProductInBucketDto> toProductInBucketDto(ProductInBucket product);*/
 }

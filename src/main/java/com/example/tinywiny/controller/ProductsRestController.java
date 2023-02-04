@@ -36,12 +36,11 @@ public class ProductsRestController {
     return converter.toProductDto(product);
   }
 
-
-  //DON'T WORK (НЕ МОЖЕТ ЗАПИСАТЬ ДАННЫЕ СВЯЗАННЫЕ С ДРУГИМИ ТАБЛИЦАМИ ТИП И КАРТИНКА)
+  //WORK
   @PostMapping
   protected ProductDto createProduct(@RequestBody ProductDto product) {
-    TypeProduct type= typeProductService.getType(product.getIdType());
-    return converter.toProductDto(productService.save(product,type));
+    Product savedProduct = productService.save(product);
+        return converter.toProductDto(savedProduct);
   }
 
   @PostMapping("/update/{productId}")

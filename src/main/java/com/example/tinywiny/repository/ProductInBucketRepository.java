@@ -12,8 +12,8 @@ import java.util.List;
 
 public interface ProductInBucketRepository extends JpaRepository<ProductInBucket, Long> {
 
-  @Query(value = "select product_id from product_in_bucket where bucket_id =:bucketId?", nativeQuery = true)
-  List<Product> findAllProductInBucket(@Param("id") Long bucketId);
+ /* @Query(value = "select product_id from product_in_bucket where bucket_id =:bucketId?", nativeQuery = true)
+  List<Product> findAllProductInBucket(@Param("id") Long bucketId);*/
 
   @Transactional
   @Modifying

@@ -20,9 +20,9 @@ public class BucketService {
   private final BucketRepository bucketRepository;
   private final ProductInBucketRepository productInBucketRepository;
 
-  public List<Product> findAllProductInBucket(Long bucketId) {
+  /*public List<Product> findAllProductInBucket(Long bucketId) {
     return productInBucketRepository.findAllProductInBucket(bucketId);
-  }
+  }*/
 
   public void addProductInBucket(Long bucketId, Long productId) {
     productInBucketRepository.addProductInBucket(bucketId, productId);

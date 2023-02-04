@@ -1,8 +1,10 @@
 package com.example.tinywiny.service;
 
 import com.example.tinywiny.converter.ProductConverter;
+import com.example.tinywiny.converter.TypeProductConverter;
 import com.example.tinywiny.dto.ProductDto;
 import com.example.tinywiny.dto.TypeProduct;
+import com.example.tinywiny.dto.TypeProductDto;
 import com.example.tinywiny.model.Product;
 import com.example.tinywiny.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
@@ -22,23 +24,26 @@ import java.util.Optional;
 public class ProductService {
   private final ProductRepository productRepository;
   private final ProductConverter converter;
-
+  private final TypeProductService typeProductService;
+  private final TypeProductConverter typeProductConverter;
 
   @Transactional
   @Modifying
-  public Product save(ProductDto productDto, TypeProduct type) {
+  public Product save(ProductDto productDto) {
     if (productRepository.findProductByProductName(productDto.getProductName()).isPresent()) {
       throw new RuntimeException("User already exists");
     }
-    Product product = converter.toProduct(productDto);
-    product.setTypeProduct(type);
+    TypeProduct typeProduct = typeProductService.getType(productDto.getIdType());
+    TypeProductDto typeProductDto = typeProductConverter.toDto(typeProduct);
+    Product product = converter.toProduct(productDto,typeProductDto);
+
     return productRepository.save(product);
   }
 
   @Transactional
   @Modifying
   public void updateProduct(ProductDto productDto) {
-    productRepository.save(converter.toProduct(productDto));
+    //productRepository.save(converter.toProduct(productDto));
   }
 
   @Transactional

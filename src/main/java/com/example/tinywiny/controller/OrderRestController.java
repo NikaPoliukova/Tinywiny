@@ -31,7 +31,7 @@ public class OrderRestController {
   //КОГДА ДЕЛАЕТСЯ ЗАКАЗ ЧИСЛО НА СКЛАДЕ ДОЛЖНО УМЕНЬШАТЬСЯ
 
   @PostMapping
-  public OrderDto addOrder(@RequestBody OrderDto order) {
+  public OrderDto createOrder(@RequestBody OrderDto order) {
     return orderConverter.toOrderDto(orderService.save(order));
   }
 

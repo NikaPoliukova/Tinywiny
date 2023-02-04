@@ -29,11 +29,11 @@ public class BucketRestController {
   private final BucketService bucketService;
   private final ProductConverter productConverter;
 
-  @GetMapping("/{bucketId}")
+  /*@GetMapping("/{bucketId}")
   public List<ProductDto> findAllProductsInBucket(@PathVariable Long bucketId) {
     List<Product> products = bucketService.findAllProductInBucket(bucketId);
     return productConverter.toProductDto(products);
-  }
+  }*/
 
   @PostMapping
   protected void addProductInBucket(@RequestBody Long bucketId, @RequestBody Long productId) {

@@ -1,7 +1,6 @@
 package com.example.tinywiny.converter;
 
 import com.example.tinywiny.dto.ProductDto;
-import com.example.tinywiny.dto.TypeProduct;
 import com.example.tinywiny.dto.TypeProductDto;
 import com.example.tinywiny.model.Product;
 import org.mapstruct.Mapper;
@@ -18,8 +17,5 @@ public interface ProductConverter {
 
   @Mapping(target = "idType", source = "product.typeProduct.id")
   ProductDto toProductDto(Product product);
-
-
-
 }
 

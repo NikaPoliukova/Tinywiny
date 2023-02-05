@@ -27,23 +27,23 @@ public class ReviewRestController {
   private final ReviewService reviewService;
   private final ReviewConverter converter;
 
-  //DON'T WORK (НЕ ВИДИТ ОБЯЗАТЕЛЬНОГО ПОЛЯ USER_ID)
-  @PostMapping("/create")
-  protected ReviewDto createReview(@RequestBody ReviewDto review){
-        return converter.toReviewDto(reviewService.save(review)) ;
-
+  // WORK
+  @PostMapping
+  protected ReviewDto createReview(@RequestBody ReviewDto review) {
+    return converter.toReviewDto(reviewService.save(review));
   }
-// WORK INCORRECT (не отображает userId)
+  // WORK
   @GetMapping
-  protected List<ReviewDto> findAlReviews(@RequestParam(value = "pageNumber", required = false, defaultValue = "1") Integer pageNumber,
+  protected List<ReviewDto> findAllReviews(@RequestParam(value = "pageNumber", required = false, defaultValue = "1") Integer pageNumber,
                                           @RequestParam(value = "pageSize", required = false, defaultValue = "20") Integer pageSize) {
     Page<Review> page = reviewService.findReviewsByPage(pageNumber - 1, pageSize);
     List<Review> reviews = page.getContent();
     return converter.toReviewDto(reviews);
-   }
-//WORK
-    @DeleteMapping("/{id}")
-  protected void deleteReview(@PathVariable Long id){
+  }
+
+  //WORK
+  @DeleteMapping("/{id}")
+  protected void deleteReview(@PathVariable Long id) {
     reviewService.deleteReviewById(id);
   }
 }

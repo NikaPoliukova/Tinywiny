@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,22 +26,23 @@ import java.util.List;
 public class BucketRestController {
 
   private final BucketService bucketService;
-  private final ProductConverter productConverter;
+  private final ProductInBucketConverter converter;
 
-  /*@GetMapping("/{bucketId}")
-  public List<ProductDto> findAllProductsInBucket(@PathVariable Long bucketId) {
-    List<Product> products = bucketService.findAllProductInBucket(bucketId);
-    return productConverter.toProductDto(products);
-  }*/
-
-  @PostMapping
-  protected void addProductInBucket(@RequestBody Long bucketId, @RequestBody Long productId) {
-    bucketService.addProductInBucket(bucketId, productId);
+//work
+ @GetMapping
+  public List<ProductInBucketDto> findAllProductsInBucket(@RequestBody ProductInBucketDto productInBucketDto) {
+   List<ProductInBucket> products= bucketService.findAllProductInBucket(productInBucketDto);
+    return converter.toProductInBucketDto(products);
   }
-
+  //work
+  @PostMapping
+  protected void addProductInBucket(@RequestBody ProductInBucketDto productInBucketDto) {
+    bucketService.addProductInBucket(productInBucketDto);
+  }
+//WORK
   @DeleteMapping
-  public void deleteProductInBucket(@RequestBody Long productInBucketId) {
-    bucketService.deleteProductInBucket(productInBucketId);
+  public void deleteProductInBucket(@RequestBody ProductInBucketDto productInBucketDto) {
+    bucketService.deleteProductInBucket(productInBucketDto.getId());
   }
 
 }

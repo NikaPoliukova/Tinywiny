@@ -2,11 +2,9 @@ package com.example.tinywiny.controller;
 
 import com.example.tinywiny.converter.ProductConverter;
 import com.example.tinywiny.dto.ProductDto;
-import com.example.tinywiny.dto.TypeProduct;
 import com.example.tinywiny.dto.TypeProductDto;
 import com.example.tinywiny.model.Product;
 import com.example.tinywiny.service.ProductService;
-import com.example.tinywiny.service.TypeProductService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -29,7 +27,12 @@ import java.util.List;
 public class ProductsRestController {
   private final ProductService productService;
   private final ProductConverter converter;
-  private final TypeProductService typeProductService;
+
+  //WORK
+  @PostMapping
+  protected ProductDto createProduct(@RequestBody ProductDto product) {
+    return converter.toProductDto(productService.save(product));
+  }
 
   // WORK
   @GetMapping("/{productId}")
@@ -39,20 +42,15 @@ public class ProductsRestController {
   }
 
   //WORK
-  @PostMapping
-  protected ProductDto createProduct(@RequestBody ProductDto product) {
-    Product savedProduct = productService.save(product);
-        return converter.toProductDto(savedProduct);
-  }
-  //WORK
   @PutMapping("/update")
   public void updateProduct(@RequestBody ProductDto productDto) {
     productService.updateProduct(productDto);
   }
+
   //WORK
   @PutMapping("/update/count-in-stock")
   public void updateCountInStock(@RequestBody ProductDto product) {
-    productService.updateCountInStock(product.getCountInStock(),product.getProductId());
+    productService.updateCountInStock(product.getCountInStock(), product.getProductId());
   }
 
   //WORK

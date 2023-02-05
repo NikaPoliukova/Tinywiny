@@ -1,5 +1,7 @@
 package com.example.tinywiny.service;
 
+import com.example.tinywiny.dto.ProductInBucketDto;
+import com.example.tinywiny.model.Bucket;
 import com.example.tinywiny.model.Product;
 import com.example.tinywiny.model.ProductInBucket;
 import com.example.tinywiny.repository.BucketRepository;
@@ -11,6 +13,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 @Log4j2
 @Service
@@ -18,14 +22,30 @@ import java.util.List;
 public class BucketService {
 
   private final BucketRepository bucketRepository;
+  private final ProductService productService;
   private final ProductInBucketRepository productInBucketRepository;
 
-  /*public List<Product> findAllProductInBucket(Long bucketId) {
-    return productInBucketRepository.findAllProductInBucket(bucketId);
-  }*/
 
-  public void addProductInBucket(Long bucketId, Long productId) {
-    productInBucketRepository.addProductInBucket(bucketId, productId);
+  public List<ProductInBucket> findAllProductInBucket(ProductInBucketDto productInBucketDto) {
+    Optional<Bucket> bucket = bucketRepository.findBucketByBucketId(productInBucketDto.getBucketId());
+    if (bucket.isEmpty()) {
+      throw new RuntimeException("bucket does not exist");
+    }
+   return productInBucketRepository.findAllByBucket(bucket.get());
+  }
+
+  public void addProductInBucket(ProductInBucketDto productInBucketDto) {
+    Optional<Bucket> bucket = bucketRepository.findBucketByBucketId(productInBucketDto.getBucketId());
+    ProductInBucket productInBucket = new ProductInBucket();
+    Product product = productService.findProductByProductId(productInBucketDto.getProductId());
+    if (bucket.isPresent()) {
+      productInBucket.setBucket(bucket.get());
+      productInBucket.setProduct(product);
+      productInBucket.setCount(productInBucketDto.getCount());
+      productInBucketRepository.save(productInBucket);
+    } else {
+      throw new RuntimeException("bucket does not exist");
+    }
   }
 
   public void deleteProductInBucket(Long productInBucketId) {

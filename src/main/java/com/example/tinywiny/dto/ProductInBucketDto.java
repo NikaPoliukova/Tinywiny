@@ -12,8 +12,8 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ProductInBucketDto {
-
+  Long id;
   int count;
   Long productId;
-
+  Long bucketId;
 }

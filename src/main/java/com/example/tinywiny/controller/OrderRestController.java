@@ -43,8 +43,8 @@ public class OrderRestController {
     return orderConverter.toOrderDto(orders);
   }
 
-  @GetMapping("/order")
-  public OrderDto findOrderByOrderId(@RequestBody Long orderId) {
+  @GetMapping("/{orderId}")
+  public OrderDto findOrderByOrderId(@PathVariable Long orderId) {
     return orderConverter.toOrderDto(orderService.findOrderByOrderId(orderId));
   }
 

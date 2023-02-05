@@ -12,10 +12,10 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class OrderDto {
-
+  Long orderId;
   String commentOrder;
   Long userId;
   Long deliveryInformationId;
   int deliveryTypeId;
-  int discountId;
+
 }

@@ -17,5 +17,6 @@ public class OrderDto {
   Long userId;
   Long deliveryInformationId;
   int deliveryTypeId;
+  String status;
 
 }

@@ -16,22 +16,21 @@ import java.util.Optional;
 public interface OrderRepository extends JpaRepository<Order, Product> {
 
   Optional<Order> findOrderByOrderId(@Param("orderId") Long orderId);
+
   List<Order> findOrdersByUserUserId(@Param("userId") Long userId);
 
-  @Query(value =" select status_order from orders where order_id =:orderNumber ", nativeQuery = true)
-  String getStatusByOrderId(Long orderNumber);
-
-  @Query(value =" select * from orders where user_id =:userId ", nativeQuery = true)
-  Order findAllByUserId(@Param("userId")Long userId);
+  @Query(value = " select status_order from orders where order_id =:orderNumber ", nativeQuery = true)
+  String getOrderStatus(@Param("orderNumber") Long orderNumber);
 
   Page<Order> findAllBy(Pageable page);
 
-  Page<Order> findAllOrdersByStatusOrder(String status,Pageable page);
-
-  @Transactional
+  /*@Transactional
   @Modifying
-  @Query(value ="update orders set status_order =:status where order_id =:orderNumber ", nativeQuery = true)
-  void updateOrderStatus(@Param("orderNumber")Long orderNumber, @Param("status") String status);
-
-
+  @Query(value = "update orders set status_order =:status where order_id =:orderNumber ", nativeQuery = true)
+  void updateOrderStatus(@Param("orderNumber") Long orderNumber, @Param("status") String status);
+*/
 }
+
+/* Page<Order> findAllOrdersByStatusOrder(String status, Pageable page);*/
+/* @Query(value = " select * from orders where user_id =:userId ", nativeQuery = true)
+  Order findAllByUserId(@Param("userId") Long userId);*/

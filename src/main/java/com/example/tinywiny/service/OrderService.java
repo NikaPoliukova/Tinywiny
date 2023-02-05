@@ -60,18 +60,15 @@ public class OrderService {
     if (order == null) {
       throw new RuntimeException("order does not exist");
     }
-    return orderRepository.getStatusByOrderId(orderId);
-  }
-
-  public Page<Order> findAll(Pageable page) {
-    return orderRepository.findAll(page);
+    return orderRepository.getOrderStatus(orderId);
   }
 
   public void updateOrderStatus(long orderNumber, String status) {
     Order order = findOrderByOrderId(orderNumber);
-    if (order != null && status.equals(order.getStatusOrder())) {
-      orderRepository.updateOrderStatus(orderNumber, status);
-    }
+    if (order != null && !(status.equals(order.getStatusOrder()))) {
+      order.setStatusOrder(status);
+      orderRepository.save(order);
+    }}
 /*
   public Page<Order> filterOrderByStatus(String status, Pageable page) {
     if (status != null) {
@@ -79,6 +76,10 @@ public class OrderService {
     } else {
       return orderRepository.findAllBy(page);
     }
-  }*/
+
+  public Page<Order> findAll(Pageable page) {
+    return orderRepository.findAll(page);
   }
+  }*/
+
 }

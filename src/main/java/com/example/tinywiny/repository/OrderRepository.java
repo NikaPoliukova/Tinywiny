@@ -24,6 +24,11 @@ public interface OrderRepository extends JpaRepository<Order, Product> {
 
   Page<Order> findAllBy(Pageable page);
 
+  Page<Order> findAllByStatusOrder(@Param("status")String status, Pageable page);
+
+
+/*@Query(value = " select * from orders where user_id =:userId ", nativeQuery = true)
+  Order findAllByUserId(@Param("userId") Long userId);
   /*@Transactional
   @Modifying
   @Query(value = "update orders set status_order =:status where order_id =:orderNumber ", nativeQuery = true)
@@ -31,6 +36,3 @@ public interface OrderRepository extends JpaRepository<Order, Product> {
 */
 }
 
-/* Page<Order> findAllOrdersByStatusOrder(String status, Pageable page);*/
-/* @Query(value = " select * from orders where user_id =:userId ", nativeQuery = true)
-  Order findAllByUserId(@Param("userId") Long userId);*/

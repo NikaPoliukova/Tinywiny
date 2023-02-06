@@ -31,7 +31,14 @@ public class BucketService {
     if (bucket.isEmpty()) {
       throw new RuntimeException("bucket does not exist");
     }
-   return productInBucketRepository.findAllByBucket(bucket.get());
+    return productInBucketRepository.findAllByBucket(bucket.get());
+  }
+
+  public ProductInBucket updateCountProduct(ProductInBucketDto productInBucketDto) {
+    Optional<Bucket> bucket = bucketRepository.findBucketByBucketId(productInBucketDto.getBucketId());
+    ProductInBucket productInBucket = productInBucketRepository.findProductInBucketByBucket(bucket.get());
+    productInBucket.setCount(productInBucketDto.getCount());
+    return productInBucketRepository.save(productInBucket);
   }
 
   public void addProductInBucket(ProductInBucketDto productInBucketDto) {

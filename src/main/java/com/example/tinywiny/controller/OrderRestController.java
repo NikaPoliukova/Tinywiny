@@ -33,6 +33,17 @@ public class OrderRestController {
     return orderConverter.toOrderDto(orderService.save(order));
   }
 
+  //work
+  @GetMapping("status")
+  public List<OrderDto> findAllOrdersByStatus(@RequestBody OrderDto orderDto,
+                                              @RequestParam(value = "pageNumber", required = false, defaultValue = "1") Integer pageNumber,
+                                              @RequestParam(value = "pageSize", required = false, defaultValue = "20") Integer pageSize) {
+
+    Page<Order> page = orderService.findOrdersByStatus(orderDto.getStatus(), pageNumber - 1, pageSize);
+    List<Order> orders = page.getContent();
+    return orderConverter.toOrderDto(orders);
+  }
+
   //WORK
   @GetMapping
   public List<OrderDto> findAllOrdersByPage(@RequestParam(value = "pageNumber", required = false, defaultValue = "1") Integer pageNumber,
@@ -53,6 +64,7 @@ public class OrderRestController {
   public List<OrderDto> findOrdersByUserId(@PathVariable Long userId) {
     return orderConverter.toOrderDto(orderService.findOrdersByUserId(userId));
   }
+
   //WORK
   @PutMapping("/status/update")
   public void updateOrderStatus(@RequestBody OrderDto orderDto) {

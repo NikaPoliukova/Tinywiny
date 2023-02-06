@@ -2,8 +2,10 @@ package com.example.tinywiny.controller;
 
 import com.example.tinywiny.converter.ProductConverter;
 import com.example.tinywiny.dto.ProductDto;
+import com.example.tinywiny.dto.ProductInBucketDto;
 import com.example.tinywiny.dto.TypeProductDto;
 import com.example.tinywiny.model.Product;
+import com.example.tinywiny.service.BucketService;
 import com.example.tinywiny.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -27,11 +29,17 @@ import java.util.List;
 public class ProductsRestController {
   private final ProductService productService;
   private final ProductConverter converter;
+  private final BucketService bucketService;
 
   //WORK
-  @PostMapping
+  @PostMapping("/create")
   protected ProductDto createProduct(@RequestBody ProductDto product) {
     return converter.toProductDto(productService.save(product));
+  }
+
+  @PostMapping
+  protected void addProductInBucket(@RequestBody ProductInBucketDto productInBucketDto) {
+    bucketService.addProductInBucket(productInBucketDto);
   }
 
   // WORK

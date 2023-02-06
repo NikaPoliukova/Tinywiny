@@ -6,21 +6,14 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
-
 @Getter
 @Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class OrderDto {
-  Long orderId;
-  String commentOrder;
-  Long userId;
-  DeliveryInformationDto deliveryInformationDto;
-  int deliveryTypeId;
-  String status;
-  List<ProductInOrderDto> productsInOrder;
-
-
+public class ProductInOrderDto {
+  Long id;
+  int count;
+  Long productId;
+  Long bucketId;
 }

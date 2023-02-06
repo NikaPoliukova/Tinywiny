@@ -1,10 +1,19 @@
 package com.example.tinywiny.service;
 
 import com.example.tinywiny.converter.OrderConverter;
+import com.example.tinywiny.converter.UserConverter;
+import com.example.tinywiny.dto.DeliveryInformationDto;
 import com.example.tinywiny.dto.OrderDto;
+import com.example.tinywiny.dto.ProductInOrderDto;
+import com.example.tinywiny.dto.UserDto;
+import com.example.tinywiny.model.DeliveryType;
+import com.example.tinywiny.model.Discount;
 import com.example.tinywiny.model.Order;
+import com.example.tinywiny.model.ProductInOrder;
 import com.example.tinywiny.model.User;
+import com.example.tinywiny.repository.DiscountRepository;
 import com.example.tinywiny.repository.OrderRepository;
+import com.example.tinywiny.repository.ProductRepository;
 import com.example.tinywiny.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -27,12 +36,36 @@ public class OrderService {
   private final OrderRepository orderRepository;
   private final OrderConverter orderConverter;
   private final UserRepository userRepository;
+  private final UserService userService;
+  private final UserConverter userConverter;
+  private final DeliveryInformationService deliveryInformationService;
+  private final DiscountService discountService;
+  private final ProductService productService;
+
 
   @Transactional
   @Modifying
   public Order save(OrderDto orderDto) {
-    Order order = orderConverter.toOrder(orderDto);
+    UserDto userDto = userConverter.toDto(userService.findUserByUserId(orderDto.getUserId()));
+    DeliveryType deliveryType = deliveryInformationService.findDeliveryType(orderDto.getDeliveryTypeId());
+    List<ProductInOrderDto> productsInOrder = orderDto.getProductsInOrder();
+    Discount discount = null;
+    int sum = orderAmountCalculation(productsInOrder);
+    if (sum > 0) {
+      discount = discountService.findDiscount(sum);
+    }
+    Order order = orderConverter.toOrder(orderDto, userDto, orderDto.getDeliveryInformationDto(),
+        deliveryType, productsInOrder, discount);
     return orderRepository.save(order);
+  }
+
+  private int orderAmountCalculation(List<ProductInOrderDto> productsInOrder) {
+    int sum = 0;
+    for (ProductInOrderDto product : productsInOrder) {
+      int count = product.getCount();
+      sum = count * (productService.findProductPrice(product.getProductId()));
+    }
+    return sum;
   }
 
   public Page<Order> getOrdersByPage(int pageNumber, int pageSize) {
@@ -68,18 +101,13 @@ public class OrderService {
     if (order != null && !(status.equals(order.getStatusOrder()))) {
       order.setStatusOrder(status);
       orderRepository.save(order);
-    }}
-/*
-  public Page<Order> filterOrderByStatus(String status, Pageable page) {
-    if (status != null) {
-      return orderRepository.findAllOrdersByStatusOrder(status, page);
-    } else {
-      return orderRepository.findAllBy(page);
     }
-
-  public Page<Order> findAll(Pageable page) {
-    return orderRepository.findAll(page);
   }
-  }*/
+
+  public Page<Order> findOrdersByStatus(String status, int pageNumber, int pageSize) {
+    Pageable page = PageRequest.of(pageNumber, pageSize);
+    return orderRepository.findAllByStatusOrder(status, page);
+
+  }
 
 }

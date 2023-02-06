@@ -1,6 +1,7 @@
 package com.example.tinywiny.converter;
 
 import com.example.tinywiny.dto.ProductInBucketDto;
+import com.example.tinywiny.dto.ProductInOrderDto;
 import com.example.tinywiny.model.ProductInBucket;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -16,4 +17,6 @@ public interface ProductInBucketConverter {
   @Mapping(target = "productId",source = "productInBucket.product.productId")
   @Mapping(target = "bucketId",source = "productInBucket.bucket.bucketId")
   ProductInBucketDto  toProductInBucketDto(ProductInBucket productInBucket);
-}
+
+  List<ProductInOrderDto> toProductInOrderDto(List<ProductInBucketDto> productInBucket);
+  }

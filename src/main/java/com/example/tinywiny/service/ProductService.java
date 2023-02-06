@@ -47,7 +47,7 @@ public class ProductService {
   public void updateProduct(ProductDto productDto) {
     Optional<Product> product = productRepository.findProductByProductId(productDto.getProductId());
     if (product.isPresent()) {
-      prepareProductForUpdate(productDto,product.get());
+      prepareProductForUpdate(productDto, product.get());
       productRepository.save(product.get());
     }
   }
@@ -68,7 +68,7 @@ public class ProductService {
     if (productDto.getIdType() != 0) {
       product.setTypeProduct(typeProductService.getType(productDto.getIdType()));
     }
-  return product;
+    return product;
   }
 
   @Transactional
@@ -93,6 +93,10 @@ public class ProductService {
       throw new RuntimeException("no such product");
     }
     return product.get();
+  }
+
+  public int findProductPrice(Long productId) {
+   return productRepository.findProductPrice(productId);
   }
 
   public void deleteProduct(Long productId) {

@@ -24,4 +24,5 @@ public class Bucket {
 
   @OneToMany(mappedBy = "bucket", fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
   private List<ProductInBucket> productInBuckets = new ArrayList<>();
+
 }

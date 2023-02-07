@@ -15,5 +15,5 @@ public class ProductInOrderDto {
   Long id;
   int count;
   Long productId;
-  Long bucketId;
+  Long orderId;
 }

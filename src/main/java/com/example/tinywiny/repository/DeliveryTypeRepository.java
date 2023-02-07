@@ -6,5 +6,5 @@ import org.springframework.data.repository.query.Param;
 
 public interface DeliveryTypeRepository extends JpaRepository<DeliveryType, Long> {
 
-  DeliveryType findByIdType(@Param("id") int id);
+
 }

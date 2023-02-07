@@ -51,5 +51,5 @@ public class Order {
   private DeliveryInformation deliveryInformation;
 
   @OneToMany(mappedBy = "order", fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-  private List<ProductInOrder> productInOrders = new ArrayList<>();
+  private List<ProductInOrder> productsInOrder = new ArrayList<>();
 }

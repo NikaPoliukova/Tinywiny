@@ -1,9 +1,15 @@
 package com.example.tinywiny.controller;
 
+import com.example.tinywiny.converter.DeliveryInformationConverter;
 import com.example.tinywiny.converter.OrderConverter;
+import com.example.tinywiny.converter.ProductInOrderConverter;
 import com.example.tinywiny.dto.OrderDto;
+import com.example.tinywiny.dto.ProductInOrderDto;
+import com.example.tinywiny.model.DeliveryInformation;
 import com.example.tinywiny.model.Order;
+import com.example.tinywiny.service.DeliveryInformationService;
 import com.example.tinywiny.service.OrderService;
+import com.example.tinywiny.service.ProductInOrderService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -25,12 +31,15 @@ import java.util.List;
 public class OrderRestController {
   private final OrderService orderService;
   private final OrderConverter orderConverter;
-
+  private final DeliveryInformationService deliveryInformationService;
+  private final DeliveryInformationConverter deliveryInformationConverter;
+  private final ProductInOrderService productInOrderService;
+  private final ProductInOrderConverter productInOrderConverter;
   //КОГДА ДЕЛАЕТСЯ ЗАКАЗ ЧИСЛО НА СКЛАДЕ ДОЛЖНО УМЕНЬШАТЬСЯ
 
   @PostMapping
   public OrderDto createOrder(@RequestBody OrderDto order) {
-    return orderConverter.toOrderDto(orderService.save(order));
+        return orderConverter.toOrderDto(orderService.save(order));
   }
 
   //work
@@ -38,8 +47,7 @@ public class OrderRestController {
   public List<OrderDto> findAllOrdersByStatus(@RequestBody OrderDto orderDto,
                                               @RequestParam(value = "pageNumber", required = false, defaultValue = "1") Integer pageNumber,
                                               @RequestParam(value = "pageSize", required = false, defaultValue = "20") Integer pageSize) {
-
-    Page<Order> page = orderService.findOrdersByStatus(orderDto.getStatus(), pageNumber - 1, pageSize);
+    Page<Order> page = orderService.findOrdersByStatus(orderDto.getStatusOrder(), pageNumber - 1, pageSize);
     List<Order> orders = page.getContent();
     return orderConverter.toOrderDto(orders);
   }
@@ -53,10 +61,14 @@ public class OrderRestController {
     return orderConverter.toOrderDto(orders);
   }
 
-  //WORK
+  //WORK не показывает айди продуктов
   @GetMapping("/{orderId}")
   public OrderDto findOrderByOrderId(@PathVariable Long orderId) {
-    return orderConverter.toOrderDto(orderService.findOrderByOrderId(orderId));
+    Order order = orderService.findOrderByOrderId(orderId);
+    DeliveryInformation deliveryInformation =order.getDeliveryInformation();
+        List <ProductInOrderDto> productInOrderDto = productInOrderConverter
+            .toProductInOrderDto(productInOrderService.findAllProductByOrder(orderId));
+    return orderConverter.toOrderDto(order,deliveryInformation, productInOrderDto);
   }
 
   //WORK
@@ -68,7 +80,7 @@ public class OrderRestController {
   //WORK
   @PutMapping("/status/update")
   public void updateOrderStatus(@RequestBody OrderDto orderDto) {
-    orderService.updateOrderStatus(orderDto.getOrderId(), orderDto.getStatus());
+    orderService.updateOrderStatus(orderDto.getOrderId(), orderDto.getStatusOrder());
   }
 
   //WORK

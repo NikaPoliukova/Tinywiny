@@ -1,6 +1,5 @@
 package com.example.tinywiny.dto;
 
-import com.example.tinywiny.model.DeliveryInformation;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -19,7 +18,7 @@ public class OrderDto {
   Long orderId;
   String commentOrder;
   Long userId;
-  DeliveryInformation deliveryInformation;
+  DeliveryInformationDto deliveryInformation;
   int deliveryTypeId;
   String statusOrder;
   List<ProductInOrderDto> productsInOrder;

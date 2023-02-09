@@ -29,7 +29,7 @@ public class ProductInOrderService {
     return productsInOrder;
   }*/
 //не понимаю,как найти продукты для заказа
-  public List<ProductInOrder> findAllProductByOrder(Long orderId){
+  public List<ProductInOrder> findAllProductsByOrder(Long orderId){
     Order order = orderService.findOrderByOrderId(orderId);
     return productInOrderRepository.findAllByOrder(order);
   }

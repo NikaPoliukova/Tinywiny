@@ -14,6 +14,7 @@ public interface DeliveryInformationConverter {
   @Mapping(target = "user", source = "userDto")
   DeliveryInformation toDeliveryInformation(DeliveryInformationDto deliveryInformationDto, UserDto userDto);
 
-  List<DeliveryInformationDto> toDeliveryInformationDto(List<DeliveryInformation>deliveryInformation);
+  List<DeliveryInformationDto> toDeliveryInformationDto(List<DeliveryInformation> deliveryInformation);
 
+  DeliveryInformationDto toDeliveryInformationDto(DeliveryInformation deliveryInformation);
 }

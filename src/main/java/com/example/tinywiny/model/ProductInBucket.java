@@ -22,7 +22,7 @@ import javax.persistence.Table;
 @DynamicInsert
 @Data
 @NoArgsConstructor
-@Table(name = "product_in_bucket")
+@Table(name = "products_in_bucket")
 public class ProductInBucket {
 
   @Id

@@ -1,5 +1,6 @@
 package com.example.tinywiny.converter;
 
+import com.example.tinywiny.dto.DeliveryInformationDto;
 import com.example.tinywiny.dto.OrderDto;
 import com.example.tinywiny.dto.ProductInOrderDto;
 import com.example.tinywiny.model.DeliveryInformation;
@@ -25,8 +26,10 @@ public interface OrderConverter {
   OrderDto toOrderDto(Order order);
 
   @Mapping(target = "userId", source = "order.user.userId")
-  @Mapping(target = "deliveryInformation", source = "order.deliveryInformation")
+  @Mapping(target = "deliveryInformation", source = "deliveryInformation")
   @Mapping(target = "productsInOrder", source = "productInOrderDto")
   @Mapping(target = "deliveryTypeId", source = "order.deliveryType.idType")
-  OrderDto toOrderDto(Order order, DeliveryInformation deliveryInformation,List<ProductInOrderDto> productInOrderDto);
+  OrderDto toOrderDto(Order order, DeliveryInformationDto deliveryInformation,List<ProductInOrderDto> productInOrderDto);
+
+
 }

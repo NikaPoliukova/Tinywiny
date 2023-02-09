@@ -24,7 +24,7 @@ public class BucketRestController {
   private final BucketService bucketService;
   private final ProductInBucketConverter converter;
 
-  //work
+  //work (отображаются только айдишники продуктов)
   @GetMapping
   public List<ProductInBucketDto> findAllProductsInBucket(@RequestBody ProductInBucketDto productInBucketDto) {
     List<ProductInBucket> products = bucketService.findAllProductInBucket(productInBucketDto);

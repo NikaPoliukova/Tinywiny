@@ -4,6 +4,7 @@ import com.example.tinywiny.converter.DeliveryInformationConverter;
 import com.example.tinywiny.converter.OrderConverter;
 import com.example.tinywiny.converter.ProductInOrderConverter;
 import com.example.tinywiny.converter.UserConverter;
+import com.example.tinywiny.dto.DeliveryInformationDto;
 import com.example.tinywiny.dto.OrderDto;
 import com.example.tinywiny.dto.ProductInOrderDto;
 import com.example.tinywiny.dto.UserDto;
@@ -44,7 +45,9 @@ public class OrderService {
   @Modifying
   public Order save(OrderDto orderDto) {
     Order order = orderConverter.toOrder(orderDto);
-    DeliveryInformation deliveryInformation = orderDto.getDeliveryInformation();
+    UserDto userDto = userConverter.toDto(userService.findUserByUserId(orderDto.getUserId()));
+    DeliveryInformation deliveryInformation = deliveryInformationConverter
+        .toDeliveryInformation(orderDto.getDeliveryInformation(),userDto);
     order.setDeliveryInformation(deliveryInformation);
     List<ProductInOrder> products = productInOrderConverter.toProductInOrder(orderDto.getProductsInOrder());
     order.setProductsInOrder(products);

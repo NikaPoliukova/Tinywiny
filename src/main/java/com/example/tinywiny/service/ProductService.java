@@ -2,10 +2,12 @@ package com.example.tinywiny.service;
 
 import com.example.tinywiny.converter.ProductConverter;
 import com.example.tinywiny.converter.TypeProductConverter;
+import com.example.tinywiny.dto.ImageDto;
 import com.example.tinywiny.dto.ProductDto;
 import com.example.tinywiny.dto.TypeProduct;
 import com.example.tinywiny.dto.TypeProductDto;
 import com.example.tinywiny.dto.UserDto;
+import com.example.tinywiny.model.Image;
 import com.example.tinywiny.model.Product;
 import com.example.tinywiny.model.User;
 import com.example.tinywiny.repository.ProductRepository;
@@ -29,6 +31,7 @@ public class ProductService {
   private final TypeProductService typeProductService;
   private final TypeProductConverter typeProductConverter;
 
+
   @Transactional
   @Modifying
   public Product save(ProductDto productDto) {
@@ -38,7 +41,6 @@ public class ProductService {
     TypeProduct typeProduct = typeProductService.getType(productDto.getIdType());
     TypeProductDto typeProductDto = typeProductConverter.toDto(typeProduct);
     Product product = converter.toProduct(productDto, typeProductDto);
-
     return productRepository.save(product);
   }
 
@@ -46,10 +48,12 @@ public class ProductService {
   @Modifying
   public void updateProduct(ProductDto productDto) {
     Optional<Product> product = productRepository.findProductByProductId(productDto.getProductId());
-    if (product.isPresent()) {
-      prepareProductForUpdate(productDto, product.get());
-      productRepository.save(product.get());
+    if (product.isEmpty()) {
+      throw new RuntimeException("no product");
     }
+    prepareProductForUpdate(productDto, product.get());
+    productRepository.save(product.get());
+
   }
 
   private Product prepareProductForUpdate(ProductDto productDto, Product product) {
@@ -96,7 +100,7 @@ public class ProductService {
   }
 
   public int findProductPrice(Long productId) {
-   return productRepository.findProductPrice(productId);
+    return productRepository.findProductPrice(productId);
   }
 
   public void deleteProduct(Long productId) {

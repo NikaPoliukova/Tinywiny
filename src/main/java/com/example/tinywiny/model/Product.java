@@ -34,8 +34,7 @@ public class Product {
     @JoinColumn(name = "id_type")
     private TypeProduct typeProduct;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "image_id")
+    @OneToOne(mappedBy = "product", cascade = CascadeType.ALL)
     private Image image;
 
     @OneToMany(mappedBy = "product", fetch = FetchType.LAZY,cascade = CascadeType.ALL)

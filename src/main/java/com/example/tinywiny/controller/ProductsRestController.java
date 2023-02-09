@@ -1,11 +1,13 @@
 package com.example.tinywiny.controller;
 
 import com.example.tinywiny.converter.ProductConverter;
+import com.example.tinywiny.dto.ImageDto;
 import com.example.tinywiny.dto.ProductDto;
 import com.example.tinywiny.dto.ProductInBucketDto;
 import com.example.tinywiny.dto.TypeProductDto;
 import com.example.tinywiny.model.Product;
 import com.example.tinywiny.service.BucketService;
+import com.example.tinywiny.service.ImageService;
 import com.example.tinywiny.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -19,7 +21,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.List;
 
 @Slf4j
@@ -30,27 +36,33 @@ public class ProductsRestController {
   private final ProductService productService;
   private final ProductConverter converter;
   private final BucketService bucketService;
+  private final ImageService imageService;
+
 
   //WORK
   @PostMapping("/create")
   protected ProductDto createProduct(@RequestBody ProductDto product) {
     return converter.toProductDto(productService.save(product));
   }
-
+  //WORK
   @PostMapping
   protected void addProductInBucket(@RequestBody ProductInBucketDto productInBucketDto) {
     bucketService.addProductInBucket(productInBucketDto);
   }
 
-  // WORK
+  // WORK (image хранит кучу вложений)
   @GetMapping("/{productId}")
-  public ProductDto showProduct(@PathVariable Long productId) {
+  public ProductDto showProduct(@PathVariable Long productId) throws URISyntaxException {
     Product product = productService.findProductByProductId(productId);
+    URI imageUrl = null;
+    if (product.getImage() != null) {
+      imageUrl = imageService.getImagePath(product.getImage().getImageName()); //как ее отобразить на UI?
+    }
     return converter.toProductDto(product);
   }
 
-  //WORK
-  @PutMapping("/update")
+  //НЕ ЗАХОДИТ ДАЖЕ В КОНТРОЛЛЕР
+  @PutMapping
   public void updateProduct(@RequestBody ProductDto productDto) {
     productService.updateProduct(productDto);
   }
@@ -60,8 +72,19 @@ public class ProductsRestController {
   public void updateCountInStock(@RequestBody ProductDto product) {
     productService.updateCountInStock(product.getCountInStock(), product.getProductId());
   }
+//НЕ ЗНАЮ КАК ОБНОВИТЬ КАРТИНКУ
+  @PutMapping("/image")
+  public ImageDto updateImage(@RequestBody ImageDto imageDto, MultipartFile file) throws IOException {
+    imageService.updateImage(imageDto, file);
+    return imageDto;
+  }
 
-  //WORK
+  @DeleteMapping("/{productId}")
+  public void deleteImage(@PathVariable Long productId) {
+    imageService.deleteImage(productId);
+  }
+
+  //WORK (image хранит кучу вложений)
   @GetMapping("/type")
   public List<ProductDto> findAllProductsByTypeAndPage(@RequestBody TypeProductDto type,
                                                        @RequestParam(value = "pageNumber", required = false, defaultValue = "1") Integer pageNumber,
@@ -71,10 +94,10 @@ public class ProductsRestController {
     return converter.toProductDto(products);
   }
 
-  //WORK
-  @DeleteMapping("/{productId}")
-  public void deleteProduct(@PathVariable Long productId) {
-    productService.deleteProduct(productId);
+  //СТОИТ КАКОЕ-ТО ОГРАНИЧЕНИЕ НА УДАЛЕНИЕ
+  @DeleteMapping
+  public void deleteProduct(@RequestBody ProductDto productDto) {
+    productService.deleteProduct(productDto.getProductId());
   }
 }
 

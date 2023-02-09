@@ -54,6 +54,7 @@
     ]
   },
   "devDependencies": {
+    "@rebass/forms": "^4.0.6",
     "mdb-react-ui-kit": "^5.1.0"
   }
 }

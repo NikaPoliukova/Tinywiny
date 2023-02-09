@@ -18,4 +18,7 @@ public interface ProductInOrderConverter {
 
   List<ProductInOrderDto> toProductInOrderDto(List<ProductInOrder> products);
 
+ @Mapping(target = "orderId", source = "order.orderId")
+ @Mapping(target = "productId", source = "product.productId")
+ ProductInOrderDto toProductInOrderDto(ProductInOrder productInOrder);
 }

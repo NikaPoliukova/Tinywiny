@@ -42,14 +42,12 @@ public class UserRestController {
   private final UserService userService;
   private final UserConverter userConverter;
 
-  //WORK
   @PutMapping("/update/user/{userId}")
   protected void updateUser(@PathVariable Long userId, @RequestBody UserDto userDto) {
     User user = userService.findUserByUserId(userId);
     userService.updateUser(userDto, user);
   }
 
-  //WORK
   @GetMapping
   protected List<UserDto> findAllUsersByPage(@RequestParam(value = "pageNumber", required = false, defaultValue = "1") Integer pageNumber,
                                              @RequestParam(value = "pageSize", required = false, defaultValue = "20") Integer pageSize) {
@@ -58,7 +56,6 @@ public class UserRestController {
     return userConverter.toDto(users);
   }
 
-  //WORK
   @GetMapping("/user/{userId}")
   protected UserDto findUser(@PathVariable Long userId) {
     User user = userService.findUserByUserId(userId);

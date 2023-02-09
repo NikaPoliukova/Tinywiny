@@ -1,9 +1,13 @@
 package com.example.tinywiny.controller;
 
+import com.example.tinywiny.converter.ProductConverter;
 import com.example.tinywiny.converter.ProductInBucketConverter;
+import com.example.tinywiny.dto.ProductDto;
 import com.example.tinywiny.dto.ProductInBucketDto;
+import com.example.tinywiny.model.Product;
 import com.example.tinywiny.model.ProductInBucket;
 import com.example.tinywiny.service.BucketService;
+import com.example.tinywiny.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -13,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
@@ -23,12 +28,18 @@ public class BucketRestController {
 
   private final BucketService bucketService;
   private final ProductInBucketConverter converter;
+  private final ProductService productService;
+  private final ProductConverter productConverter;
 
-  //work (отображаются только айдишники продуктов)
+  //work
   @GetMapping
-  public List<ProductInBucketDto> findAllProductsInBucket(@RequestBody ProductInBucketDto productInBucketDto) {
-    List<ProductInBucket> products = bucketService.findAllProductInBucket(productInBucketDto);
-    return converter.toProductInBucketDto(products);
+  public List<ProductDto> findAllProductsInBucket(@RequestBody ProductInBucketDto productInBucketDto) {
+    List<ProductInBucket> productsInBucket = bucketService.findAllProductInBucket(productInBucketDto);
+    List<Product> products = new ArrayList<>();
+    for (ProductInBucket prod : productsInBucket) {
+      products.add(productService.findProductByProductId(prod.getProduct().getProductId()));
+    }
+    return productConverter.toProductDto(products);
   }
 
   //WORK

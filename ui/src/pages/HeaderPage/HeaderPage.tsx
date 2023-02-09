@@ -1,27 +1,26 @@
 import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import CameraIcon from '@mui/icons-material/PhotoCamera';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
+import CardHeader from '@mui/material/CardHeader';
 import CssBaseline from '@mui/material/CssBaseline';
 import Grid from '@mui/material/Grid';
-import Stack from '@mui/material/Stack';
-import Box from '@mui/material/Box';
+import StarIcon from '@mui/icons-material/StarBorder';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
 import Link from '@mui/material/Link';
-import {createTheme, ThemeProvider} from '@mui/material/styles';
+import GlobalStyles from '@mui/material/GlobalStyles';
+import Container from '@mui/material/Container';
 
-function Copyright() {
+function Copyright(props: any) {
     return (
-        <Typography variant="body2" color="text.secondary" align="center">
+        <Typography variant="body2" color="text.secondary" align="center" {...props}>
             {'Copyright © '}
             <Link color="inherit" href="https://mui.com/">
-                Tiny-Winy
+                Your Website
             </Link>{' '}
             {new Date().getFullYear()}
             {'.'}
@@ -29,14 +28,52 @@ function Copyright() {
     );
 }
 
-const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+const tiers = [
+    {
+        title: 'Free',
+        price: '0',
+        description: [
+            '10 users included',
+            '2 GB of storage',
+            'Help center access',
+            'Email support',
+        ],
+        buttonText: 'Sign up for free',
+        buttonVariant: 'outlined',
+    },
+    {
+        title: 'Pro',
+        subheader: 'Most popular',
+        price: '15',
+        description: [
+            '20 users included',
+            '10 GB of storage',
+            'Help center access',
+            'Priority email support',
+        ],
+        buttonText: 'Get started',
+        buttonVariant: 'contained',
+    },
+    {
+        title: 'Enterprise',
+        price: '30',
+        description: [
+            '50 users included',
+            '30 GB of storage',
+            'Help center access',
+            'Phone & email support',
+        ],
+        buttonText: 'Contact us',
+        buttonVariant: 'outlined',
+    },
+];
 
-const theme = createTheme();
 
-export default function Album() {
+function PricingContent() {
     return (
-        <ThemeProvider theme={theme}>
-            <CssBaseline/>
+        <React.Fragment>
+            <GlobalStyles styles={{ ul: { margin: 0, padding: 0, listStyle: 'none' } }} />
+            <CssBaseline />
             <AppBar
                 position="static"
                 color="default"
@@ -86,37 +123,10 @@ export default function Album() {
                     </Button>
                 </Toolbar>
             </AppBar>
-            <main>
-
-                <Box
-                    sx={{
-                        bgcolor: 'background.paper',
-                        pt: 8,
-                        pb: 6,
-                    }}
-                >
-                    <Container maxWidth="sm">
-                        <Typography
-                            component="h1"
-                            variant="h2"
-                            align="center"
-                            color="text.primary"
-                            gutterBottom
-                        >
-                            Products
-                        </Typography>
-                        <Stack
-                            sx={{pt: 4}}
-                            direction="row"
-                            spacing={2}
-                            justifyContent="center"
-                        >
-
-                        </Stack>
-                    </Container>
-                </Box>
-
-            </main>
-        </ThemeProvider>
+        </React.Fragment>
     );
+}
+
+export default function Pricing() {
+    return <PricingContent />;
 }

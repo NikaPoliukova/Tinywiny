@@ -1,7 +1,18 @@
 import React, {useEffect, useState} from 'react';
 import UserService from "../../services/UserService";
 import {User} from '../../model/User';
-import {Card, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography} from "@mui/material";
+import {
+    Box,
+    Button,
+    Card,
+    Table,
+    TableBody,
+    TableCell,
+    TableContainer,
+    TableHead,
+    TableRow,
+    Typography
+} from "@mui/material";
 
 
 const UsersPage = () => {
@@ -19,7 +30,7 @@ const UsersPage = () => {
         <div>
             {error}
             <Typography component="h1" variant="h5">
-              <h1>Users</h1>
+                <h1>Users</h1>
             </Typography>
             <Card style={{width: 1000}}>
                 <TableContainer>
@@ -50,6 +61,7 @@ const UsersPage = () => {
                                     <TableCell align="right">
                                         {user.phoneNumber}
                                     </TableCell>
+
                                 </TableRow>
                             ))}
                         </TableBody>

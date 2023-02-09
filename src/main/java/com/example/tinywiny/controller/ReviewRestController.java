@@ -27,12 +27,12 @@ public class ReviewRestController {
   private final ReviewService reviewService;
   private final ReviewConverter converter;
 
-  // WORK
+
   @PostMapping
   protected ReviewDto createReview(@RequestBody ReviewDto review) {
     return converter.toReviewDto(reviewService.save(review));
   }
-  // WORK
+
   @GetMapping
   protected List<ReviewDto> findAllReviews(@RequestParam(value = "pageNumber", required = false, defaultValue = "1") Integer pageNumber,
                                           @RequestParam(value = "pageSize", required = false, defaultValue = "20") Integer pageSize) {
@@ -41,7 +41,6 @@ public class ReviewRestController {
     return converter.toReviewDto(reviews);
   }
 
-  //WORK
   @DeleteMapping("/{id}")
   protected void deleteReview(@PathVariable Long id) {
     reviewService.deleteReviewById(id);

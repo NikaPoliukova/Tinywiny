@@ -42,7 +42,6 @@ public class OrderRestController {
         return orderConverter.toOrderDto(orderService.save(order));
   }
 
-  //work (deliveryInformation -null userID, productsInOrder -null productId,OrderId)
   @GetMapping("status")
   public List<OrderDto> findAllOrdersByStatus(@RequestBody OrderDto orderDto,
                                               @RequestParam(value = "pageNumber", required = false, defaultValue = "1") Integer pageNumber,
@@ -52,7 +51,6 @@ public class OrderRestController {
     return orderConverter.toOrderDto(orders);
   }
 
-  //work (deliveryInformation -null userID, productsInOrder -null productId,OrderId)
   @GetMapping
   public List<OrderDto> findAllOrdersByPage(@RequestParam(value = "pageNumber", required = false, defaultValue = "1") Integer pageNumber,
                                             @RequestParam(value = "pageSize", required = false, defaultValue = "20") Integer pageSize) {
@@ -61,7 +59,6 @@ public class OrderRestController {
     return orderConverter.toOrderDto(orders);
   }
 
-  //work (deliveryInformation -null userID, productsInOrder -null productId,OrderId)
   @GetMapping("/{orderId}")
   public OrderDto findOrderByOrderId(@PathVariable Long orderId) {
     Order order = orderService.findOrderByOrderId(orderId);
@@ -71,19 +68,16 @@ public class OrderRestController {
     return orderConverter.toOrderDto(order,deliveryInformationDto, productInOrderDto);
   }
 
-  //work (deliveryInformation -null userID, productsInOrder -null productId,OrderId)
   @GetMapping("/orders-by/{userId}")
   public List<OrderDto> findOrdersByUserId(@PathVariable Long userId) {
     return orderConverter.toOrderDto(orderService.findOrdersByUserId(userId));
   }
 
-  //WORK
   @PutMapping("/status/update")
   public void updateOrderStatus(@RequestBody OrderDto orderDto) {
     orderService.updateOrderStatus(orderDto.getOrderId(), orderDto.getStatusOrder());
   }
 
-  //WORK
   @GetMapping("/status/{orderId}")
   public String findStatusOrder(@PathVariable Long orderId) {
     return orderService.getStatusByOrderId(orderId);

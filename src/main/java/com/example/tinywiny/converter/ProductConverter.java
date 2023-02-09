@@ -16,6 +16,7 @@ public interface ProductConverter {
   List<ProductDto> toProductDto(List<Product> product);
 
   @Mapping(target = "idType", source = "product.typeProduct.id")
+  @Mapping(target = "imageDto", source = "image")
   ProductDto toProductDto(Product product);
 }
 

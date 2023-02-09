@@ -38,19 +38,16 @@ public class ProductsRestController {
   private final BucketService bucketService;
   private final ImageService imageService;
 
-
-  //WORK
   @PostMapping("/create")
   protected ProductDto createProduct(@RequestBody ProductDto product) {
     return converter.toProductDto(productService.save(product));
   }
-  //WORK
+
   @PostMapping
   protected void addProductInBucket(@RequestBody ProductInBucketDto productInBucketDto) {
     bucketService.addProductInBucket(productInBucketDto);
   }
 
-  // WORK (image хранит кучу вложений)
   @GetMapping("/{productId}")
   public ProductDto showProduct(@PathVariable Long productId) throws URISyntaxException {
     Product product = productService.findProductByProductId(productId);
@@ -61,13 +58,11 @@ public class ProductsRestController {
     return converter.toProductDto(product);
   }
 
-  //НЕ ЗАХОДИТ ДАЖЕ В КОНТРОЛЛЕР
   @PutMapping
   public void updateProduct(@RequestBody ProductDto productDto) {
     productService.updateProduct(productDto);
   }
 
-  //WORK
   @PutMapping("/update/count-in-stock")
   public void updateCountInStock(@RequestBody ProductDto product) {
     productService.updateCountInStock(product.getCountInStock(), product.getProductId());
@@ -84,7 +79,7 @@ public class ProductsRestController {
     imageService.deleteImage(productId);
   }
 
-  //WORK (image хранит кучу вложений)
+
   @GetMapping("/type")
   public List<ProductDto> findAllProductsByTypeAndPage(@RequestBody TypeProductDto type,
                                                        @RequestParam(value = "pageNumber", required = false, defaultValue = "1") Integer pageNumber,
@@ -94,7 +89,6 @@ public class ProductsRestController {
     return converter.toProductDto(products);
   }
 
-  //СТОИТ КАКОЕ-ТО ОГРАНИЧЕНИЕ НА УДАЛЕНИЕ
   @DeleteMapping
   public void deleteProduct(@RequestBody ProductDto productDto) {
     productService.deleteProduct(productDto.getProductId());

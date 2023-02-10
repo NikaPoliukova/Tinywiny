@@ -36,15 +36,12 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @RequiredArgsConstructor
 public class UserRestController {
 
-  @Value("${jwt.secretKey}")
-  private String secretKey;
-
   private final UserService userService;
   private final UserConverter userConverter;
 
-  @PutMapping("/update/user/{userId}")
-  protected void updateUser(@PathVariable Long userId, @RequestBody UserDto userDto) {
-    User user = userService.findUserByUserId(userId);
+  @PutMapping("/update/user")
+  protected void updateUser(@RequestBody UserDto userDto) {
+    User user = userService.findUserByUserId(userDto.getUserId());
     userService.updateUser(userDto, user);
   }
 
@@ -62,25 +59,4 @@ public class UserRestController {
     return userConverter.toDto(user);
   }
 
-  @GetMapping("/token/refresh")
-  public void refreshToken(HttpServletRequest request, HttpServletResponse response,
-                           @RequestHeader(AUTHORIZATION) String authorizationHeader) {
-    if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
-      try {
-        String refreshToken = authorizationHeader.substring("Bearer ".length());
-        String username = getUsernameFromRefreshToken(refreshToken, secretKey);
-        String accessToken = generateRefreshedAccessToken(username, request.getRequestURL().toString(), secretKey);
-        TokensDto dto = new TokensDto();
-        dto.setAccess_token(accessToken);
-        dto.setRefreshToken(refreshToken);
-
-        response.setContentType(APPLICATION_JSON_VALUE);
-        new ObjectMapper().writeValue(response.getOutputStream(), dto);
-      } catch (Exception e) {
-        log.info("Error logging in {}", e.getMessage());
-      }
-    } else {
-      throw new RuntimeException("Refresh token is missing");
-    }
-  }
 }

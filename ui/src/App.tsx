@@ -6,6 +6,8 @@ import {Registry} from "./pages/RegistrationPage/RegistryPage";
 import {SignIn} from "./pages/LoginPage/LoginPage";
 import ReviewsPage from "./pages/ReviewsPage/ReviewsPage";
 import OrderPage from "./pages/OrderPage/OrderPage";
+import BucketPage from "./pages/BucketPage/BucketPage";
+
 
 
 function App() {
@@ -17,6 +19,9 @@ function App() {
             <Route path={'/registration'} element={<Registry/>}/>
             <Route path={'/reviews'} element={<ReviewsPage/>}/>
             <Route path={'/products-for-order'} element={<OrderPage/>}/>
+
+            <Route path={'/bucket'} element={<BucketPage/>}/>
+
 
         </Routes>
     );

@@ -2,8 +2,6 @@ import React, {useEffect, useState} from 'react';
 import UserService from "../../services/UserService";
 import {User} from '../../model/User';
 import {
-    Box,
-    Button,
     Card,
     Table,
     TableBody,
@@ -13,6 +11,7 @@ import {
     TableRow,
     Typography
 } from "@mui/material";
+import Header from "../component/Header";
 
 
 const UsersPage = () => {
@@ -28,6 +27,7 @@ const UsersPage = () => {
 
     return (
         <div>
+            <Header/>
             {error}
             <Typography component="h1" variant="h5">
                 <h1>Users</h1>

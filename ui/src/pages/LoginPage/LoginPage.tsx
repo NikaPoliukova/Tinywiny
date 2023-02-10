@@ -1,15 +1,20 @@
 import * as React from 'react';
 import {
     Avatar,
-    Box, Button, Checkbox,
+    Box,
+    Button,
+    Checkbox,
     Container,
     createTheme,
-    CssBaseline, FormControlLabel, Grid,
+    CssBaseline,
+    FormControlLabel,
+    Grid,
     Link,
     TextField,
     ThemeProvider,
     Typography
 } from "@mui/material";
+import Header from "../component/Header";
 
 const theme = createTheme();
 
@@ -24,7 +29,9 @@ export function SignIn() {
     };
 
     return (
+
         <ThemeProvider theme={theme}>
+            <Header/>
             <Container component="main" maxWidth="xs">
                 <CssBaseline/>
                 <Box
@@ -35,6 +42,7 @@ export function SignIn() {
                         alignItems: 'center',
                     }}
                 >
+
                     <Avatar sx={{m: 1, bgcolor: 'secondary.main'}}>
                     </Avatar>
                     <Typography component="h1" variant="h5">

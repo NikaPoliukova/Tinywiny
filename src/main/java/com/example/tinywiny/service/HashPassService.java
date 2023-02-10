@@ -1,7 +1,5 @@
 package com.example.tinywiny.service;
 
-import java.security.SecureRandom;
-
 import at.favre.lib.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Component;
 
@@ -9,6 +7,7 @@ import java.security.SecureRandom;
 
 @Component
 public class HashPassService {
+
   private final BCrypt.Hasher hasher;
 
   public HashPassService() {

@@ -12,11 +12,11 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class DeliveryInformationDto {
+
   Long deliveryInformationId;
   String customerName;
   String customerLastName;
   String customerSurname;
   String addressDelivery;
   Long userId;
-
 }

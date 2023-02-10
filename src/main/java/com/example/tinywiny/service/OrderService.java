@@ -4,7 +4,6 @@ import com.example.tinywiny.converter.DeliveryInformationConverter;
 import com.example.tinywiny.converter.OrderConverter;
 import com.example.tinywiny.converter.ProductInOrderConverter;
 import com.example.tinywiny.converter.UserConverter;
-import com.example.tinywiny.dto.DeliveryInformationDto;
 import com.example.tinywiny.dto.OrderDto;
 import com.example.tinywiny.dto.ProductInOrderDto;
 import com.example.tinywiny.dto.UserDto;
@@ -47,7 +46,7 @@ public class OrderService {
     Order order = orderConverter.toOrder(orderDto);
     UserDto userDto = userConverter.toDto(userService.findUserByUserId(orderDto.getUserId()));
     DeliveryInformation deliveryInformation = deliveryInformationConverter
-        .toDeliveryInformation(orderDto.getDeliveryInformation(),userDto);
+        .toDeliveryInformation(orderDto.getDeliveryInformation(), userDto);
     order.setDeliveryInformation(deliveryInformation);
     List<ProductInOrder> products = productInOrderConverter.toProductInOrder(orderDto.getProductsInOrder());
     order.setProductsInOrder(products);
@@ -64,7 +63,7 @@ public class OrderService {
     int sum = 0;
     for (ProductInOrderDto product : productsInOrder) {
       int count = product.getCount();
-      sum = count * (productService.findProductPrice(product.getProductId()));
+      sum += count * (productService.findProductPrice(product.getProductId()));
     }
     return sum;
   }
@@ -97,10 +96,10 @@ public class OrderService {
     return orderRepository.getOrderStatus(orderId);
   }
 
-  public void updateOrderStatus(long orderNumber, String status) {
-    Order order = findOrderByOrderId(orderNumber);
-    if (order != null && !(status.equals(order.getStatusOrder()))) {
-      order.setStatusOrder(status);
+  public void updateOrderStatus(OrderDto orderDto) {
+    Order order = findOrderByOrderId(orderDto.getOrderId());
+    if (order != null && !(orderDto.getStatusOrder().equals(order.getStatusOrder()))) {
+      order.setStatusOrder(orderDto.getStatusOrder());
       orderRepository.save(order);
     }
   }
@@ -109,5 +108,4 @@ public class OrderService {
     Pageable page = PageRequest.of(pageNumber, pageSize);
     return orderRepository.findAllByStatusOrder(status, page);
   }
-
 }

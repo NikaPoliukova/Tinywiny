@@ -1,27 +1,62 @@
 package com.example.tinywiny.controller;
 
+import com.example.tinywiny.dto.TokensDto;
 import com.example.tinywiny.dto.UserDto;
 import com.example.tinywiny.service.UserService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.MediaType;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import static com.example.tinywiny.security.jwt.JwtUtils.generateRefreshedAccessToken;
+import static com.example.tinywiny.security.jwt.JwtUtils.getUsernameFromRefreshToken;
+import static org.springframework.http.HttpHeaders.AUTHORIZATION;
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @Slf4j
 @RestController
 @RequestMapping("/api/v1/login")
 @AllArgsConstructor
 public class LoginRestController {
+
   private final UserService userService;
-//work
+
+  @Value("${jwt.secretKey}")
+  private String secretKey;
+
   @PostMapping
   protected void userAuthorization(@RequestBody UserDto user) {
     userService.findUserByUserNameAndPassword(user.getUserName(), user.getPassword());
+  }
 
+  @GetMapping("/token/refresh")
+  public void refreshToken(HttpServletRequest request, HttpServletResponse response,
+                           @RequestHeader(AUTHORIZATION) String authorizationHeader) {
+    if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
+      try {
+        String refreshToken = authorizationHeader.substring("Bearer ".length());
+        String username = getUsernameFromRefreshToken(refreshToken, secretKey);
+        String accessToken = generateRefreshedAccessToken(username, request.getRequestURL().toString(), secretKey);
+        TokensDto dto = new TokensDto();
+        dto.setAccess_token(accessToken);
+        dto.setRefreshToken(refreshToken);
 
+        response.setContentType(APPLICATION_JSON_VALUE);
+        new ObjectMapper().writeValue(response.getOutputStream(), dto);
+      } catch (Exception e) {
+        log.info("Error logging in {}", e.getMessage());
+      }
+    } else {
+      throw new RuntimeException("Refresh token is missing");
+    }
   }
 }

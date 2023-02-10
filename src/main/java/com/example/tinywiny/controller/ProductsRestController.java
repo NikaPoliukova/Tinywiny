@@ -47,9 +47,9 @@ public class ProductsRestController {
   protected void addProductInBucket(@RequestBody ProductInBucketDto productInBucketDto) {
     bucketService.addProductInBucket(productInBucketDto);
   }
-
+//не знаю,как отобразить
   @GetMapping("/{productId}")
-  public ProductDto showProduct(@PathVariable Long productId) throws URISyntaxException {
+  public ProductDto findProduct(@PathVariable Long productId) throws URISyntaxException {
     Product product = productService.findProductByProductId(productId);
     URI imageUrl = null;
     if (product.getImage() != null) {
@@ -67,18 +67,18 @@ public class ProductsRestController {
   public void updateCountInStock(@RequestBody ProductDto product) {
     productService.updateCountInStock(product.getCountInStock(), product.getProductId());
   }
-//НЕ ЗНАЮ КАК ОБНОВИТЬ КАРТИНКУ
+
+  //НЕ ЗНАЮ КАК ОБНОВИТЬ КАРТИНКУ
   @PutMapping("/image")
   public ImageDto updateImage(@RequestBody ImageDto imageDto, MultipartFile file) throws IOException {
     imageService.updateImage(imageDto, file);
     return imageDto;
   }
 
-  @DeleteMapping("/{productId}")
+  @DeleteMapping("/{productId}/image")
   public void deleteImage(@PathVariable Long productId) {
     imageService.deleteImage(productId);
   }
-
 
   @GetMapping("/type")
   public List<ProductDto> findAllProductsByTypeAndPage(@RequestBody TypeProductDto type,
@@ -89,9 +89,9 @@ public class ProductsRestController {
     return converter.toProductDto(products);
   }
 
-  @DeleteMapping
-  public void deleteProduct(@RequestBody ProductDto productDto) {
-    productService.deleteProduct(productDto.getProductId());
+  @DeleteMapping("/{productId}")
+  public void deleteProduct(@PathVariable Long productId) {
+    productService.deleteProduct(productId);
   }
 }
 

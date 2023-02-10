@@ -5,9 +5,10 @@ import TextField from '@mui/material/TextField';
 
 import {Box, Button, Card, Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@mui/material";
 
-
 import {Product} from "../../model/Product";
 import ProductService from "../../services/ProductService";
+import Header from '../component/Header';
+
 
 
 export default function OrderPage() {
@@ -20,15 +21,25 @@ export default function OrderPage() {
             .catch(error => setError(error.message));
     }, []);
     return (
+
         <React.Fragment>
-            <Card style={{width: 1000}}>
-                <TableContainer >
+            <Header />
+            <Card style={{width: 1000}}
+
+                  sx={{
+                      marginTop: 10,
+                      display: 'flex',
+                      flexDirection: 'column',
+                      alignItems: 'center',
+
+                  }}>
+                <TableContainer>
                     <Table sx={{minWidth: 800}} aria-label="simple table">
                         <TableHead>
                             <TableRow>
-                                <TableCell align="right">Product</TableCell>
-                                <TableCell align="right">Count</TableCell>
-                                <TableCell align="right">Price</TableCell>
+                                <TableCell align="center">Product</TableCell>
+                                <TableCell align="center">Count</TableCell>
+                                <TableCell align="center">Price</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
@@ -49,7 +60,7 @@ export default function OrderPage() {
                     </Table>
                 </TableContainer>
             </Card>
-            <Typography variant="h6" gutterBottom>
+            <Typography variant="h6" gutterBottom align="center">
                 Form for order
             </Typography>
 
@@ -108,9 +119,20 @@ export default function OrderPage() {
                             variant="standard"
                         />
                     </Grid>
-                    <Grid item xs={12}>
+                    <Grid item xs={100}>
                         <TextField
                             label="order comments"
+                        />
+                    </Grid>
+                    <Grid item xs={12} sm={5}>
+                        <TextField
+                            required
+                            id="typeDelivery"
+                            name="typeDelivery"
+                            label="Type delivery"
+                            fullWidth
+                            autoComplete="shipping address-line1"
+                            variant="standard"
                         />
                     </Grid>
                     <Button
@@ -124,6 +146,5 @@ export default function OrderPage() {
                 </Grid>
             </Box>
         </React.Fragment>
-    )
-        ;
+    );
 }

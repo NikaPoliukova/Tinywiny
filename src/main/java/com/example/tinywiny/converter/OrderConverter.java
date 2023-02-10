@@ -3,7 +3,6 @@ package com.example.tinywiny.converter;
 import com.example.tinywiny.dto.DeliveryInformationDto;
 import com.example.tinywiny.dto.OrderDto;
 import com.example.tinywiny.dto.ProductInOrderDto;
-import com.example.tinywiny.model.DeliveryInformation;
 import com.example.tinywiny.model.Order;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -29,7 +28,5 @@ public interface OrderConverter {
   @Mapping(target = "deliveryInformation", source = "deliveryInformation")
   @Mapping(target = "productsInOrder", source = "productInOrderDto")
   @Mapping(target = "deliveryTypeId", source = "order.deliveryType.idType")
-  OrderDto toOrderDto(Order order, DeliveryInformationDto deliveryInformation,List<ProductInOrderDto> productInOrderDto);
-
-
+  OrderDto toOrderDto(Order order, DeliveryInformationDto deliveryInformation, List<ProductInOrderDto> productInOrderDto);
 }

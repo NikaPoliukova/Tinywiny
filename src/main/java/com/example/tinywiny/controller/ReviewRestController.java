@@ -27,7 +27,6 @@ public class ReviewRestController {
   private final ReviewService reviewService;
   private final ReviewConverter converter;
 
-
   @PostMapping
   protected ReviewDto createReview(@RequestBody ReviewDto review) {
     return converter.toReviewDto(reviewService.save(review));
@@ -35,7 +34,7 @@ public class ReviewRestController {
 
   @GetMapping
   protected List<ReviewDto> findAllReviews(@RequestParam(value = "pageNumber", required = false, defaultValue = "1") Integer pageNumber,
-                                          @RequestParam(value = "pageSize", required = false, defaultValue = "20") Integer pageSize) {
+                                           @RequestParam(value = "pageSize", required = false, defaultValue = "20") Integer pageSize) {
     Page<Review> page = reviewService.findReviewsByPage(pageNumber - 1, pageSize);
     List<Review> reviews = page.getContent();
     return converter.toReviewDto(reviews);

@@ -10,11 +10,12 @@ import java.util.List;
 
 @Mapper
 public interface ReviewConverter {
+
   @Mapping(target = "user", source = "userDto")
   Review toReview(ReviewDto review, UserDto userDto);
 
   List<ReviewDto> toReviewDto(List<Review> review);
 
- @Mapping(target = "userId", source = "review.user.userId")
+  @Mapping(target = "userId", source = "review.user.userId")
   ReviewDto toReviewDto(Review review);
 }

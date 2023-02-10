@@ -6,7 +6,6 @@ import com.example.tinywiny.converter.ProductInOrderConverter;
 import com.example.tinywiny.dto.DeliveryInformationDto;
 import com.example.tinywiny.dto.OrderDto;
 import com.example.tinywiny.dto.ProductInOrderDto;
-import com.example.tinywiny.model.DeliveryInformation;
 import com.example.tinywiny.model.Order;
 import com.example.tinywiny.service.OrderService;
 import com.example.tinywiny.service.ProductInOrderService;
@@ -36,10 +35,10 @@ public class OrderRestController {
   private final DeliveryInformationConverter deliveryInformationConverter;
   //КОГДА ДЕЛАЕТСЯ ЗАКАЗ ЧИСЛО НА СКЛАДЕ ДОЛЖНО УМЕНЬШАТЬСЯ
 
-  //work????
+
   @PostMapping
   public OrderDto createOrder(@RequestBody OrderDto order) {
-        return orderConverter.toOrderDto(orderService.save(order));
+    return orderConverter.toOrderDto(orderService.save(order));
   }
 
   @GetMapping("status")
@@ -62,10 +61,10 @@ public class OrderRestController {
   @GetMapping("/{orderId}")
   public OrderDto findOrderByOrderId(@PathVariable Long orderId) {
     Order order = orderService.findOrderByOrderId(orderId);
-   DeliveryInformationDto deliveryInformationDto= deliveryInformationConverter.toDeliveryInformationDto(order.getDeliveryInformation());
-        List <ProductInOrderDto> productInOrderDto = productInOrderConverter
-            .toProductInOrderDto(productInOrderService.findAllProductsByOrder(orderId));
-    return orderConverter.toOrderDto(order,deliveryInformationDto, productInOrderDto);
+    DeliveryInformationDto deliveryInformationDto = deliveryInformationConverter.toDeliveryInformationDto(order.getDeliveryInformation());
+    List<ProductInOrderDto> productInOrderDto = productInOrderConverter
+        .toProductInOrderDto(productInOrderService.findAllProductsByOrder(orderId));
+    return orderConverter.toOrderDto(order, deliveryInformationDto, productInOrderDto);
   }
 
   @GetMapping("/orders-by/{userId}")
@@ -75,7 +74,7 @@ public class OrderRestController {
 
   @PutMapping("/status/update")
   public void updateOrderStatus(@RequestBody OrderDto orderDto) {
-    orderService.updateOrderStatus(orderDto.getOrderId(), orderDto.getStatusOrder());
+    orderService.updateOrderStatus(orderDto);
   }
 
   @GetMapping("/status/{orderId}")

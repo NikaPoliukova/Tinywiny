@@ -1,4 +1,5 @@
 import * as React from 'react';
+import {useEffect, useState} from 'react';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
@@ -13,12 +14,21 @@ import Container from '@mui/material/Container';
 import {createTheme, ThemeProvider} from '@mui/material/styles';
 import Header from "../component/Header";
 import Sidebar from "../component/SideBar";
+import {Product} from "../../model/Product";
+import ProductService from "../../services/ProductService";
 
-const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 const theme = createTheme();
 
 export function Products() {
+
+    const [products, setProducts] = useState<Array<Product>>([]);
+
+
+    useEffect(() => {
+        ProductService.getProducts()
+            .then(response => setProducts(response));
+    }, []);
     return (
         <ThemeProvider theme={theme}>
             <CssBaseline/>
@@ -55,8 +65,8 @@ export function Products() {
                 <Container sx={{py: 8}} maxWidth="md">
 
                     <Grid container spacing={4}>
-                        {cards.map((card) => (
-                            <Grid item key={card} xs={10} sm={6} md={4}>
+                        {products.map((product) => (
+                            <Grid item key={product.productName} xs={10} sm={6} md={4}>
                                 <Card
                                     sx={{height: '100%', display: 'flex', flexDirection: 'column'}}
                                 >
@@ -70,10 +80,13 @@ export function Products() {
                                     />
                                     <CardContent sx={{flexGrow: 1}}>
                                         <Typography gutterBottom variant="h5" component="h2">
-                                            Product
+                                            {product.productName}
                                         </Typography>
                                         <Typography>
-                                            ОПИСАНИЕ ТОВАРА
+                                            {product.description}
+                                        </Typography>
+                                        <Typography>
+                                            {product.price}
                                         </Typography>
                                     </CardContent>
                                     <CardActions>

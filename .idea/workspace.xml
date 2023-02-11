@@ -14,9 +14,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4dd877d4-850b-4093-ba42-62db28456f03" name="Changes" comment="add page ui">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/src/pages/BucketPage/BucketPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/pages/BucketPage/BucketPage.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ui/src/pages/ProductsPage/ProductsPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/pages/ProductsPage/ProductsPage.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -259,7 +256,7 @@
       <workItem from="1675958102538" duration="11034000" />
       <workItem from="1676016130851" duration="14604000" />
       <workItem from="1676051487366" duration="12938000" />
-      <workItem from="1676108161882" duration="10159000" />
+      <workItem from="1676108161882" duration="10722000" />
     </task>
     <task id="LOCAL-00001" summary="added more classes">
       <created>1675167662551</created>
@@ -387,7 +384,14 @@
       <option name="project" value="LOCAL" />
       <updated>1676117889820</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="add page ui">
+      <created>1676118927695</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1676118927695</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -546,10 +550,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="249" y="0" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1676056205216" />
-    <state x="361" y="132" key="Vcs.Push.Dialog.v2" timestamp="1676117894048">
+    <state x="361" y="132" key="Vcs.Push.Dialog.v2" timestamp="1676118938323">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="361" y="132" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1676117894048" />
+    <state x="361" y="132" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1676118938323" />
     <state x="349" y="67" key="com.intellij.database.dbimport.ImportDialog" timestamp="1674672836094">
       <screen x="0" y="0" width="1536" height="824" />
     </state>

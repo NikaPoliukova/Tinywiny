@@ -9,7 +9,7 @@ class UserService {
         return response.data;
     }
     async getUser(): Promise<User> {
-        const response = await axios.get<User>('http://localhost:8080/api/v1/users/{userId}');
+        const response = await axios.get<User>('http://localhost:8080/api/v1/users/${userId}');
         return response.data;
     }
 
@@ -17,7 +17,8 @@ class UserService {
         await axios.post('http://localhost:8080/api/v1/registration', user);
         }
 
-
-
+    async updateUser(user: User): Promise<void> {
+        await axios.put('http://localhost:8080/api/v1/users', user);
+    }
 }
 export default new UserService();

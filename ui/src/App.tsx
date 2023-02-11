@@ -9,6 +9,7 @@ import OrderPage from "./pages/OrderPage/OrderPage";
 import BucketPage from "./pages/BucketPage/BucketPage";
 import OrdersPage from "./pages/OrdersPage/OrdersPage";
 import {Products} from "./pages/ProductsPage/ProductsPage";
+import GalleryPage from "./pages/GalleryPage/GalleryPage";
 
 
 
@@ -25,6 +26,7 @@ function App() {
             <Route path={'/orders'} element={<OrdersPage/>}/>
             <Route path={'/bucket'} element={<BucketPage/>}/>
             <Route path={'/products'} element={<Products/>}/>
+            <Route path={'/gallery'} element={<GalleryPage/>}/>
 
 
         </Routes>

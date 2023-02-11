@@ -12,10 +12,8 @@ import {
 } from "@mui/material";
 import {Review} from "../../model/Review";
 import ReviewService from "../../services/ReviewService";
-import Toolbar from "@mui/material/Toolbar";
-import Link from "@mui/material/Link";
-import AppBar from "@mui/material/AppBar";
 import Header from 'pages/component/Header';
+
 
 
 const ReviewsPage = () => {
@@ -27,17 +25,17 @@ const ReviewsPage = () => {
             .then(response => setReviews(response))
             .catch(error => setError(error.message));
     }, []);
-
+    const greeting = "greeting";
     return (
 
         <div>
-            <Header />
-            <Typography component="h1" variant="h5">
-                <h1 >Reviews</h1>
-            </Typography>
+            <Header/>
+
+                <h1 id={greeting}>Reviews</h1>
+
             <Card style={{width: 1000}}>
-                <TableContainer >
-                    <Table sx={{minWidth: 800}} aria-label="simple table" >
+                <TableContainer>
+                    <Table sx={{minWidth: 800}} aria-label="simple table">
                         <TableHead>
                             <TableRow>
                                 <TableCell align="left">Id review</TableCell>
@@ -70,7 +68,7 @@ const ReviewsPage = () => {
                                         variant="contained"
                                         sx={{mt: 1, mb: 1}}
                                     >
-                                       Delete
+                                        Delete
                                     </Button>
                                 </TableRow>
                             ))}

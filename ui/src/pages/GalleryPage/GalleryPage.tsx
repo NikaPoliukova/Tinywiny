@@ -10,19 +10,18 @@ export default function GalleryPage() {
 
         <React.Fragment>
             <Header/>
+
             <ImageList variant="masonry" cols={3} gap={6}
                        sx={{
                            marginTop: 1,
                            flexDirection: 'column',
                            alignItems: 'center',
-
                        }}>
                 {itemData.map((item) => (
                     <ImageListItem key={item.img}>
                         <img
                             src={`${item.img}?w=248&fit=crop&auto=format`}
                             srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
-
                             loading="lazy"
                         />
                         <ImageListItemBar position="below"/>

@@ -20,7 +20,7 @@ const OrdersPage = () => {
     const [error, setError] = useState<string>('');
 
     useEffect(() => {
-        OrderService.getOrders()
+        OrderService.findAllOrdersByPage()
             .then(response => setOrders(response))
             .catch(error => setError(error.message));
     }, []);

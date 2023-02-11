@@ -1,6 +1,8 @@
+import {ProductInBucket} from "./ProductInBucket";
+
 export interface Bucket {
     bucketId: number;
     user: object;
-    // productInBuckets list&&
+    productInBuckets : Array<ProductInBucket>
 
 }

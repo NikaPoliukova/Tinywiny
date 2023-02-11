@@ -64,7 +64,7 @@ function PricingContent() {
                             bucket
                         </Link>
                     </nav>
-                    <Button href="#" variant="outlined" sx={{ my: 1, mx: 1.5 }}>
+                    <Button href="/login" variant="outlined" sx={{ my: 1, mx: 1.5 }}>
                         Login
                     </Button>
                 </Toolbar>

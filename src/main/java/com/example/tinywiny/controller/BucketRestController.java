@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,9 +33,9 @@ public class BucketRestController {
   private final ProductService productService;
   private final ProductConverter productConverter;
 
-  @GetMapping
-  public List<ProductDto> findAllProductsInBucket(@RequestBody ProductInBucketDto productInBucketDto) {
-    List<ProductInBucket> productsInBucket = bucketService.findAllProductInBucket(productInBucketDto);
+  @GetMapping("/{bucketId}")
+  public List<ProductDto> findAllProductsInBucket(@PathVariable Long bucketId) {
+    List<ProductInBucket> productsInBucket = bucketService.findAllProductInBucket(bucketId);
     List<Product> products = productsInBucket.stream()
         .map(product -> productService.findProductByProductId(product.getProduct().getProductId()))
         .collect(Collectors.toList());

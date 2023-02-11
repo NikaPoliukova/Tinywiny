@@ -13,15 +13,13 @@ import Header from '../component/Header';
 
 export default function OrderPage() {
     const [products, setProduct] = useState<Array<Product>>([]);
-    const [error, setError] = useState<string>('');
+
 
     useEffect(() => {
-        ProductService.getProducts()
-            .then(response => setProduct(response))
-            .catch(error => setError(error.message));
+        ProductService.findAllProductsByTypeAndPage()
+            .then(response => setProduct(response));
     }, []);
     return (
-
         <React.Fragment>
             <Header />
             <Card style={{width: 1000}}
@@ -134,6 +132,10 @@ export default function OrderPage() {
                             autoComplete="shipping address-line1"
                             variant="standard"
                         />
+                        <select>
+                            <option value="grapefruit">Европочта</option>
+                            <option value="lime">Белпочта</option>
+                        </select>
                     </Grid>
                     <Button
                         type="submit"

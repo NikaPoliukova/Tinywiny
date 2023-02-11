@@ -26,7 +26,7 @@ export function Products() {
 
 
     useEffect(() => {
-        ProductService.getProducts()
+        ProductService.findAllProductsByTypeAndPage()
             .then(response => setProducts(response));
     }, []);
     return (

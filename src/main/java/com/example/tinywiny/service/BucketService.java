@@ -24,8 +24,8 @@ public class BucketService {
   private final ProductInBucketRepository productInBucketRepository;
 
   // return empty bucket
-  public List<ProductInBucket> findAllProductInBucket(ProductInBucketDto productInBucketDto) {
-    Optional<Bucket> bucket = bucketRepository.findBucketByBucketId(productInBucketDto.getBucketId());
+  public List<ProductInBucket> findAllProductInBucket(Long bucketId) {
+    Optional<Bucket> bucket = bucketRepository.findBucketByBucketId(bucketId);
     if (bucket.isEmpty()) {
      return Collections.emptyList();
     }

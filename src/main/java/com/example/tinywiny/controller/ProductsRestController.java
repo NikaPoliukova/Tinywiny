@@ -37,7 +37,7 @@ public class ProductsRestController {
   private final ProductConverter converter;
   private final BucketService bucketService;
   private final ImageService imageService;
-
+ //GET image????
   @PostMapping("/create")
   protected ProductDto createProduct(@RequestBody ProductDto product) {
     return converter.toProductDto(productService.save(product));
@@ -49,7 +49,7 @@ public class ProductsRestController {
   }
 //не знаю,как отобразить
   @GetMapping("/{productId}")
-  public ProductDto findProduct(@PathVariable Long productId) throws URISyntaxException {
+  public ProductDto getProduct(@PathVariable Long productId) throws URISyntaxException {
     Product product = productService.findProductByProductId(productId);
     URI imageUrl = null;
     if (product.getImage() != null) {

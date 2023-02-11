@@ -11,8 +11,9 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import {createTheme, ThemeProvider} from '@mui/material/styles';
-
 import Header from "../component/Header";
+import Sidebar from "../component/SideBar";
+
 const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 const theme = createTheme();
@@ -20,17 +21,16 @@ const theme = createTheme();
 export default function Album() {
     return (
         <ThemeProvider theme={theme}>
-            <Header />
             <CssBaseline/>
-
+            <Header/>
+            <Sidebar/>
             <main>
-
-                <Box
-                    sx={{
-                        bgcolor: 'background.paper',
-                        pt: 8,
-                        pb: 6,
-                    }}
+                <Box component='nav' max-height='200vh'
+                     sx={{
+                         bgcolor: 'background.paper',
+                         pt: 8,
+                         pb: 6,
+                     }}
                 >
                     <Container maxWidth="sm">
                         <Typography
@@ -51,6 +51,7 @@ export default function Album() {
                         </Stack>
                     </Container>
                 </Box>
+
                 <Container sx={{py: 8}} maxWidth="md">
 
                     <Grid container spacing={4}>

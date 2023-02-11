@@ -39,7 +39,7 @@ public class UserRestController {
   private final UserService userService;
   private final UserConverter userConverter;
 
-  @PutMapping("/update/user")
+  @PutMapping
   protected void updateUser(@RequestBody UserDto userDto) {
     User user = userService.findUserByUserId(userDto.getUserId());
     userService.updateUser(userDto, user);
@@ -53,7 +53,7 @@ public class UserRestController {
     return userConverter.toDto(users);
   }
 
-  @GetMapping("/user/{userId}")
+  @GetMapping("/{userId}")
   protected UserDto findUser(@PathVariable Long userId) {
     User user = userService.findUserByUserId(userId);
     return userConverter.toDto(user);

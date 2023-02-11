@@ -53,6 +53,14 @@ function PricingContent() {
                             href="#"
                             sx={{ my: 1, mx: 1.5 }}
                         >
+                            My Page
+                        </Link>
+                        <Link
+                            variant="button"
+                            color="text.primary"
+                            href="#"
+                            sx={{ my: 1, mx: 1.5 }}
+                        >
                             bucket
                         </Link>
                     </nav>

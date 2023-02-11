@@ -15,6 +15,7 @@ import ReviewService from "../../services/ReviewService";
 import Toolbar from "@mui/material/Toolbar";
 import Link from "@mui/material/Link";
 import AppBar from "@mui/material/AppBar";
+import Header from 'pages/component/Header';
 
 
 const ReviewsPage = () => {
@@ -30,55 +31,7 @@ const ReviewsPage = () => {
     return (
 
         <div>
-            <AppBar
-                position="static"
-                color="default"
-                elevation={0}
-                sx={{borderBottom: (theme) => `1px solid ${theme.palette.divider}`}}
-            >
-                <Toolbar sx={{flexWrap: 'wrap'}}>
-                    <Typography variant="h6" color="inherit" noWrap sx={{flexGrow: 1}}>
-                        Tiny-Winy
-                    </Typography>
-                    <nav>
-                        <Link
-                            variant="button"
-                            color="text.primary"
-                            href="#"
-                            sx={{my: 1, mx: 1.5}}
-                        >
-                            Gallery
-                        </Link>
-                        <Link
-                            variant="button"
-                            color="text.primary"
-                            href="#"
-                            sx={{my: 1, mx: 1.5}}
-                        >
-                            Products
-                        </Link>
-                        <Link
-                            variant="button"
-                            color="text.primary"
-                            href="#"
-                            sx={{my: 1, mx: 1.5}}
-                        >
-                            bucket
-                        </Link>
-                        <Link
-                            variant="button"
-                            color="text.primary"
-                            href="#"
-                            sx={{my: 1, mx: 1.5}}
-                        >
-                            bucket
-                        </Link>
-                    </nav>
-                    <Button href="#" variant="outlined" sx={{my: 1, mx: 1.5}}>
-                        Login
-                    </Button>
-                </Toolbar>
-            </AppBar>
+            <Header />
             <Typography component="h1" variant="h5">
                 <h1 >Reviews</h1>
             </Typography>

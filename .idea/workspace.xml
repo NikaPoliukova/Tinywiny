@@ -14,46 +14,30 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4dd877d4-850b-4093-ba42-62db28456f03" name="Changes" comment="add more classes">
-      <change afterPath="$PROJECT_DIR$/ui/src/OrdersByUser/OrdersByUser/OrdersByUser.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ui/src/model/Order.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ui/src/pages/component/SideBar.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ui/src/model/Bucket.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ui/src/model/ProductInBucket.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ui/src/pages/OrdersPage/OrdersPage.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ui/src/pages/ProductPage/ProductPage.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ui/src/services/BucketService.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ui/src/services/OrderService.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ui/tsconfig.node.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/controller/BucketRestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/controller/BucketRestController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/controller/LoginRestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/controller/LoginRestController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/controller/OrderRestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/controller/OrderRestController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/controller/ProductsRestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/controller/ProductsRestController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/controller/RegistrationRestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/controller/RegistrationRestController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/controller/ReviewRestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/controller/ReviewRestController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/controller/UserRestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/controller/UserRestController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/converter/ImageConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/converter/ImageConverter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/converter/OrderConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/converter/OrderConverter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/converter/ProductConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/converter/ProductConverter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/converter/ProductInBucketConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/converter/ProductInBucketConverter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/converter/ProductInOrderConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/converter/ProductInOrderConverter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/converter/ReviewConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/converter/ReviewConverter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/converter/TypeProductConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/converter/TypeProductConverter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/converter/UserConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/converter/UserConverter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/dto/DeliveryInformationDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/dto/DeliveryInformationDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/service/BucketService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/service/BucketService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/service/HashPassService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/service/HashPassService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/service/OrderService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/service/OrderService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/service/ProductInOrderService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/service/ProductInOrderService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/service/ReviewService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/service/ReviewService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/service/UserService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ui/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/ui/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ui/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/ui/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ui/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/src/model/Product.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/model/Product.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/src/model/Review.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/model/Review.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/src/pages/HeaderPage/HeaderPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/pages/component/Header.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/src/model/Order.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/model/Order.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/src/model/User.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/model/User.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/src/pages/GalleryPage/GalleryPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/pages/GalleryPage/GalleryPage.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ui/src/pages/HomePage/HomePage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/pages/HomePage/HomePage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/src/pages/LoginPage/LoginPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/pages/LoginPage/LoginPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/src/pages/OrderPage/OrderPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/pages/OrderPage/OrderPage.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ui/src/pages/ProductsPage/ProductsPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/pages/ProductsPage/ProductsPage.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ui/src/pages/ReviewsPage/ReviewsPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/pages/ReviewsPage/ReviewsPage.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ui/src/pages/UserPage/UserPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/pages/UserPage/UserPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/src/pages/UsersPage/UsersPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/pages/UsersPage/UsersPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/src/services/ProductService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/services/ProductService.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/src/pages/component/Header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/pages/component/Header.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/src/pages/component/SideBar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/pages/component/SideBar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/src/services/UserService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/services/UserService.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/ui/tsconfig.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -102,7 +86,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/ui" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -125,11 +109,11 @@
       <recent name="com.example.tinywiny.service" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\project\TeachMeSkills\Tinywiny\ui" />
+      <recent name="D:\project\TeachMeSkills\Tinywiny\ui\public" />
+      <recent name="D:\project\TeachMeSkills\Tinywiny\ui\src" />
       <recent name="D:\project\TeachMeSkills\Tinywiny\src\main\resources" />
       <recent name="D:\project\TeachMeSkills\Tinywiny" />
-      <recent name="D:\project\TeachMeSkills\Tinywiny\ui\src\pages\PaymentPage" />
-      <recent name="D:\project\TeachMeSkills\Tinywiny\ui\src\pages\ProductsPage" />
-      <recent name="D:\project\TeachMeSkills\Tinywiny\ui\src\pages\OrderPage" />
     </key>
   </component>
   <component name="RunManager" selected="Spring Boot.MainApplication">
@@ -294,7 +278,8 @@
       <workItem from="1675933919106" duration="9706000" />
       <workItem from="1675958102538" duration="11034000" />
       <workItem from="1676016130851" duration="14604000" />
-      <workItem from="1676051487366" duration="5752000" />
+      <workItem from="1676051487366" duration="12938000" />
+      <workItem from="1676108161882" duration="9082000" />
     </task>
     <task id="LOCAL-00001" summary="added more classes">
       <created>1675167662551</created>
@@ -408,7 +393,14 @@
       <option name="project" value="LOCAL" />
       <updated>1675962454743</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="add more classes">
+      <created>1676057355318</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1676057355318</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -470,10 +462,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="551" y="281" width="433" height="267" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1536.824@0.0.1536.824" timestamp="1673988539876" />
-    <state x="499" y="159" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1675967716192">
+    <state x="499" y="159" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1676060728664">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="499" y="159" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.824@0.0.1536.824" timestamp="1675967716192" />
+    <state x="499" y="159" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.824@0.0.1536.824" timestamp="1676060728664" />
     <state x="243" y="231" width="826" height="593" key="#xdebugger.evaluate" timestamp="1675592186816">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -498,65 +490,65 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="553" y="110" key="Github.UntrackedFilesDialog/0.0.1536.824@0.0.1536.824" timestamp="1675079047942" />
-    <state width="1493" height="216" key="GridCell.Tab.0.bottom" timestamp="1676055683165">
+    <state width="1493" height="198" key="GridCell.Tab.0.bottom" timestamp="1676111487599">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="216" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1676055683165" />
+    <state width="1493" height="198" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1676111487599" />
     <state width="1493" height="320" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1674736178189" />
-    <state width="1493" height="216" key="GridCell.Tab.0.center" timestamp="1676055683165">
+    <state width="1493" height="198" key="GridCell.Tab.0.center" timestamp="1676111487599">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="216" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1676055683165" />
+    <state width="1493" height="198" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1676111487599" />
     <state width="1493" height="320" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1674736178183" />
-    <state width="1493" height="216" key="GridCell.Tab.0.left" timestamp="1676055683165">
+    <state width="1493" height="198" key="GridCell.Tab.0.left" timestamp="1676111487599">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="216" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1676055683165" />
+    <state width="1493" height="198" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1676111487599" />
     <state width="1493" height="320" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1674736178179" />
-    <state width="1493" height="216" key="GridCell.Tab.0.right" timestamp="1676055683165">
+    <state width="1493" height="198" key="GridCell.Tab.0.right" timestamp="1676111487599">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="216" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1676055683165" />
+    <state width="1493" height="198" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1676111487599" />
     <state width="1493" height="320" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1674736178187" />
-    <state width="1493" height="216" key="GridCell.Tab.1.bottom" timestamp="1676055683166">
+    <state width="1493" height="198" key="GridCell.Tab.1.bottom" timestamp="1676111487599">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="216" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1676055683166" />
+    <state width="1493" height="198" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1676111487599" />
     <state width="1493" height="320" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1674736178202" />
-    <state width="1493" height="216" key="GridCell.Tab.1.center" timestamp="1676055683165">
+    <state width="1493" height="198" key="GridCell.Tab.1.center" timestamp="1676111487599">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="216" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1676055683165" />
+    <state width="1493" height="198" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1676111487599" />
     <state width="1493" height="320" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1674736178196" />
-    <state width="1493" height="216" key="GridCell.Tab.1.left" timestamp="1676055683165">
+    <state width="1493" height="198" key="GridCell.Tab.1.left" timestamp="1676111487599">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="216" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1676055683165" />
+    <state width="1493" height="198" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1676111487599" />
     <state width="1493" height="320" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1674736178192" />
-    <state width="1493" height="216" key="GridCell.Tab.1.right" timestamp="1676055683166">
+    <state width="1493" height="198" key="GridCell.Tab.1.right" timestamp="1676111487599">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="216" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1676055683166" />
+    <state width="1493" height="198" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1676111487599" />
     <state width="1493" height="320" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1674736178199" />
-    <state width="1493" height="216" key="GridCell.Tab.2.bottom" timestamp="1676055683166">
+    <state width="1493" height="198" key="GridCell.Tab.2.bottom" timestamp="1676111487599">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="216" key="GridCell.Tab.2.bottom/0.0.1536.824@0.0.1536.824" timestamp="1676055683166" />
+    <state width="1493" height="198" key="GridCell.Tab.2.bottom/0.0.1536.824@0.0.1536.824" timestamp="1676111487599" />
     <state width="1493" height="320" key="GridCell.Tab.2.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1674736178204" />
-    <state width="1493" height="216" key="GridCell.Tab.2.center" timestamp="1676055683166">
+    <state width="1493" height="198" key="GridCell.Tab.2.center" timestamp="1676111487599">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="216" key="GridCell.Tab.2.center/0.0.1536.824@0.0.1536.824" timestamp="1676055683166" />
+    <state width="1493" height="198" key="GridCell.Tab.2.center/0.0.1536.824@0.0.1536.824" timestamp="1676111487599" />
     <state width="1493" height="320" key="GridCell.Tab.2.center/0.0.1920.1040@0.0.1920.1040" timestamp="1674736178203" />
-    <state width="1493" height="216" key="GridCell.Tab.2.left" timestamp="1676055683166">
+    <state width="1493" height="198" key="GridCell.Tab.2.left" timestamp="1676111487599">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="216" key="GridCell.Tab.2.left/0.0.1536.824@0.0.1536.824" timestamp="1676055683166" />
+    <state width="1493" height="198" key="GridCell.Tab.2.left/0.0.1536.824@0.0.1536.824" timestamp="1676111487599" />
     <state width="1493" height="320" key="GridCell.Tab.2.left/0.0.1920.1040@0.0.1920.1040" timestamp="1674736178203" />
-    <state width="1493" height="216" key="GridCell.Tab.2.right" timestamp="1676055683166">
+    <state width="1493" height="198" key="GridCell.Tab.2.right" timestamp="1676111487599">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="216" key="GridCell.Tab.2.right/0.0.1536.824@0.0.1536.824" timestamp="1676055683166" />
+    <state width="1493" height="198" key="GridCell.Tab.2.right/0.0.1536.824@0.0.1536.824" timestamp="1676111487599" />
     <state width="1493" height="320" key="GridCell.Tab.2.right/0.0.1920.1040@0.0.1920.1040" timestamp="1674736178204" />
     <state x="299" y="67" key="Maven.ArtifactSearchDialog" timestamp="1674763528142">
       <screen x="0" y="0" width="1536" height="824" />
@@ -566,10 +558,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="249" y="0" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1676056205216" />
-    <state x="361" y="132" key="Vcs.Push.Dialog.v2" timestamp="1675962459494">
+    <state x="361" y="132" key="Vcs.Push.Dialog.v2" timestamp="1676057357432">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="361" y="132" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1675962459494" />
+    <state x="361" y="132" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1676057357432" />
     <state x="349" y="67" key="com.intellij.database.dbimport.ImportDialog" timestamp="1674672836094">
       <screen x="0" y="0" width="1536" height="824" />
     </state>

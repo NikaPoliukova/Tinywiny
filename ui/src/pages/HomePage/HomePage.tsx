@@ -1,90 +1,47 @@
-import * as React from 'react';
-import Button from '@mui/material/Button';
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import CssBaseline from '@mui/material/CssBaseline';
-import Grid from '@mui/material/Grid';
-import Stack from '@mui/material/Stack';
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import {createTheme, ThemeProvider} from '@mui/material/styles';
-import Header from "../component/Header";
-import Sidebar from "../component/SideBar";
+import React, {useEffect, useState} from 'react';
+import {Card, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography} from "@mui/material";
+import BucketService from "../../services/BucketService";
+import {Bucket} from "../../model/Bucket";
 
-const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
-const theme = createTheme();
+const BucketPage = () => {
+    const [bucket, setBucket] = useState<Bucket>();
+    useEffect(() => {
+        BucketService.getBucket()
+            .then(response => setBucket(response));
+    }, []);
 
-export default function Album() {
     return (
-        <ThemeProvider theme={theme}>
-            <CssBaseline/>
-            <Header/>
-            <Sidebar/>
-            <main>
-                <Box
-                    sx={{
-                        bgcolor: 'background.paper',
-                        pt: 8,
-                        pb: 6,
-                    }}
-                >
-                    <Container maxWidth="sm">
-                        <Typography
-                            component="h1"
-                            variant="h2"
-                            align="center"
-                            color="text.primary"
-                            gutterBottom
-                        >
-                            Products
-                        </Typography>
-                        <Stack
-                            sx={{pt: 4}}
-                            direction="row"
-                            spacing={2}
-                            justifyContent="center"
-                        >
-                        </Stack>
-                    </Container>
-                </Box>
-                <Container sx={{py: 8}} maxWidth="md">
+        <div>
 
-                    <Grid container spacing={4}>
-                        {cards.map((card) => (
-                            <Grid item key={card} xs={10} sm={6} md={4}>
-                                <Card
-                                    sx={{height: '100%', display: 'flex', flexDirection: 'column'}}
-                                >
-                                    <CardMedia
-                                        component="img"
-                                        sx={{
-                                            pt: '2%',
-                                        }}
-                                        image="https://source.unsplash.com/random"
-                                        alt="random"
-                                    />
-                                    <CardContent sx={{flexGrow: 1}}>
-                                        <Typography gutterBottom variant="h5" component="h2">
-                                            Product
-                                        </Typography>
-                                        <Typography>
-                                            ОПИСАНИЕ ТОВАРА
-                                        </Typography>
-                                    </CardContent>
-                                    <CardActions>
-                                        <Button size="small">Add in bucket</Button>
+            <Typography component="h1" variant="h5">
+                <h1>Bucket {bucket?.bucketId}</h1>
+            </Typography>
+            <Card style={{width: 1000}}>
+                <TableContainer>
+                    <Table sx={{minWidth: 800}} aria-label="simple table">
+                        <TableHead>
+                            <TableRow>
+                                <TableCell align="right">Product in bucket</TableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            <TableRow>
+                                <TableCell component="th" scope="row">
 
-                                    </CardActions>
-                                </Card>
-                            </Grid>
-                        ))}
-                    </Grid>
-                </Container>
-            </main>
-        </ThemeProvider>
-    );
-}
+                                    <div>
+
+                                        list products in bucket
+
+                                    </div>
+                                </TableCell>
+                            </TableRow>
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+            </Card>
+        </div>
+);
+};
+
+export default BucketPage;

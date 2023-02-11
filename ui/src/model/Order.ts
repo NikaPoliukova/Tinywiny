@@ -6,6 +6,5 @@ export interface Order {
     deliveryInformation: object;
     deliveryTypeId: number;
     statusOrder: string;
-    //List<ProductInOrderDto> productsInOrder;
-    //createdAt: date;
+    createdAt: string;
 }

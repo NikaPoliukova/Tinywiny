@@ -8,6 +8,8 @@ import ReviewsPage from "./pages/ReviewsPage/ReviewsPage";
 import OrderPage from "./pages/OrderPage/OrderPage";
 import BucketPage from "./pages/BucketPage/BucketPage";
 import OrdersPage from "./pages/OrdersPage/OrdersPage";
+import {Products} from "./pages/ProductsPage/ProductsPage";
+
 
 
 
@@ -22,6 +24,7 @@ function App() {
             <Route path={'/products-for-order'} element={<OrderPage/>}/>
             <Route path={'/orders'} element={<OrdersPage/>}/>
             <Route path={'/bucket'} element={<BucketPage/>}/>
+            <Route path={'/products'} element={<Products/>}/>
 
 
         </Routes>

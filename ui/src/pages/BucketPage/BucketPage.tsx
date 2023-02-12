@@ -1,31 +1,30 @@
 import React, {useEffect, useState} from 'react';
 import {Card, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography} from "@mui/material";
+import BucketService from "../../services/BucketService";
 import {Product} from "../../model/Product";
-import ProductService from "../../services/ProductService";
 
 
 const BucketPage = () => {
-    const [products, setProduct] = useState<Array<Product>>([]);
-    const [error, setError] = useState<string>('');
-
+    const [products, setProducts] =useState<Array<Product>>([])
     useEffect(() => {
-        ProductService.getProductsInBucket()
-            .then(response => setProduct(response))
-            .catch(error => setError(error.message));
+        BucketService.findAllProductsInBucket()
+            .then(response => setProducts(response));
     }, []);
 
     return (
         <div>
-            {error}
             <Typography component="h1" variant="h5">
-                <h1>Bucket</h1>
+                <h1>Bucket </h1>
             </Typography>
             <Card style={{width: 1000}}>
                 <TableContainer>
                     <Table sx={{minWidth: 800}} aria-label="simple table">
                         <TableHead>
                             <TableRow>
-                                <TableCell align="right">Product</TableCell>
+                                <TableCell align="right">productName</TableCell>
+                                <TableCell align="right">price</TableCell>
+                                <TableCell align="right">description</TableCell>
+                                <TableCell align="right">count in stock</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
@@ -37,6 +36,16 @@ const BucketPage = () => {
                                     <TableCell component="th" scope="row">
                                         {product.productName}
                                     </TableCell>
+                                    <TableCell component="th" scope="row">
+                                        {product.price}
+                                    </TableCell>
+                                    <TableCell align="right">
+                                        {product.description}
+                                    </TableCell>
+                                    <TableCell align="right">
+                                        {product.count}
+                                    </TableCell>
+
                                 </TableRow>
                             ))}
                         </TableBody>

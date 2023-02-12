@@ -10,65 +10,70 @@ import {
     TableRow,
     Typography
 } from "@mui/material";
-import {Review} from "../../model/Review";
-import ReviewService from "../../services/ReviewService";
-import Header from 'pages/component/Header';
+import Header from "../component/Header";
+import {Order} from "../../model/Order";
+import OrderService from "../../services/OrderService";
 
 
-
-const ReviewsPage = () => {
-    const [reviews, setReviews] = useState<Array<Review>>([]);
+const OrdersPage = () => {
+    const [orders, setOrders] = useState<Array<Order>>([]);
     const [error, setError] = useState<string>('');
 
     useEffect(() => {
-        ReviewService.getReviews()
-            .then(response => setReviews(response))
+        OrderService.findAllOrdersByPage()
+            .then(response => setOrders(response))
             .catch(error => setError(error.message));
     }, []);
-    const greeting = "greeting";
-    return (
 
+
+    return (
         <div>
             <Header/>
-
-                <h1 id={greeting}>Reviews</h1>
-
+            {error}
+            <Typography component="h1" variant="h5">
+                <h1>Orders</h1>
+            </Typography>
             <Card style={{width: 1000}}>
                 <TableContainer>
                     <Table sx={{minWidth: 800}} aria-label="simple table">
                         <TableHead>
                             <TableRow>
-                                <TableCell align="left">Id review</TableCell>
-                                <TableCell align="left">Text</TableCell>
-                                <TableCell align="left">Data created</TableCell>
-                                <TableCell align="left">User Id</TableCell>
+                                <TableCell align="center">orderId</TableCell>
+                                <TableCell align="center">statusOrder</TableCell>
+                                <TableCell align="center">commentOrder</TableCell>
+                                <TableCell align="center">userId</TableCell>
+                                <TableCell align="center">createdAt</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {reviews.map((review) => (
+                            {orders.map((order) => (
                                 <TableRow
-                                    key={review.id}
+                                    key={order.orderId}
                                     sx={{'&:last-child td, &:last-child th': {border: 0}}}
                                 >
                                     <TableCell component="th" scope="row">
-                                        {review.id}
+                                        {order.orderId}
                                     </TableCell>
-                                    <TableCell component="th" scope="row" align="left">
-                                        {review.textReview}
+                                    <TableCell component="th" scope="row">
+                                        {order.statusOrder}
                                     </TableCell>
-                                    <TableCell align="left">
-                                        {review.createdDate}
+                                    <TableCell component="th" scope="row">
+                                        {order.commentOrder}
                                     </TableCell>
-                                    <TableCell align="left">
-                                        {review.userId}
+                                    <TableCell align="right">
+                                        {order.userId}
+                                    </TableCell>
+                                    <TableCell align="right">
+                                        {order.createdAt}
                                     </TableCell>
                                     <Button
                                         type="submit"
                                         fullWidth
                                         variant="contained"
                                         sx={{mt: 1, mb: 1}}
+                                        value={order.orderId}
                                     >
-                                        Delete
+                                        Open
                                     </Button>
                                 </TableRow>
                             ))}
@@ -80,4 +85,4 @@ const ReviewsPage = () => {
     );
 };
 
-export default ReviewsPage;
+export default OrdersPage;

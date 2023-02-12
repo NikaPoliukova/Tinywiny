@@ -8,12 +8,10 @@ import com.example.tinywiny.repository.BucketRepository;
 import com.example.tinywiny.repository.ProductInBucketRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 @Log4j2
@@ -25,11 +23,11 @@ public class BucketService {
   private final ProductService productService;
   private final ProductInBucketRepository productInBucketRepository;
 
-
-  public List<ProductInBucket> findAllProductInBucket(ProductInBucketDto productInBucketDto) {
-    Optional<Bucket> bucket = bucketRepository.findBucketByBucketId(productInBucketDto.getBucketId());
+  // return empty bucket
+  public List<ProductInBucket> findAllProductInBucket(Long bucketId) {
+    Optional<Bucket> bucket = bucketRepository.findBucketByBucketId(bucketId);
     if (bucket.isEmpty()) {
-      throw new RuntimeException("bucket does not exist");
+     return Collections.emptyList();
     }
     return productInBucketRepository.findAllByBucket(bucket.get());
   }
@@ -58,5 +56,4 @@ public class BucketService {
   public void createBucket(Long userId) {
     bucketRepository.createBucket(userId);
   }
-
 }

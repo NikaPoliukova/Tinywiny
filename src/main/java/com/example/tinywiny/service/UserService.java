@@ -14,7 +14,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
 import java.util.Optional;
 
 @Log4j2
@@ -36,14 +35,14 @@ public class UserService {
     return user.get();
   }
 
-  public List<User> findAll() {
-    return userRepository.findAll();
-  }
-
   @Transactional
   @Modifying
   public User updateUser(UserDto userDto, User user) {
-    return userRepository.save(prepareUserForUpdate(userDto, user));
+    if (user != null) {
+      return userRepository.save(prepareUserForUpdate(userDto, user));
+    } else {
+      throw new RuntimeException("user is not exists");
+    }
   }
 
   @Transactional
@@ -83,8 +82,12 @@ public class UserService {
       }
     }
     if (userDto.getPassword() != null) {
-      String hashPass = hashPassService.hashPass(userDto.getPassword());
-      user.setPassword(hashPass);
+      if (!(user.getPassword().equals(user.getPassword()))) {
+        String hashPass = hashPassService.hashPass(userDto.getPassword());
+        user.setPassword(hashPass);
+      }else {
+        throw new RuntimeException("this password already exist");
+      }
     }
     if (userDto.getEmail() != null) {
       user.setEmail(userDto.getEmail());

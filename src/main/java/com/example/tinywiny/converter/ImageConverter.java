@@ -14,5 +14,4 @@ public interface ImageConverter {
 
   @Mapping(target = "productId", source = "product.productId")
   ImageDto toImageDto(Image image);
-
 }

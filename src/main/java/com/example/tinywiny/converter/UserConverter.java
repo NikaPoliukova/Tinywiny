@@ -10,6 +10,7 @@ import java.util.List;
 public interface UserConverter {
 
   UserDto toDto(User user);
+
   List<UserDto> toDto(List<User> users);
 
   User toUser(UserDto userDto);

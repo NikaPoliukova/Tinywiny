@@ -10,6 +10,7 @@ import java.util.List;
 
 @Mapper
 public interface ProductConverter {
+
   @Mapping(target = "typeProduct", source = "typeProduct")
   Product toProduct(ProductDto productDto, TypeProductDto typeProduct);
 

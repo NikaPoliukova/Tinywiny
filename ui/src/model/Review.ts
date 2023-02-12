@@ -1,7 +1,7 @@
 export interface Review {
-    id: string;
+    id: number;
     textReview: string;
     createdDate: string;
-    userId: string;
+    userId: number;
 
 }

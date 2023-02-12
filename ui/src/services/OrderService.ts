@@ -19,7 +19,7 @@ class OrderService {
         const response = await axios.get<Order>('http://localhost:8080/api/v1/orders/${orderId}');
         return response.data;
     }
-    async findOrdersByUserId(): Promise<Array<Order>> {
+    async findOrdersByUserId(userId : number): Promise<Array<Order>> {
         const response = await axios.get<Array<Order>>('http://localhost:8080/api/v1/orders/orders-by/${userId}');
         return response.data;
     }

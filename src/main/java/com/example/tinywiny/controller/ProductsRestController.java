@@ -48,7 +48,7 @@ public class ProductsRestController {
     bucketService.addProductInBucket(productInBucketDto);
   }
 //не знаю,как отобразить
-  @GetMapping("/{productId}")
+  @GetMapping("/product/{productId}")
   public ProductDto getProduct(@PathVariable Long productId) throws URISyntaxException {
     Product product = productService.findProductByProductId(productId);
     URI imageUrl = null;
@@ -80,11 +80,11 @@ public class ProductsRestController {
     imageService.deleteImage(productId);
   }
 
-  @GetMapping("/type")
-  public List<ProductDto> findAllProductsByTypeAndPage(@RequestBody TypeProductDto type,
+  @GetMapping("/{typeName}")
+  public List<ProductDto> findAllProductsByTypeAndPage(@PathVariable String typeName,
                                                        @RequestParam(value = "pageNumber", required = false, defaultValue = "1") Integer pageNumber,
                                                        @RequestParam(value = "pageSize", required = false, defaultValue = "20") Integer pageSize) {
-    Page<Product> page = productService.findAllProductsByTypeAndPage(type, pageNumber - 1, pageSize);
+    Page<Product> page = productService.findAllProductsByTypeAndPage(typeName, pageNumber - 1, pageSize);
     List<Product> products = page.getContent();
     return converter.toProductDto(products);
   }

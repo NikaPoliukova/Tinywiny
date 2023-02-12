@@ -13,6 +13,7 @@ import {
 import Header from "../component/Header";
 import {Order} from "../../model/Order";
 import OrderService from "../../services/OrderService";
+import {Link} from "react-router-dom";
 
 
 const OrdersPage = () => {
@@ -67,11 +68,12 @@ const OrdersPage = () => {
                                         {order.createdAt}
                                     </TableCell>
                                     <Button
+                                        component={Link}
                                         type="submit"
                                         fullWidth
                                         variant="contained"
                                         sx={{mt: 1, mb: 1}}
-                                        value={order.orderId}
+                                        to={'product/${order.orderId}'}
                                     >
                                         Open
                                     </Button>

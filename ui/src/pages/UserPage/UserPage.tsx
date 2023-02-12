@@ -63,7 +63,7 @@ export const UserPage = () => {
                     type="submit"
                     size="small"
                     sx={{mt: 1, mb: 1}}
-                    to={'orders/orders-by/${userId}'}
+                    to={'orders/orders-by/' + userId}
                 >
                     Orders
                 </Button>

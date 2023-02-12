@@ -31,7 +31,10 @@ class OrderService {
         const response = await axios.get<String>('http://localhost:8080/api/v1/orders/status/${orderId}');
         return response.data;
     }
-
+    async findOrderByOrderId(orderId : number): Promise<Order>{
+        const response = await axios.get<Order>('http://localhost:8080/api/v1/orders/' + orderId);
+        return response.data;
+    }
 
 }
 export default new OrderService();

@@ -23,11 +23,10 @@ public class BucketService {
   private final ProductService productService;
   private final ProductInBucketRepository productInBucketRepository;
 
-  // return empty bucket
   public List<ProductInBucket> findAllProductInBucket(Long bucketId) {
     Optional<Bucket> bucket = bucketRepository.findBucketByBucketId(bucketId);
     if (bucket.isEmpty()) {
-     return Collections.emptyList();
+      return Collections.emptyList();
     }
     return productInBucketRepository.findAllByBucket(bucket.get());
   }
@@ -38,6 +37,7 @@ public class BucketService {
     productInBucket.setCount(productInBucketDto.getCount());
     return productInBucketRepository.save(productInBucket);
   }
+
 
   public void addProductInBucket(ProductInBucketDto productInBucketDto) {
     Optional<Bucket> bucket = bucketRepository.findBucketByBucketId(productInBucketDto.getBucketId());

@@ -20,6 +20,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 @Log4j2
@@ -85,8 +86,8 @@ public class ProductService {
     }
   }
 
-  public Page<Product> findAllProductsByTypeAndPage(TypeProductDto type, int pageNumber, int pageSize) {
-    TypeProduct typeProduct = typeProductService.getType(type.getId());
+  public Page<Product> findAllProductsByTypeAndPage(String typeName, int pageNumber, int pageSize) {
+    TypeProduct typeProduct = typeProductService.getType(typeName);
     Pageable page = PageRequest.of(pageNumber, pageSize);
     return productRepository.findAllByTypeProduct(typeProduct, page);
   }
@@ -106,4 +107,6 @@ public class ProductService {
   public void deleteProduct(Long productId) {
     productRepository.deleteProductByProductId(productId);
   }
+
+
 }

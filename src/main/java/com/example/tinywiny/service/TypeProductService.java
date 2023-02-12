@@ -12,6 +12,9 @@ public class TypeProductService {
 
   private final TypeProductRepository repository;
 
+  public TypeProduct getType(String typeName) {
+    return repository.findByName(typeName);
+  }
   public TypeProduct getType(int typeId) {
     return repository.findById(typeId);
   }

@@ -26,7 +26,7 @@ function PricingContent() {
                         <Link
                             variant="button"
                             color="text.primary"
-                            href="#"
+                            href="/gallery"
                             sx={{ my: 1, mx: 1.5 }}
                         >
                             Gallery
@@ -34,7 +34,7 @@ function PricingContent() {
                         <Link
                             variant="button"
                             color="text.primary"
-                            href="#"
+                            href="/products/${decorations}"
                             sx={{ my: 1, mx: 1.5 }}
                         >
                             Products
@@ -42,7 +42,7 @@ function PricingContent() {
                         <Link
                             variant="button"
                             color="text.primary"
-                            href="#"
+                            href="/bucket/${bucket.bucketId}"
                             sx={{ my: 1, mx: 1.5 }}
                         >
                             bucket
@@ -50,7 +50,7 @@ function PricingContent() {
                         <Link
                             variant="button"
                             color="text.primary"
-                            href="#"
+                            href="/user/${user.userId}"
                             sx={{ my: 1, mx: 1.5 }}
                         >
                             My Page

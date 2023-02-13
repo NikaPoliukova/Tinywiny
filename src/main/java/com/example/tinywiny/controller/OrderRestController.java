@@ -7,6 +7,7 @@ import com.example.tinywiny.dto.DeliveryInformationDto;
 import com.example.tinywiny.dto.OrderDto;
 import com.example.tinywiny.dto.ProductInOrderDto;
 import com.example.tinywiny.model.Order;
+import com.example.tinywiny.model.ProductInOrder;
 import com.example.tinywiny.service.OrderService;
 import com.example.tinywiny.service.ProductInOrderService;
 import lombok.AllArgsConstructor;
@@ -36,7 +37,7 @@ public class OrderRestController {
   //КОГДА ДЕЛАЕТСЯ ЗАКАЗ ЧИСЛО НА СКЛАДЕ ДОЛЖНО УМЕНЬШАТЬСЯ
 
 
-  @PostMapping
+  @PostMapping("/create")
   public OrderDto createOrder(@RequestBody OrderDto order) {
     return orderConverter.toOrderDto(orderService.save(order));
   }
@@ -58,7 +59,7 @@ public class OrderRestController {
     return orderConverter.toOrderDto(orders);
   }
 
-  @GetMapping("/{orderId}")
+  @GetMapping("/order/{orderId}")
   public OrderDto findOrderByOrderId(@PathVariable Long orderId) {
     Order order = orderService.findOrderByOrderId(orderId);
     DeliveryInformationDto deliveryInformationDto = deliveryInformationConverter.toDeliveryInformationDto(order.getDeliveryInformation());

@@ -44,7 +44,7 @@ function PricingContent() {
                         <Link
                             variant="button"
                             color="text.primary"
-                            href="/products/${decorations}"
+                            href="/products/toys"
                             sx={{ my: 1, mx: 1.5 }}
                         >
                             Products

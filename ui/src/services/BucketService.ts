@@ -5,8 +5,8 @@ import {Product} from "../model/Product";
 
 class BucketService {
 
-    async findAllProductsInBucket(): Promise<Array<ProductInBucket>> {
-        const response = await axios.get<Array<ProductInBucket>>('http://localhost:8080/api/v1/bucket/${bucketId}');
+    async findAllProductsInBucket(bucketId : number): Promise<Array<Product>> {
+        const response = await axios.get<Array<Product>>('http://localhost:8080/api/v1/bucket/'+ bucketId);
         return response.data;
     }
     async findBucketByUserId(userId : number): Promise<Bucket> {

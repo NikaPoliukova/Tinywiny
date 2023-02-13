@@ -17,7 +17,7 @@ import {Link, useParams} from "react-router-dom";
 import {Footer} from "../component/Footer";
 
 
-export const MyOrdersPage = () => {
+export default function MyOrdersPage (){
     const [orders, setOrders] = useState<Array<Order>>([]);
     const {userId} = useParams();
 

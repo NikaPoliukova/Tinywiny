@@ -7,7 +7,9 @@ import com.example.tinywiny.dto.ProductDto;
 import com.example.tinywiny.dto.ProductInBucketDto;
 import com.example.tinywiny.dto.TypeProduct;
 import com.example.tinywiny.dto.TypeProductDto;
+import com.example.tinywiny.model.Order;
 import com.example.tinywiny.model.Product;
+import com.example.tinywiny.model.ProductInOrder;
 import com.example.tinywiny.service.BucketService;
 import com.example.tinywiny.service.ImageService;
 import com.example.tinywiny.service.ProductService;
@@ -102,6 +104,8 @@ public class ProductsRestController {
     List<TypeProduct> types = page.getContent();
     return typeProductConverter.toDto(types);
   }
+
+
 
   @DeleteMapping("/{productId}")
   public void deleteProduct(@PathVariable Long productId) {

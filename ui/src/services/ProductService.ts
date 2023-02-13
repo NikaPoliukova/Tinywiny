@@ -13,7 +13,7 @@ class ProductService {
     }
 
     async getProduct(productId: number): Promise<Product> {
-        const response = await axios.get<Product>('http://localhost:8080/api/v1/products/' + productId);
+        const response = await axios.get<Product>('http://localhost:8080/api/v1/products/product/' + productId);
         return response.data;
     }
 

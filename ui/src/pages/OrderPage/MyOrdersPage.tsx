@@ -14,6 +14,7 @@ import Header from "../component/Header";
 import {Order} from "../../model/Order";
 import OrderService from "../../services/OrderService";
 import {Link, useParams} from "react-router-dom";
+import {Footer} from "../component/Footer";
 
 
 export const MyOrdersPage = () => {
@@ -28,7 +29,8 @@ export const MyOrdersPage = () => {
 
     return (
         <div>
-            <Header/>
+            <Header />
+
             <Typography component="h1" variant="h5">
                 <h1>Orders</h1>
             </Typography>
@@ -71,6 +73,7 @@ export const MyOrdersPage = () => {
                     </Table>
                 </TableContainer>
             </Card>
+            <Footer />
         </div>
     );
 };

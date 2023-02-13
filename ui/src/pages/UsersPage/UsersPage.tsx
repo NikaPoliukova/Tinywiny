@@ -12,6 +12,7 @@ import {
     Typography
 } from "@mui/material";
 import Header from "../component/Header";
+import {Footer} from "../component/Footer";
 
 
 const UsersPage = () => {
@@ -24,10 +25,10 @@ const UsersPage = () => {
             .catch(error => setError(error.message));
     }, []);
 
-
     return (
         <div>
-            <Header/>
+            <Header />
+
             {error}
             <Typography component="h1" variant="h5">
                 <h1>Users</h1>
@@ -68,6 +69,7 @@ const UsersPage = () => {
                     </Table>
                 </TableContainer>
             </Card>
+            <Footer />
         </div>
     );
 };

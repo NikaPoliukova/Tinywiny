@@ -13,6 +13,8 @@ import {
 import BucketService from "../../services/BucketService";
 import {Link, useParams} from "react-router-dom";
 import {ProductInBucket} from "../../model/ProductInBucket";
+import {Footer} from "../component/Footer";
+import Header from 'pages/component/Header';
 
 
 function BucketPage() {
@@ -25,6 +27,8 @@ function BucketPage() {
 
     return (
         <div>
+            <Header />
+
             <Typography component="h1" variant="h5">
                 <h1>Bucket </h1>
             </Typography>
@@ -89,6 +93,7 @@ function BucketPage() {
             >
                 Go to order
             </Button>
+            <Footer />
         </div>
     );
 };

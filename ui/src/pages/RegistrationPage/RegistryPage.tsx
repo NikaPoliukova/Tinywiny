@@ -13,6 +13,8 @@ import {
     Typography
 } from "@mui/material";
 import {useState} from "react";
+import Header from "../component/Header";
+import {Footer} from "../component/Footer";
 
 
 const theme = createTheme();
@@ -38,6 +40,7 @@ export function Registry() {
 
     return (
         <ThemeProvider theme={theme}>
+            <Header />
             <Container component="main" maxWidth="xs">
                 <CssBaseline/>
                 <Box
@@ -112,6 +115,7 @@ export function Registry() {
                     </Box>
                 </Box>
             </Container>
+            <Footer />
         </ThemeProvider>
     );
 

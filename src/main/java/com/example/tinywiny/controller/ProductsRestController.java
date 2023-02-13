@@ -1,14 +1,17 @@
 package com.example.tinywiny.controller;
 
 import com.example.tinywiny.converter.ProductConverter;
+import com.example.tinywiny.converter.TypeProductConverter;
 import com.example.tinywiny.dto.ImageDto;
 import com.example.tinywiny.dto.ProductDto;
 import com.example.tinywiny.dto.ProductInBucketDto;
+import com.example.tinywiny.dto.TypeProduct;
 import com.example.tinywiny.dto.TypeProductDto;
 import com.example.tinywiny.model.Product;
 import com.example.tinywiny.service.BucketService;
 import com.example.tinywiny.service.ImageService;
 import com.example.tinywiny.service.ProductService;
+import com.example.tinywiny.service.TypeProductService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -37,7 +40,9 @@ public class ProductsRestController {
   private final ProductConverter converter;
   private final BucketService bucketService;
   private final ImageService imageService;
- //GET image????
+  private final TypeProductService typeProductService;
+  private final TypeProductConverter typeProductConverter;
+  //GET image????
   @PostMapping("/create")
   protected ProductDto createProduct(@RequestBody ProductDto product) {
     return converter.toProductDto(productService.save(product));
@@ -47,7 +52,8 @@ public class ProductsRestController {
   protected void addProductInBucket(@RequestBody ProductInBucketDto productInBucketDto) {
     bucketService.addProductInBucket(productInBucketDto);
   }
-//не знаю,как отобразить
+
+  //не знаю,как отобразить
   @GetMapping("/product/{productId}")
   public ProductDto getProduct(@PathVariable Long productId) throws URISyntaxException {
     Product product = productService.findProductByProductId(productId);
@@ -80,13 +86,21 @@ public class ProductsRestController {
     imageService.deleteImage(productId);
   }
 
-  @GetMapping("/{typeName}")
+  @GetMapping("/type/{typeName}")
   public List<ProductDto> findAllProductsByTypeAndPage(@PathVariable String typeName,
                                                        @RequestParam(value = "pageNumber", required = false, defaultValue = "1") Integer pageNumber,
                                                        @RequestParam(value = "pageSize", required = false, defaultValue = "20") Integer pageSize) {
     Page<Product> page = productService.findAllProductsByTypeAndPage(typeName, pageNumber - 1, pageSize);
     List<Product> products = page.getContent();
     return converter.toProductDto(products);
+  }
+
+  @GetMapping("/type")
+  public List<TypeProductDto> findAllTypes(@RequestParam(value = "pageNumber", required = false, defaultValue = "1") Integer pageNumber,
+                                            @RequestParam(value = "pageSize", required = false, defaultValue = "20") Integer pageSize) {
+    Page<TypeProduct> page = typeProductService.findAllType(pageNumber - 1, pageSize);
+    List<TypeProduct> types = page.getContent();
+    return typeProductConverter.toDto(types);
   }
 
   @DeleteMapping("/{productId}")

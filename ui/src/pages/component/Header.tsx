@@ -1,4 +1,5 @@
 import * as React from 'react';
+import {useEffect, useState} from 'react';
 import AppBar from '@mui/material/AppBar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -6,8 +7,17 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
 import GlobalStyles from '@mui/material/GlobalStyles';
+import {useParams} from "react-router-dom";
+import BucketService from "../../services/BucketService";
+import {Bucket} from "../../model/Bucket";
 
 function PricingContent() {
+    const {userId} = useParams();
+    const [bucket, setBucket] = useState<Bucket>();
+    useEffect(() => {
+        BucketService.findBucketByUserId(Number(userId))
+            .then(response => setBucket(response));
+    }, []);
     return (
         <React.Fragment>
             <GlobalStyles styles={{ ul: { margin: 0, padding: 0, listStyle: 'none' } }} />
@@ -42,7 +52,7 @@ function PricingContent() {
                         <Link
                             variant="button"
                             color="text.primary"
-                            href="/bucket/${bucket.bucketId}"
+                            href="/bucket/${userId}"
                             sx={{ my: 1, mx: 1.5 }}
                         >
                             bucket
@@ -50,7 +60,7 @@ function PricingContent() {
                         <Link
                             variant="button"
                             color="text.primary"
-                            href="/user/${user.userId}"
+                            href="/users/${userId}"
                             sx={{ my: 1, mx: 1.5 }}
                         >
                             My Page
@@ -61,7 +71,7 @@ function PricingContent() {
                             href="#"
                             sx={{ my: 1, mx: 1.5 }}
                         >
-                            bucket
+                           Contacts
                         </Link>
                     </nav>
                     <Button href="/login" variant="outlined" sx={{ my: 1, mx: 1.5 }}>

@@ -10,6 +10,7 @@ import Header from '../component/Header';
 import {useParams} from "react-router-dom";
 import OrderService from "../../services/OrderService";
 import {Order} from "../../model/Order";
+import {Footer} from "../component/Footer";
 
 
 export default function OrderPage() {
@@ -24,7 +25,8 @@ export default function OrderPage() {
 
 return (
     <React.Fragment>
-        <Header/>
+        <Header />
+
         <Card style={{width: 1000}}
 
               sx={{
@@ -50,7 +52,7 @@ return (
                                 sx={{'&:last-child td, &:last-child th': {border: 0}}}
                             >
                                 <TableCell component="th" scope="row">
-                                    {product.count}
+                                    {product.countInStock}
                                 </TableCell>
                                 <TableCell component="th" scope="row">
                                     {product.price}
@@ -150,6 +152,7 @@ return (
                 </Button>
             </Grid>
         </Box>
+        <Footer />
     </React.Fragment>
 );
 }

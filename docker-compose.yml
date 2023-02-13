@@ -22,3 +22,4 @@ services:
       - DATA_DIR=/tmp/localstack/data
     volumes:
       - ./localstack:/docker-entrypoint-initaws.d
+

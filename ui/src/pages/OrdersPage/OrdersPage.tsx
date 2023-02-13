@@ -14,23 +14,24 @@ import Header from "../component/Header";
 import {Order} from "../../model/Order";
 import OrderService from "../../services/OrderService";
 import {Link} from "react-router-dom";
+import {Footer} from "../component/Footer";
 
 
 const OrdersPage = () => {
     const [orders, setOrders] = useState<Array<Order>>([]);
-    const [error, setError] = useState<string>('');
+
 
     useEffect(() => {
         OrderService.findAllOrdersByPage()
             .then(response => setOrders(response))
-            .catch(error => setError(error.message));
+            ;
     }, []);
 
 
     return (
         <div>
-            <Header/>
-            {error}
+            <Header />
+
             <Typography component="h1" variant="h5">
                 <h1>Orders</h1>
             </Typography>
@@ -83,6 +84,7 @@ const OrdersPage = () => {
                     </Table>
                 </TableContainer>
             </Card>
+            <Footer />
         </div>
     );
 };

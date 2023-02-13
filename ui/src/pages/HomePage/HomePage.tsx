@@ -4,13 +4,14 @@ import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 import ImageListItemBar from '@mui/material/ImageListItemBar';
 import Header from '../component/Header';
+import {Sidebar} from "../component/SideBar";
 
 export default function GalleryPage() {
     return (
 
         <React.Fragment>
             <Header/>
-
+<Sidebar />
             <ImageList variant="masonry" cols={3} gap={6}
                        sx={{
                            marginTop: 1,

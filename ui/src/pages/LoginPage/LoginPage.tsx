@@ -15,6 +15,7 @@ import {
     Typography
 } from "@mui/material";
 import Header from "../component/Header";
+import {Footer} from "../component/Footer";
 
 const theme = createTheme();
 
@@ -31,7 +32,8 @@ export function SignIn() {
     return (
 
         <ThemeProvider theme={theme}>
-            <Header/>
+            <Header />
+
             <Container component="main" maxWidth="xs">
                 <CssBaseline/>
                 <Box
@@ -91,6 +93,7 @@ export function SignIn() {
                     </Box>
                 </Box>
             </Container>
+            <Footer />
         </ThemeProvider>
     );
 }

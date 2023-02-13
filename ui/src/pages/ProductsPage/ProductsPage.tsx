@@ -17,6 +17,7 @@ import {Footer} from "../component/Footer";
 import {Product} from "../../model/Product";
 import ProductService from "../../services/ProductService";
 import {Link, useParams} from "react-router-dom";
+import {Sidebar} from "../component/SideBar";
 
 const cards = [1, 2, 3, 4, 5, 6];
 
@@ -34,7 +35,9 @@ export default function Products() {
         <ThemeProvider theme={theme}>
             <CssBaseline/>
             <Header/>
+
             <main>
+                <Sidebar/>
                 <Box
                     sx={{
                         bgcolor: 'background.paper',
@@ -47,7 +50,7 @@ export default function Products() {
                             component="h1"
                             variant="h2"
                             align="center"
-                            color="text.primary"    >
+                            color="text.primary">
                             Products
                         </Typography>
                     </Container>
@@ -63,7 +66,7 @@ export default function Products() {
                                         image="https://source.unsplash.com/random"/>
                                     <CardContent sx={{flexGrow: 1}}>
                                         <Typography>
-                                            product {product.productName}
+                                            {product.productName}
                                         </Typography>
                                         <Typography>
                                             price = {product.price}
@@ -75,14 +78,14 @@ export default function Products() {
                                             type="submit"
                                             size="small"
                                             sx={{mt: 1, mb: 1}}
-                                            to={'/product/${product.productId}'}
+                                            to={'/products/product/${product.productId}'}
                                         >Open</Button>
                                         <Button
                                             component={Link}
                                             type="submit"
                                             size="small"
                                             sx={{mt: 1, mb: 1}}
-                                            to={"МЕТОД ДОБАВЛЕНИЯ КАК?"}
+                                            to={'/bucket'}
                                         >Add in bucket</Button>
                                     </CardActions>
                                 </Card>

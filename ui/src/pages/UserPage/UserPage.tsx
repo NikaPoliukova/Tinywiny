@@ -4,6 +4,7 @@ import {User} from "../../model/User";
 import UserService from "../../services/UserService";
 import {Button, Card, Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@mui/material";
 import {Link, useParams} from "react-router-dom";
+import {Footer} from "../component/Footer";
 
 
 export const UserPage = () => {
@@ -15,9 +16,9 @@ export const UserPage = () => {
                 .then(response => setUser(response));
         }, []);
         return (
-
             <div className="container mb-5 mt-5 row inner-wrap">
-                <Header/>
+                <Header />
+
                 <h3 className="mb-5">User, {user?.userName}</h3>
 
                 <div className="col-lg-6">
@@ -67,6 +68,7 @@ export const UserPage = () => {
                 >
                     Orders
                 </Button>
+                <Footer />
             </div>
         );
     }

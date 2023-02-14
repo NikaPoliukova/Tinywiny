@@ -10,7 +10,6 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-
 import {createTheme, ThemeProvider} from '@mui/material/styles';
 import Header from 'pages/component/Header';
 import {Footer} from "../component/Footer";
@@ -18,19 +17,30 @@ import {Product} from "../../model/Product";
 import ProductService from "../../services/ProductService";
 import {Link, useParams} from "react-router-dom";
 import {Sidebar} from "../component/SideBar";
+import {ProductInBucket} from "../../model/ProductInBucket";
+import {Bucket} from "../../model/Bucket";
+import {useSessionStore} from "../../Session";
+import BucketService from "../../services/BucketService";
 
 const cards = [1, 2, 3, 4, 5, 6];
 
 const theme = createTheme();
-
 export default function Products() {
     const [products, setProducts] = useState<Array<Product>>([]);
     const {type} = useParams();
-
+    const [productInBucket, setProductInBucket] = useState<ProductInBucket>();
+    const [bucket, setBucket] = useState<Bucket>();
+    const user = useSessionStore(state => state.user);
+   /* useEffect(() => {
+        BucketService.findBucketByUserId(Number(user.userId))
+            .then(response => setBucket(response));
+    }, []);*/
     useEffect(() => {
         ProductService.findAllProductsByTypeAndPage(String(type))
             .then(response => setProducts(response));
     }, []);
+
+
     return (
         <ThemeProvider theme={theme}>
             <CssBaseline/>
@@ -56,7 +66,6 @@ export default function Products() {
                     </Container>
                 </Box>
                 <Container sx={{py: 8}} maxWidth="md">
-
                     <Grid container spacing={4}>
                         {products.map((product) => (
                             <Grid item key={product.productId} xs={12} sm={6} md={4}>
@@ -78,15 +87,12 @@ export default function Products() {
                                             type="submit"
                                             size="small"
                                             sx={{mt: 1, mb: 1}}
-                                            to={'/products/product/${product.productId}'}
+                                            to={'/products/product/' + product.productId}
                                         >Open</Button>
                                         <Button
-                                            component={Link}
-                                            type="submit"
-                                            size="small"
-                                            sx={{mt: 1, mb: 1}}
-                                            to={'/bucket'}
+                                           // onClick={addInBucket(product)}
                                         >Add in bucket</Button>
+
                                     </CardActions>
                                 </Card>
                             </Grid>

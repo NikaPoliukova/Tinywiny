@@ -17,7 +17,7 @@ export const UserPage = () => {
         }, []);
         return (
             <div className="container mb-5 mt-5 row inner-wrap">
-                <Header />
+                <Header/>
 
                 <h3 className="mb-5">User, {user?.userName}</h3>
 
@@ -68,7 +68,7 @@ export const UserPage = () => {
                 >
                     Orders
                 </Button>
-                <Footer />
+                <Footer/>
             </div>
         );
     }

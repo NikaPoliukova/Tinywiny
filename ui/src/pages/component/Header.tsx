@@ -10,10 +10,12 @@ import GlobalStyles from '@mui/material/GlobalStyles';
 import {useParams} from "react-router-dom";
 import BucketService from "../../services/BucketService";
 import {Bucket} from "../../model/Bucket";
+import {useSessionStore} from "../../Session";
 
 function PricingContent() {
     const {userId} = useParams();
     const [bucket, setBucket] = useState<Bucket>();
+    const user = useSessionStore(state => state.user);
     useEffect(() => {
         BucketService.findBucketByUserId(Number(userId))
             .then(response => setBucket(response));
@@ -52,7 +54,7 @@ function PricingContent() {
                         <Link
                             variant="button"
                             color="text.primary"
-                            href="/bucket/${userId}"
+                            href="/bucket/${user.userId}"
                             sx={{ my: 1, mx: 1.5 }}
                         >
                             bucket
@@ -73,6 +75,7 @@ function PricingContent() {
                         >
                            Contacts
                         </Link>
+                      
                     </nav>
                     <Button href="/login" variant="outlined" sx={{ my: 1, mx: 1.5 }}>
                         Login

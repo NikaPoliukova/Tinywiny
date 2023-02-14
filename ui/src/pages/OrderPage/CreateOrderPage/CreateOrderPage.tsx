@@ -2,14 +2,10 @@ import React, {useState} from 'react';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
-
 import {Box, Button, Card, Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@mui/material";
 import Header from '../../component/Header';
-
 import {Order} from "../../../model/Order";
 import {Footer} from "../../component/Footer";
-import {Link} from "react-router-dom";
-import CardActions from "@mui/material/CardActions";
 
 
 export default function CreateOrderPage() {
@@ -125,7 +121,7 @@ export default function CreateOrderPage() {
                     </Grid>
                     <Grid item xs={100}>
                         <TextField label="order comments"/>
-                        value={comment}
+
                     </Grid>
                     <Grid item xs={12} sm={5}>
                         <select>
@@ -134,13 +130,7 @@ export default function CreateOrderPage() {
 
                         </select>
                     </Grid>
-                    <Button
-                        component={Link}
-                        type="submit"
-                        size="small"
-                        sx={{mt: 1, mb: 1}}
-                        to={'/orders'}
-                    >Create order</Button>
+                    <Button color="secondary" variant="contained">Create order</Button>
                 </Grid>
             </Box>
             <Footer/>

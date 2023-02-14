@@ -17,7 +17,7 @@ import {Link, useParams} from "react-router-dom";
 import {Footer} from "../component/Footer";
 
 
-export default function MyOrdersPage (){
+export default function MyOrdersPage() {
     const [orders, setOrders] = useState<Array<Order>>([]);
     const {userId} = useParams();
 
@@ -25,29 +25,26 @@ export default function MyOrdersPage (){
         OrderService.findOrdersByUserId(Number(userId))
             .then(response => setOrders(response));
     }, []);
-
-
     return (
         <div>
-            <Header />
-
+            <Header/>
             <Typography component="h1" variant="h5">
-                <h1>Orders</h1>
+                <h2>Orders User {userId}</h2>
             </Typography>
             <Card style={{width: 1000}}>
                 <TableContainer>
                     <Table sx={{minWidth: 800}} aria-label="simple table">
                         <TableHead>
                             <TableRow>
-                                <TableCell align="center">orderId</TableCell>
-                                <TableCell align="center">statusOrder</TableCell>
-                                <TableCell align="center">createdAt</TableCell>
+                                <TableCell align="left">orderId</TableCell>
+                                <TableCell align="left">statusOrder</TableCell>
+                                <TableCell align="left">createdAt</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
                             {orders.map((order) => (
                                 <TableRow
-                                    key={order.orderId}
+                                    key={order?.orderId}
                                     sx={{'&:last-child td, &:last-child th': {border: 0}}}
                                 >
                                     <TableCell component="th" scope="row">
@@ -73,7 +70,7 @@ export default function MyOrdersPage (){
                     </Table>
                 </TableContainer>
             </Card>
-            <Footer />
+            <Footer/>
         </div>
     );
 };

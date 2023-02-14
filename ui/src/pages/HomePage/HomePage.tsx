@@ -1,86 +1,100 @@
 import * as React from 'react';
+import {useEffect, useState} from 'react';
+import Button from '@mui/material/Button';
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import CssBaseline from '@mui/material/CssBaseline';
+import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import Container from '@mui/material/Container';
 
-import ImageList from '@mui/material/ImageList';
-import ImageListItem from '@mui/material/ImageListItem';
-import ImageListItemBar from '@mui/material/ImageListItemBar';
-import Header from '../component/Header';
+import {createTheme, ThemeProvider} from '@mui/material/styles';
+import Header from 'pages/component/Header';
+import {Footer} from "../component/Footer";
+import {Product} from "../../model/Product";
+import ProductService from "../../services/ProductService";
+import {Link, useParams} from "react-router-dom";
 import {Sidebar} from "../component/SideBar";
 
-export default function GalleryPage() {
+const cards = [1, 2, 3, 4, 5, 6];
+
+const theme = createTheme();
+
+export default function Products() {
+    const [products, setProducts] = useState<Array<Product>>([]);
+    const {type} = useParams();
+
+    useEffect(() => {
+        ProductService.findAllProductsByTypeAndPage(String(type))
+            .then(response => setProducts(response));
+    }, []);
     return (
-
-        <React.Fragment>
+        <ThemeProvider theme={theme}>
+            <CssBaseline/>
             <Header/>
-<Sidebar />
-            <ImageList variant="masonry" cols={3} gap={6}
-                       sx={{
-                           marginTop: 1,
-                           flexDirection: 'column',
-                           alignItems: 'center',
-                       }}>
-                {itemData.map((item) => (
-                    <ImageListItem key={item.img}>
-                        <img
-                            src={`${item.img}?w=248&fit=crop&auto=format`}
-                            srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
-                            loading="lazy"
-                        />
-                        <ImageListItemBar position="below"/>
-                    </ImageListItem>
-                ))}
-            </ImageList>
-        </React.Fragment>
-    )
 
+            <main>
+                <Sidebar/>
+                <Box
+                    sx={{
+                        bgcolor: 'background.paper',
+                        pt: 15,
+                        pb: 10,
+                    }}
+                >
+                    <Container maxWidth="sm">
+                        <Typography
+                            component="h1"
+                            variant="h2"
+                            align="center"
+                            color="text.primary">
+                            Products
+                        </Typography>
+                    </Container>
+                </Box>
+                <Container sx={{py: 8}} maxWidth="md">
+
+                    <Grid container spacing={4}>
+                        {products.map((product) => (
+                            <Grid item key={product.productId} xs={12} sm={6} md={4}>
+                                <Card sx={{height: '100%', display: 'flex', flexDirection: 'column'}}>
+                                    <CardMedia
+                                        component="img"
+                                        image="https://source.unsplash.com/random"/>
+                                    <CardContent sx={{flexGrow: 1}}>
+                                        <Typography>
+                                            {product.productName}
+                                        </Typography>
+                                        <Typography>
+                                            price = {product.price}
+                                        </Typography>
+                                    </CardContent>
+                                    <CardActions>
+                                        <Button
+                                            component={Link}
+                                            type="submit"
+                                            size="small"
+                                            sx={{mt: 1, mb: 1}}
+                                            to={'/products/product/${product.productId}'}
+                                        >Open</Button>
+                                        <Button
+                                            component={Link}
+                                            type="submit"
+                                            size="small"
+                                            sx={{mt: 1, mb: 1}}
+                                            to={'/bucket'}
+                                        >Add in bucket</Button>
+                                    </CardActions>
+                                </Card>
+                            </Grid>
+                        ))}
+                    </Grid>
+                </Container>
+            </main>
+            <Footer/>
+        </ThemeProvider>
+    );
 }
-
-const itemData = [
-    {
-        img: 'https://images.unsplash.com/photo-1549388604-817d15aa0110',
-
-    },
-    {
-        img: 'https://images.unsplash.com/photo-1525097487452-6278ff080c31',
-
-    },
-    {
-        img: 'https://images.unsplash.com/photo-1523413651479-597eb2da0ad6',
-
-    },
-    {
-        img: 'https://images.unsplash.com/photo-1563298723-dcfebaa392e3',
-
-    },
-    {
-        img: 'https://images.unsplash.com/photo-1588436706487-9d55d73a39e3',
-
-    },
-    {
-        img: 'https://images.unsplash.com/photo-1574180045827-681f8a1a9622',
-
-    },
-    {
-        img: 'https://images.unsplash.com/photo-1530731141654-5993c3016c77',
-
-    },
-    {
-        img: 'https://images.unsplash.com/photo-1481277542470-605612bd2d61',
-
-    },
-    {
-        img: 'https://images.unsplash.com/photo-1517487881594-2787fef5ebf7',
-
-    },
-    {
-        img: 'https://images.unsplash.com/photo-1516455207990-7a41ce80f7ee',
-
-    },
-    {
-        img: 'https://images.unsplash.com/photo-1597262975002-c5c3b14bbd62',
-
-    },
-    {
-        img: 'https://images.unsplash.com/photo-1519710164239-da123dc03ef4',
-
-    },
-];

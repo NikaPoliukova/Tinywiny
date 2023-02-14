@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {
     Button,
-    Card,
+    Card, IconButton,
     Table,
     TableBody,
     TableCell,
@@ -14,19 +14,20 @@ import BucketService from "../../services/BucketService";
 import {Link, useParams} from "react-router-dom";
 import {Footer} from "../component/Footer";
 import Header from 'pages/component/Header';
-import {Bucket} from "../../model/Bucket";
+import DeleteIcon from '@mui/icons-material/Delete';
 import {Product} from "../../model/Product";
 
 
 function BucketPage() {
     const [products, setProducts] = useState<Array<Product>>([])
     const {bucketId} = useParams();
-
+    const [count, setCount] = useState(1);
 
     useEffect(() => {
         BucketService.findAllProductsInBucket(Number(bucketId))
             .then(response => setProducts(response));
     }, []);
+
     return (
         <div>
             <Header/>
@@ -59,26 +60,16 @@ function BucketPage() {
                                         {product.idType}
                                     </TableCell>
                                     <TableCell>
-                                        <Button
-                                            component={Link}
-                                            type="submit"
-
-                                            variant="contained"
-                                            sx={{mt: 1, mb: 1}}
-                                            to={'products/${product.productId}'}
-                                        > add count +1 </Button>
+                                        <Button sx={{mt: 4}}
+                                                variant="contained"
+                                                onClick={() => setCount(count + 1)}
+                                        >
+                                         add count +1 </Button>
                                     </TableCell>
                                     <TableCell>
-
-                                        <Button
-                                            component={Link}
-                                            type="submit"
-
-                                            variant="contained"
-                                            sx={{mt: 1, mb: 1}}
-                                            to={'products/${product.productId}'}
-                                        > delete
-                                        </Button>
+                                        <IconButton aria-label="delete">
+                                            <DeleteIcon />
+                                        </IconButton>
                                     </TableCell>
                                 </TableRow>
                             ))}

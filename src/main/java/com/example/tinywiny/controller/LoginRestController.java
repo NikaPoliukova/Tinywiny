@@ -35,7 +35,7 @@ public class LoginRestController {
   protected void userAuthorization(@RequestBody UserDto user) {
     userService.findUserByUserNameAndPassword(user.getUserName(), user.getPassword());
   }
-
+//+method GET TOKEN?
   @GetMapping("/token/refresh")
   public void refreshToken(HttpServletRequest request, HttpServletResponse response,
                            @RequestHeader(AUTHORIZATION) String authorizationHeader) {

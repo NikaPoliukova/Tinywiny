@@ -19,10 +19,10 @@ const theme = createTheme();
 
 export function ProductPage() {
     const Product = () => {
-        const {id} = useParams();
+        const {productId} = useParams();
         const [product, setProduct] = useState<Product>();
         useEffect(() => {
-            ProductService.getProduct(Number(id))
+            ProductService.getProduct(Number(productId))
                 .then(response => setProduct(response));
         }, []);
         return (

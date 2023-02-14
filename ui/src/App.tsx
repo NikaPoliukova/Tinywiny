@@ -17,7 +17,7 @@ import {ProductPage} from "./pages/ProductPage/ProductPage";
 import {OrderPage} from "./pages/OrderPage/OrderPage";
 import CreateOrderPage from "./pages/OrderPage/CreateOrderPage/CreateOrderPage";
 import MyOrdersPage from "./pages/OrderPage/MyOrdersPage";
-
+import CreateProduct from "./pages/ProductPage/CreateNewProductPage";
 
 
 
@@ -33,15 +33,15 @@ function App() {
             <Route path={'/reviews'} element={<ReviewsPage/>}/>
             <Route path={'/gallery'} element={<GalleryPage/>}/>
             <Route path={'/products/:type'} element={<Products/>}/>
-            <Route path={'/products/product/:id'} element={<ProductPage/>}/>
+            <Route path={'/products/product/:productId'} element={<ProductPage/>}/>
             <Route path={'/orders'} element={<OrdersPage/>}/>
-
-
             <Route path={'/bucket/:bucketId'} element={<BucketPage/>}/>
-            <Route path={'/orders/:orderId'} element={<MyOrdersPage/>}/>
+
+
+            <Route path={'/orders/:userId'} element={<MyOrdersPage/>}/>
             <Route path={'/orders/order/:orderId'} element={<OrderPage/>}/>
                 <Route path={'/orders/create'} element={<CreateOrderPage/>}/>
-
+            <Route path={'/products/create'} element={<CreateProduct/>}/>
 
         </Routes>
     );

@@ -38,7 +38,6 @@ public class BucketService {
     return productInBucketRepository.save(productInBucket);
   }
 
-
   public void addProductInBucket(ProductInBucketDto productInBucketDto) {
     Optional<Bucket> bucket = bucketRepository.findBucketByBucketId(productInBucketDto.getBucketId());
     ProductInBucket productInBucket = new ProductInBucket();

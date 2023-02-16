@@ -11,6 +11,7 @@ import {useParams} from "react-router-dom";
 import BucketService from "../../services/BucketService";
 import {Bucket} from "../../model/Bucket";
 import {useSessionStore} from "../../Session";
+import {Icon} from "semantic-ui-react";
 
 function PricingContent() {
     const {userId} = useParams();
@@ -22,16 +23,16 @@ function PricingContent() {
     }, []);
     return (
         <React.Fragment>
-            <GlobalStyles styles={{ ul: { margin: 0, padding: 0, listStyle: 'none' } }} />
-            <CssBaseline />
+            <GlobalStyles styles={{ul: {margin: 0, padding: 0, listStyle: 'none'}}}/>
+            <CssBaseline/>
             <AppBar
                 position="static"
                 color="default"
                 elevation={0}
-                sx={{ borderBottom: (theme) => `1px solid ${theme.palette.divider}` }}
+                sx={{borderBottom: (theme) => `1px solid ${theme.palette.divider}`}}
             >
-                <Toolbar sx={{ flexWrap: 'wrap' }}>
-                    <Typography variant="h6" color="inherit" noWrap sx={{ flexGrow: 1 }}>
+                <Toolbar sx={{flexWrap: 'wrap'}}>
+                    <Typography variant="h6" color="inherit" noWrap sx={{flexGrow: 1}}>
                         Tiny-Winy
                     </Typography>
                     <nav>
@@ -39,7 +40,7 @@ function PricingContent() {
                             variant="button"
                             color="text.primary"
                             href="/gallery"
-                            sx={{ my: 1, mx: 1.5 }}
+                            sx={{my: 1, mx: 1.5}}
                         >
                             Gallery
                         </Link>
@@ -47,37 +48,31 @@ function PricingContent() {
                             variant="button"
                             color="text.primary"
                             href="/products/toys"
-                            sx={{ my: 1, mx: 1.5 }}
+                            sx={{my: 1, mx: 1.5}}
                         >
                             Products
                         </Link>
                         <Link
                             variant="button"
                             color="text.primary"
-                            href="/bucket/${user.userId}"
-                            sx={{ my: 1, mx: 1.5 }}
-                        >
-                            bucket
-                        </Link>
-                        <Link
-                            variant="button"
-                            color="text.primary"
                             href="/users/${userId}"
-                            sx={{ my: 1, mx: 1.5 }}
+                            sx={{my: 1, mx: 1.5}}
                         >
                             My Page
                         </Link>
                         <Link
                             variant="button"
                             color="text.primary"
-                            href="#"
-                            sx={{ my: 1, mx: 1.5 }}
+                            href="/contacts"
+                            sx={{my: 1, mx: 1.5}}
                         >
-                           Contacts
+                            Contacts
                         </Link>
-                      
                     </nav>
-                    <Button href="/login" variant="outlined" sx={{ my: 1, mx: 1.5 }}>
+                    <Button href="/bucket/${bucket.bucketId}">
+                        <Icon name='shop' size='big'/>
+                    </Button>
+                    <Button href="/login" variant="outlined" sx={{my: 1, mx: 1.5}}>
                         Login
                     </Button>
                 </Toolbar>
@@ -87,5 +82,5 @@ function PricingContent() {
 }
 
 export default function Pricing() {
-    return <PricingContent />;
+    return <PricingContent/>;
 }

@@ -3,7 +3,7 @@ import * as React from 'react';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 import ImageListItemBar from '@mui/material/ImageListItemBar';
-import Header from '../component/Header';
+import Header from '../component/MyHeader';
 import {Footer} from "../component/Footer";
 
 export default function GalleryPage() {

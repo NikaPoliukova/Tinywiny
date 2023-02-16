@@ -8,11 +8,11 @@ import {
     TableContainer,
     TableHead,
     TableRow,
-    Typography
+
 } from "@mui/material";
 import {Review} from "../../model/Review";
 import ReviewService from "../../services/ReviewService";
-import Header from 'pages/component/Header';
+import Header from 'pages/component/MyHeader';
 import {Footer} from "../component/Footer";
 
 

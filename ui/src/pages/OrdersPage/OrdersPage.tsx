@@ -10,7 +10,7 @@ import {
     TableRow,
     Typography
 } from "@mui/material";
-import Header from "../component/Header";
+import Header from "../component/MyHeader";
 import {Order} from "../../model/Order";
 import OrderService from "../../services/OrderService";
 import {Link} from "react-router-dom";

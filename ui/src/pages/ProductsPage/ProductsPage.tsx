@@ -11,7 +11,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import {createTheme, ThemeProvider} from '@mui/material/styles';
-import Header from 'pages/component/Header';
+import Header from 'pages/component/MyHeader';
 import {Footer} from "../component/Footer";
 import {Product} from "../../model/Product";
 import ProductService from "../../services/ProductService";
@@ -31,10 +31,10 @@ export default function Products() {
     const [productInBucket, setProductInBucket] = useState<ProductInBucket>();
     const [bucket, setBucket] = useState<Bucket>();
     const user = useSessionStore(state => state.user);
-   /* useEffect(() => {
-        BucketService.findBucketByUserId(Number(user.userId))
-            .then(response => setBucket(response));
-    }, []);*/
+    /* useEffect(() => {
+         BucketService.findBucketByUserId(Number(user.userId))
+             .then(response => setBucket(response));
+     }, []);*/
     useEffect(() => {
         ProductService.findAllProductsByTypeAndPage(String(type))
             .then(response => setProducts(response));
@@ -90,7 +90,7 @@ export default function Products() {
                                             to={'/products/product/' + product.productId}
                                         >Open</Button>
                                         <Button
-                                           // onClick={addInBucket(product)}
+                                            // onClick={addInBucket(product)}
                                         >Add in bucket</Button>
 
                                     </CardActions>

@@ -1,10 +1,11 @@
-import Header from 'pages/component/Header';
 import React, {useEffect, useState} from 'react';
 import {User} from "../../model/User";
 import UserService from "../../services/UserService";
 import {Button, Card, Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@mui/material";
 import {Link, useParams} from "react-router-dom";
 import {Footer} from "../component/Footer";
+import {Header, Icon} from "semantic-ui-react";
+import MyHeader from 'pages/component/MyHeader';
 
 
 export const UserPage = () => {
@@ -17,13 +18,17 @@ export const UserPage = () => {
         }, []);
         return (
             <div className="container mb-5 mt-5 row inner-wrap">
-                <Header/>
+                <MyHeader/>
+                <div>
+                    <Header as='h2' icon textAlign='center'>
+                        <Icon name='user' circular size='big'/>
+                        <Header.Content>User, {user?.userName}</Header.Content>
+                    </Header>
 
-                <h3 className="mb-5">User, {user?.userName}</h3>
+                </div>
 
                 <div className="col-lg-6">
                     <div className="card">
-                        <img src="https://cdn-icons-png.flaticon.com/512/20/20079.png"/>
                         <Button size="small">Update profile information</Button>
                     </div>
                 </div>

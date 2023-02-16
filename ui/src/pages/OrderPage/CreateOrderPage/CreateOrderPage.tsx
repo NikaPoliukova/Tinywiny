@@ -3,7 +3,7 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import {Box, Button, Card, Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@mui/material";
-import Header from '../../component/Header';
+import Header from '../../component/MyHeader';
 import {Order} from "../../../model/Order";
 import {Footer} from "../../component/Footer";
 

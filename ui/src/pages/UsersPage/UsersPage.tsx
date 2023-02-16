@@ -11,7 +11,7 @@ import {
     TableRow,
     Typography
 } from "@mui/material";
-import Header from "../component/Header";
+import Header from "../component/MyHeader";
 import {Footer} from "../component/Footer";
 
 

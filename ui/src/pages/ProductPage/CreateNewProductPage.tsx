@@ -1,66 +1,64 @@
-import React, {useState} from 'react';
-import Modal from "react-bootstrap/Modal";
-import {Button, Form} from "react-bootstrap";
-import Header from "../component/Header";
-import {Box, Card, IconButton, Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@mui/material";
-import Typography from "@mui/material/Typography";
-import Grid from "@mui/material/Grid";
-import TextField from "@mui/material/TextField";
-import {Footer} from "../component/Footer";
-import {PhotoCamera} from "@mui/icons-material";
+import React, {useState} from 'react'
+import {Form, Header, Icon, Segment} from 'semantic-ui-react'
+import {IconButton} from "@mui/material";
+import {AddAPhoto} from "@mui/icons-material";
+import {Product} from "../../model/Product";
 
+const getTypeProduct = [
+    {key: 'm', text: 'mobil', value: 'male'},
+    {key: 'f', text: 'toy', value: 'female'},
+    {key: 'o', text: 'Other', value: 'other'},
+]
 
-export default function CreateProduct () {
-    const [product, setProduct] = useState()
-    const [name, setName] = useState('')
+export function CreateProduct() {
+    const [product, setProduct] = useState<Product>();
+
+    const [productName, setProductName] = useState('')
     const [price, setPrice] = useState(0)
-    const [count, setCount] = useState(0)
+    const [countInStock, setCountInStock] = useState(0)
+    const [description, setDescription] = useState('')
+    const [idType, setIdType] = useState(0)
+    const [file, setFile] = useState(null)
+    /*  const addProduct = () => {
+          setProduct([...product, {productName: '', price:0 ,countInStock: 0, description: '', idType: 0}])
+      }*/
     return (
-        <React.Fragment>
-            <Header/>
-            <h2> Create product</h2>
-            <Card style={{width: 1000}}
-                  sx={{
-                      marginTop: 10,
-                      display: 'flex',
-                      flexDirection: 'column',
-                      alignItems: 'center',
-
-                  }}>
-
-            </Card>
-            <Typography variant="h6" gutterBottom align="center">
-             Add details for product
-            </Typography>
-
-            <Box
-                sx={{
-                    marginTop: 10,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                }}
-
-            >  <Button variant="contained" >
-                Upload photo
-                <input hidden accept="image/*" multiple type="file" />
-            </Button>
+        <>
+            <Segment placeholder>
+                <Header icon>
+                    <Icon name='photo'/>
+                </Header>
                 <IconButton color="primary" aria-label="upload picture" component="label">
-                    <input hidden accept="image/*" type="file" />
-                    <PhotoCamera />
+                    <input hidden accept="image/*" type="file"/>
+                    <AddAPhoto/>
                 </IconButton>
+            </Segment>
+            <Form>
+                <Form.Group widths='equal'>
+                    <Form.Input fluid label='Product Name' placeholder='Product Name'/>
+                </Form.Group>
+                <Form.Group widths='equal'>
+                    <Form.Select
+                        fluid
+                        label='Type product'
+                        options={getTypeProduct}
+                        placeholder='Type product'
+                    />
+                </Form.Group>
+                <Form.Group  widths='equal'>
+                    <Form.Input fluid label='Price' placeholder='Price'/>
+                </Form.Group>
+                <Form.Group widths='equal'>
+                    <Form.Input fluid label='Count in stock' placeholder='Count in stock'/>
+                </Form.Group>
+                <Form.Group widths='equal'>
+                </Form.Group>
+                <Form.TextArea label='Discription' placeholder='Write dicscription...'/>
 
-                <Grid sx={{minWidth: 800}} aria-label="simple table">
-
-                    <Grid item xs={100}>
-                        <TextField label="discription"/>
-
-                    </Grid>
-
-                    <Button color="secondary" variant="contained">Add product</Button>
-                </Grid>
-            </Box>
-            <Footer/>
-        </React.Fragment>
-    );
+                <Form.Button>Add product</Form.Button>
+            </Form>
+        </>
+    )
 }
+
+

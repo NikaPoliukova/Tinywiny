@@ -3,8 +3,8 @@ import {
     Avatar,
     Box,
     Button,
-    Container,
-    createTheme,
+    Container, createTheme,
+
     CssBaseline,
     Grid,
     Link,
@@ -13,7 +13,7 @@ import {
     Typography
 } from "@mui/material";
 import {useState} from "react";
-import Header from "../component/Header";
+import Header from "../component/MyHeader";
 import {Footer} from "../component/Footer";
 
 

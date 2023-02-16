@@ -1,6 +1,5 @@
 import * as React from 'react';
 import {
-    Alert, AlertColor, AlertTitle,
     Avatar,
     Box,
     Button,
@@ -15,55 +14,18 @@ import {
     ThemeProvider,
     Typography
 } from "@mui/material";
-import Header from "../component/Header";
-import {Footer} from "../component/Footer";
-import { redirect } from 'react-router-dom';
-import AuthorizationService from "../../services/AuthorizationService";
-
-
+import Header from "../component/MyHeader";
 
 const theme = createTheme();
 
 export function SignIn() {
-    const [login, setLogin] = React.useState("");
-    const [password, setPassword] = React.useState("");
-
-    const infoAlertType = "info" as AlertColor;
-    const warningAlertType = "warning" as AlertColor;
-    const successAlertType = "success" as AlertColor;
-
-    const [alertType, setAlertType] = React.useState(infoAlertType);
-    const [alertText, setAlertText] = React.useState('Input credentials');
-    const [alertTitle, setAlertTitle] = React.useState('Info');
-
-    const handleLoginChange = (event: { target: { value: React.SetStateAction<string>; }; }) => {
-        setLogin(event.target.value);
-    }
-
-    const handlePasswordChange = (event: { target: { value: React.SetStateAction<string>; }; }) => {
-        setPassword(event.target.value);
-    }
-    const handleSubmit = async (event: { preventDefault: () => void; }) => {
+    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        console.log(login)
-
-        const authorizationStatus = await AuthorizationService.login(login, password);
-
-        handleAlert(authorizationStatus);
-    };
-    const handleAlert = (status :number) => {
-        if (status == 200) {
-            setAlertType(successAlertType);
-            setAlertTitle('Success');
-            setAlertText('Ok');
-            redirect("http://localhost:3000/products/type/toys");
-            return;
-        } else {
-            setAlertType(warningAlertType);
-            setAlertTitle('Warning');
-            setAlertText('Credentials are not correct');
-            return;
-        }
+        const data = new FormData(event.currentTarget);
+        console.log({
+            userName: data.get('userName'),
+            password: data.get('password'),
+        });
     };
 
     return (
@@ -91,13 +53,11 @@ export function SignIn() {
                             margin="normal"
                             required
                             fullWidth
-                            id="login"
-                            label="login"
-                            name="login"
-                            autoComplete="login"
+                            id="userName"
+                            label="UserName"
+                            name="userName"
+                            autoComplete="userName"
                             autoFocus
-                            value = {login}
-                            onChange={handleLoginChange}
                         />
                         <TextField
                             margin="normal"
@@ -108,13 +68,7 @@ export function SignIn() {
                             type="password"
                             id="password"
                             autoComplete="current-password"
-                            value = {password}
-                            onChange={handlePasswordChange}
                         />
-                        <Alert severity={alertType}>
-                            <AlertTitle>{alertTitle}</AlertTitle>
-                            <strong>{alertText}</strong>
-                        </Alert>
                         <FormControlLabel
                             control={<Checkbox value="remember" color="primary"/>}
                             label="Remember me"
@@ -124,7 +78,6 @@ export function SignIn() {
                             fullWidth
                             variant="contained"
                             sx={{mt: 3, mb: 2}}
-
                         >
                             Sign In
                         </Button>
@@ -138,7 +91,6 @@ export function SignIn() {
                     </Box>
                 </Box>
             </Container>
-            <Footer/>
         </ThemeProvider>
     );
 }

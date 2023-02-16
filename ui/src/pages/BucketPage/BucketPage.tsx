@@ -1,27 +1,29 @@
 import React, {useEffect, useState} from 'react';
-import {
-    Button,
-    Card, IconButton,
-    Table,
-    TableBody,
-    TableCell,
-    TableContainer,
-    TableHead,
-    TableRow,
-    Typography
-} from "@mui/material";
+import {Button, Card, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography} from "@mui/material";
 import BucketService from "../../services/BucketService";
 import {Link, useParams} from "react-router-dom";
 import {Footer} from "../component/Footer";
-import Header from 'pages/component/Header';
-import DeleteIcon from '@mui/icons-material/Delete';
+import {Icon, Table} from 'semantic-ui-react'
 import {Product} from "../../model/Product";
+import MyHeader from "../component/MyHeader";
 
 
 function BucketPage() {
     const [products, setProducts] = useState<Array<Product>>([])
     const {bucketId} = useParams();
     const [count, setCount] = useState(1);
+
+    /*  const addProductInBucket = () => {
+          setProduct([...product, {productName: '', price:0 ,countInStock: 0, description: '', idType: 0}])
+      }*/
+    /*  const deleteProductFromBucket = () => {
+         setProduct([...product, {productName: '', price:0 ,countInStock: 0, description: '', idType: 0}])
+     }*/
+
+
+    //функция которая передает все продукты в ордер
+    //функция добавления количества продукта в корзину
+    //функция удаления продукта из корзины
 
     useEffect(() => {
         BucketService.findAllProductsInBucket(Number(bucketId))
@@ -30,19 +32,19 @@ function BucketPage() {
 
     return (
         <div>
-            <Header/>
+            <MyHeader/>
             <Typography component="h1" variant="h5">
-                <h1>Bucket </h1>
+                <h1><Icon name='bitbucket' size='big'/>Bucket</h1>
             </Typography>
             <Card style={{width: 1000}}>
                 <TableContainer>
-                    <Table sx={{minWidth: 800}} aria-label="simple table">
+                    <Table celled padded>
                         <TableHead>
-                            <TableRow>
-                                <TableCell align="left">productName</TableCell>
-                                <TableCell align="left">price</TableCell>
-                                <TableCell align="left">Type product</TableCell>
-                            </TableRow>
+                            <Table.Row>
+                                <Table.HeaderCell>Name product</Table.HeaderCell>
+                                <Table.HeaderCell>Price</Table.HeaderCell>
+                                <Table.HeaderCell>Type priduct</Table.HeaderCell>
+                            </Table.Row>
                         </TableHead>
                         <TableBody>
                             {products.map((product) => (
@@ -50,6 +52,7 @@ function BucketPage() {
                                     key={product.productId}
                                     sx={{'&:last-child td, &:last-child th': {border: 0}}}
                                 >
+
                                     <TableCell component="th" scope="row">
                                         {product.productName}
                                     </TableCell>
@@ -61,33 +64,31 @@ function BucketPage() {
                                     </TableCell>
                                     <TableCell>
                                         <Button sx={{mt: 4}}
-                                                variant="contained"
                                                 onClick={() => setCount(count + 1)}
-                                        >
-                                         add count +1 </Button>
+                                        ><Icon name='add to cart' size='big'/>
+                                            add count +1 </Button>
                                     </TableCell>
                                     <TableCell>
-                                        <IconButton aria-label="delete">
-                                            <DeleteIcon />
-                                        </IconButton>
+                                        <Button sx={{mt: 4}}
+                                                onClick={() => setCount(count + 1)}
+                                        ><Icon name='delete' size='big'/>
+                                        </Button>
                                     </TableCell>
                                 </TableRow>
                             ))}
                         </TableBody>
                     </Table>
+
                 </TableContainer>
-
             </Card>
-            <Button
-                component={Link}
-                type="submit"
-
-                variant="contained"
-                sx={{mt: 1, mb: 1}}
-                to={'/orders/create'}
-            >
-                Go to order
+            <Button sx={{mt: 4}}
+                    component={Link}
+                    type="submit"
+                    variant="contained"
+                    to={'/orders/create'}
+            > Go to order
             </Button>
+
             <Footer/>
         </div>
     );

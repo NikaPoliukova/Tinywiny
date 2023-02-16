@@ -24,7 +24,7 @@ class BucketService {
     }
 
     async updateCountProduct(productInBucket: ProductInBucket): Promise<ProductInBucket> {
-        const response = await axios.put<ProductInBucket>('http://localhost:8080/api/v1/bucket/', productInBucket);
+        const response = await axios.put<ProductInBucket>('http://localhost:8080/api/v1/bucket', productInBucket);
         return response.data
     }
 

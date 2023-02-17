@@ -69,7 +69,7 @@ export function SignIn() {
     return (
 
         <ThemeProvider theme={theme}>
-        <MyHeader />
+            <MyHeader />
             <Container component="main" maxWidth="xs">
                 <CssBaseline/>
                 <Box
@@ -84,7 +84,7 @@ export function SignIn() {
                     <Avatar sx={{m: 1, bgcolor: 'secondary.main'}}>
                     </Avatar>
                     <Typography component="h1" variant="h5">
-                        Sign in
+                        Log in
                     </Typography>
                     <Box component="form" onSubmit={handleSubmit} noValidate sx={{mt: 1}}>
                         <TextField
@@ -92,11 +92,11 @@ export function SignIn() {
                             required
                             fullWidth
                             id="userName"
-                            label="userName"
+                            label="UserName"
                             name="userName"
                             autoComplete="userName"
                             autoFocus
-                            value = {userName}
+                            value={userName}
                             onChange={handleLoginChange}
                         />
                         <TextField
@@ -108,33 +108,28 @@ export function SignIn() {
                             type="password"
                             id="password"
                             autoComplete="current-password"
-                            value = {password}
+                            value={password}
                             onChange={handlePasswordChange}
-                        />
-                        <Alert severity={alertType}>
-                            <AlertTitle>{alertTitle}</AlertTitle>
-                            <strong>{alertText}</strong>
-                        </Alert>
-                        <FormControlLabel
-                            control={<Checkbox value="remember" color="primary"/>}
-                            label="Remember me"
                         />
                         <Button
                             type="submit"
                             fullWidth
                             variant="contained"
                             sx={{mt: 3, mb: 2}}
-
+                            href="/"
                         >
                             Sign In
                         </Button>
-                        <Grid container>
-                            <Grid item xs>
-                                <Link href="/registration" variant="body2">
-                                    Register
-                                </Link>
-                            </Grid>
-                        </Grid>
+                        <Button
+                            type="submit"
+                            fullWidth
+                            variant="contained"
+                            sx={{mt: 3, mb: 2}}
+                            href="/registration"
+                        >
+                            Registry
+                        </Button>
+
                     </Box>
                 </Box>
             </Container>

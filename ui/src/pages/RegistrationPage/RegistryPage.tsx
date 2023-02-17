@@ -1,20 +1,21 @@
 import * as React from 'react';
+import {useState} from 'react';
 import {
     Avatar,
     Box,
     Button,
-    Container, createTheme,
-
+    Container,
+    createTheme,
     CssBaseline,
-    Grid,
-    Link,
     TextField,
     ThemeProvider,
     Typography
 } from "@mui/material";
-import {useState} from "react";
-import Header from "../component/MyHeader";
+import MyHeader from "../component/MyHeader";
 import {Footer} from "../component/Footer";
+import {User} from "../../model/User";
+import UserService from "../../services/UserService";
+import {useNavigate} from "react-router-dom";
 
 
 const theme = createTheme();
@@ -25,22 +26,39 @@ export function Registry() {
     const [email, setEmail] = useState("");
     const [phoneNumber, setPhoneNumber] = useState("");
 
+    const navigate = useNavigate();
+    const addUser = () => {
+        const user: User = {
+            userName,
+            password,
+            email,
+            phoneNumber
+        };
+        UserService.saveUser(user).then(response => navigate("/"));
+    }
 
- const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        const data = new FormData(event.currentTarget);
-        console.log({
-            userName: data.get('userName'),
-            password: data.get('password'),
-            email: data.get('email'),
-            phoneNumber: data.get('phoneNumber'),
-        });
     };
+    const handleLoginChange = (event: { target: { value: React.SetStateAction<string>; }; }) => {
+        setUserName(event.target.value);
+    }
+
+    const handlePasswordChange = (event: { target: { value: React.SetStateAction<string>; }; }) => {
+        setPassword(event.target.value);
+    }
+    const handleEmailChange = (event: { target: { value: React.SetStateAction<string>; }; }) => {
+        setEmail(event.target.value);
+    }
+
+    const handlePhoneNumberChange = (event: { target: { value: React.SetStateAction<string>; }; }) => {
+        setPhoneNumber(event.target.value);
+    }
 
 
     return (
         <ThemeProvider theme={theme}>
-            <Header />
+        <MyHeader />
             <Container component="main" maxWidth="xs">
                 <CssBaseline/>
                 <Box
@@ -51,6 +69,7 @@ export function Registry() {
                         alignItems: 'center',
                     }}
                 >
+
                     <Avatar sx={{m: 1, bgcolor: 'secondary.main'}}>
                     </Avatar>
                     <Typography component="h1" variant="h5">
@@ -66,6 +85,8 @@ export function Registry() {
                             name="userName"
                             autoComplete="userName"
                             autoFocus
+                            value={userName}
+                            onChange={handleLoginChange}
                         />
                         <TextField
                             margin="normal"
@@ -76,6 +97,8 @@ export function Registry() {
                             type="password"
                             id="password"
                             autoComplete="current-password"
+                            value={password}
+                            onChange={handlePasswordChange}
                         />
                         <TextField
                             margin="normal"
@@ -83,9 +106,11 @@ export function Registry() {
                             fullWidth
                             id="email"
                             label="Email"
-                            name="mail"
+                            name="email"
                             autoComplete="email"
                             autoFocus
+                            value={email}
+                            onChange={handleEmailChange}
                         />
                         <TextField
                             margin="normal"
@@ -96,26 +121,31 @@ export function Registry() {
                             name="phoneNumber"
                             autoComplete="phoneNumber"
                             autoFocus
+                            value={phoneNumber}
+                            onChange={handlePhoneNumberChange}
                         />
                         <Button
                             type="submit"
                             fullWidth
                             variant="contained"
                             sx={{mt: 3, mb: 2}}
+                            onClick={addUser}
                         >
                             Registry
                         </Button>
-                        <Grid container>
-                            <Grid item xs>
-                                <Link href="/login" variant="body2">
-                                    Log in
-                                </Link>
-                            </Grid>
-                        </Grid>
+                        <Button
+                            type="submit"
+                            fullWidth
+                            variant="contained"
+                            sx={{mt: 3, mb: 2}}
+                            href="/login"
+                        >
+                            Log In
+                        </Button>
                     </Box>
                 </Box>
             </Container>
-            <Footer />
+            <Footer/>
         </ThemeProvider>
     );
 

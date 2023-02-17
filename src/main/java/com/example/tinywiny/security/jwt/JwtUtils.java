@@ -26,7 +26,7 @@ public class JwtUtils {
   public static String generateRefreshToken(User user, String requestUrl, Algorithm algorithm) {
     return JWT.create()
         .withSubject(user.getUsername())
-        .withExpiresAt(new Date(System.currentTimeMillis() + 60 * 60 * 1000))
+        .withExpiresAt(new Date(System.currentTimeMillis() + 120 * 60 * 1000))
         .withIssuer(requestUrl)
         .withClaim("roles", user.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList()))
         .sign(algorithm);
@@ -39,6 +39,18 @@ public class JwtUtils {
     return JWT.create()
         .withSubject(username)
         .withExpiresAt(new Date(System.currentTimeMillis() + 60 * 60 * 1000))
+        .withIssuer(requestUrl)
+        .withClaim("roles", roles)
+        .sign(algorithm);
+  }
+
+  public static String generateRefreshedRefreshToken(String username, String requestUrl, String secretKey) {
+    Algorithm algorithm = Algorithm.HMAC256(secretKey.getBytes());
+    List<String> roles = new ArrayList<>();
+    roles.add("USER");
+    return JWT.create()
+        .withSubject(username)
+        .withExpiresAt(new Date(System.currentTimeMillis() + 120 * 60 * 1000))
         .withIssuer(requestUrl)
         .withClaim("roles", roles)
         .sign(algorithm);

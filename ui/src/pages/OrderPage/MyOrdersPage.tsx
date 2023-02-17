@@ -13,44 +13,38 @@ import {
 import Header from "../component/Header";
 import {Order} from "../../model/Order";
 import OrderService from "../../services/OrderService";
-import {Link} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 import {Footer} from "../component/Footer";
 
 
-const OrdersPage = () => {
+export default function MyOrdersPage() {
     const [orders, setOrders] = useState<Array<Order>>([]);
-
+    const {userId} = useParams();
 
     useEffect(() => {
-        OrderService.findAllOrdersByPage()
-            .then(response => setOrders(response))
-            ;
+        OrderService.findOrdersByUserId(Number(userId))
+            .then(response => setOrders(response));
     }, []);
-
-
     return (
         <div>
-            <Header />
-
+            <Header/>
             <Typography component="h1" variant="h5">
-                <h1>Orders</h1>
+                <h2>Orders User {userId}</h2>
             </Typography>
             <Card style={{width: 1000}}>
                 <TableContainer>
                     <Table sx={{minWidth: 800}} aria-label="simple table">
                         <TableHead>
                             <TableRow>
-                                <TableCell align="center">orderId</TableCell>
-                                <TableCell align="center">statusOrder</TableCell>
-                                <TableCell align="center">commentOrder</TableCell>
-                                <TableCell align="center">userId</TableCell>
-                                <TableCell align="center">createdAt</TableCell>
+                                <TableCell align="left">orderId</TableCell>
+                                <TableCell align="left">statusOrder</TableCell>
+                                <TableCell align="left">createdAt</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
                             {orders.map((order) => (
                                 <TableRow
-                                    key={order.orderId}
+                                    key={order?.orderId}
                                     sx={{'&:last-child td, &:last-child th': {border: 0}}}
                                 >
                                     <TableCell component="th" scope="row">
@@ -59,15 +53,7 @@ const OrdersPage = () => {
                                     <TableCell component="th" scope="row">
                                         {order.statusOrder}
                                     </TableCell>
-                                    <TableCell component="th" scope="row">
-                                        {order.commentOrder}
-                                    </TableCell>
-                                    <TableCell align="right">
-                                        {order.userId}
-                                    </TableCell>
-                                    <TableCell align="right">
-                                        {order.createdAt}
-                                    </TableCell>
+
                                     <Button
                                         component={Link}
                                         type="submit"
@@ -84,9 +70,7 @@ const OrdersPage = () => {
                     </Table>
                 </TableContainer>
             </Card>
-            <Footer />
+            <Footer/>
         </div>
     );
 };
-
-export default OrdersPage;

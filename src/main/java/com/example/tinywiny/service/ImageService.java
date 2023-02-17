@@ -61,7 +61,7 @@ public class ImageService {
   public URI getImagePath(String imageName) throws URISyntaxException {
     return storageService.getImagePath(imageName);
   }
-
+//может удалять по айди картинки?
   public void deleteImage(Long productId) {
     Product product = productService.findProductByProductId(productId);
     if (product == null) {

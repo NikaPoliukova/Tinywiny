@@ -7,18 +7,18 @@ class ProductService {
         await axios.post('http://localhost:8080/api/v1/products/create', product);
     }
 
-    async findAllProductsByTypeAndPage(): Promise<Array<Product>> {
-        const response = await axios.get<Array<Product>>('http://localhost:8080/api/v1/products/type');
+    async findAllProductsByTypeAndPage(type : string): Promise<Array<Product>> {
+        const response = await axios.get<Array<Product>>('http://localhost:8080/api/v1/products/type/' + type);
         return response.data;
     }
 
-    async getProduct(): Promise<Product> {
-        const response = await axios.get<Product>('http://localhost:8080/api/v1/products/${productId}');
+    async getProduct(productId: number): Promise<Product> {
+        const response = await axios.get<Product>('http://localhost:8080/api/v1/products/product/' + productId);
         return response.data;
     }
 
-    async addProductInBucket(productInBucket: ProductInBucket): Promise<Array<ProductInBucket>> {
-        const response = await axios.post<Array<ProductInBucket>>('http://localhost:8080/api/v1/bucket', productInBucket);
+    async addProductInBucket(productInBucket: ProductInBucket): Promise<ProductInBucket> {
+        const response = await axios.post<ProductInBucket>('http://localhost:8080/api/v1/products', productInBucket);
         return response.data;
     }
 

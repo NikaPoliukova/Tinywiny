@@ -10,6 +10,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface ProductRepository extends JpaRepository<Product, String> {
@@ -27,6 +28,8 @@ public interface ProductRepository extends JpaRepository<Product, String> {
 
   Page<Product> findAllByTypeProduct(TypeProduct type, Pageable page);
 
-  Page<Product> findAllBy(Pageable page);
+  //Page<Product> findAllBy(Pageable page);
+
+
 
 }

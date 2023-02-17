@@ -1,3 +1,5 @@
+import {ProductInOrder} from "./ProductInOrder";
+
 export interface Order {
 
     orderId: number;
@@ -7,4 +9,9 @@ export interface Order {
     deliveryTypeId: number;
     statusOrder: string;
     createdAt: string;
+    productsInOrder: Array<ProductInOrder>
 }
+
+
+
+

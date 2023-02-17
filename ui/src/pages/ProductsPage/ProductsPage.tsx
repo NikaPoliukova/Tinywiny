@@ -7,90 +7,91 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import CssBaseline from '@mui/material/CssBaseline';
 import Grid from '@mui/material/Grid';
-import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import {createTheme, ThemeProvider} from '@mui/material/styles';
-import Header from "../component/Header";
-import Sidebar from "../component/SideBar";
+import Header from 'pages/component/Header';
+import {Footer} from "../component/Footer";
 import {Product} from "../../model/Product";
 import ProductService from "../../services/ProductService";
+import {Link, useParams} from "react-router-dom";
+import {Sidebar} from "../component/SideBar";
+import {ProductInBucket} from "../../model/ProductInBucket";
+import {Bucket} from "../../model/Bucket";
+import {useSessionStore} from "../../Session";
+import BucketService from "../../services/BucketService";
 
+const cards = [1, 2, 3, 4, 5, 6];
 
 const theme = createTheme();
-
-export function Products() {
-
+export default function Products() {
     const [products, setProducts] = useState<Array<Product>>([]);
-
-
+    const {type} = useParams();
+    const [productInBucket, setProductInBucket] = useState<ProductInBucket>();
+    const [bucket, setBucket] = useState<Bucket>();
+    const user = useSessionStore(state => state.user);
+   /* useEffect(() => {
+        BucketService.findBucketByUserId(Number(user.userId))
+            .then(response => setBucket(response));
+    }, []);*/
     useEffect(() => {
-        ProductService.findAllProductsByTypeAndPage()
+        ProductService.findAllProductsByTypeAndPage(String(type))
             .then(response => setProducts(response));
     }, []);
+
+
     return (
         <ThemeProvider theme={theme}>
             <CssBaseline/>
             <Header/>
-            <Sidebar/>
+
             <main>
-                <Box component='nav' max-height='200vh'
-                     sx={{
-                         bgcolor: 'background.paper',
-                         pt: 8,
-                         pb: 6,
-                     }}
+                <Sidebar/>
+                <Box
+                    sx={{
+                        bgcolor: 'background.paper',
+                        pt: 15,
+                        pb: 10,
+                    }}
                 >
                     <Container maxWidth="sm">
                         <Typography
                             component="h1"
                             variant="h2"
                             align="center"
-                            color="text.primary"
-                            gutterBottom
-                        >
+                            color="text.primary">
                             Products
                         </Typography>
-                        <Stack
-                            sx={{pt: 4}}
-                            direction="row"
-                            spacing={2}
-                            justifyContent="center"
-                        >
-                        </Stack>
                     </Container>
                 </Box>
-
                 <Container sx={{py: 8}} maxWidth="md">
-
                     <Grid container spacing={4}>
                         {products.map((product) => (
-                            <Grid item key={product.productName} xs={10} sm={6} md={4}>
-                                <Card
-                                    sx={{height: '100%', display: 'flex', flexDirection: 'column'}}
-                                >
+                            <Grid item key={product.productId} xs={12} sm={6} md={4}>
+                                <Card sx={{height: '100%', display: 'flex', flexDirection: 'column'}}>
                                     <CardMedia
                                         component="img"
-                                        sx={{
-                                            pt: '2%',
-                                        }}
-                                        image="https://source.unsplash.com/random"
-                                        alt="random"
-                                    />
+                                        image="https://source.unsplash.com/random"/>
                                     <CardContent sx={{flexGrow: 1}}>
-                                        <Typography gutterBottom variant="h5" component="h2">
+                                        <Typography>
                                             {product.productName}
                                         </Typography>
                                         <Typography>
-                                            {product.description}
-                                        </Typography>
-                                        <Typography>
-                                            {product.price}
+                                            price = {product.price}
                                         </Typography>
                                     </CardContent>
                                     <CardActions>
-                                        <Button size="small">Add in bucket</Button>
+                                        <Button
+                                            component={Link}
+                                            type="submit"
+                                            size="small"
+                                            sx={{mt: 1, mb: 1}}
+                                            to={'/products/product/' + product.productId}
+                                        >Open</Button>
+                                        <Button
+                                           // onClick={addInBucket(product)}
+                                        >Add in bucket</Button>
 
                                     </CardActions>
                                 </Card>
@@ -99,6 +100,7 @@ export function Products() {
                     </Grid>
                 </Container>
             </main>
+            <Footer/>
         </ThemeProvider>
     );
 }

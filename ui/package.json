@@ -21,6 +21,8 @@
     "@types/react-dom": "^18.0.10",
     "axios": "^1.2.4",
     "bootstrap": "^5.2.3",
+    "cors": "^2.8.5",
+    "deepmerge": "^4.3.0",
     "framer-motion": "^9.0.2",
     "react": "^18.2.0",
     "react-bootstrap": "^2.7.0",
@@ -72,7 +74,9 @@
     "gatsby": "^5.6.0",
     "mdb-react-ui-kit": "^5.1.0",
     "react-redux": "^8.0.5",
+    "react-responsive": "^9.0.2",
     "react-stormpath": "^2.0.1",
-    "styled-components": "^5.3.6"
+    "styled-components": "^5.3.6",
+    "zustand": "^4.3.3"
   }
 }

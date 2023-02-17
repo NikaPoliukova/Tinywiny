@@ -23,11 +23,10 @@ public class BucketService {
   private final ProductService productService;
   private final ProductInBucketRepository productInBucketRepository;
 
-  // return empty bucket
   public List<ProductInBucket> findAllProductInBucket(Long bucketId) {
     Optional<Bucket> bucket = bucketRepository.findBucketByBucketId(bucketId);
     if (bucket.isEmpty()) {
-     return Collections.emptyList();
+      return Collections.emptyList();
     }
     return productInBucketRepository.findAllByBucket(bucket.get());
   }

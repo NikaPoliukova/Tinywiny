@@ -13,6 +13,7 @@ import {
 import {Review} from "../../model/Review";
 import ReviewService from "../../services/ReviewService";
 import Header from 'pages/component/Header';
+import {Footer} from "../component/Footer";
 
 
 
@@ -29,7 +30,7 @@ const ReviewsPage = () => {
     return (
 
         <div>
-            <Header/>
+            <Header />
 
                 <h1 id={greeting}>Reviews</h1>
 
@@ -76,6 +77,7 @@ const ReviewsPage = () => {
                     </Table>
                 </TableContainer>
             </Card>
+            <Footer />
         </div>
     );
 };

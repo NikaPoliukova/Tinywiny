@@ -1,10 +1,16 @@
-import {Link} from "react-router-dom";
+import * as React from 'react';
+import {useEffect, useState} from "react";
+import {TypeProduct} from "../../model/TypeProduct";
+import TypeProductService from "../../services/TypeProductService";
 
 
-const Sidebar: React.FC = (): JSX.Element => {
-
-
-    return (
+export const Sidebar: React.FC = (): JSX.Element => {
+    const [types, setTypes] = useState<Array<TypeProduct>>([])
+    useEffect(() => {
+        TypeProductService.findAllTypes()
+            .then(response => setTypes(response));
+    }, []);
+ return (
         <aside className="w-300 h-full">
             <div className="overflow-y-auto h-screen py-4 px-3 bg-gray-50  dark:bg-gray-800">
                 <div className="flex items-center pl-2.5 mb-5">
@@ -13,17 +19,17 @@ const Sidebar: React.FC = (): JSX.Element => {
                     </span>
                 </div>
 
-                <div className="w3-sidebar w3-bar-block">
-                    <a href="#" className="w3-bar-item w3-button w3-border-bottom">Радуги</a>
+                <div className="w5-sidebar w3-bar-block" >
+                    <a href="/products/toys" className="w3-bar-item w3-button w3-border-bottom" >Toys</a>
                 </div>
                     <div className="w3-sidebar w3-bar-block">
-                    <a href="#" className="w3-bar-item w3-button w3-border-bottom">Игрушки</a>
+                    <a href="/products/wings" className="w3-bar-item w3-button w3-border-bottom">Wings</a>
                     </div>
                 <div className="w3-sidebar w3-bar-block">
-                    <a href="#" className="w3-bar-item w3-button">Декор</a>
+                    <a href="/products/mobiles" className="w3-bar-item w3-button">Mobiles</a>
                 </div>
                 <div className="w3-sidebar w3-bar-block">
-                    <a href="#" className="w3-bar-item w3-button">Мобили</a>
+                    <a href="/products/decorations" className="w3-bar-item w3-button">Decorations</a>
                 </div>
 
             </div>
@@ -31,4 +37,5 @@ const Sidebar: React.FC = (): JSX.Element => {
     );
 };
 
-export default Sidebar;
+
+

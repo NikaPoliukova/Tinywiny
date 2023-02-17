@@ -25,17 +25,17 @@ export function ProductPage() {
     const Product = () => {
         const {productId} = useParams();
         const [product, setProduct] = useState<Product>();
-        const [user];
-        const [bucket]
+       //const [user];
+        //const [bucket]
 
         const navigate = useNavigate();
-        const addProductInBucket = () => {
+     /*  const addProductInBucket = () => {
             const product: ProductInBucket = {
                 productId,
                 bucketId
             };
             ProductService.addProductInBucket(product).then(response => navigate("/products/toys"));
-        }
+        }*/
 
 
         useEffect(() => {
@@ -96,7 +96,7 @@ export function ProductPage() {
                                 type="submit"
                                 variant="contained"
                                 sx={{mt: 1, mb: 1}}
-                                onClick={addProductInBucket}
+                               // onClick={addProductInBucket}
                             >
                                 Add in bucket
                             </Button>

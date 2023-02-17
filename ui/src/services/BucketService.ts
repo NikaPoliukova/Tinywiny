@@ -27,8 +27,6 @@ class BucketService {
         const response = await axios.put<ProductInBucket>('http://localhost:8080/api/v1/bucket', productInBucket);
         return response.data
     }
-
-
 }
 
 export default new BucketService();

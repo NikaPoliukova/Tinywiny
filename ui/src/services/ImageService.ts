@@ -3,10 +3,13 @@ import {Image} from "../model/Image";
 
 class ImageService {
 
-    async updateUserUser(image: Image): Promise<void> {
-        await axios.put('http://localhost:8080/api/v1/products/image', image);
+    async updateImage(image: Image): Promise<Image> {
+        const response =await axios.put<Image>('http://localhost:8080/api/v1/admin/products/product', image);
+        return response.data;
     }
-    async deleteImage(image2: Image): Promise<void> {
-        await axios.delete('http://localhost:8080/api/v1/products/${productId}/image');
+    async deleteImage(image: Image): Promise<void> {
+        const response = await axios.delete('http://localhost:8080/api/v1/admin/products/product');
+        return response.data;
     }
 }
+export default new ImageService();

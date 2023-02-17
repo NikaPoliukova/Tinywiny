@@ -109,4 +109,7 @@ public class ProductService {
   }
 
 
+  public List<Product> findAllProducts() {
+   return productRepository.findAll();
+  }
 }

@@ -50,7 +50,7 @@ export const AdminPage = () => {
                 <Button type="submit"
                         variant="contained"
                         sx={{mt: 3, mb: 2}}
-                        href="/products">Update product </Button>
+                        href="/admin/products">Update product </Button>
             </TableCell>
                 <Footer/>
         </div>

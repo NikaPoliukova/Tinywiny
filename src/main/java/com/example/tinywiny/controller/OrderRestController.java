@@ -68,7 +68,7 @@ public class OrderRestController {
     return orderConverter.toOrderDto(order, deliveryInformationDto, productInOrderDto);
   }
 
-  @GetMapping("/orders-by/{userId}")
+  @GetMapping("/{userId}")
   public List<OrderDto> findOrdersByUserId(@PathVariable Long userId) {
     return orderConverter.toOrderDto(orderService.findOrdersByUserId(userId));
   }

@@ -7,9 +7,7 @@ import com.example.tinywiny.dto.ProductDto;
 import com.example.tinywiny.dto.ProductInBucketDto;
 import com.example.tinywiny.dto.TypeProduct;
 import com.example.tinywiny.dto.TypeProductDto;
-import com.example.tinywiny.model.Order;
 import com.example.tinywiny.model.Product;
-import com.example.tinywiny.model.ProductInOrder;
 import com.example.tinywiny.service.BucketService;
 import com.example.tinywiny.service.ImageService;
 import com.example.tinywiny.service.ProductService;
@@ -35,7 +33,7 @@ import java.util.List;
 
 @Slf4j
 @RestController
-@RequestMapping("/api/v1/products")
+@RequestMapping("/api/v1")
 @RequiredArgsConstructor
 public class ProductsRestController {
   private final ProductService productService;
@@ -44,19 +42,20 @@ public class ProductsRestController {
   private final ImageService imageService;
   private final TypeProductService typeProductService;
   private final TypeProductConverter typeProductConverter;
+
   //GET image????
-  @PostMapping("/create")
+  @PostMapping("/products/create")
   protected ProductDto createProduct(@RequestBody ProductDto product) {
     return converter.toProductDto(productService.save(product));
   }
 
-  @PostMapping
+  @PostMapping("/products")
   protected void addProductInBucket(@RequestBody ProductInBucketDto productInBucketDto) {
     bucketService.addProductInBucket(productInBucketDto);
   }
 
   //не знаю,как отобразить
-  @GetMapping("/product/{productId}")
+  @GetMapping("/products/product/{productId}")
   public ProductDto getProduct(@PathVariable Long productId) throws URISyntaxException {
     Product product = productService.findProductByProductId(productId);
     URI imageUrl = null;
@@ -66,29 +65,29 @@ public class ProductsRestController {
     return converter.toProductDto(product);
   }
 
-  @PutMapping
+  @PutMapping("/products")
   public void updateProduct(@RequestBody ProductDto productDto) {
     productService.updateProduct(productDto);
   }
 
-  @PutMapping("/update/count-in-stock")
+  @PutMapping("/products/update/count-in-stock")
   public void updateCountInStock(@RequestBody ProductDto product) {
     productService.updateCountInStock(product.getCountInStock(), product.getProductId());
   }
 
   //НЕ ЗНАЮ КАК ОБНОВИТЬ КАРТИНКУ
-  @PutMapping("/image")
+  @PutMapping("/admin/products/product")
   public ImageDto updateImage(@RequestBody ImageDto imageDto, MultipartFile file) throws IOException {
     imageService.updateImage(imageDto, file);
     return imageDto;
   }
 
-  @DeleteMapping("/{productId}/image")
+  @DeleteMapping("/admin/products/product")
   public void deleteImage(@PathVariable Long productId) {
     imageService.deleteImage(productId);
   }
 
-  @GetMapping("/type/{typeName}")
+  @GetMapping("/products/type/{typeName}")
   public List<ProductDto> findAllProductsByTypeAndPage(@PathVariable String typeName,
                                                        @RequestParam(value = "pageNumber", required = false, defaultValue = "1") Integer pageNumber,
                                                        @RequestParam(value = "pageSize", required = false, defaultValue = "20") Integer pageSize) {
@@ -97,17 +96,22 @@ public class ProductsRestController {
     return converter.toProductDto(products);
   }
 
-  @GetMapping("/type")
+  @GetMapping("/admin/products")
+  public List<ProductDto> findAllProducts() {
+    List<Product> products = productService.findAllProducts();
+    return converter.toProductDto(products);
+  }
+
+  @GetMapping("/products/type")
   public List<TypeProductDto> findAllTypes(@RequestParam(value = "pageNumber", required = false, defaultValue = "1") Integer pageNumber,
-                                            @RequestParam(value = "pageSize", required = false, defaultValue = "20") Integer pageSize) {
+                                           @RequestParam(value = "pageSize", required = false, defaultValue = "20") Integer pageSize) {
     Page<TypeProduct> page = typeProductService.findAllType(pageNumber - 1, pageSize);
     List<TypeProduct> types = page.getContent();
     return typeProductConverter.toDto(types);
   }
 
 
-
-  @DeleteMapping("/{productId}")
+  @DeleteMapping("/products/{productId}")
   public void deleteProduct(@PathVariable Long productId) {
     productService.deleteProduct(productId);
   }

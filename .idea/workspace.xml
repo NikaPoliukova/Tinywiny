@@ -13,31 +13,13 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4dd877d4-850b-4093-ba42-62db28456f03" name="Changes" comment="work Bucket page">
-      <change afterPath="$PROJECT_DIR$/ui/src/model/DeliveryInformation.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ui/src/pages/AdminPage/CreateNewProductPage.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ui/src/pages/AdminPage/ProductsUpdatePage.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ui/src/pages/AdminPage/UpdateProductPage.tsx" afterDir="false" />
+    <list default="true" id="4dd877d4-850b-4093-ba42-62db28456f03" name="Changes" comment="add pages for admin">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/controller/OrderRestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/controller/OrderRestController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/controller/ProductsRestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/controller/ProductsRestController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/service/ProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/service/ProductService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ui/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/src/model/Image.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/model/Image.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/src/model/Order.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/model/Order.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/src/model/Product.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/model/Product.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ui/src/model/ProductInBucket.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/model/ProductInBucket.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/src/pages/AdminPage/AdminPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/pages/AdminPage/AdminPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/src/pages/BucketPage/BucketPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/pages/BucketPage/BucketPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/src/pages/OrderPage/CreateOrderPage/CreateOrderPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/pages/AdminPage/CreateOrderPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/src/pages/OrderPage/MyOrdersPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/pages/OrderPage/MyOrdersPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/src/pages/ProductPage/CreateNewProductPage.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/src/pages/ProductsPage/ProductsPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/pages/ProductsPage/ProductsPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/src/pages/UsersPage/UsersPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/pages/UsersPage/UsersPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/src/services/BucketService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/services/BucketService.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/src/services/ImageService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/services/ImageService.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/src/pages/ProductPage/ProductPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/pages/ProductPage/ProductPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/src/pages/UserPage/UserPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/pages/UserPage/UserPage.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ui/src/services/OrderService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/services/OrderService.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/src/services/ProductService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/services/ProductService.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -298,7 +280,7 @@
       <workItem from="1676483423285" duration="9480000" />
       <workItem from="1676540341381" duration="5180000" />
       <workItem from="1676563077772" duration="11888000" />
-      <workItem from="1676620078359" duration="8657000" />
+      <workItem from="1676620078359" duration="11072000" />
     </task>
     <task id="LOCAL-00001" summary="added more classes">
       <created>1675167662551</created>
@@ -475,7 +457,14 @@
       <option name="project" value="LOCAL" />
       <updated>1676317612008</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="add pages for admin">
+      <created>1676628870037</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1676628870038</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -508,7 +497,8 @@
     <MESSAGE value="update ui order and product" />
     <MESSAGE value="work user page,product page.pagination by type product" />
     <MESSAGE value="work Bucket page" />
-    <option name="LAST_COMMIT_MESSAGE" value="work Bucket page" />
+    <MESSAGE value="add pages for admin" />
+    <option name="LAST_COMMIT_MESSAGE" value="add pages for admin" />
   </component>
   <component name="WindowStateProjectService">
     <state x="361" y="53" key="#Plugins" timestamp="1674550738479">

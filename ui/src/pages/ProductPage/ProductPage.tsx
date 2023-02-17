@@ -7,7 +7,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Container from '@mui/material/Container';
 import {createTheme, ThemeProvider} from '@mui/material/styles';
 
-import {Link, useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import ProductService from "../../services/ProductService";
 import {Product} from "../../model/Product";
 import Button from "@mui/material/Button";
@@ -16,6 +16,7 @@ import {Col, Row} from "react-bootstrap";
 
 import {Divider, Header, Icon, Table} from 'semantic-ui-react'
 import MyHeader from 'pages/component/MyHeader';
+import {ProductInBucket} from "../../model/ProductInBucket";
 
 
 const theme = createTheme();
@@ -24,6 +25,19 @@ export function ProductPage() {
     const Product = () => {
         const {productId} = useParams();
         const [product, setProduct] = useState<Product>();
+        const [user];
+        const [bucket]
+
+        const navigate = useNavigate();
+        const addProductInBucket = () => {
+            const product: ProductInBucket = {
+                productId,
+                bucketId
+            };
+            ProductService.addProductInBucket(product).then(response => navigate("/products/toys"));
+        }
+
+
         useEffect(() => {
             ProductService.getProduct(Number(productId))
                 .then(response => setProduct(response));
@@ -61,6 +75,10 @@ export function ProductPage() {
                             <Table definition>
                                 <Table.Body>
                                     <Table.Row>
+                                        <Table.Cell width={2}>Product name:</Table.Cell>
+                                        <Table.Cell>{product?.productName}</Table.Cell>
+                                    </Table.Row>
+                                    <Table.Row>
                                         <Table.Cell width={2}>Price, BUN:</Table.Cell>
                                         <Table.Cell>{product?.price}</Table.Cell>
                                     </Table.Row>
@@ -75,11 +93,10 @@ export function ProductPage() {
                                 </Table.Body>
                             </Table>
                             <Button
-                                component={Link}
                                 type="submit"
                                 variant="contained"
                                 sx={{mt: 1, mb: 1}}
-                                to={'product/${order.orderId}'}
+                                onClick={addProductInBucket}
                             >
                                 Add in bucket
                             </Button>

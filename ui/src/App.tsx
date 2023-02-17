@@ -39,7 +39,7 @@ function App() {
             <Route path={'/bucket/:bucketId'} element={<BucketPage/>}/>
 
 
-            <Route path={'orders/:userId'} element={<MyOrdersPage/>}/>
+            <Route path={'/orders/:userId'} element={<MyOrdersPage/>}/>
             <Route path={'/orders/order/:orderId'} element={<OrderPage/>}/>
             <Route path={'/orders/create'} element={<CreateOrderPage/>}/>
             <Route path={'/products/create'} element={<CreateProduct/>}/>

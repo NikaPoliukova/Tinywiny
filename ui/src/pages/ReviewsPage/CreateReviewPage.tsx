@@ -1,19 +1,26 @@
-import React, {useEffect, useState} from 'react'
-import {Form} from 'semantic-ui-react'
-import {Review} from 'model/Review';
+import React, {useState} from 'react'
+
 import MyHeader from 'pages/component/MyHeader';
 import {Footer} from "../component/Footer";
-import BucketService from "../../services/BucketService";
-import ReviewService from "../../services/ReviewService";
+import {useNavigate} from "react-router-dom";
+import {Comment, Form} from 'semantic-ui-react'
 
 export function CreateReview() {
-    const [review, setReview] = useState<Review>();
-    const [text, setText] = useState('')
+    const [textReview, setText] = useState('')
+    //const [user] =
 
-   /* useEffect(() => {
-        ReviewService.saveReview(Object(review))
-            .then(response => setReview(response));
-    }, []);*/
+    const navigate = useNavigate();
+    /* const addReview = () => {
+         const review: Review = {
+             textReview,
+          //   userId
+         };
+         ReviewService.saveReview(review).then(response => navigate("/"));
+     }
+    useEffect(() => {
+         ReviewService.saveReview(Object(review))
+             .then(response => setReview(response));
+     }, []);*/
 
 
     /*  const addReview = () => {
@@ -21,13 +28,25 @@ export function CreateReview() {
       }*/
     return (
         <>
-        <MyHeader/>
-            Add new review
-            <Form>
-                <Form.TextArea label='Discription' placeholder='Write dicscription...'/>
-                <Form.Button>Add</Form.Button>
-            </Form>
-            <Footer />
+            <MyHeader/>
+
+
+            <Comment.Group>
+                <Comment>
+                    <Comment.Content>
+                        <Form>
+                            <Form.TextArea label='Add review' placeholder='Write review...'
+                                           value={textReview}
+                                           onChange={e => setText(e.target.value)}/>
+                            <Form.Button
+                                /// onClick={addReview}
+                            >Add</Form.Button>
+                        </Form>
+                    </Comment.Content>
+                </Comment>
+            </Comment.Group>
+
+            <Footer/>
         </>
     )
 }

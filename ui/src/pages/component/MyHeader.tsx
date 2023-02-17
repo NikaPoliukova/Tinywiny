@@ -68,6 +68,14 @@ function PricingContent() {
                         >
                             Contacts
                         </Link>
+                        <Link
+                            variant="button"
+                            color="text.primary"
+                            href="/reviews"
+                            sx={{my: 1, mx: 1.5}}
+                        >
+                            Reviews
+                        </Link>
                     </nav>
                     <Button href="/bucket/${bucket.bucketId}">
                         <Icon name='shop' size='big'/>

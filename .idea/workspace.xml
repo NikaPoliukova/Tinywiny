@@ -13,11 +13,11 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4dd877d4-850b-4093-ba42-62db28456f03" name="Changes" comment="correct login page">
+    <list default="true" id="4dd877d4-850b-4093-ba42-62db28456f03" name="Changes" comment="registration work">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/src/model/User.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/model/User.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/src/pages/LoginPage/LoginPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/pages/LoginPage/LoginPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/src/pages/RegistrationPage/RegistryPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/pages/RegistrationPage/RegistryPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/src/model/Review.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/model/Review.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/src/pages/ReviewsPage/CreateReviewPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/pages/ReviewsPage/CreateReviewPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/src/pages/component/MyHeader.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/pages/component/MyHeader.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -278,7 +278,7 @@
       <workItem from="1676483423285" duration="9480000" />
       <workItem from="1676540341381" duration="5180000" />
       <workItem from="1676563077772" duration="11888000" />
-      <workItem from="1676620078359" duration="13965000" />
+      <workItem from="1676620078359" duration="15427000" />
     </task>
     <task id="LOCAL-00001" summary="added more classes">
       <created>1675167662551</created>
@@ -476,7 +476,14 @@
       <option name="project" value="LOCAL" />
       <updated>1676632822996</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="registration work">
+      <created>1676634227323</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1676634227323</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -511,7 +518,8 @@
     <MESSAGE value="work Bucket page" />
     <MESSAGE value="add pages for admin" />
     <MESSAGE value="correct login page" />
-    <option name="LAST_COMMIT_MESSAGE" value="correct login page" />
+    <MESSAGE value="registration work" />
+    <option name="LAST_COMMIT_MESSAGE" value="registration work" />
   </component>
   <component name="WindowStateProjectService">
     <state x="361" y="53" key="#Plugins" timestamp="1674550738479">

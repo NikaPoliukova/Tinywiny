@@ -27,7 +27,7 @@ function BucketPage() {
     const deleteProduct = () => {
         const productForDelete: ProductInBucket = {
             productId,
-           // bucketId
+            //bucketId
         }
         BucketService.deleteProductInBucket(productForDelete).then(response => navigate("/bucket/${bucketId}"))
     }
@@ -96,7 +96,6 @@ function BucketPage() {
                     to={'/orders/create'}
             > Go to order
             </Button>
-
             <Footer/>
         </div>
     );

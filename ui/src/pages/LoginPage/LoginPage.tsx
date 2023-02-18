@@ -6,19 +6,15 @@ import {
     Avatar,
     Box,
     Button,
-    Checkbox,
     Container,
     createTheme,
     CssBaseline,
-    FormControlLabel,
-    Link,
     TextField,
     ThemeProvider,
     Typography
 } from "@mui/material";
 import AuthorizationService from "../../services/AuthorizationService";
 import {redirect} from 'react-router-dom';
-import {Grid} from "semantic-ui-react";
 import {Footer} from "../component/Footer";
 import MyHeader from 'pages/component/MyHeader';
 
@@ -56,7 +52,7 @@ export function SignIn() {
             setAlertType(successAlertType);
             setAlertTitle('Success');
             setAlertText('Ok');
-            redirect("http://localhost:3000/products/type/toys");
+            redirect("http://localhost:3000/users/userId");
             return;
         } else {
             setAlertType(warningAlertType);
@@ -116,7 +112,7 @@ export function SignIn() {
                             fullWidth
                             variant="contained"
                             sx={{mt: 3, mb: 2}}
-                            href="/"
+                            href="/users/"
                         >
                             Sign In
                         </Button>
@@ -129,7 +125,10 @@ export function SignIn() {
                         >
                             Registry
                         </Button>
-
+                        <Alert severity={alertType}>
+                            <AlertTitle>{alertTitle}</AlertTitle>
+                            <strong>{alertText}</strong>
+                        </Alert>
                     </Box>
                 </Box>
             </Container>

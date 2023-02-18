@@ -1,11 +1,10 @@
 import axios from 'axios';
+import {User} from "../model/User";
 
 class AuthorizationService {
-    async login(userName: string, password: string) {
+    async login(user: User): Promise<number> {
         const response = await axios.post('http://localhost:8080/api/v1/login',
-            {userName: userName, password: password}).catch(function (error) {
-            return error.response.status;
-        })
+            user);
         return response.status;
     }
 }

@@ -15,8 +15,7 @@ import {
 } from "@mui/material";
 import AuthorizationService from "../../services/AuthorizationService";
 import {redirect} from 'react-router-dom';
-import {Footer} from "../component/Footer";
-import MyHeader from 'pages/component/MyHeader';
+import {User} from "../../model/User";
 
 
 const theme = createTheme();
@@ -24,6 +23,10 @@ const theme = createTheme();
 export function SignIn() {
     const [userName, setUserName] = React.useState("");
     const [password, setPassword] = React.useState("");
+
+    const user: User = {
+        userName, password
+    }
 
     const infoAlertType = "info" as AlertColor;
     const warningAlertType = "warning" as AlertColor;
@@ -43,16 +46,16 @@ export function SignIn() {
     const handleSubmit = async (event: { preventDefault: () => void; }) => {
         event.preventDefault();
 
-        const authorizationStatus = await AuthorizationService.login(userName, password);
+        const authorizationStatus = await AuthorizationService.login(user);
 
         handleAlert(authorizationStatus);
     };
-    const handleAlert = (status :number) => {
+    const handleAlert = (status: number) => {
         if (status == 200) {
             setAlertType(successAlertType);
             setAlertTitle('Success');
             setAlertText('Ok');
-            redirect("http://localhost:3000/users/userId");
+            redirect("http://localhost:3000/users/${user.userId}");
             return;
         } else {
             setAlertType(warningAlertType);
@@ -65,7 +68,6 @@ export function SignIn() {
     return (
 
         <ThemeProvider theme={theme}>
-            <MyHeader />
             <Container component="main" maxWidth="xs">
                 <CssBaseline/>
                 <Box
@@ -112,7 +114,6 @@ export function SignIn() {
                             fullWidth
                             variant="contained"
                             sx={{mt: 3, mb: 2}}
-                            href="/users/"
                         >
                             Sign In
                         </Button>
@@ -132,7 +133,6 @@ export function SignIn() {
                     </Box>
                 </Box>
             </Container>
-            <Footer/>
         </ThemeProvider>
     );
 }

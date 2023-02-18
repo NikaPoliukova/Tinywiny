@@ -15,7 +15,7 @@ import MyHeader from 'pages/component/MyHeader';
 import {Footer} from "../component/Footer";
 import {Product} from "../../model/Product";
 import ProductService from "../../services/ProductService";
-import {Link, useParams} from "react-router-dom";
+import {Link, useNavigate, useParams} from "react-router-dom";
 import {Sidebar} from "../component/SideBar";
 import {ProductInBucket} from "../../model/ProductInBucket";
 import {Bucket} from "../../model/Bucket";
@@ -37,7 +37,15 @@ export default function Products() {
         ProductService.findAllProductsByTypeAndPage(String(type))
             .then(response => setProducts(response));
     }, []);
+    const navigate = useNavigate();
+    const addProductInBucket = () => {
+        const productInBucket: ProductInBucket = {
+            //productId,
+           // bucketId
 
+        };
+        ProductService.addProductInBucket(productInBucket).then(response => navigate("/products/toys"));
+    }
 
     return (
         <ThemeProvider theme={theme}>
@@ -88,7 +96,7 @@ export default function Products() {
                                             to={'/products/product/' + product.productId}
                                         >Open</Button>
                                         <Button
-                                            // onClick={addInBucket(product)}
+                                        //    onClick={addProductInBucket}
                                         >Add in bucket</Button>
 
                                     </CardActions>

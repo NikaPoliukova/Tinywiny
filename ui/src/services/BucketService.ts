@@ -15,10 +15,6 @@ class BucketService {
         return response.data;
     }
 
-    async saveBucket(bucket: Bucket): Promise<void> {
-        await axios.post('http://localhost:8080/api/v1/bucket', bucket);
-    }
-
     async deleteProductInBucket(productInBucket: ProductInBucket): Promise<void> {
         await axios.delete('http://localhost:8080/api/v1/bucket');
     }

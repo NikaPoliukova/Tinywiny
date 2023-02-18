@@ -96,10 +96,10 @@ public class OrderService {
     return orderRepository.getOrderStatus(orderId);
   }
 
-  public void updateOrderStatus(OrderDto orderDto) {
-    Order order = findOrderByOrderId(orderDto.getOrderId());
-    if (order != null && !orderDto.getStatusOrder().equals(order.getStatusOrder())) {
-      order.setStatusOrder(orderDto.getStatusOrder());
+  public void updateOrderStatus(String status,Long orderId) {
+    Order order = findOrderByOrderId(orderId);
+    if (order != null && !status.equals(order.getStatusOrder())) {
+      order.setStatusOrder(status);
       orderRepository.save(order);
     }
   }

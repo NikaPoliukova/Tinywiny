@@ -21,12 +21,7 @@ export default function MyOrdersPage() {
     const [orders, setOrders] = useState<Array<Order>>([]);
     const {userId} = useParams();
 
-    let navigate = useNavigate();
-
-    const toOrder = () => {
-        navigate('/order/${order.orderId}');
-    };
-    useEffect(() => {
+     useEffect(() => {
         OrderService.findOrdersByUserId(Number(userId))
             .then(response => setOrders(response));
     }, []);

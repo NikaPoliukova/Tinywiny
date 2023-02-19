@@ -33,22 +33,21 @@ export function CreateProduct() {
             countInStock,
             description,
             idType
-            //я хочу иметь возможность загружать сразу фото и нет,нужно два метода?
         };
         ProductService.createProduct(product).then(response => navigate("/products"));
     }
     const addImage = () => {
-        const image : Image ={
+        const image: Image = {
             imageName,
-           productId
+            productId
             // Хочу сразу загружать фото,но нету поля картинки(id продукт)
-                   }
+        }
         ImageService.updateImage(image).then(response => navigate("/products"));
     }
 
     return (
         <>
-            <MyHeader />
+            <MyHeader/>
             <Segment placeholder>
                 <Header icon>
                     <Icon name='photo'/>
@@ -59,8 +58,8 @@ export function CreateProduct() {
                             onClick={addImage}
                 >
                     <input hidden accept="image/*" type="file"
-                          // value={file}
-                          // onChange={e => setFile(e.target.value)}
+                        // value={file}
+                        // onChange={e => setFile(e.target.value)}
                     />
                     <AddAPhoto/>
                 </IconButton>
@@ -78,7 +77,7 @@ export function CreateProduct() {
                         options={getTypeProduct}
                         placeholder='Type product'
                         value={idType}
-                       // onChange={e => setIdType(Number(e.target.value))}
+                        // onChange={e => setIdType(Number(e.target.value))}
                     />
                 </Form.Group>
                 <Form.Group widths='equal'>

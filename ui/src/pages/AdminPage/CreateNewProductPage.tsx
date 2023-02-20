@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import {Form, Header, Icon, Segment} from 'semantic-ui-react'
 import {IconButton} from "@mui/material";
 import {AddAPhoto} from "@mui/icons-material";
@@ -8,23 +8,31 @@ import {useNavigate} from 'react-router-dom';
 import MyHeader from 'pages/component/MyHeader';
 import {Image} from "../../model/Image";
 import ImageService from "../../services/ImageService";
+import {TypeProduct} from "../../model/TypeProduct";
+import TypeProductService from "../../services/TypeProductService";
 
-const getTypeProduct = [
-    {key: 'm', text: 'mobil', value: 'male'},
-    {key: 'f', text: 'toy', value: 'female'},
-    {key: 'o', text: 'Other', value: 'other'},
-]
+//выводить сообщение,если не корректные параметры
 
 export function CreateProduct() {
 
     const [productName, setProductName] = useState('');
-    const [price, setPrice] = useState(0);
-    const [countInStock, setCountInStock] = useState(0);
+    const [price, setPrice] = useState(Number);
+    const [countInStock, setCountInStock] = useState(Number);
     const [description, setDescription] = useState('');
-    const [idType, setIdType] = useState(0);
+    const [typeProduct, setType] = useState<TypeProduct>();
+    const [idType, setIdType] = useState(Number);
     const [productId, setProductId] = useState(0);
     const [imageName, setImageName] = useState('');
+    const [types, setTypes] = useState<Array<TypeProduct>>([]);
 
+    useEffect(() => {
+        TypeProductService.findAllTypes()
+            .then(response => setTypes(response));
+    }, []);
+
+    const options = types.map((type, idType) => {
+        return <option key={idType} value={idType}>{type.name}</option>;
+    });
     const navigate = useNavigate();
     const addProduct = () => {
         const product: Product = {
@@ -40,7 +48,7 @@ export function CreateProduct() {
         const image: Image = {
             imageName,
             productId
-            // Хочу сразу загружать фото,но нету поля картинки(id продукт)
+            //не могу указать айди продукта-не создан
         }
         ImageService.updateImage(image).then(response => navigate("/products"));
     }
@@ -70,15 +78,12 @@ export function CreateProduct() {
                                 value={productName}
                                 onChange={e => setProductName(e.target.value)}/>
                 </Form.Group>
+                <div>Type product</div>
                 <Form.Group widths='equal'>
-                    <Form.Select
-                        fluid
-                        label='Type product'
-                        options={getTypeProduct}
-                        placeholder='Type product'
-                        value={idType}
-                        // onChange={e => setIdType(Number(e.target.value))}
-                    />
+
+                    <select value={idType} onChange={event => setIdType(Number(event.target.value))}>
+                        {options}
+                    </select>
                 </Form.Group>
                 <Form.Group widths='equal'>
                     <Form.Input fluid label='Price' placeholder='Price' value={price}
@@ -102,5 +107,3 @@ export function CreateProduct() {
         </>
     )
 }
-
-

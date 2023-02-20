@@ -11,6 +11,10 @@ class ProductService {
         const response = await axios.get<Array<Product>>('http://localhost:8080/api/v1/products/type/' + type);
         return response.data;
     }
+    async findAllProducts(): Promise<Array<Product>> {
+        const response = await axios.get<Array<Product>>('http://localhost:8080/api/v1/admin/products');
+        return response.data;
+    }
 
     async getProduct(productId: number): Promise<Product> {
         const response = await axios.get<Product>('http://localhost:8080/api/v1/products/product/' + productId);

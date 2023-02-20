@@ -43,10 +43,10 @@ public class OrderRestController {
   }
 
   @GetMapping("status")
-  public List<OrderDto> findAllOrdersByStatus(@RequestBody OrderDto orderDto,
+  public List<OrderDto> findAllOrdersByStatus(@RequestBody String status,
                                               @RequestParam(value = "pageNumber", required = false, defaultValue = "1") Integer pageNumber,
                                               @RequestParam(value = "pageSize", required = false, defaultValue = "20") Integer pageSize) {
-    Page<Order> page = orderService.findOrdersByStatus(orderDto.getStatusOrder(), pageNumber - 1, pageSize);
+    Page<Order> page = orderService.findOrdersByStatus(status, pageNumber - 1, pageSize);
     List<Order> orders = page.getContent();
     return orderConverter.toOrderDto(orders);
   }
@@ -68,14 +68,14 @@ public class OrderRestController {
     return orderConverter.toOrderDto(order, deliveryInformationDto, productInOrderDto);
   }
 
-  @GetMapping("/orders-by/{userId}")
+  @GetMapping("/{userId}")
   public List<OrderDto> findOrdersByUserId(@PathVariable Long userId) {
     return orderConverter.toOrderDto(orderService.findOrdersByUserId(userId));
   }
 
   @PutMapping("/status/update")
-  public void updateOrderStatus(@RequestBody OrderDto orderDto) {
-    orderService.updateOrderStatus(orderDto);
+  public void updateOrderStatus(@RequestBody String status,Long orderId) {
+    orderService.updateOrderStatus(status, orderId);
   }
 
   @GetMapping("/status/{orderId}")

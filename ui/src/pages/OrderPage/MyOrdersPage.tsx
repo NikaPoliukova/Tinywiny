@@ -10,10 +10,10 @@ import {
     TableRow,
     Typography
 } from "@mui/material";
-import Header from "../component/Header";
+import Header from "../component/MyHeader";
 import {Order} from "../../model/Order";
 import OrderService from "../../services/OrderService";
-import {Link, useParams} from "react-router-dom";
+import {Link, useNavigate, useParams} from "react-router-dom";
 import {Footer} from "../component/Footer";
 
 
@@ -21,7 +21,7 @@ export default function MyOrdersPage() {
     const [orders, setOrders] = useState<Array<Order>>([]);
     const {userId} = useParams();
 
-    useEffect(() => {
+     useEffect(() => {
         OrderService.findOrdersByUserId(Number(userId))
             .then(response => setOrders(response));
     }, []);
@@ -53,6 +53,9 @@ export default function MyOrdersPage() {
                                     <TableCell component="th" scope="row">
                                         {order.statusOrder}
                                     </TableCell>
+                                    <TableCell component="th" scope="row">
+                                        {order.createdAt}
+                                    </TableCell>
 
                                     <Button
                                         component={Link}
@@ -60,7 +63,7 @@ export default function MyOrdersPage() {
                                         fullWidth
                                         variant="contained"
                                         sx={{mt: 1, mb: 1}}
-                                        to={'product/${order.orderId}'}
+                                        to={"/orders/order/"+ order.orderId}
                                     >
                                         Open
                                     </Button>

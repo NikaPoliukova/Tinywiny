@@ -11,18 +11,16 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import {createTheme, ThemeProvider} from '@mui/material/styles';
-import Header from 'pages/component/Header';
+import MyHeader from 'pages/component/MyHeader';
 import {Footer} from "../component/Footer";
 import {Product} from "../../model/Product";
 import ProductService from "../../services/ProductService";
-import {Link, useParams} from "react-router-dom";
+import {Link, useNavigate, useParams} from "react-router-dom";
 import {Sidebar} from "../component/SideBar";
 import {ProductInBucket} from "../../model/ProductInBucket";
 import {Bucket} from "../../model/Bucket";
 import {useSessionStore} from "../../Session";
-import BucketService from "../../services/BucketService";
 
-const cards = [1, 2, 3, 4, 5, 6];
 
 const theme = createTheme();
 export default function Products() {
@@ -31,20 +29,28 @@ export default function Products() {
     const [productInBucket, setProductInBucket] = useState<ProductInBucket>();
     const [bucket, setBucket] = useState<Bucket>();
     const user = useSessionStore(state => state.user);
-   /* useEffect(() => {
-        BucketService.findBucketByUserId(Number(user.userId))
-            .then(response => setBucket(response));
-    }, []);*/
+    /* useEffect(() => {
+         BucketService.findBucketByUserId(Number(user.userId))
+             .then(response => setBucket(response));
+     }, []);*/
     useEffect(() => {
         ProductService.findAllProductsByTypeAndPage(String(type))
             .then(response => setProducts(response));
     }, []);
+    const navigate = useNavigate();
+    const addProductInBucket = () => {
+        const productInBucket: ProductInBucket = {
+            //productId,
+           // bucketId
 
+        };
+        ProductService.addProductInBucket(productInBucket).then(response => navigate("/products/toys"));
+    }
 
     return (
         <ThemeProvider theme={theme}>
             <CssBaseline/>
-            <Header/>
+            <MyHeader />
 
             <main>
                 <Sidebar/>
@@ -90,7 +96,7 @@ export default function Products() {
                                             to={'/products/product/' + product.productId}
                                         >Open</Button>
                                         <Button
-                                           // onClick={addInBucket(product)}
+                                        //    onClick={addProductInBucket}
                                         >Add in bucket</Button>
 
                                     </CardActions>

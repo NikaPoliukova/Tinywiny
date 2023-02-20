@@ -11,25 +11,22 @@ import {
     TableRow,
     Typography
 } from "@mui/material";
-import Header from "../component/Header";
 import {Footer} from "../component/Footer";
+import MyHeader from '../component/MyHeader';
 
 
 const UsersPage = () => {
     const [users, setUsers] = useState<Array<User>>([]);
-    const [error, setError] = useState<string>('');
+
 
     useEffect(() => {
         UserService.getUsers()
-            .then(response => setUsers(response))
-            .catch(error => setError(error.message));
+            .then(response => setUsers(response));
     }, []);
 
     return (
         <div>
-            <Header />
-
-            {error}
+         <MyHeader />
             <Typography component="h1" variant="h5">
                 <h1>Users</h1>
             </Typography>

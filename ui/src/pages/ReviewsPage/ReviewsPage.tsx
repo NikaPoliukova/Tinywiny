@@ -8,12 +8,13 @@ import {
     TableContainer,
     TableHead,
     TableRow,
-    Typography
+
 } from "@mui/material";
 import {Review} from "../../model/Review";
 import ReviewService from "../../services/ReviewService";
-import Header from 'pages/component/Header';
+import Header from 'pages/component/MyHeader';
 import {Footer} from "../component/Footer";
+import {Comment} from "semantic-ui-react";
 
 
 
@@ -26,17 +27,17 @@ const ReviewsPage = () => {
             .then(response => setReviews(response))
             .catch(error => setError(error.message));
     }, []);
-    const greeting = "greeting";
+
     return (
 
         <div>
             <Header />
 
-                <h1 id={greeting}>Reviews</h1>
+                <h1>Reviews </h1>
 
             <Card style={{width: 1000}}>
-                <TableContainer>
-                    <Table sx={{minWidth: 800}} aria-label="simple table">
+                <TableContainer >
+                    <Table sx={{minWidth: 800}} aria-label="simple table" >
                         <TableHead>
                             <TableRow>
                                 <TableCell align="left">Id review</TableCell>

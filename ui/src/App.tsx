@@ -5,21 +5,22 @@ import HomePage from "./pages/HomePage/HomePage";
 import {Registry} from "./pages/RegistrationPage/RegistryPage";
 import {SignIn} from "./pages/LoginPage/LoginPage";
 import ReviewsPage from "./pages/ReviewsPage/ReviewsPage";
-
 import BucketPage from "./pages/BucketPage/BucketPage";
 import OrdersPage from "./pages/OrdersPage/OrdersPage";
 import GalleryPage from "./pages/GalleryPage/GalleryPage";
-
 import Products from "./pages/ProductsPage/ProductsPage";
 import {UserPage} from "./pages/UserPage/UserPage";
-
 import {ProductPage} from "./pages/ProductPage/ProductPage";
 import {OrderPage} from "./pages/OrderPage/OrderPage";
-import CreateOrderPage from "./pages/OrderPage/CreateOrderPage/CreateOrderPage";
+import CreateOrderPage from "./pages/AdminPage/CreateOrderPage";
 import MyOrdersPage from "./pages/OrderPage/MyOrdersPage";
-import CreateProduct from "./pages/ProductPage/CreateNewProductPage";
+import DividerExampleHorizontalTable from "./pages/ContactPage/ContactPage";
+import {CreateReview} from "./pages/ReviewsPage/CreateReviewPage";
+import {AdminPage} from "./pages/AdminPage/AdminPage";
 
-
+import {UpdateProductPage} from "./pages/AdminPage/UpdateProductPage";
+import ProductsUpdatePage from "./pages/AdminPage/ProductsUpdatePage";
+import {CreateProduct} from "./pages/AdminPage/CreateNewProductPage";
 
 
 function App() {
@@ -40,11 +41,20 @@ function App() {
 
             <Route path={'/orders/:userId'} element={<MyOrdersPage/>}/>
             <Route path={'/orders/order/:orderId'} element={<OrderPage/>}/>
-                <Route path={'/orders/create'} element={<CreateOrderPage/>}/>
+            <Route path={'/orders/create'} element={<CreateOrderPage/>}/>
             <Route path={'/products/create'} element={<CreateProduct/>}/>
+            <Route path={'/contacts'} element={<DividerExampleHorizontalTable/>}/>
+            <Route path={'/review/create'} element={<CreateReview/>}/>
+            <Route path={'/admin'} element={<AdminPage/>}/>
+            <Route path={'/admin/products/product/:productId'} element={<UpdateProductPage/>}/>
+            <Route path={'/admin/products'} element={<ProductsUpdatePage/>}/>
 
         </Routes>
     );
 }
 
+const styleLink = document.createElement("link");
+styleLink.rel = "stylesheet";
+styleLink.href = "https://cdn.jsdelivr.net/npm/semantic-ui/dist/semantic.min.css";
+document.head.appendChild(styleLink);
 export default App;

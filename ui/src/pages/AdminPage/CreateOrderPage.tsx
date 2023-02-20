@@ -3,20 +3,37 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import {Box, Button, Card, Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@mui/material";
-import Header from '../../component/Header';
-import {Order} from "../../../model/Order";
-import {Footer} from "../../component/Footer";
+import Header from '../component/MyHeader';
+import {Footer} from "../component/Footer";
+import {ProductInOrder} from "../../model/ProductInOrder";
+import {useNavigate} from "react-router-dom";
+import OrderService from "../../services/OrderService";
+import {Order} from 'model/Order';
+import {DeliveryInformation} from "../../model/DeliveryInformation";
 
 
 export default function CreateOrderPage() {
-    const [order, setOrder] = useState<Order>();
-    const [firstName, setFirstName] = useState('')
-    const [lastName, setLastName] = useState('')
-    const [sureName, setSureName] = useState('')
-    const [address, setAddress] = useState('')
-    const [comment, setComment] = useState('')
-    const [deliveryType, setDeliveryType] = useState('')
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
+    const [sureName, setSureName] = useState('');
+    const [userId, setAUserId] = useState(0);
+    const [deliveryInformation, setDeliveryInformation] = useState<DeliveryInformation>();
+    const [address, setAddress] = useState('');
+    const [commentOrder, setComment] = useState('');
+    const [deliveryTypeId, setDeliveryType] = useState(0);
+    const [productsInOrder, setProductsInOrder] = useState<Array<ProductInOrder>>([]);
 
+    const navigate = useNavigate();
+  /*  const addOrder = () => {
+        const order: Order = {
+            commentOrder,
+            userId,
+            deliveryInformation,
+            deliveryTypeId,
+            productsInOrder
+        };
+        OrderService.createOrder(order).then(response => navigate("/products"));
+    }*/
     return (
         <React.Fragment>
             <Header/>
@@ -40,9 +57,9 @@ export default function CreateOrderPage() {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {order?.productsInOrder.map((productInOrder) => (
+                            {productsInOrder.map((productInOrder) => (
                                 <TableRow
-                                    key={order?.orderId}
+                                    key={productInOrder.orderId}
                                     sx={{'&:last-child td, &:last-child th': {border: 0}}}
                                 >
                                     <TableCell component="th" scope="row">

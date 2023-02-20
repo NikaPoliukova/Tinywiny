@@ -2,7 +2,7 @@ import MyHeader from 'pages/component/MyHeader'
 import React from 'react'
 import {Button, Divider, Header, Icon, Table} from 'semantic-ui-react'
 
-const DividerExampleHorizontalTable = () => (
+const Contacts = () => (
     <>
         <MyHeader />
 
@@ -44,4 +44,4 @@ const DividerExampleHorizontalTable = () => (
     </>
 )
 
-export default DividerExampleHorizontalTable
+export default Contacts

@@ -20,6 +20,7 @@ import {Sidebar} from "../component/SideBar";
 import {ProductInBucket} from "../../model/ProductInBucket";
 import {Bucket} from "../../model/Bucket";
 import {useSessionStore} from "../../Session";
+import BucketService from "../../services/BucketService";
 
 
 const theme = createTheme();
@@ -38,14 +39,14 @@ export default function Products() {
             .then(response => setProducts(response));
     }, []);
     const navigate = useNavigate();
-    const addProductInBucket = () => {
-        const productInBucket: ProductInBucket = {
-            //productId,
-           // bucketId
+    /*   const addProductInBucket = () => {
+         const productInBucket: ProductInBucket = {
+          //    productId,
+           //  bucketId
 
-        };
-        ProductService.addProductInBucket(productInBucket).then(response => navigate("/products/toys"));
-    }
+          };
+         BucketService.addProductInBucket(productInBucket).then(response => navigate("/products/toys"));
+      }*/
 
     return (
         <ThemeProvider theme={theme}>
@@ -93,10 +94,10 @@ export default function Products() {
                                             type="submit"
                                             size="small"
                                             sx={{mt: 1, mb: 1}}
-                                            to={'/products/product/' + product.productId}
+                                            to={'/products/'+ product.productId}
                                         >Open</Button>
                                         <Button
-                                        //    onClick={addProductInBucket}
+                                        //   onClick={addProductInBucket}
                                         >Add in bucket</Button>
 
                                     </CardActions>

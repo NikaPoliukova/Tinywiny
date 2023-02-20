@@ -42,8 +42,8 @@ public class OrderRestController {
     return orderConverter.toOrderDto(orderService.save(order));
   }
 
-  @GetMapping("status")
-  public List<OrderDto> findAllOrdersByStatus(@RequestBody String status,
+  @GetMapping("/{status}")
+  public List<OrderDto> findAllOrdersByStatus(@PathVariable String status,
                                               @RequestParam(value = "pageNumber", required = false, defaultValue = "1") Integer pageNumber,
                                               @RequestParam(value = "pageSize", required = false, defaultValue = "20") Integer pageSize) {
     Page<Order> page = orderService.findOrdersByStatus(status, pageNumber - 1, pageSize);

@@ -37,7 +37,6 @@ export function ProductPage() {
             ProductService.addProductInBucket(product).then(response => navigate("/products/toys"));
         }*/
 
-
         useEffect(() => {
             ProductService.getProduct(Number(productId))
                 .then(response => setProduct(response));
@@ -47,7 +46,6 @@ export function ProductPage() {
                 <CssBaseline/>
                 <MyHeader/>
                 <main>
-
                     <Container className="mt-3">
                         <Row>
                             <Col md={4}>

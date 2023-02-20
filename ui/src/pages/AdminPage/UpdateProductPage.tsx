@@ -58,7 +58,7 @@ export function UpdateProductPage() {
                 description
 
             };
-            ProductService.updateProduct(product).then(response => navigate("/admin/products"));
+            ProductService.updateProduct(Number(productId),product).then(response => navigate("/admin/products"));
         }
 
         useEffect(() => {

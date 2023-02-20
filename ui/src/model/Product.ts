@@ -1,10 +1,12 @@
+import {Image} from "./Image";
+
 export interface Product {
     productId?: number;
     productName?: string;
     price?: number;
-    countInStock?: number;
     description?: string;
+    countInStock?: number;
     idType?: number;
-    imageDto?: object;
+    image?: Image;
 
 }

@@ -1,5 +1,6 @@
 package com.example.tinywiny.service;
 
+import com.example.tinywiny.dto.BucketDto;
 import com.example.tinywiny.dto.ProductInBucketDto;
 import com.example.tinywiny.model.Bucket;
 import com.example.tinywiny.model.Product;
@@ -28,7 +29,15 @@ public class BucketService {
     if (bucket.isEmpty()) {
       return Collections.emptyList();
     }
-    return productInBucketRepository.findAllByBucket(bucket.get());
+    return productInBucketRepository.findProductInBucketsByBucket(bucket.get());
+  }
+
+  public Bucket findBucketByBucketId(Long bucketId) {
+    Optional<Bucket> bucket = bucketRepository.findBucketByBucketId(bucketId);
+    if (bucket.isEmpty()) {
+      throw new RuntimeException("bucket is not exist");
+    }
+    return bucket.get();
   }
 
   public ProductInBucket updateCountProduct(ProductInBucketDto productInBucketDto) {
@@ -41,7 +50,7 @@ public class BucketService {
   public void addProductInBucket(ProductInBucketDto productInBucketDto) {
     Optional<Bucket> bucket = bucketRepository.findBucketByBucketId(productInBucketDto.getBucketId());
     ProductInBucket productInBucket = new ProductInBucket();
-    Product product = productService.findProductByProductId(productInBucketDto.getProductId());
+    Product product = productService.findProductByProductId(productInBucketDto.getProductDto().getProductId());
     productInBucket.setBucket(bucket.get());
     productInBucket.setProduct(product);
     productInBucket.setCount(productInBucketDto.getCount());

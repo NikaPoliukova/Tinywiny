@@ -14,13 +14,12 @@ import {ProductPage} from "./pages/ProductPage/ProductPage";
 import {OrderPage} from "./pages/OrderPage/OrderPage";
 import CreateOrderPage from "./pages/AdminPage/CreateOrderPage";
 import MyOrdersPage from "./pages/OrderPage/MyOrdersPage";
-import DividerExampleHorizontalTable from "./pages/ContactPage/ContactPage";
 import {CreateReview} from "./pages/ReviewsPage/CreateReviewPage";
 import {AdminPage} from "./pages/AdminPage/AdminPage";
-
 import {UpdateProductPage} from "./pages/AdminPage/UpdateProductPage";
 import ProductsUpdatePage from "./pages/AdminPage/ProductsUpdatePage";
 import {CreateProduct} from "./pages/AdminPage/CreateNewProductPage";
+import Contacts from "./pages/ContactPage/ContactPage";
 
 
 function App() {
@@ -33,8 +32,8 @@ function App() {
             <Route path={'/registration'} element={<Registry/>}/>
             <Route path={'/reviews'} element={<ReviewsPage/>}/>
             <Route path={'/gallery'} element={<GalleryPage/>}/>
-            <Route path={'/products/:type'} element={<Products/>}/>
-            <Route path={'/products/product/:productId'} element={<ProductPage/>}/>
+            <Route path={'/products/type/:type'} element={<Products/>}/>
+            <Route path={'/products/:productId'} element={<ProductPage/>}/>
             <Route path={'/orders'} element={<OrdersPage/>}/>
             <Route path={'/bucket/:bucketId'} element={<BucketPage/>}/>
 
@@ -42,11 +41,11 @@ function App() {
             <Route path={'/orders/:userId'} element={<MyOrdersPage/>}/>
             <Route path={'/orders/order/:orderId'} element={<OrderPage/>}/>
             <Route path={'/orders/create'} element={<CreateOrderPage/>}/>
-            <Route path={'/products/create'} element={<CreateProduct/>}/>
-            <Route path={'/contacts'} element={<DividerExampleHorizontalTable/>}/>
+            <Route path={'/products'} element={<CreateProduct/>}/>
+            <Route path={'/contacts'} element={<Contacts/>}/>
             <Route path={'/review/create'} element={<CreateReview/>}/>
             <Route path={'/admin'} element={<AdminPage/>}/>
-            <Route path={'/admin/products/product/:productId'} element={<UpdateProductPage/>}/>
+            <Route path={'/admin/products/:productId'} element={<UpdateProductPage/>}/>
             <Route path={'/admin/products'} element={<ProductsUpdatePage/>}/>
 
         </Routes>

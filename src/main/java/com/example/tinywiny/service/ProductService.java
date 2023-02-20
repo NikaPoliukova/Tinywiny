@@ -47,8 +47,8 @@ public class ProductService {
 
   @Transactional
   @Modifying
-  public void updateProduct(ProductDto productDto) {
-    Optional<Product> product = productRepository.findProductByProductId(productDto.getProductId());
+  public void updateProduct(ProductDto productDto, Long productId) {
+    Optional<Product> product = productRepository.findProductByProductId(productId);
     if (product.isEmpty()) {
       throw new RuntimeException("no product");
     }

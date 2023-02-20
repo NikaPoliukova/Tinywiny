@@ -62,7 +62,7 @@ const ProductsUpdatePage = () => {
                                             fullWidth
                                             variant="contained"
                                             sx={{mt: 1, mb: 1}}
-                                            to={'product/'+product.productId}
+                                            to={'/admin/products/${product.productId'}
                                         >
                                             Update
                                         </Button>

@@ -1,7 +1,5 @@
 package com.example.tinywiny.model;
 
-import com.example.tinywiny.model.Bucket;
-import com.example.tinywiny.model.Product;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

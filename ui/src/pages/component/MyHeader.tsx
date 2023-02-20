@@ -18,7 +18,7 @@ function PricingContent() {
     const [bucket, setBucket] = useState<Bucket>();
     const user = useSessionStore(state => state.user);
     useEffect(() => {
-        BucketService.findBucketByUserId(Number(userId))
+        BucketService.findBucketByBucketId(Number(userId))
             .then(response => setBucket(response));
     }, []);
     return (
@@ -47,7 +47,7 @@ function PricingContent() {
                         <Link
                             variant="button"
                             color="text.primary"
-                            href="/products/toys"
+                            href="/products/type/toys"
                             sx={{my: 1, mx: 1.5}}
                         >
                             Products

@@ -20,16 +20,16 @@ export const Sidebar: React.FC = (): JSX.Element => {
                 </div>
 
                 <div className="w5-sidebar w3-bar-block" >
-                    <a href="/products/toys" className="w3-bar-item w3-button w3-border-bottom" >Toys</a>
+                    <a href="/products/type/toys" className="w3-bar-item w3-button w3-border-bottom" >Toys</a>
                 </div>
                     <div className="w3-sidebar w3-bar-block">
-                    <a href="/products/wings" className="w3-bar-item w3-button w3-border-bottom">Wings</a>
+                    <a href="/products/type/wings" className="w3-bar-item w3-button w3-border-bottom">Wings</a>
                     </div>
                 <div className="w3-sidebar w3-bar-block">
-                    <a href="/products/mobiles" className="w3-bar-item w3-button">Mobiles</a>
+                    <a href="/products/type/mobiles" className="w3-bar-item w3-button">Mobiles</a>
                 </div>
                 <div className="w3-sidebar w3-bar-block">
-                    <a href="/products/decorations" className="w3-bar-item w3-button">Decorations</a>
+                    <a href="/products/type/decorations" className="w3-bar-item w3-button">Decorations</a>
                 </div>
 
             </div>

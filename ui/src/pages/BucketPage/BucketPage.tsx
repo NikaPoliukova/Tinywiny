@@ -4,30 +4,32 @@ import BucketService from "../../services/BucketService";
 import {Link, useNavigate, useParams} from "react-router-dom";
 import {Footer} from "../component/Footer";
 import {Icon, Table} from 'semantic-ui-react'
-import {Product} from "../../model/Product";
 import MyHeader from "../component/MyHeader";
 import {ProductInBucket} from "../../model/ProductInBucket";
+import {Product} from "../../model/Product";
 
 
 function BucketPage() {
-    const [products, setProducts] = useState<Array<Product>>([])
+    const [products, setProducts] = useState<Array<ProductInBucket>>([])
     const {bucketId} = useParams();
     const [count, setCount] = useState(1);
-    const [productId, setProductId] = useState(0);
+    const [productDto, setProduct] = useState<Product>();
     const navigate = useNavigate();
+    const id = Number(bucketId);
 
     const addCountProduct = () => {
         const productInBucket: ProductInBucket = {
-            productId,
+            productDto,
             count,
-            //bucketId
+            bucketId: id
         }
         BucketService.updateCountProduct(productInBucket).then(response => navigate("/bucket/${bucketId}"))
     }
+
     const deleteProduct = () => {
         const productForDelete: ProductInBucket = {
-            productId,
-            //bucketId
+            productDto,
+            bucketId: id
         }
         BucketService.deleteProductInBucket(productForDelete).then(response => navigate("/bucket/${bucketId}"))
     }
@@ -47,32 +49,30 @@ function BucketPage() {
                     <Table celled padded>
                         <TableHead>
                             <Table.Row>
-                                <Table.HeaderCell>Id product</Table.HeaderCell>
-                                <Table.HeaderCell>Name product</Table.HeaderCell>
+                                <Table.HeaderCell>Product Name</Table.HeaderCell>
+                                <Table.HeaderCell>Count</Table.HeaderCell>
                                 <Table.HeaderCell>Price</Table.HeaderCell>
-                                <Table.HeaderCell>Type product</Table.HeaderCell>
+
                             </Table.Row>
                         </TableHead>
                         <TableBody>
-                            {products.map((product) => (
+                            {products.map((item) => (
                                 <TableRow
-                                    key={product.productId}
+                                    key={item.productDto?.productId}
                                     sx={{'&:last-child td, &:last-child th': {border: 0}}}
-                                > <TableCell component="th" scope="row">
-                                    {product.productId}
-                                </TableCell>
+                                >
                                     <TableCell component="th" scope="row">
-                                        {product.productName}
+                                        {item.productDto?.productName}
                                     </TableCell>
                                     <TableCell component="th" scope="row">
-                                        {product.price}
+                                        {item.count}
                                     </TableCell>
                                     <TableCell component="th" scope="row">
-                                        {product.idType}
+                                        {item.productDto?.price}
                                     </TableCell>
                                     <TableCell>
                                         <Button sx={{mt: 4}}
-                                           onClick={() => setCount(count+1)}
+                                            //   onClick={() => setCount(count + 1)}
                                         ><Icon name='add to cart' size='big'/>
                                             add count </Button>
                                     </TableCell>

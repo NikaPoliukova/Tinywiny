@@ -4,7 +4,6 @@ import com.example.tinywiny.converter.ProductConverter;
 import com.example.tinywiny.converter.TypeProductConverter;
 import com.example.tinywiny.dto.ImageDto;
 import com.example.tinywiny.dto.ProductDto;
-import com.example.tinywiny.dto.ProductInBucketDto;
 import com.example.tinywiny.dto.TypeProduct;
 import com.example.tinywiny.dto.TypeProductDto;
 import com.example.tinywiny.model.Product;
@@ -38,24 +37,18 @@ import java.util.List;
 public class ProductsRestController {
   private final ProductService productService;
   private final ProductConverter converter;
-  private final BucketService bucketService;
   private final ImageService imageService;
   private final TypeProductService typeProductService;
   private final TypeProductConverter typeProductConverter;
 
   //GET image????
-  @PostMapping("/products/create")
+  @PostMapping("/products")
   protected ProductDto createProduct(@RequestBody ProductDto product) {
     return converter.toProductDto(productService.save(product));
   }
 
-  @PostMapping("/products")
-  protected void addProductInBucket(@RequestBody ProductInBucketDto productInBucketDto) {
-    bucketService.addProductInBucket(productInBucketDto);
-  }
-
   //не знаю,как отобразить
-  @GetMapping("/products/product/{productId}")
+  @GetMapping("/products/{productId}")
   public ProductDto getProduct(@PathVariable Long productId) throws URISyntaxException {
     Product product = productService.findProductByProductId(productId);
     URI imageUrl = null;
@@ -65,9 +58,9 @@ public class ProductsRestController {
     return converter.toProductDto(product);
   }
 
-  @PutMapping("/products")
-  public void updateProduct(@RequestBody ProductDto productDto) {
-    productService.updateProduct(productDto);
+  @PutMapping("/admin/products/{productId}")
+  public void updateProduct(@PathVariable Long productId, @RequestBody ProductDto productDto) {
+    productService.updateProduct(productDto,productId);
   }
 
   @PutMapping("/products/update/count-in-stock")
@@ -76,13 +69,13 @@ public class ProductsRestController {
   }
 
   //НЕ ЗНАЮ КАК ОБНОВИТЬ КАРТИНКУ
-  @PutMapping("/admin/products/product")
+  @PutMapping("/admin/products")
   public ImageDto updateImage(@RequestBody ImageDto imageDto, MultipartFile file) throws IOException {
     imageService.updateImage(imageDto, file);
     return imageDto;
   }
 
-  @DeleteMapping("/admin/products/product")
+  @DeleteMapping("/admin/products")
   public void deleteImage(@PathVariable Long productId) {
     imageService.deleteImage(productId);
   }
@@ -102,7 +95,7 @@ public class ProductsRestController {
     return converter.toProductDto(products);
   }
 
-  @GetMapping("/products/type")
+  @GetMapping("/products")
   public List<TypeProductDto> findAllTypes(@RequestParam(value = "pageNumber", required = false, defaultValue = "1") Integer pageNumber,
                                            @RequestParam(value = "pageSize", required = false, defaultValue = "20") Integer pageSize) {
     Page<TypeProduct> page = typeProductService.findAllType(pageNumber - 1, pageSize);
@@ -111,7 +104,7 @@ public class ProductsRestController {
   }
 
 
-  @DeleteMapping("/products/{productId}")
+  @DeleteMapping("/admin/products/{productId}")
   public void deleteProduct(@PathVariable Long productId) {
     productService.deleteProduct(productId);
   }

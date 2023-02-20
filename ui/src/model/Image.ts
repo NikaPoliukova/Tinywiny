@@ -1,5 +1,5 @@
 export interface Image {
     id?: number;
-    imageName: String;
+    imageName: string;
     productId: number;
 }

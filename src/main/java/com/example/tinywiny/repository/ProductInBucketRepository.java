@@ -12,7 +12,7 @@ import java.util.List;
 public interface ProductInBucketRepository extends JpaRepository<ProductInBucket, Long> {
 
 
-  List<ProductInBucket> findAllByBucket(@Param("bucket") Bucket bucket);
+  List<ProductInBucket> findProductInBucketsByBucket(@Param("bucket") Bucket bucket);
 
 
   ProductInBucket findProductInBucketByBucket(@Param("bucket") Bucket bucket);

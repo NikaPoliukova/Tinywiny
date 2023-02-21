@@ -1,30 +1,44 @@
-import React, {useState} from 'react';
-import Grid from '@mui/material/Grid';
-import Typography from '@mui/material/Typography';
-import TextField from '@mui/material/TextField';
-import {Box, Button, Card, Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@mui/material";
+import React, {useEffect, useState} from 'react';
+import {Button, Card, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography} from "@mui/material";
 import Header from '../component/MyHeader';
 import {Footer} from "../component/Footer";
 import {ProductInOrder} from "../../model/ProductInOrder";
 import {useNavigate} from "react-router-dom";
-import OrderService from "../../services/OrderService";
-import {Order} from 'model/Order';
 import {DeliveryInformation} from "../../model/DeliveryInformation";
+import {Form, Table} from "semantic-ui-react";
+import {Order} from "../../model/Order";
+import OrderService from "../../services/OrderService";
+import BucketService from "../../services/BucketService";
+import {ProductInBucket} from "../../model/ProductInBucket";
+import Container from "@mui/material/Container";
+import Box from "@mui/material/Box";
 
 
 export default function CreateOrderPage() {
-    const [firstName, setFirstName] = useState('');
-    const [lastName, setLastName] = useState('');
-    const [sureName, setSureName] = useState('');
-    const [userId, setAUserId] = useState(0);
-    const [deliveryInformation, setDeliveryInformation] = useState<DeliveryInformation>();
-    const [address, setAddress] = useState('');
+    const [customerName, setFirstName] = useState('');
+    const [customerLastName, setLastName] = useState('');
+    const [customerSurname, setSureName] = useState('');
+    const [userId, setUserId] = useState(0);//ДОСТАТЬ ИЗ СЕССИИ
+    const [bucketId, setBucketId] = useState(0);//ДОСТАТЬ ИЗ СЕССИИ
+    const [addressDelivery, setAddress] = useState('');
     const [commentOrder, setComment] = useState('');
     const [deliveryTypeId, setDeliveryType] = useState(0);
     const [productsInOrder, setProductsInOrder] = useState<Array<ProductInOrder>>([]);
+    const [products, setProducts] = useState<Array<ProductInBucket>>([])
+    useEffect(() => {
+        BucketService.findAllProductsInBucket(Number(2))
+            .then(response => setProducts(response));
+    }, []);
+    const deliveryInformation: DeliveryInformation = {
+        customerName,
+        customerLastName,
+        customerSurname,
+        addressDelivery,
+        userId
+    }
 
     const navigate = useNavigate();
-  /*  const addOrder = () => {
+    const createOrder = () => {
         const order: Order = {
             commentOrder,
             userId,
@@ -32,12 +46,20 @@ export default function CreateOrderPage() {
             deliveryTypeId,
             productsInOrder
         };
-        OrderService.createOrder(order).then(response => navigate("/products"));
-    }*/
+        OrderService.createOrder(order).then(response => navigate("/products/type/toys"));
+    }
     return (
         <React.Fragment>
             <Header/>
-            <h2> Create order</h2>
+            <Container maxWidth="sm">
+                <Typography
+                    component="h1"
+                    variant="h2"
+                    align="center"
+                    color="text.primary">
+                    Create order
+                </Typography>
+            </Container>
             <Card style={{width: 1000}}
                   sx={{
                       marginTop: 10,
@@ -48,108 +70,75 @@ export default function CreateOrderPage() {
                   }}>
                 <h2> Product in order</h2>
                 <TableContainer>
-                    <Table sx={{minWidth: 800}} aria-label="simple table">
+                    <Table celled padded>
                         <TableHead>
-                            <TableRow>
-                                <TableCell align="center">Product</TableCell>
-                                <TableCell align="center">Count</TableCell>
-                                <TableCell align="center">Price</TableCell>
-                            </TableRow>
+                            <Table.Row>
+                                <Table.HeaderCell>Product Name</Table.HeaderCell>
+                                <Table.HeaderCell>Count</Table.HeaderCell>
+                                <Table.HeaderCell>Price</Table.HeaderCell>
+
+                            </Table.Row>
                         </TableHead>
                         <TableBody>
-                            {productsInOrder.map((productInOrder) => (
+                            {products.map((item) => (
                                 <TableRow
-                                    key={productInOrder.orderId}
+                                    key={item.productDto?.productId}
                                     sx={{'&:last-child td, &:last-child th': {border: 0}}}
                                 >
                                     <TableCell component="th" scope="row">
-                                        {productInOrder.productId}
+                                        {item.productDto?.productName}
                                     </TableCell>
                                     <TableCell component="th" scope="row">
-                                        {productInOrder.count}
+                                        {item.count}
                                     </TableCell>
-
+                                    <TableCell component="th" scope="row">
+                                        {item.productDto?.price}
+                                    </TableCell>
                                 </TableRow>
                             ))}
                         </TableBody>
                     </Table>
+
                 </TableContainer>
             </Card>
-            <Typography variant="h6" gutterBottom align="center">
-                Заполни поля для заказа
-            </Typography>
-            <Box
-                sx={{
-                    marginTop: 10,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                }}
-            >
-
-                <Grid sx={{minWidth: 800}} aria-label="simple table">
-                    <Grid item xs={12} sm={5}>
-                        <TextField
-                            required
-                            id="firstName"
-                            name="firstName"
-                            label="First name"
-                            fullWidth
-                            autoComplete="given-name"
-                            variant="standard"
-                            value={firstName}
-                        />
-                    </Grid>
-                    <Grid item xs={12} sm={5}>
-                        <TextField
-                            required
-                            id="lastName"
-                            name="lastName"
-                            label="Last name"
-                            fullWidth
-                            autoComplete="family-name"
-                            variant="standard"
-                            value={lastName}
-                        />
-                    </Grid>
-                    <Grid item xs={12} sm={5}>
-                        <TextField
-                            required
-                            id="sureName"
-                            name="sureName"
-                            label="SureName"
-                            fullWidth
-                            autoComplete="family-name"
-                            variant="standard"
-                            value={sureName}
-                        />
-                    </Grid>
-                    <Grid item xs={12} sm={5}>
-                        <TextField
-                            required
-                            id="address"
-                            name="address"
-                            label="Address"
-                            fullWidth
-                            autoComplete="shipping address-line1"
-                            variant="standard"
-                            value={address}
-                        />
-                    </Grid>
-                    <Grid item xs={100}>
-                        <TextField label="order comments"/>
-
-                    </Grid>
-                    <Grid item xs={12} sm={5}>
-                        <select>
-                            <option value="grapefruit">Европочта</option>
-                            <option value="lime">Белпочта</option>
-
-                        </select>
-                    </Grid>
-                    <Button color="secondary" variant="contained">Create order</Button>
-                </Grid>
-            </Box>
+            <h2> Add information</h2>
+            <Form>
+                <Form.Group widths='equal'>
+                    <Form.Input fluid label='FirstName' placeholder='Enter firstname'
+                                value={customerName}
+                                onChange={e => setFirstName(e.target.value)}/>
+                </Form.Group>
+                <Form.Group widths='equal'>
+                    <Form.Input fluid label='LastName' placeholder='Enter lastname' value={customerLastName}
+                                onChange={e => setLastName(e.target.value)}/>
+                </Form.Group>
+                <Form.Group widths='equal'>
+                    <Form.Input fluid label='SureName' placeholder='Enter surename'
+                                value={customerSurname}
+                                onChange={e => setSureName(e.target.value)}/>
+                </Form.Group>
+                <Form.Group widths='equal'>
+                    <Form.Input fluid label='Address' placeholder='Enter address'
+                                value={addressDelivery}
+                                onChange={e => setAddress(e.target.value)}/>
+                </Form.Group>
+                <Form.Group widths='equal'>
+                </Form.Group>
+                <Form.TextArea label='Order comment'
+                               value={commentOrder}
+                               onChange={e => setComment(e.target.value)}/>
+                <div>Тип доставки</div>
+                <Form.Group>
+                    <select value={deliveryTypeId} onChange={event => setDeliveryType(Number(event.target.value))}>
+                        <option value={1}>Белпочта</option>
+                        <option value={2}>SDEK</option>
+                    </select>
+                </Form.Group>
+                <Button color="secondary"
+                        variant="contained"
+                        onClick={createOrder}
+                >Create order</Button>
+            </Form>
             <Footer/>
         </React.Fragment>
     );

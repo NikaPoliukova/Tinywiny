@@ -15,6 +15,7 @@ import {Footer} from "../component/Footer";
 import {User} from "../../model/User";
 import UserService from "../../services/UserService";
 import {useNavigate} from "react-router-dom";
+import HeaderForNoAuthorized from "../component/HeaderForNoAuthorized";
 
 
 const theme = createTheme();
@@ -56,6 +57,7 @@ export function Registry() {
 
     return (
         <ThemeProvider theme={theme}>
+            <HeaderForNoAuthorized />
             <Container component="main" maxWidth="xs">
                 <CssBaseline/>
                 <Box

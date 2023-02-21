@@ -9,6 +9,10 @@ class BucketService {
         const response = await axios.get<Array<ProductInBucket>>('http://localhost:8080/api/v1/bucket/' + bucketId);
         return response.data;
     }
+    async findBucketByUserId(userId: number): Promise<Bucket> {
+        const response = await axios.get<Bucket>('http://localhost:8080/api/v1/bucket/' + userId);
+        return response.data;
+    }
 
     async findBucketByBucketId(bucketId: number): Promise<Bucket> {
         const response = await axios.get<Bucket>('http://localhost:8080/api/v1/bucket/' + bucketId);

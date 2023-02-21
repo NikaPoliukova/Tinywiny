@@ -16,6 +16,7 @@ import {
 import AuthorizationService from "../../services/AuthorizationService";
 import {useNavigate} from 'react-router-dom';
 import {User} from "../../model/User";
+import HeaderForNoAuthorized from 'pages/component/HeaderForNoAuthorized';
 
 
 const theme = createTheme();
@@ -47,13 +48,14 @@ export function SignIn() {
         event.preventDefault();
         const authorizationStatus = await AuthorizationService.login(user);
         handleAlert(authorizationStatus);
+
     };
     const handleAlert = (status: number) => {
         if (status == 200) {
             setAlertType(successAlertType);
             setAlertTitle('Success');
             setAlertText('Ok');
-            navigate("/users");
+            navigate("/users/${user.userId}");
             return;
         } else {
             setAlertType(warningAlertType);
@@ -64,8 +66,8 @@ export function SignIn() {
     };
 
     return (
-
         <ThemeProvider theme={theme}>
+            <HeaderForNoAuthorized />
             <Container component="main" maxWidth="xs">
                 <CssBaseline/>
                 <Box

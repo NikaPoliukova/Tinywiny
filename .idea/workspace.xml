@@ -13,24 +13,14 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4dd877d4-850b-4093-ba42-62db28456f03" name="Changes" comment="add create product">
+    <list default="true" id="4dd877d4-850b-4093-ba42-62db28456f03" name="Changes" comment="work registry and login page">
+      <change afterPath="$PROJECT_DIR$/ui/src/pages/component/HeaderForNoAuthorized.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/config/ApplicationSecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/config/ApplicationSecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/config/MvcConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/config/MvcConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/controller/LoginRestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/controller/LoginRestController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/controller/OrderRestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/controller/OrderRestController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/service/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/src/pages/AdminPage/CreateNewProductPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/pages/AdminPage/CreateNewProductPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/src/pages/AdminPage/CreateOrderPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/pages/OrdersPage/CreateOrderPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/src/pages/AdminPage/ProductsUpdatePage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/pages/AdminPage/ProductsUpdatePage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/src/pages/AdminPage/UpdateProductPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/pages/AdminPage/UpdateProductPage.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ui/src/pages/LoginPage/LoginPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/pages/LoginPage/LoginPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/src/pages/OrdersPage/OrdersPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/pages/AdminPage/OrdersPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/src/pages/OrdersPage/CreateOrderPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/pages/OrdersPage/CreateOrderPage.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ui/src/pages/RegistrationPage/RegistryPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/pages/RegistrationPage/RegistryPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/src/pages/component/MyHeader.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/pages/component/MyHeader.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ui/src/services/BucketService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/services/BucketService.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/src/services/OrderService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/services/OrderService.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/src/services/ProductService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/services/ProductService.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -298,7 +288,7 @@
       <workItem from="1676876959052" duration="17266000" />
       <workItem from="1676914042373" duration="16186000" />
       <workItem from="1676970973871" duration="9827000" />
-      <workItem from="1676993788523" duration="3329000" />
+      <workItem from="1676993788523" duration="10180000" />
     </task>
     <task id="LOCAL-00001" summary="added more classes">
       <created>1675167662551</created>
@@ -545,7 +535,14 @@
       <option name="project" value="LOCAL" />
       <updated>1676927896891</updated>
     </task>
-    <option name="localTasksCounter" value="36" />
+    <task id="LOCAL-00036" summary="work registry and login page">
+      <created>1676997229695</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1676997229695</updated>
+    </task>
+    <option name="localTasksCounter" value="37" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -586,7 +583,8 @@
     <MESSAGE value="added page" />
     <MESSAGE value="correct bucket page" />
     <MESSAGE value="add create product" />
-    <option name="LAST_COMMIT_MESSAGE" value="add create product" />
+    <MESSAGE value="work registry and login page" />
+    <option name="LAST_COMMIT_MESSAGE" value="work registry and login page" />
   </component>
   <component name="WindowStateProjectService">
     <state x="361" y="53" key="#Plugins" timestamp="1674550738479">

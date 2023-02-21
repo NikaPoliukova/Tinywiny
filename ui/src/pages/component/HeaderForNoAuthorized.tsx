@@ -1,5 +1,4 @@
 import * as React from 'react';
-import {useEffect, useState} from 'react';
 import AppBar from '@mui/material/AppBar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -7,22 +6,8 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
 import GlobalStyles from '@mui/material/GlobalStyles';
-import {useParams} from "react-router-dom";
-import BucketService from "../../services/BucketService";
-import {Bucket} from "../../model/Bucket";
-import {useSessionStore} from "../../Session";
-import {Icon} from "semantic-ui-react";
 
-function PricingContent() {
-    //const {userId} = useParams();
-    //const [bucket, setBucket] = useState<Bucket>();
-    const user = useSessionStore(state => state.user);
-
-   // const bucket = BucketService.findBucketByUserId(Number(user.userId));
-   /* useEffect(() => {
-        BucketService.findBucketByBucketId(Number(userId))
-            .then(response => setBucket(response));
-    }, []);*/
+function NoAuthorized() {
     return (
         <React.Fragment>
             <GlobalStyles styles={{ul: {margin: 0, padding: 0, listStyle: 'none'}}}/>
@@ -71,14 +56,11 @@ function PricingContent() {
                             Reviews
                         </Link>
                     </nav>
-                    <Button href="/bucket/${bucket.bucketId}">
-                        <Icon name='shop' size='big'/>
+                    <Button href="/login" variant="outlined" sx={{my: 1, mx: 1.5}}>
+                        Login
                     </Button>
-                    <Button href="/users/${user.userId}">
-                        <Icon name='user' size='big'/>
-                    </Button>
-                    <Button href="/" variant="outlined" sx={{my: 1, mx: 1.5}}>
-                        Log out
+                    <Button href="/registration" variant="outlined" sx={{my: 1, mx: 1.5}}>
+                        Registration
                     </Button>
                 </Toolbar>
             </AppBar>
@@ -87,5 +69,5 @@ function PricingContent() {
 }
 
 export default function Pricing() {
-    return <PricingContent/>;
+    return <NoAuthorized/>;
 }

@@ -14,7 +14,7 @@ import {
     Typography
 } from "@mui/material";
 import AuthorizationService from "../../services/AuthorizationService";
-import {redirect} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import {User} from "../../model/User";
 
 
@@ -39,15 +39,13 @@ export function SignIn() {
     const handleLoginChange = (event: { target: { value: React.SetStateAction<string>; }; }) => {
         setUserName(event.target.value);
     }
-
     const handlePasswordChange = (event: { target: { value: React.SetStateAction<string>; }; }) => {
         setPassword(event.target.value);
     }
+    const navigate = useNavigate();
     const handleSubmit = async (event: { preventDefault: () => void; }) => {
         event.preventDefault();
-
         const authorizationStatus = await AuthorizationService.login(user);
-
         handleAlert(authorizationStatus);
     };
     const handleAlert = (status: number) => {
@@ -55,7 +53,7 @@ export function SignIn() {
             setAlertType(successAlertType);
             setAlertTitle('Success');
             setAlertText('Ok');
-            redirect("http://localhost:3000/users/${user.userId}");
+            navigate("/users");
             return;
         } else {
             setAlertType(warningAlertType);
@@ -78,7 +76,6 @@ export function SignIn() {
                         alignItems: 'center',
                     }}
                 >
-
                     <Avatar sx={{m: 1, bgcolor: 'secondary.main'}}>
                     </Avatar>
                     <Typography component="h1" variant="h5">

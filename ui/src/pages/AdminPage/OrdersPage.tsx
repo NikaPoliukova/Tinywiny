@@ -20,9 +20,15 @@ import Grid from "@mui/material/Grid";
 
 const OrdersPage = () => {
     const [orders, setOrders] = useState<Array<Order>>([]);
-    const [statusOrder, setStatus] = useState<string>('');
     const navigate = useNavigate();
-    const updateStatus = (statusOrder: string, orderId: number) => {
+    const statuses = ['NEW', 'PROCESS', 'FINISH'];
+    const [statusOrder, setStatus] = useState<string>('');
+   //const [orderId, setOrderId] = useState(Number);
+
+    const options = statuses.map((status, orderId) => {
+        return <option key={orderId}>{status}</option>;
+    });
+    const updateStatus = (orderId: number) => {
         OrderService.updateOrderStatus(statusOrder, orderId).then(response => navigate("/orders"))
     }
 
@@ -31,7 +37,6 @@ const OrdersPage = () => {
             .then(response => setOrders(response))
         ;
     }, []);
-
 
     return (
         <div>
@@ -58,25 +63,22 @@ const OrdersPage = () => {
                                     key={order.orderId}
                                     sx={{'&:last-child td, &:last-child th': {border: 0}}}
                                 >
-                                    <TableCell component="th" scope="row">
-                                        value={order.orderId}
+                                    <TableCell component="th" scope="row" >
+                                        {order.orderId}
                                     </TableCell>
                                     <TableCell component="th" scope="row">
                                         {order.statusOrder}
                                         <Grid item xs={12} sm={5}>
-                                            <select>
-                                                <option value="new">NEW</option>
-                                                <option value="finish">FINISH</option>
-                                                <option value="prosess">IN PROCESS</option>
+                                            <select value={statusOrder} onChange={(event) =>
+                                                setStatus(event.target.value)}>
+                                                {options}
                                             </select>
                                         </Grid>
                                         <Button
-                                            //      component={Link}
-                                            //   type="submit"
-                                            //   fullWidth
-                                            //   variant="contained"
-                                            //   sx={{mt: 1, mb: 1}}
-                                            //   onClick={updateStatus(statusOrder, orderId)}
+                                           // component={Link}
+                                            type="submit"
+                                            fullWidth
+                                           // onClick={updateStatus(Number(order.orderId))}
                                         >
                                             update status
                                         </Button>
@@ -96,7 +98,7 @@ const OrdersPage = () => {
                                         fullWidth
                                         variant="contained"
                                         sx={{mt: 1, mb: 1}}
-                                        to={'product/${order.orderId}'}
+                                        to={'/orders/order/' + order.orderId}
                                     >
                                         Open
                                     </Button>

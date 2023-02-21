@@ -13,9 +13,24 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4dd877d4-850b-4093-ba42-62db28456f03" name="Changes" comment="correct bucket page">
+    <list default="true" id="4dd877d4-850b-4093-ba42-62db28456f03" name="Changes" comment="add create product">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/config/ApplicationSecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/config/ApplicationSecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/config/MvcConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/config/MvcConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/controller/LoginRestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/controller/LoginRestController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/controller/OrderRestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/controller/OrderRestController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/App.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ui/src/pages/AdminPage/CreateNewProductPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/pages/AdminPage/CreateNewProductPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/src/pages/AdminPage/CreateOrderPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/pages/OrdersPage/CreateOrderPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/src/pages/AdminPage/ProductsUpdatePage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/pages/AdminPage/ProductsUpdatePage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/src/pages/AdminPage/UpdateProductPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/pages/AdminPage/UpdateProductPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/src/pages/LoginPage/LoginPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/pages/LoginPage/LoginPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/src/pages/OrdersPage/OrdersPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/pages/AdminPage/OrdersPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/src/pages/RegistrationPage/RegistryPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/pages/RegistrationPage/RegistryPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/src/services/BucketService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/services/BucketService.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/src/services/OrderService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/services/OrderService.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/src/services/ProductService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/services/ProductService.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -76,12 +91,11 @@
     <property name="ts.external.directory.path" value="D:\project\TeachMeSkills\Tinywiny\ui\node_modules\typescript\lib" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\project\TeachMeSkills\Tinywiny\ui\src\pages\AdminPage" />
+      <recent name="D:\project\TeachMeSkills\Tinywiny\ui\src\pages\OrdersPage" />
       <recent name="D:\project\TeachMeSkills\Tinywiny\ui\src" />
-      <recent name="D:\project\TeachMeSkills\Tinywiny\ui\node_modules" />
-      <recent name="D:\project\TeachMeSkills\Tinywiny\ui" />
-      <recent name="D:\project\TeachMeSkills\Tinywiny\ui\public" />
-      <recent name="D:\project\TeachMeSkills\Tinywiny\src\main\resources" />
+      <recent name="D:\project\TeachMeSkills\Tinywiny\ui\src\pages\OrderPage\CreateOrderPage" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.example.tinywiny.service.amazonService" />
@@ -90,10 +104,12 @@
       <recent name="com.example.tinywiny.dto" />
       <recent name="com.example.tinywiny.service" />
     </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\project\TeachMeSkills\Tinywiny\ui\src\pages\AdminPage" />
+    <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\project\TeachMeSkills\Tinywiny\ui\src" />
-      <recent name="D:\project\TeachMeSkills\Tinywiny\ui\src\pages\OrderPage\CreateOrderPage" />
+      <recent name="D:\project\TeachMeSkills\Tinywiny\ui\node_modules" />
+      <recent name="D:\project\TeachMeSkills\Tinywiny\ui" />
+      <recent name="D:\project\TeachMeSkills\Tinywiny\ui\public" />
+      <recent name="D:\project\TeachMeSkills\Tinywiny\src\main\resources" />
     </key>
   </component>
   <component name="RunManager" selected="Spring Boot.MainApplication">
@@ -280,7 +296,9 @@
       <workItem from="1676715258103" duration="8745000" />
       <workItem from="1676816033522" duration="250000" />
       <workItem from="1676876959052" duration="17266000" />
-      <workItem from="1676914042373" duration="13084000" />
+      <workItem from="1676914042373" duration="16186000" />
+      <workItem from="1676970973871" duration="9827000" />
+      <workItem from="1676993788523" duration="3329000" />
     </task>
     <task id="LOCAL-00001" summary="added more classes">
       <created>1675167662551</created>
@@ -520,7 +538,14 @@
       <option name="project" value="LOCAL" />
       <updated>1676895084646</updated>
     </task>
-    <option name="localTasksCounter" value="35" />
+    <task id="LOCAL-00035" summary="add create product">
+      <created>1676927896890</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1676927896891</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -560,7 +585,8 @@
     <MESSAGE value="add button in orders page and methods" />
     <MESSAGE value="added page" />
     <MESSAGE value="correct bucket page" />
-    <option name="LAST_COMMIT_MESSAGE" value="correct bucket page" />
+    <MESSAGE value="add create product" />
+    <option name="LAST_COMMIT_MESSAGE" value="add create product" />
   </component>
   <component name="WindowStateProjectService">
     <state x="361" y="53" key="#Plugins" timestamp="1674550738479">
@@ -623,65 +649,65 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="553" y="110" key="Github.UntrackedFilesDialog/0.0.1536.824@0.0.1536.824" timestamp="1675079047942" />
-    <state width="1493" height="389" key="GridCell.Tab.0.bottom" timestamp="1676927438430">
+    <state width="1493" height="344" key="GridCell.Tab.0.bottom" timestamp="1676996774103">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="389" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1676927438430" />
+    <state width="1493" height="344" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1676996774103" />
     <state width="1493" height="320" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1674736178189" />
-    <state width="1493" height="389" key="GridCell.Tab.0.center" timestamp="1676927438430">
+    <state width="1493" height="344" key="GridCell.Tab.0.center" timestamp="1676996774103">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="389" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1676927438430" />
+    <state width="1493" height="344" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1676996774103" />
     <state width="1493" height="320" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1674736178183" />
-    <state width="1493" height="389" key="GridCell.Tab.0.left" timestamp="1676927438430">
+    <state width="1493" height="344" key="GridCell.Tab.0.left" timestamp="1676996774103">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="389" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1676927438430" />
+    <state width="1493" height="344" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1676996774103" />
     <state width="1493" height="320" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1674736178179" />
-    <state width="1493" height="389" key="GridCell.Tab.0.right" timestamp="1676927438430">
+    <state width="1493" height="344" key="GridCell.Tab.0.right" timestamp="1676996774103">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="389" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1676927438430" />
+    <state width="1493" height="344" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1676996774103" />
     <state width="1493" height="320" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1674736178187" />
-    <state width="1493" height="389" key="GridCell.Tab.1.bottom" timestamp="1676927762097">
+    <state width="1493" height="344" key="GridCell.Tab.1.bottom" timestamp="1676996774103">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="389" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1676927762097" />
+    <state width="1493" height="344" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1676996774103" />
     <state width="1493" height="320" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1674736178202" />
-    <state width="1493" height="389" key="GridCell.Tab.1.center" timestamp="1676927762097">
+    <state width="1493" height="344" key="GridCell.Tab.1.center" timestamp="1676996774103">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="389" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1676927762097" />
+    <state width="1493" height="344" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1676996774103" />
     <state width="1493" height="320" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1674736178196" />
-    <state width="1493" height="389" key="GridCell.Tab.1.left" timestamp="1676927762097">
+    <state width="1493" height="344" key="GridCell.Tab.1.left" timestamp="1676996774103">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="389" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1676927762097" />
+    <state width="1493" height="344" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1676996774103" />
     <state width="1493" height="320" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1674736178192" />
-    <state width="1493" height="389" key="GridCell.Tab.1.right" timestamp="1676927762097">
+    <state width="1493" height="344" key="GridCell.Tab.1.right" timestamp="1676996774103">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="389" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1676927762097" />
+    <state width="1493" height="344" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1676996774103" />
     <state width="1493" height="320" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1674736178199" />
-    <state width="1493" height="389" key="GridCell.Tab.2.bottom" timestamp="1676927438431">
+    <state width="1493" height="344" key="GridCell.Tab.2.bottom" timestamp="1676996774103">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="389" key="GridCell.Tab.2.bottom/0.0.1536.824@0.0.1536.824" timestamp="1676927438431" />
+    <state width="1493" height="344" key="GridCell.Tab.2.bottom/0.0.1536.824@0.0.1536.824" timestamp="1676996774103" />
     <state width="1493" height="320" key="GridCell.Tab.2.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1674736178204" />
-    <state width="1493" height="389" key="GridCell.Tab.2.center" timestamp="1676927438431">
+    <state width="1493" height="344" key="GridCell.Tab.2.center" timestamp="1676996774103">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="389" key="GridCell.Tab.2.center/0.0.1536.824@0.0.1536.824" timestamp="1676927438431" />
+    <state width="1493" height="344" key="GridCell.Tab.2.center/0.0.1536.824@0.0.1536.824" timestamp="1676996774103" />
     <state width="1493" height="320" key="GridCell.Tab.2.center/0.0.1920.1040@0.0.1920.1040" timestamp="1674736178203" />
-    <state width="1493" height="389" key="GridCell.Tab.2.left" timestamp="1676927438431">
+    <state width="1493" height="344" key="GridCell.Tab.2.left" timestamp="1676996774103">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="389" key="GridCell.Tab.2.left/0.0.1536.824@0.0.1536.824" timestamp="1676927438431" />
+    <state width="1493" height="344" key="GridCell.Tab.2.left/0.0.1536.824@0.0.1536.824" timestamp="1676996774103" />
     <state width="1493" height="320" key="GridCell.Tab.2.left/0.0.1920.1040@0.0.1920.1040" timestamp="1674736178203" />
-    <state width="1493" height="389" key="GridCell.Tab.2.right" timestamp="1676927438431">
+    <state width="1493" height="344" key="GridCell.Tab.2.right" timestamp="1676996774103">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="389" key="GridCell.Tab.2.right/0.0.1536.824@0.0.1536.824" timestamp="1676927438431" />
+    <state width="1493" height="344" key="GridCell.Tab.2.right/0.0.1536.824@0.0.1536.824" timestamp="1676996774103" />
     <state width="1493" height="320" key="GridCell.Tab.2.right/0.0.1920.1040@0.0.1920.1040" timestamp="1674736178204" />
     <state x="299" y="67" key="Maven.ArtifactSearchDialog" timestamp="1674763528142">
       <screen x="0" y="0" width="1536" height="824" />
@@ -715,10 +741,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="217" y="141" width="1102" height="591" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/0.0.1536.824@0.0.1536.824" timestamp="1675770134250" />
-    <state x="478" y="147" width="892" height="620" key="find.popup" timestamp="1676887614059">
+    <state x="236" y="149" width="892" height="620" key="find.popup" timestamp="1676994966622">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="478" y="147" width="892" height="620" key="find.popup/0.0.1536.824@0.0.1536.824" timestamp="1676887614059" />
+    <state x="236" y="149" width="892" height="620" key="find.popup/0.0.1536.824@0.0.1536.824" timestamp="1676994966622" />
     <state x="550" y="125" key="git4idea.branch.GitSmartOperationDialog" timestamp="1676632206659">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -752,8 +778,13 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/example/tinywiny/controller/ProductsRestController.java</url>
-          <line>46</line>
-          <option name="timeStamp" value="46" />
+          <line>62</line>
+          <option name="timeStamp" value="50" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>jar://$MAVEN_REPOSITORY$/org/springframework/spring-web/5.3.23/spring-web-5.3.23.jar!/org/springframework/web/method/support/InvocableHandlerMethod.class</url>
+          <line>110</line>
+          <option name="timeStamp" value="54" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

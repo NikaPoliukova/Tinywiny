@@ -11,7 +11,6 @@ import {
     ThemeProvider,
     Typography
 } from "@mui/material";
-import MyHeader from "../component/MyHeader";
 import {Footer} from "../component/Footer";
 import {User} from "../../model/User";
 import UserService from "../../services/UserService";
@@ -34,7 +33,7 @@ export function Registry() {
             email,
             phoneNumber
         };
-        UserService.saveUser(user).then(response => navigate("/"));
+        UserService.saveUser(user).then(response => navigate("/login"));
     }
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -55,10 +54,8 @@ export function Registry() {
         setPhoneNumber(event.target.value);
     }
 
-
     return (
         <ThemeProvider theme={theme}>
-        <MyHeader />
             <Container component="main" maxWidth="xs">
                 <CssBaseline/>
                 <Box
@@ -69,7 +66,6 @@ export function Registry() {
                         alignItems: 'center',
                     }}
                 >
-
                     <Avatar sx={{m: 1, bgcolor: 'secondary.main'}}>
                     </Avatar>
                     <Typography component="h1" variant="h5">

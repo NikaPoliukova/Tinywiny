@@ -21,7 +21,8 @@ class BucketService {
     }
 
     async deleteProductInBucket(productInBucket: ProductInBucket): Promise<void> {
-        await axios.delete('http://localhost:8080/api/v1/bucket');
+        const response = await axios.delete('http://localhost:8080/api/v1/bucket', );
+        return response.data;
     }
 
     async updateCountProduct(productInBucket: ProductInBucket): Promise<ProductInBucket> {

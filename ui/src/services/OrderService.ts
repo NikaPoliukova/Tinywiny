@@ -17,10 +17,6 @@ class OrderService {
         return response.data;
     }
 
-    async getOrder(): Promise<Order> {
-        const response = await axios.get<Order>('http://localhost:8080/api/v1/orders/${orderId}');
-        return response.data;
-    }
 
     async findOrdersByUserId(userId: number): Promise<Array<Order>> {
         const response = await axios.get<Array<Order>>('http://localhost:8080/api/v1/orders/' + userId);
@@ -28,7 +24,7 @@ class OrderService {
     }
 
     async updateOrderStatus(status: string, orderId: number): Promise<void> {
-        const response = await axios.put('http://localhost:8080/api/v1/orders/status/update');
+        const response = await axios.put('http://localhost:8080/api/v1/orders/status');
         return response.data;
     }
 

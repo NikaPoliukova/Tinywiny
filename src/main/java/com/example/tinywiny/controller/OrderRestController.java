@@ -73,7 +73,7 @@ public class OrderRestController {
     return orderConverter.toOrderDto(orderService.findOrdersByUserId(userId));
   }
 
-  @PutMapping("/status/update")
+  @PutMapping("/status")
   public void updateOrderStatus(@RequestBody String status,Long orderId) {
     orderService.updateOrderStatus(status, orderId);
   }

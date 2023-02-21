@@ -19,7 +19,6 @@ export function CreateProduct() {
     const [price, setPrice] = useState(Number);
     const [countInStock, setCountInStock] = useState(Number);
     const [description, setDescription] = useState('');
-    const [typeProduct, setType] = useState<TypeProduct>();
     const [idType, setIdType] = useState(Number);
     const [productId, setProductId] = useState(0);
     const [imageName, setImageName] = useState('');
@@ -80,7 +79,6 @@ export function CreateProduct() {
                 </Form.Group>
                 <div>Type product</div>
                 <Form.Group widths='equal'>
-
                     <select value={idType} onChange={event => setIdType(Number(event.target.value))}>
                         {options}
                     </select>

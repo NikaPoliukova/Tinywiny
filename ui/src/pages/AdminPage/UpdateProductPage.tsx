@@ -48,19 +48,15 @@ export function UpdateProductPage() {
             };
             ImageService.deleteImage(image).then(response => navigate("/products"));
         }*/
-
-
-        const updateProduct = () => {
+   const updateProduct = () => {
             const product: Product = {
                 productName,
                 price,
                 countInStock,
                 description
-
             };
             ProductService.updateProduct(Number(productId),product).then(response => navigate("/admin/products"));
         }
-
         useEffect(() => {
             ProductService.getProduct(Number(productId))
                 .then(response => setProduct(response));
@@ -95,7 +91,6 @@ export function UpdateProductPage() {
                                     >
                                         <AutoDelete/>
                                     </IconButton>
-
                                 </Card>
                             </Col>
                             <Divider horizontal>
@@ -121,7 +116,6 @@ export function UpdateProductPage() {
                                                     value={price}
                                                     onChange={e => setPrice(Number(e.target.value))}/>
                                     </Table.Row>
-
                                     <Table.Row>
                                         <Table.Cell>Count in stock</Table.Cell>
                                         <Table.Cell>{product?.countInStock}</Table.Cell>
@@ -129,7 +123,6 @@ export function UpdateProductPage() {
                                                     value={countInStock}
                                                     onChange={e => setCountInStock(Number(e.target.value))}/>
                                     </Table.Row>
-
                                     <Table.Row>
                                         <Table.Cell>Description</Table.Cell>
                                         <Table.Cell>{product?.description}</Table.Cell>

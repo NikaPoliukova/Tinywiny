@@ -5,6 +5,7 @@ import com.example.tinywiny.converter.OrderConverter;
 import com.example.tinywiny.converter.ProductInOrderConverter;
 import com.example.tinywiny.converter.UserConverter;
 import com.example.tinywiny.dto.OrderDto;
+import com.example.tinywiny.dto.ProductInBucketDto;
 import com.example.tinywiny.dto.ProductInOrderDto;
 import com.example.tinywiny.dto.UserDto;
 import com.example.tinywiny.model.DeliveryInformation;
@@ -50,20 +51,28 @@ public class OrderService {
     order.setDeliveryInformation(deliveryInformation);
     List<ProductInOrder> products = productInOrderConverter.toProductInOrder(orderDto.getProductsInOrder());
     order.setProductsInOrder(products);
-    Discount discount = null;
+    /*Discount discount = null;
     int sum = orderAmountCalculation(orderDto.getProductsInOrder());
     if (sum > 0) {
       discount = discountService.findDiscount(sum);
     }
-    order.setDiscount(discount);
+    order.setDiscount(discount);*/
     return orderRepository.save(order);
   }
 
-  private int orderAmountCalculation(List<ProductInOrderDto> productsInOrder) {
+  /*private int orderAmountCalculation(List<ProductInOrderDto> productsInOrder) {
     int sum = 0;
     for (ProductInOrderDto product : productsInOrder) {
       int count = product.getCount();
       sum += count * (productService.findProductPrice(product.getProductId()));
+    }
+    return sum;
+  }*/
+  private int sumCalculate(List<ProductInBucketDto> productsInBucket) {
+    int sum = 0;
+    for (ProductInBucketDto product : productsInBucket) {
+      int count = product.getCount();
+      sum += count * (productService.findProductPrice(product.getProductDto().getProductId()));
     }
     return sum;
   }

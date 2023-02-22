@@ -26,7 +26,7 @@ public class Discount {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name ="discount_id")
-  private int id;
+  private int discountId;
 
   private int size;
 

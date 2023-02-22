@@ -47,14 +47,6 @@ function NoAuthorized() {
                         >
                             Contacts
                         </Link>
-                        <Link
-                            variant="button"
-                            color="text.primary"
-                            href="/reviews"
-                            sx={{my: 1, mx: 1.5}}
-                        >
-                            Reviews
-                        </Link>
                     </nav>
                     <Button href="/login" variant="outlined" sx={{my: 1, mx: 1.5}}>
                         Login

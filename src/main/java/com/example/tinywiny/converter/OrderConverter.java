@@ -14,6 +14,7 @@ public interface OrderConverter {
 
   @Mapping(target = "user.userId", source = "orderDto.userId")
   @Mapping(target = "deliveryType.idType", source = "orderDto.deliveryTypeId")
+  @Mapping(target = "discount.discountId", source = "discountId")
   Order toOrder(OrderDto orderDto);
 
   List<OrderDto> toOrderDto(List<Order> order);
@@ -22,11 +23,13 @@ public interface OrderConverter {
   @Mapping(target = "deliveryInformation", source = "deliveryInformation")
   @Mapping(target = "deliveryTypeId", source = "order.deliveryType.idType")
   @Mapping(target = "statusOrder", source = "statusOrder")
+  @Mapping(target = "discountId", source = "order.discount.discountId")
   OrderDto toOrderDto(Order order);
 
   @Mapping(target = "userId", source = "order.user.userId")
   @Mapping(target = "deliveryInformation", source = "deliveryInformation")
   @Mapping(target = "productsInOrder", source = "productInOrderDto")
   @Mapping(target = "deliveryTypeId", source = "order.deliveryType.idType")
+  @Mapping(target = "discountId", source = "order.discount.discountId")
   OrderDto toOrderDto(Order order, DeliveryInformationDto deliveryInformation, List<ProductInOrderDto> productInOrderDto);
 }

@@ -9,8 +9,10 @@ export const Sidebar: React.FC = (): JSX.Element => {
     useEffect(() => {
         TypeProductService.findAllTypes()
             .then(response => setTypes(response));
+
     }, []);
  return (
+
         <aside className="w-300 h-full">
             <div className="overflow-y-auto h-screen py-4 px-3 bg-gray-50  dark:bg-gray-800">
                 <div className="flex items-center pl-2.5 mb-5">
@@ -34,6 +36,7 @@ export const Sidebar: React.FC = (): JSX.Element => {
 
             </div>
         </aside>
+
     );
 };
 

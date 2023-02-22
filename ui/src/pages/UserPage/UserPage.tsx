@@ -17,7 +17,7 @@ export const UserPage = () => {
                 .then(response => setUser(response));
         }, []);
         return (
-            <div className="container mb-5 mt-5 row inner-wrap">
+            <div className="card">
                 <MyHeader/>
                 <div>
                     <Header as='h2' icon textAlign='center'>

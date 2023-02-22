@@ -1,6 +1,7 @@
 import MyHeader from 'pages/component/MyHeader'
 import React from 'react'
 import {Button, Divider, Header, Icon, Table} from 'semantic-ui-react'
+import ReviewForUsers from "../ReviewsPage/ReviewForUsers";
 
 const Contacts = () => (
     <>
@@ -29,6 +30,8 @@ const Contacts = () => (
                 </Table.Row>
             </Table.Body>
         </Table>
+<h3> reviews</h3>
+        <ReviewForUsers />
         <div>
             <Button color='facebook'>
                 <Icon name='facebook' /> Facebook

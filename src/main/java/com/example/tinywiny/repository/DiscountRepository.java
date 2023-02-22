@@ -6,5 +6,5 @@ import org.springframework.data.repository.query.Param;
 
 public interface DiscountRepository extends JpaRepository<Discount, Long> {
 
-  Discount findById(@Param("id") int id);
+  Discount findByDiscountId(@Param("discountId") int discountId);
 }

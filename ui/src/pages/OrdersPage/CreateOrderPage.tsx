@@ -11,7 +11,6 @@ import OrderService from "../../services/OrderService";
 import BucketService from "../../services/BucketService";
 import {ProductInBucket} from "../../model/ProductInBucket";
 import Container from "@mui/material/Container";
-import Box from "@mui/material/Box";
 
 
 export default function CreateOrderPage() {
@@ -98,8 +97,8 @@ export default function CreateOrderPage() {
                             ))}
                         </TableBody>
                     </Table>
-
                 </TableContainer>
+                <div>Sum order consist: </div>
             </Card>
             <h2> Add information</h2>
             <Form>

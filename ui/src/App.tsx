@@ -4,7 +4,7 @@ import UsersPage from './pages/UsersPage/UsersPage';
 import HomePage from "./pages/HomePage/HomePage";
 import {Registry} from "./pages/RegistrationPage/RegistryPage";
 import {SignIn} from "./pages/LoginPage/LoginPage";
-import ReviewsPage from "./pages/ReviewsPage/ReviewsPage";
+import ReviewsPage from "./pages/AdminPage/ReviewsPage";
 import BucketPage from "./pages/BucketPage/BucketPage";
 import OrdersPage from "./pages/AdminPage/OrdersPage";
 import GalleryPage from "./pages/GalleryPage/GalleryPage";
@@ -20,6 +20,7 @@ import {UpdateProductPage} from "./pages/AdminPage/UpdateProductPage";
 import ProductsUpdatePage from "./pages/AdminPage/ProductsUpdatePage";
 import {CreateProduct} from "./pages/AdminPage/CreateNewProductPage";
 import Contacts from "./pages/ContactPage/ContactPage";
+import ReviewForUsers from "./pages/ReviewsPage/ReviewForUsers";
 
 
 function App() {
@@ -30,14 +31,14 @@ function App() {
             <Route path={'/users'} element={<UsersPage/>}/>
             <Route path={'/users/:userId'} element={<UserPage/>}/>
             <Route path={'/registration'} element={<Registry/>}/>
-            <Route path={'/reviews'} element={<ReviewsPage/>}/>
+            <Route path={'/admin/reviews'} element={<ReviewsPage/>}/>
             <Route path={'/gallery'} element={<GalleryPage/>}/>
             <Route path={'/products/type/:type'} element={<Products/>}/>
             <Route path={'/products/:productId'} element={<ProductPage/>}/>
             <Route path={'/orders'} element={<OrdersPage/>}/>
             <Route path={'/bucket/:bucketId'} element={<BucketPage/>}/>
 
-
+            <Route path={'/reviews'} element={<ReviewForUsers/>}/>
             <Route path={'/orders/:userId'} element={<MyOrdersPage/>}/>
             <Route path={'/orders/order/:orderId'} element={<OrderPage/>}/>
             <Route path={'/orders/create'} element={<CreateOrderPage/>}/>

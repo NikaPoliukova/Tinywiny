@@ -14,6 +14,8 @@ import com.example.tinywiny.service.TypeProductService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -68,14 +70,13 @@ public class ProductsRestController {
     productService.updateCountInStock(product.getCountInStock(), product.getProductId());
   }
 
-  //НЕ ЗНАЮ КАК ОБНОВИТЬ КАРТИНКУ
-  @PutMapping("/admin/products")
-  public ImageDto updateImage(@RequestBody ImageDto imageDto, MultipartFile file) throws IOException {
-    imageService.updateImage(imageDto, file);
-    return imageDto;
-  }
+  @PostMapping("/admin/products/{productId}")
+  public ResponseEntity updateImage(@PathVariable Long productId, @RequestBody MultipartFile file) throws IOException {
+    imageService.addNewImage(productId, file);
+    return ResponseEntity.ok().build();
+   }
 
-  @DeleteMapping("/admin/products")
+  @DeleteMapping("/admin/products/image/{productId}")
   public void deleteImage(@PathVariable Long productId) {
     imageService.deleteImage(productId);
   }

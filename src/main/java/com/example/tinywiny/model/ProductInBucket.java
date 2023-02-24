@@ -5,7 +5,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.DynamicInsert;
 
-
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -28,6 +27,11 @@ public class ProductInBucket {
   private Long id;
 
   private int count;
+  //private int sum;
+
+  /*@ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "discount_id")
+  private Discount discount;*/
 
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "bucket_id")

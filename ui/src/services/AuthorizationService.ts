@@ -7,6 +7,14 @@ class AuthorizationService {
             user);
         return response.status;
     }
+    async getUser(userName: string, password : string): Promise<User> {
+        const param = {userName: userName, password: password}
+        const response = await axios.post('http://localhost:8080/api/v1/users/user',{
+                data: param
+            }
+            );
+        return response.data;
+    }
 }
 
 export default new AuthorizationService();

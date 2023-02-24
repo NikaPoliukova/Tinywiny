@@ -25,7 +25,6 @@ class UserService {
         let response;
         response = await axios.post('http://localhost:8080/api/v1/login',
             {username: username, password: password}, {withCredentials: true});
-
         return response?.status == 200;
     }
 }

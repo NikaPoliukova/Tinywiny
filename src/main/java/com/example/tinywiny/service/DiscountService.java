@@ -14,14 +14,17 @@ public class DiscountService {
 
   public Discount findDiscount(int sum) {
     if (sum >= 50 && sum < 100) {
-      return discountRepository.findByDiscountId(1);
+      return discountRepository.findDiscountByDiscountId(1);
     }
     if (sum >= 100 && sum < 150) {
-      return discountRepository.findByDiscountId(2);
+      return discountRepository.findDiscountByDiscountId(2);
     }
     if (sum >= 150 && sum < 200) {
-      return discountRepository.findByDiscountId(3);
-    } else
-      return discountRepository.findByDiscountId(4);
+      return discountRepository.findDiscountByDiscountId(3);
+    }
+    if (sum >= 200) {
+      return discountRepository.findDiscountByDiscountId(4);
+    }else
+      return null;
   }
 }

@@ -22,5 +22,9 @@ public interface ProductInBucketRepository extends JpaRepository<ProductInBucket
   @Transactional
   @Modifying
   void deleteProductInBucketById(@Param("id") Long id);
+
+  @Transactional
+  @Modifying
+  void deleteAllByBucket(@Param("bucket") Bucket bucket);
 }
 

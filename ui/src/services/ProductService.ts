@@ -26,8 +26,8 @@ class ProductService {
         return response.data;
     }
 
-    async deleteProduct(): Promise<void> {
-        const response = await axios.post('http://localhost:8080/api/v1/admin/products/${productId}');
+    async deleteProduct(productId : number): Promise<void> {
+        const response = await axios.post('http://localhost:8080/api/v1/admin/products/' +productId);
         return response.data;
     }
 

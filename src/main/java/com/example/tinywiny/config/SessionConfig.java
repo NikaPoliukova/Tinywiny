@@ -1,7 +1,5 @@
 package com.example.tinywiny.config;
 
-
-
 import com.example.tinywiny.AuthContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

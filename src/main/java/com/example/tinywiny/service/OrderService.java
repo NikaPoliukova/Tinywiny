@@ -6,10 +6,8 @@ import com.example.tinywiny.converter.ProductInOrderConverter;
 import com.example.tinywiny.converter.UserConverter;
 import com.example.tinywiny.dto.OrderDto;
 import com.example.tinywiny.dto.ProductInBucketDto;
-import com.example.tinywiny.dto.ProductInOrderDto;
 import com.example.tinywiny.dto.UserDto;
 import com.example.tinywiny.model.DeliveryInformation;
-import com.example.tinywiny.model.Discount;
 import com.example.tinywiny.model.Order;
 import com.example.tinywiny.model.ProductInOrder;
 import com.example.tinywiny.repository.OrderRepository;
@@ -36,7 +34,6 @@ public class OrderService {
   private final UserRepository userRepository;
   private final UserService userService;
   private final UserConverter userConverter;
-  private final DiscountService discountService;
   private final ProductService productService;
   private final DeliveryInformationConverter deliveryInformationConverter;
   private final ProductInOrderConverter productInOrderConverter;
@@ -51,30 +48,7 @@ public class OrderService {
     order.setDeliveryInformation(deliveryInformation);
     List<ProductInOrder> products = productInOrderConverter.toProductInOrder(orderDto.getProductsInOrder());
     order.setProductsInOrder(products);
-    /*Discount discount = null;
-    int sum = orderAmountCalculation(orderDto.getProductsInOrder());
-    if (sum > 0) {
-      discount = discountService.findDiscount(sum);
-    }
-    order.setDiscount(discount);*/
     return orderRepository.save(order);
-  }
-
-  /*private int orderAmountCalculation(List<ProductInOrderDto> productsInOrder) {
-    int sum = 0;
-    for (ProductInOrderDto product : productsInOrder) {
-      int count = product.getCount();
-      sum += count * (productService.findProductPrice(product.getProductId()));
-    }
-    return sum;
-  }*/
-  private int sumCalculate(List<ProductInBucketDto> productsInBucket) {
-    int sum = 0;
-    for (ProductInBucketDto product : productsInBucket) {
-      int count = product.getCount();
-      sum += count * (productService.findProductPrice(product.getProductDto().getProductId()));
-    }
-    return sum;
   }
 
   public Page<Order> getOrdersByPage(int pageNumber, int pageSize) {
@@ -105,7 +79,7 @@ public class OrderService {
     return orderRepository.getOrderStatus(orderId);
   }
 
-  public void updateOrderStatus(String status,Long orderId) {
+  public void updateOrderStatus(String status, Long orderId) {
     Order order = findOrderByOrderId(orderId);
     if (order != null && !status.equals(order.getStatusOrder())) {
       order.setStatusOrder(status);

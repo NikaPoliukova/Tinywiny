@@ -22,6 +22,8 @@ public class Order {
   @Column(name = "order_id")
   private Long orderId;
 
+  private int sum;
+
   @Column(name = "comment_order")
   private String commentOrder;
 
@@ -37,10 +39,6 @@ public class Order {
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "user_id")
   private User user;
-
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "discount_id")
-  private Discount discount;
 
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "id_type")

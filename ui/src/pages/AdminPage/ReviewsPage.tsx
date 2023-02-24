@@ -4,12 +4,16 @@ import {Review} from "../../model/Review";
 import ReviewService from "../../services/ReviewService";
 import MyHeader from 'pages/component/MyHeader';
 import {Footer} from "../component/Footer";
+import {useNavigate, useParams} from "react-router-dom";
 
 
 const ReviewsPage = () => {
     const [reviews, setReviews] = useState<Array<Review>>([]);
-
-
+    const {id} = useParams();
+    const navigate = useNavigate();
+const deleteReview = () =>{
+    ReviewService.deleteReview(Number(id)).then(()=>navigate("/admin/reviews"))
+}
     useEffect(() => {
         ReviewService.getReviews()
             .then(response => setReviews(response));

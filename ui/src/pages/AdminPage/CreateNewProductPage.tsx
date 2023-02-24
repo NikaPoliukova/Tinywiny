@@ -49,7 +49,7 @@ export function CreateProduct() {
             productId
             //не могу указать айди продукта-не создан
         }
-        ImageService.updateImage(image).then(response => navigate("/products"));
+        //ImageService.updateImage(image).then(response => navigate("/products"));
     }
 
     return (

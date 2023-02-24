@@ -55,6 +55,7 @@ const OrdersPage = () => {
                                 <TableCell align="center">commentOrder</TableCell>
                                 <TableCell align="center">userId</TableCell>
                                 <TableCell align="center">createdAt</TableCell>
+                                <TableCell align="center">Payment status</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
@@ -91,6 +92,9 @@ const OrdersPage = () => {
                                     </TableCell>
                                     <TableCell align="right">
                                         {order.createdAt}
+                                    </TableCell>
+                                    <TableCell align="right">
+                                        {order.paymentStatus}
                                     </TableCell>
                                     <Button
                                         component={Link}

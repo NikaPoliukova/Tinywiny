@@ -16,6 +16,13 @@ public interface ImageRepository extends JpaRepository<Image, Long> {
   Image findImageByProduct(@Param("product") Product product);
 
   @Modifying
+  @Query(value ="update image set image_name=:imageName where product_id=:productId",nativeQuery = true)
+  void updateImage(@Param("imageName") String imageName, @Param("productId") long productId);
+
+  @Modifying
   void deleteImageByProduct(@Param("product") Product product);
 
+  @Modifying
+  @Query(value ="insert into image (image_name, product_id) values (:imageName, :productId)", nativeQuery= true)
+  void setNewImage(@Param("imageName") String imageName, @Param("productId") long productId);
 }

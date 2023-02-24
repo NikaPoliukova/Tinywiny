@@ -10,6 +10,8 @@ export interface Order {
     deliveryTypeId?: number;
     statusOrder?: string;
     createdAt?: string;
+    sum?: number;
+    paymentStatus?: string;
     productsInOrder?: Array<ProductInOrder>
 }
 

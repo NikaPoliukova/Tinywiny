@@ -21,6 +21,7 @@ import ProductsUpdatePage from "./pages/AdminPage/ProductsUpdatePage";
 import {CreateProduct} from "./pages/AdminPage/CreateNewProductPage";
 import Contacts from "./pages/ContactPage/ContactPage";
 import ReviewForUsers from "./pages/ReviewsPage/ReviewForUsers";
+import {UpdateUserPage} from "./pages/UserPage/UpdateUserPage";
 
 
 function App() {
@@ -48,7 +49,7 @@ function App() {
             <Route path={'/admin'} element={<AdminPage/>}/>
             <Route path={'/admin/products/:productId'} element={<UpdateProductPage/>}/>
             <Route path={'/admin/products'} element={<ProductsUpdatePage/>}/>
-
+            <Route path={'/users/update/:userId'} element={<UpdateUserPage/>}/>
         </Routes>
     );
 }

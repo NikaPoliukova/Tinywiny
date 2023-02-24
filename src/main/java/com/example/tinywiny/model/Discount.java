@@ -30,7 +30,7 @@ public class Discount {
 
   private int size;
 
-  @OneToMany(mappedBy = "discount", fetch = FetchType.LAZY,cascade = {CascadeType.ALL})
-  private List<Order> orders = new ArrayList<>();
+ /* @OneToMany(mappedBy = "discount", fetch = FetchType.LAZY,cascade = {CascadeType.ALL})
+  private List<ProductInBucket> productInBuckets = new ArrayList<>();*/
 
 }

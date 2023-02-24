@@ -35,7 +35,7 @@ export const AdminPage = () => {
                 <Button type="submit"
                         variant="contained"
                         sx={{mt: 3, mb: 2}}
-                        href="/reviews"> Open list reviews </Button>
+                        href="/admin/reviews"> Open list reviews </Button>
             </ Grid >
             <div>Просмотреть всех пользвоателей</div>
             < Grid  container spacing={4}>

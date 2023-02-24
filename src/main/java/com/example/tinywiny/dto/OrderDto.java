@@ -17,13 +17,13 @@ import java.util.List;
 public class OrderDto {
   Long orderId;
   String commentOrder;
-  Date createdAt;
-  String statusOrder;
-  String paymentStatus;
   Long userId;
   DeliveryInformationDto deliveryInformation;
   int deliveryTypeId;
-  int discountId;
+  String statusOrder;
+  Date createdAt;
+  String paymentStatus;
+   int sum;
   List<ProductInOrderDto> productsInOrder;
 
 

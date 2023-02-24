@@ -8,15 +8,17 @@ import Link from '@mui/material/Link';
 import GlobalStyles from '@mui/material/GlobalStyles';
 import {useSessionStore} from "../../Session";
 import {Icon} from "semantic-ui-react";
+import {useEffect, useState} from "react";
+import BucketService from "../../services/BucketService";
+import { Bucket } from 'model/Bucket';
 
 function PricingContent() {
     //const {userId} = useParams();
-    //const [bucket, setBucket] = useState<Bucket>();
+    const [bucket, setBucket] = useState<Bucket>();
     const user = useSessionStore(state => state.user);
 
-    // const bucket = BucketService.findBucketByUserId(Number(user.userId));
-    /* useEffect(() => {
-         BucketService.findBucketByBucketId(Number(userId))
+   /*useEffect(() => {
+         BucketService.findBucketByBucketId(Number(user.userId))
              .then(response => setBucket(response));
      }, []);*/
     return (

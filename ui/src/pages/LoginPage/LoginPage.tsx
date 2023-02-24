@@ -17,6 +17,9 @@ import AuthorizationService from "../../services/AuthorizationService";
 import {useNavigate} from 'react-router-dom';
 import {User} from "../../model/User";
 import HeaderForNoAuthorized from 'pages/component/HeaderForNoAuthorized';
+import UserService from "../../services/UserService";
+import {useEffect, useState} from "react";
+import {useSessionStore} from "../../Session";
 
 
 const theme = createTheme();
@@ -24,11 +27,10 @@ const theme = createTheme();
 export function SignIn() {
     const [userName, setUserName] = React.useState("");
     const [password, setPassword] = React.useState("");
-
+    const [userNew, setUser] = useState<User>();
     const user: User = {
         userName, password
     }
-
     const infoAlertType = "info" as AlertColor;
     const warningAlertType = "warning" as AlertColor;
     const successAlertType = "success" as AlertColor;
@@ -49,13 +51,16 @@ export function SignIn() {
         const authorizationStatus = await AuthorizationService.login(user);
         handleAlert(authorizationStatus);
 
+       AuthorizationService.getUser(userName,password)
+                .then(response => setUser(response));
+
     };
     const handleAlert = (status: number) => {
         if (status == 200) {
             setAlertType(successAlertType);
             setAlertTitle('Success');
             setAlertText('Ok');
-            navigate("/users/${user.userId}");
+            navigate("/products/type/toys");
             return;
         } else {
             setAlertType(warningAlertType);

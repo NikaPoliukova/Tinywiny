@@ -58,5 +58,10 @@ public class UserRestController {
     User user = userService.findUserByUserId(userId);
     return userConverter.toDto(user);
   }
+  @GetMapping("/user")
+  protected UserDto findUserByUserNameAndPassword(@RequestParam String userName,@RequestParam String password) {
+    User user = userService.findUserByUserNameAndPassword(userName,password);
+    return userConverter.toDto(user);
+  }
 
 }

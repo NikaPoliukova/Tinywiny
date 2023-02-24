@@ -3,13 +3,17 @@ import {Image} from "../model/Image";
 
 class ImageService {
 
-    async updateImage(image: Image): Promise<Image> {
-        const response =await axios.put<Image>('http://localhost:8080/api/v1/admin/products', image);
-        return response.data;
+    async updateImage(productId: number, image: File) {
+        const param = {productId: productId, image: image};
+        return axios.post('http://localhost:8080/api/v1admin/products/' +productId, {
+            data: param
+        });
     }
-    async deleteImage(image: Image): Promise<void> {
-        const response = await axios.delete('http://localhost:8080/api/v1/admin/products');
+
+    async deleteImage(productId: number): Promise<void> {
+        const response = await axios.delete('http://localhost:8080/api/v1/admin/products/image/' + productId);
         return response.data;
     }
 }
+
 export default new ImageService();

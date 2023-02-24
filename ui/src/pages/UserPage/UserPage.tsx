@@ -29,7 +29,9 @@ export const UserPage = () => {
 
                 <div className="col-lg-6">
                     <div className="card">
-                        <Button size="small">Update profile information</Button>
+                        <Button size="small"
+                                href={"/users/update/userId"}
+                        >Update profile information</Button>
                     </div>
                 </div>
                 <Card style={{width: 1000}}>
@@ -71,7 +73,7 @@ export const UserPage = () => {
                     sx={{mt: 1, mb: 1}}
                     to={'/orders/' + userId}
                 >
-                    Orders
+                    My orders
                 </Button>
                 <Footer/>
             </div>

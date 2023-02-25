@@ -8,12 +8,12 @@ import MyHeader from "../component/MyHeader";
 import {ProductInBucket} from "../../model/ProductInBucket";
 import {Product} from "../../model/Product";
 import {useSessionStore} from "../../Session";
+import ProductService from "../../services/ProductService";
 
 
 function BucketPage() {
     const [products, setProducts] = useState<Array<ProductInBucket>>([])
     const user = useSessionStore(state => state.user);
-    //const [userId, setUserId] = useState(Number);//ПОЛУЧИТЬ ИЗ СЕССИИ
     const {bucketId} = useParams();
     const id = Number(bucketId)
     const [count, setCount] = useState(1);
@@ -22,17 +22,17 @@ function BucketPage() {
     const [sumProducts, setSumProducts] = useState(0);
 
     const updateCountProduct = () => {
-         const productInBucket: ProductInBucket = {
-             productDto,
-             count,
-             bucketId: id
-         }
-         BucketService.updateCountProduct(productInBucket).then(() => navigate("/bucket/${bucketId}"))
-     }
+        const productInBucket: ProductInBucket = {
+            productDto,
+            count,
+            bucketId: id
+        }
+        BucketService.updateCountProduct(productInBucket).then(() => navigate("/bucket/${bucketId}"))
+    }
 
-     const deleteProduct = (id: number) => {
-                 BucketService.deleteProductInBucket(id).then(() => navigate("/bucket/${bucketId}"))
-     }
+    const deleteProduct = (id: number) => {
+        BucketService.deleteProductInBucket(id).then(() => navigate("/bucket/${bucketId}"))
+    }
 
     useEffect(() => {
         BucketService.findAllProductsInBucket(Number(bucketId))
@@ -40,6 +40,7 @@ function BucketPage() {
                 setProducts(response);
                 return products;
             })
+        BucketService.getSumProductInBucket(Number(bucketId)).then(sum=>setSumProducts(sum));
     }, []);
     console.log(sumProducts)
     return (
@@ -68,20 +69,23 @@ function BucketPage() {
                                         {item.productDto?.productName}
                                     </TableCell>
                                     <TableCell component="th" scope="row">
-                                        <button onClick={() => setCount(count +1)}> + </button>
+                                        <button type='button' className='count__up' onClick={() => setCount(count - 1)}>
+                                            <Icon name="plus"/>
+                                        </button>
                                         {item.count}
-                                        <button onClick={() => setCount(count -1)}> - </button>
+                                        <button type='button' className='count__down'
+                                                onClick={() => setCount(count + 1)}>
+                                            <Icon name="minus"/>
+                                        </button>
                                     </TableCell>
                                     <TableCell component="th" scope="row">
                                         {item.productDto?.price}
                                     </TableCell>
                                     <TableCell>
                                         <Button sx={{mt: 4}}
-                                            onClick={()=>deleteProduct(Number(item.id))}
+                                                onClick={() => deleteProduct(Number(item.id))}
                                         ><Icon name='delete' size='big'/>
                                         </Button>
-                                    </TableCell>
-                                    <TableCell>
                                     </TableCell>
                                 </TableRow>
                             ))}

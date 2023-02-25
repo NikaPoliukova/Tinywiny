@@ -27,8 +27,10 @@ const theme = createTheme();
 export default function Products() {
     const [products, setProducts] = useState<Array<Product>>([]);
     const {type} = useParams();
-    const [productInBucket, setProductInBucket] = useState<ProductInBucket>();
     const [bucket, setBucket] = useState<Bucket>();
+  //Как получить продукта айди
+    //достать пбакет айди из сессии юзер
+
     const user = useSessionStore(state => state.user);
     /* useEffect(() => {
          BucketService.findBucketByUserId(Number(user.userId))
@@ -39,10 +41,10 @@ export default function Products() {
             .then(response => setProducts(response));
     }, []);
     const navigate = useNavigate();
-    /*   const addProductInBucket = () => {
+  /* const addProductInBucket = () => {
          const productInBucket: ProductInBucket = {
-          //    productId,
-           //  bucketId
+           productId,
+          bucketId
 
           };
          BucketService.addProductInBucket(productInBucket).then(response => navigate("/products/toys"));

@@ -29,7 +29,7 @@ export default function CreateOrderPage() {
     const [bucket, setBucket] = useState<Bucket>();
 
     useEffect(() => {
-        BucketService.findAllProductsInBucket(Number(userId))
+        BucketService.findAllProductsInBucket(3)
             .then(response => setProducts(response));
     }, []);
     useEffect(() => {
@@ -45,9 +45,10 @@ export default function CreateOrderPage() {
         addressDelivery,
         userId
     }
-
+//Переложить продукты в ордеркарзину
     const navigate = useNavigate();
     const createOrder = () => {
+
         const order: Order = {
             commentOrder,
             userId,
@@ -56,6 +57,7 @@ export default function CreateOrderPage() {
             productsInOrder,
             sum: finalSum
         };
+
         OrderService.createOrder(order).then(response => navigate("/products/type/toys"));
         BucketService.deleteAllProductsInBucket(Number(bucket?.bucketId)).then(() => navigate("/products/type/toys") );
     }

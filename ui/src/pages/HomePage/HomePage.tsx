@@ -13,7 +13,9 @@ export default function GalleryPage() {
 
                 <p >
                    ABOUT TINY-WINY
+
                 </p>
+
             </Container>
             <Footer />
         </React.Fragment>

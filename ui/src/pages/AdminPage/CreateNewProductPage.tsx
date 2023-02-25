@@ -41,7 +41,7 @@ export function CreateProduct() {
             description,
             idType
         };
-        ProductService.createProduct(product).then(response => navigate("/products"));
+        ProductService.createProduct(product).then(() => navigate("/admin"));
     }
     const addImage = () => {
         const image: Image = {

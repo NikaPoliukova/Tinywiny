@@ -23,13 +23,13 @@ const OrdersPage = () => {
     const navigate = useNavigate();
     const statuses = ['NEW', 'PROCESS', 'FINISH'];
     const [statusOrder, setStatus] = useState<string>('');
-   //const [orderId, setOrderId] = useState(Number);
+    //const [orderId, setOrderId] = useState(Number);
 
     const options = statuses.map((status, orderId) => {
         return <option key={orderId}>{status}</option>;
     });
     const updateStatus = (orderId: number) => {
-        OrderService.updateOrderStatus(statusOrder, orderId).then(response => navigate("/orders"))
+        OrderService.updateOrderStatus(statusOrder, orderId).then(() => navigate("/admin"))
     }
 
     useEffect(() => {
@@ -41,7 +41,6 @@ const OrdersPage = () => {
     return (
         <div>
             <Header/>
-
             <Typography component="h1" variant="h5">
                 <h1>Orders</h1>
             </Typography>
@@ -50,7 +49,7 @@ const OrdersPage = () => {
                     <Table sx={{minWidth: 800}} aria-label="simple table">
                         <TableHead>
                             <TableRow>
-                                <TableCell align="center">orderId</TableCell>
+                                <TableCell align="center">Number order</TableCell>
                                 <TableCell align="center">statusOrder</TableCell>
                                 <TableCell align="center">commentOrder</TableCell>
                                 <TableCell align="center">userId</TableCell>
@@ -64,7 +63,7 @@ const OrdersPage = () => {
                                     key={order.orderId}
                                     sx={{'&:last-child td, &:last-child th': {border: 0}}}
                                 >
-                                    <TableCell component="th" scope="row" >
+                                    <TableCell component="th" scope="row">
                                         {order.orderId}
                                     </TableCell>
                                     <TableCell component="th" scope="row">
@@ -76,10 +75,9 @@ const OrdersPage = () => {
                                             </select>
                                         </Grid>
                                         <Button
-                                           // component={Link}
                                             type="submit"
                                             fullWidth
-                                           // onClick={updateStatus(Number(order.orderId))}
+                                            onClick={() => updateStatus(Number(order.orderId))}
                                         >
                                             update status
                                         </Button>

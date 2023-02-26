@@ -20,9 +20,9 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 
   @Override
   protected void configure(HttpSecurity http) throws Exception {
-    CustomAuthenticationFilter customAuthenticationFilter = new CustomAuthenticationFilter(authenticationManagerBean(),
-        secretKey);
-   customAuthenticationFilter.setFilterProcessesUrl("/api/v1/login");
+   // CustomAuthenticationFilter customAuthenticationFilter = new CustomAuthenticationFilter(authenticationManagerBean(),
+     //   secretKey);
+   //customAuthenticationFilter.setFilterProcessesUrl("/api/v1/login");
     http.csrf().disable();
     http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     http.authorizeRequests().antMatchers("/api/v1/token/refresh").permitAll();
@@ -30,7 +30,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 
 
     http.authorizeRequests().antMatchers("/**").permitAll();
-    http.addFilter(customAuthenticationFilter);
+    //http.addFilter(customAuthenticationFilter);
     http.addFilterBefore(new CustomAuthorizationFilter(secretKey), UsernamePasswordAuthenticationFilter.class);
   }
 }

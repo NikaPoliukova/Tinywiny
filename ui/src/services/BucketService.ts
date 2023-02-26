@@ -10,9 +10,9 @@ class BucketService {
     }
 
     async findBucketByUserId(userId: number): Promise<Bucket> {
-        const param = {userId: userId};
+        const params = {userId: userId};
         const response = await axios.get<Bucket>('http://localhost:8080/api/v1/bucket', {
-            data: param
+            params
         });
         return response.data;
     }
@@ -23,18 +23,18 @@ class BucketService {
     }
 
     async getSumWithDiscount(sum: number) {
-        const param = {sum: sum};
+        const params = {sum: sum};
         const response = await axios.get<number>('http://localhost:8080/api/v1/bucket/final-sum', {
-            data: param
+          params
         });
         return response.data;
     }
 
     async getSumProductInBucket(bucketId: number) {
-        const param = {bucketId: bucketId};
-        const response = await axios.get<number>('http://localhost:8080/api/v1/bucket/sum/all', {
-            data: param
-        });
+        const params = {bucketId: bucketId};
+        const response = await axios.get<number>('http://localhost:8080/api/v1/bucket/sum/all',
+            {params}
+        );
         return response.data;
     }
 
@@ -44,9 +44,9 @@ class BucketService {
     }
 
     async deleteProductInBucket(id: number): Promise<void> {
-        const param = {id: id};
+        const params = {productInBucketId: id};
         const response = await axios.delete('http://localhost:8080/api/v1/bucket', {
-            data: param
+           params:params
         });
         return response.data;
     }

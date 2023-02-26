@@ -14,6 +14,7 @@ import ProductService from "../../services/ProductService";
 function BucketPage() {
     const [products, setProducts] = useState<Array<ProductInBucket>>([])
     const user = useSessionStore(state => state.user);
+
     const {bucketId} = useParams();
     const id = Number(bucketId)
     const [count, setCount] = useState(1);
@@ -27,11 +28,11 @@ function BucketPage() {
             count,
             bucketId: id
         }
-        BucketService.updateCountProduct(productInBucket).then(() => navigate("/bucket/${bucketId}"))
+        BucketService.updateCountProduct(productInBucket).then(() => navigate(`/bucket/${bucketId}`))
     }
 
     const deleteProduct = (id: number) => {
-        BucketService.deleteProductInBucket(id).then(() => navigate("/bucket/${bucketId}"))
+        BucketService.deleteProductInBucket(id).then(() => navigate(`/bucket/${bucketId}`))
     }
 
     useEffect(() => {

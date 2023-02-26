@@ -42,7 +42,6 @@ public class BucketRestController {
     List<ProductInBucket> productInBucket = bucketService.findAllProductInBucket(bucket.getBucketId());
     return bucketService.getSumProductInBucket(productInBucket);
   }
-
 /*
   @GetMapping
   public BucketDto findBucketByBucketId(@RequestBody Long bucketId) {
@@ -73,7 +72,7 @@ public class BucketRestController {
   public void deleteProductInBucket(@RequestParam Long productInBucketId) {
     bucketService.deleteProductInBucket(productInBucketId);
   }
-  @DeleteMapping("{bucketId}")
+  @DeleteMapping("/{bucketId}")
   public void deleteAllProductsInBucket (@PathVariable Long bucketId){
     bucketService.deleteAllProductsInBucket(bucketId);
   }

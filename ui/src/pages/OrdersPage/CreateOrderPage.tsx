@@ -11,10 +11,12 @@ import OrderService from "../../services/OrderService";
 import BucketService from "../../services/BucketService";
 import {ProductInBucket} from "../../model/ProductInBucket";
 import Container from "@mui/material/Container";
-import { Bucket } from 'model/Bucket';
+import {Bucket} from 'model/Bucket';
+import SessionService from "../../services/SessionService";
 
 
 export default function CreateOrderPage() {
+    const user = SessionService.getSession();
     const [userId, setUserId] = useState(1);//ДОСТАТЬ ИЗ СЕССИИ
     const [customerName, setFirstName] = useState('');
     const [customerLastName, setLastName] = useState('');
@@ -29,14 +31,22 @@ export default function CreateOrderPage() {
     const [bucket, setBucket] = useState<Bucket>();
 
     useEffect(() => {
-        BucketService.findAllProductsInBucket(3)
-            .then(response => setProducts(response));
-    }, []);
-    useEffect(() => {
-        BucketService.findBucketByUserId(Number(userId))
+        BucketService.findBucketByUserId(Number(2))
             .then(bucket => setBucket(bucket));
     }, []);
 
+    useEffect(() => {
+        BucketService.findAllProductsInBucket(Number(2))
+            .then(response => {
+                setProducts(response);
+                return products;
+            })
+        BucketService.getSumProductInBucket(Number(2)).then(sum => {
+            setSumProducts(sum);
+            return sumProducts;
+        })
+        BucketService.getSumWithDiscount(sumProducts).then(finalSum => setFinalSum(finalSum));
+    }, []);
 
     const deliveryInformation: DeliveryInformation = {
         customerName,
@@ -45,7 +55,8 @@ export default function CreateOrderPage() {
         addressDelivery,
         userId
     }
-//Переложить продукты в ордеркарзину
+//Переложить продукты в ордер карзину
+
     const navigate = useNavigate();
     const createOrder = () => {
 
@@ -59,7 +70,7 @@ export default function CreateOrderPage() {
         };
 
         OrderService.createOrder(order).then(response => navigate("/products/type/toys"));
-        BucketService.deleteAllProductsInBucket(Number(bucket?.bucketId)).then(() => navigate("/products/type/toys") );
+        BucketService.deleteAllProductsInBucket(Number(bucket?.bucketId)).then(() => navigate("/products/type/toys"));
     }
     return (
         <React.Fragment>
@@ -112,7 +123,8 @@ export default function CreateOrderPage() {
                         </TableBody>
                     </Table>
                 </TableContainer>
-                <div>Sum order consist:</div>
+                <div>Sum order consist: {sumProducts}</div>
+                <div>Final sum with discount : {finalSum}</div>
             </Card>
             <h2> Add information</h2>
             <Form>
@@ -147,8 +159,6 @@ export default function CreateOrderPage() {
                         <option value={2}>SDEK</option>
                     </select>
                 </Form.Group>
-                <div>Sum for products : {sumProducts}</div>
-                <div>Final sum with discount : {finalSum}</div>
                 <Button color="secondary"
                         variant="contained"
                         onClick={createOrder}

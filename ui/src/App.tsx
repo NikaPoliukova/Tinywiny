@@ -38,7 +38,6 @@ function App() {
             <Route path={'/products/:productId'} element={<ProductPage/>}/>
             <Route path={'/orders'} element={<OrdersPage/>}/>
             <Route path={'/bucket/:bucketId'} element={<BucketPage/>}/>
-
             <Route path={'/reviews'} element={<ReviewForUsers/>}/>
             <Route path={'/orders/:userId'} element={<MyOrdersPage/>}/>
             <Route path={'/orders/order/:orderId'} element={<OrderPage/>}/>

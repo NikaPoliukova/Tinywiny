@@ -22,7 +22,7 @@ class ProductService {
     }
 
     async updateProduct(productId : number, product: Product): Promise<void> {
-        const response = await axios.put('http://localhost:8080/api/v1/admin/products' + productId, product);
+        const response = await axios.put('http://localhost:8080/api/v1/admin/products/' + productId, product);
         return response.data;
     }
 

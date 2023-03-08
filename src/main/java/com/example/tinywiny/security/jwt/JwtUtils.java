@@ -1,19 +1,90 @@
 package com.example.tinywiny.security.jwt;
 
+import com.example.tinywiny.model.User;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.MalformedJwtException;
+import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.SignatureException;
+import io.jsonwebtoken.UnsupportedJwtException;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
-import com.auth0.jwt.JWT;
-import com.auth0.jwt.JWTVerifier;
-import com.auth0.jwt.algorithms.Algorithm;
-import com.auth0.jwt.interfaces.DecodedJWT;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.User;
-
-import java.util.ArrayList;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Date;
-import java.util.List;
-import java.util.stream.Collectors;
 
+@Slf4j
+@Component
 public class JwtUtils {
+
+  @Value("${security.secretKey}")
+  private String secretKey;
+  @Value("${security.refresh_secret}")
+  private static String jwtRefreshSecret;
+
+  public String generateAccessToken(User user) {
+    LocalDateTime now = LocalDateTime.now();
+    Instant accessExpirationInstant = now.plusMinutes(15).atZone(ZoneId.systemDefault()).toInstant();
+    Date date = Date.from(accessExpirationInstant);
+    return Jwts.builder()
+        .setSubject(user.getUserName())
+        .setExpiration(date)
+        .signWith(SignatureAlgorithm.HS512, secretKey)
+        .claim("role", user.getRole())
+        .claim("userId", user.getUserId())
+        .compact();
+  }
+
+  public String generateRefreshToken(String login) {
+    LocalDateTime now = LocalDateTime.now();
+    Instant refreshExpirationInstant = now.plusDays(30).atZone(ZoneId.systemDefault()).toInstant();
+    Date date = Date.from(refreshExpirationInstant);
+    return Jwts.builder()
+        .setSubject(login)
+        .setExpiration(date)
+        .signWith(SignatureAlgorithm.HS512, jwtRefreshSecret)
+        .compact();
+  }
+
+  public boolean validateToken(String token) {
+    try {
+      Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token);
+      return true;
+    } catch (ExpiredJwtException expEx) {
+      log.info("Token expired");
+    } catch (UnsupportedJwtException unsEx) {
+      log.info("Unsupported jwt");
+    } catch (MalformedJwtException mjEx) {
+      log.info("Malformed jwt");
+    } catch (SignatureException sEx) {
+      log.info("Invalid signature");
+    } catch (Exception e) {
+      log.info("invalid token");
+    }
+    return false;
+  }
+
+  public boolean validateAccessToken(String accessToken) {
+    return validateToken(accessToken);
+  }
+
+  public boolean validateRefreshToken(String refreshToken) {
+    return validateToken(refreshToken);
+  }
+
+  public String getLoginFromToken(String token) {
+    Claims claims = Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody();
+    return claims.getSubject();
+  }
+
+  public Claims getTokenClaims(final String token) {
+    return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody();
+  }
+/*
   public static String generateAccessToken(User user, String requestUrl, Algorithm algorithm) {
     return JWT.create()
         .withSubject(user.getUsername())
@@ -68,4 +139,12 @@ public class JwtUtils {
     JWTVerifier verifier = JWT.require(algorithm).build();
     return verifier.verify(token);
   }
+
+  public static String generateAccessTokenV2(com.example.tinywiny.model.User user) {
+    return JWT.create()
+        .withSubject(user.getUserId().toString())
+        .withExpiresAt(new Date(System.currentTimeMillis() + 60 * 60 * 1000)) //TODO move it to property
+        .withClaim("login", user.getUserName())
+        .sign(Algorithm.HMAC256("nika".getBytes()));
+  }*/
 }

@@ -1,11 +1,12 @@
 import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
-import Button from '@mui/material/Button';
+
 import CssBaseline from '@mui/material/CssBaseline';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
 import GlobalStyles from '@mui/material/GlobalStyles';
+import {Button} from 'semantic-ui-react'
 
 function NoAuthorized() {
     return (
@@ -48,11 +49,15 @@ function NoAuthorized() {
                             Contacts
                         </Link>
                     </nav>
-                    <Button href="/login" variant="outlined" sx={{my: 1, mx: 1.5}}>
-                        Login
+                    <Button basic color='brown'
+                            content='Login'
+                            href="/login" variant="outlined" sx={{my: 1, mx: 1.5}}>
+
                     </Button>
-                    <Button href="/registration" variant="outlined" sx={{my: 1, mx: 1.5}}>
-                        Registration
+                    <Button
+                        basic color='brown'
+                        content='Registration'
+                        href="/registration" variant="outlined" sx={{my: 1, mx: 1.5}}>
                     </Button>
                 </Toolbar>
             </AppBar>

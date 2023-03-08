@@ -1,6 +1,7 @@
 import axios from "axios";
 import {Bucket} from "../model/Bucket";
 import {ProductInBucket} from "../model/ProductInBucket";
+import {OrderSumDto} from "../model/OrderSumDto";
 
 class BucketService {
 
@@ -10,10 +11,8 @@ class BucketService {
     }
 
     async findBucketByUserId(userId: number): Promise<Bucket> {
-        const params = {userId: userId};
-        const response = await axios.get<Bucket>('http://localhost:8080/api/v1/bucket', {
-            params
-        });
+        const params = {userId: userId}
+        const response = await axios.get<Bucket>('http://localhost:8080/api/v1/bucket' ,{params});
         return response.data;
     }
 
@@ -22,17 +21,17 @@ class BucketService {
         return response.data;
     }
 
-    async getSumWithDiscount(sum: number) {
+   /* async getSumWithDiscount(sum: number) {
         const params = {sum: sum};
         const response = await axios.get<number>('http://localhost:8080/api/v1/bucket/final-sum', {
-          params
+            params
         });
         return response.data;
-    }
+    }*/
 
-    async getSumProductInBucket(bucketId: number) {
+    async getSumProductInBucket(bucketId: number): Promise<OrderSumDto> {
         const params = {bucketId: bucketId};
-        const response = await axios.get<number>('http://localhost:8080/api/v1/bucket/sum/all',
+        const response = await axios.get<OrderSumDto>('http://localhost:8080/api/v1/bucket/sum/all',
             {params}
         );
         return response.data;
@@ -46,7 +45,7 @@ class BucketService {
     async deleteProductInBucket(id: number): Promise<void> {
         const params = {productInBucketId: id};
         const response = await axios.delete('http://localhost:8080/api/v1/bucket', {
-           params:params
+            params: params
         });
         return response.data;
     }

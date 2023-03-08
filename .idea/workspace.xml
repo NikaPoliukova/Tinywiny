@@ -13,15 +13,119 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4dd877d4-850b-4093-ba42-62db28456f03" name="Changes" comment="delete filter">
+    <list default="true" id="4dd877d4-850b-4093-ba42-62db28456f03" name="Changes" comment="work delete product in bucket, and sum on order and bucket pages">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/config/ExceptionHandlerFilter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/dto/CredentialsDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/dto/JwtResponseDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/dto/OrderSumDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/dto/RefreshTokenDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/dto/UserRefreshToken.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/security/PrincipalUser.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/security/filter/JwtFilter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ui/public/image/3771518.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ui/public/image/images.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ui/public/image/изображение_viber_2023-01-15_00-34-24-976.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ui/public/image/изображение_viber_2023-01-15_00-34-25-567.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ui/public/image/изображение_viber_2023-01-15_00-35-33-319.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ui/src/model/OrderSumDto.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ui/src/pages/LoginPage/SignInStore.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ui/src/pages/component/Authentication.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/config/ApplicationSecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/config/ApplicationSecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/config/MvcConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/config/MvcConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/config/SessionConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/config/SessionConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/controller/BucketRestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/controller/BucketRestController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/controller/LoginRestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/controller/LoginRestController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/controller/OrderRestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/controller/OrderRestController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/controller/ProductsRestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/controller/ProductsRestController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/controller/ReviewRestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/controller/ReviewRestController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/controller/UserRestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/controller/UserRestController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/converter/BucketConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/converter/BucketConverter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/converter/DiscountConverter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/converter/ImageConverter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/converter/OrderConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/converter/OrderConverter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/converter/ProductConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/converter/ProductConverter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/converter/ProductInBucketConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/converter/ProductInBucketConverter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/converter/ProductInOrderConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/converter/ProductInOrderConverter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/dto/BucketDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/dto/BucketDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/dto/DiscountDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/dto/ImageDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/dto/OrderDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/dto/OrderDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/dto/ProductDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/dto/ProductDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/dto/ProductInBucketDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/dto/ProductInBucketDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/dto/ProductInOrderDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/dto/ProductInOrderDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/dto/TokensDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/dto/TypeProduct.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/dto/TypeProduct.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/handler/ExceptionMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/handler/ExceptionMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/model/Bucket.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/model/Bucket.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/model/DeliveryInformation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/model/DeliveryInformation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/model/DeliveryType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/model/DeliveryType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/model/Discount.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/model/Discount.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/model/Image.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/model/Image.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/model/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/model/Order.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/model/PostOffice.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/model/PostOffice.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/model/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/model/Product.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/model/ProductInBucket.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/model/ProductInBucket.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/model/ProductInOrder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/model/ProductInOrder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/model/Review.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/model/Review.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/model/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/repository/BucketRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/repository/BucketRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/repository/DeliveryInformationRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/repository/DeliveryInformationRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/repository/DeliveryTypeRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/repository/DeliveryTypeRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/repository/ImageRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/repository/ImageRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/repository/OrderRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/repository/OrderRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/repository/ProductRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/repository/ProductRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/repository/ReviewRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/repository/ReviewRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/repository/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/repository/UserRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/security/filter/CustomAuthenticationFilter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/security/filter/CustomAuthorizationFilter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/security/jwt/JwtUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/security/jwt/JwtUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/service/BucketService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/service/BucketService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/service/DeliveryInformationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/service/DeliveryInformationService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/service/DiscountService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/service/DiscountService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/service/ImageService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/service/ImageService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/service/JwtTokenService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/service/OrderService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/service/OrderService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/service/ProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/service/ProductService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/service/TypeProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/service/TypeProductService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/service/UserDetailsServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/security/UserDetailsServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/db.migration/V4__Create_products_table.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/db.migration/V4__Create_products_table.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/db.migration/V8__Create_delivery_information_table.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/db.migration/V8__Create_delivery_information_table.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/ui/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/ui/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ui/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/src/Session.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/src/model/Bucket.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/model/Bucket.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/src/model/Image.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/model/Image.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/src/model/Order.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/model/Order.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/src/model/Product.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/model/Product.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/src/pages/AdminPage/CreateNewProductPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/pages/AdminPage/CreateNewProductPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/src/pages/AdminPage/OrdersPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/pages/AdminPage/OrdersPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/src/pages/AdminPage/UpdateProductPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/pages/AdminPage/UpdateProductPage.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ui/src/pages/BucketPage/BucketPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/pages/BucketPage/BucketPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/src/pages/ContactPage/ContactPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/pages/ContactPage/ContactPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/src/pages/GalleryPage/GalleryPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/pages/GalleryPage/GalleryPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/src/pages/HomePage/HomePage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/pages/HomePage/HomePage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/src/pages/LoginPage/LoginPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/pages/LoginPage/LoginPage.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ui/src/pages/OrdersPage/CreateOrderPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/pages/OrdersPage/CreateOrderPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/src/pages/ProductsPage/ProductsPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/pages/ProductsPage/ProductsPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/src/pages/RegistrationPage/RegistryPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/pages/RegistrationPage/RegistryPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/src/pages/ReviewsPage/ReviewForUsers.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/pages/ReviewsPage/ReviewForUsers.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/src/pages/UserPage/UserPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/pages/UserPage/UserPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/src/pages/component/HeaderForNoAuthorized.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/pages/component/HeaderForNoAuthorized.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/src/pages/component/MyHeader.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/pages/component/MyHeader.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/src/pages/component/SideBar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/pages/component/SideBar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/src/services/AuthorizationService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/services/AuthorizationService.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ui/src/services/BucketService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/services/BucketService.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/src/services/ImageService.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/src/services/OrderService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/services/OrderService.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ui/src/services/ProductService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/services/ProductService.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/src/services/SessionService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/services/SessionService.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/src/services/TypeProductService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/services/TypeProductService.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/src/services/UserService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/services/UserService.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,8 +137,8 @@
       <list>
         <option value="HTML File" />
         <option value="TypeScript JSX File" />
-        <option value="Class" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -52,6 +156,7 @@
   <component name="ProjectId" id="2Jv73Zi4usITwo4UyB7q1KECBE4" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
+    <option name="autoscrollFromSource" value="true" />
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
@@ -82,11 +187,12 @@
     <property name="ts.external.directory.path" value="D:\project\TeachMeSkills\Tinywiny\ui\node_modules\typescript\lib" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\project\TeachMeSkills\Tinywiny\ui\src\pages\AdminPage" />
-      <recent name="D:\project\TeachMeSkills\Tinywiny\ui\src\pages\OrdersPage" />
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\project\TeachMeSkills\Tinywiny\ui\src\pages\component" />
       <recent name="D:\project\TeachMeSkills\Tinywiny\ui\src" />
-      <recent name="D:\project\TeachMeSkills\Tinywiny\ui\src\pages\OrderPage\CreateOrderPage" />
+      <recent name="D:\project\TeachMeSkills\Tinywiny\ui\node_modules" />
+      <recent name="D:\project\TeachMeSkills\Tinywiny\ui" />
+      <recent name="D:\project\TeachMeSkills\Tinywiny\ui\public" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.example.tinywiny.service.amazonService" />
@@ -95,12 +201,12 @@
       <recent name="com.example.tinywiny.dto" />
       <recent name="com.example.tinywiny.service" />
     </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\project\TeachMeSkills\Tinywiny\ui\src\pages\component" />
-      <recent name="D:\project\TeachMeSkills\Tinywiny\ui\src" />
-      <recent name="D:\project\TeachMeSkills\Tinywiny\ui\node_modules" />
-      <recent name="D:\project\TeachMeSkills\Tinywiny\ui" />
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\project\TeachMeSkills\Tinywiny\ui\public\image" />
       <recent name="D:\project\TeachMeSkills\Tinywiny\ui\public" />
+      <recent name="D:\project\TeachMeSkills\Tinywiny\ui\src\image" />
+      <recent name="D:\project\TeachMeSkills\Tinywiny\ui\src\images" />
+      <recent name="D:\project\TeachMeSkills\Tinywiny\ui\src\pages\AdminPage" />
     </key>
   </component>
   <component name="RunManager" selected="Spring Boot.MainApplication">
@@ -300,7 +406,23 @@
       <workItem from="1677305403861" duration="147000" />
       <workItem from="1677318452354" duration="1206000" />
       <workItem from="1677386042488" duration="641000" />
-      <workItem from="1677405665681" duration="4959000" />
+      <workItem from="1677405665681" duration="12157000" />
+      <workItem from="1677436188834" duration="4997000" />
+      <workItem from="1677491312118" duration="6977000" />
+      <workItem from="1677512255657" duration="21755000" />
+      <workItem from="1677577558342" duration="6920000" />
+      <workItem from="1677602451409" duration="6460000" />
+      <workItem from="1677660850554" duration="23620000" />
+      <workItem from="1677744392787" duration="2583000" />
+      <workItem from="1677836386322" duration="6200000" />
+      <workItem from="1677873785743" duration="8202000" />
+      <workItem from="1677923612331" duration="3025000" />
+      <workItem from="1677927494221" duration="6705000" />
+      <workItem from="1677955827332" duration="5330000" />
+      <workItem from="1678127682116" duration="10467000" />
+      <workItem from="1678184452992" duration="1452000" />
+      <workItem from="1678211097140" duration="9500000" />
+      <workItem from="1678257497339" duration="29235000" />
     </task>
     <task id="LOCAL-00001" summary="added more classes">
       <created>1675167662551</created>
@@ -596,7 +718,14 @@
       <option name="project" value="LOCAL" />
       <updated>1677405719339</updated>
     </task>
-    <option name="localTasksCounter" value="43" />
+    <task id="LOCAL-00043" summary="work delete product in bucket, and sum on order and bucket pages">
+      <created>1677413304613</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1677413304613</updated>
+    </task>
+    <option name="localTasksCounter" value="44" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -615,7 +744,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="work createProduct" />
     <MESSAGE value="work find by type product" />
     <MESSAGE value="work update product" />
     <MESSAGE value="work product controller all" />
@@ -640,9 +768,14 @@
     <MESSAGE value="login (does not have HTTP ok status)" />
     <MESSAGE value="add index and package json files" />
     <MESSAGE value="delete filter" />
-    <option name="LAST_COMMIT_MESSAGE" value="delete filter" />
+    <MESSAGE value="work delete product in bucket, and sum on order and bucket pages" />
+    <option name="LAST_COMMIT_MESSAGE" value="work delete product in bucket, and sum on order and bucket pages" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="395" y="91" key="#Inspections" timestamp="1677616579289">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="395" y="91" key="#Inspections/0.0.1536.824@0.0.1536.824" timestamp="1677616579289" />
     <state x="361" y="53" key="#Plugins" timestamp="1674550738479">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -655,18 +788,18 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="206" y="254" key="#SQL_Dialects/0.0.1536.824@0.0.1536.824" timestamp="1675935983583" />
-    <state x="447" y="135" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1675196326240">
+    <state x="447" y="135" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1677663272296">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="447" y="135" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1675196326240" />
+    <state x="447" y="135" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1677663272296" />
     <state x="510" y="214" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1676141961109">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="510" y="214" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1536.824@0.0.1536.824" timestamp="1676141961109" />
-    <state x="898" y="99" key="#com.intellij.ide.util.MemberChooser" timestamp="1675413397154">
+    <state x="898" y="99" key="#com.intellij.ide.util.MemberChooser" timestamp="1677874035766">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="898" y="99" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1675413397154" />
+    <state x="898" y="99" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1677874035766" />
     <state x="415" y="337" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog" timestamp="1674730011488">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -675,26 +808,26 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="551" y="281" width="433" height="267" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1536.824@0.0.1536.824" timestamp="1676719991383" />
-    <state x="499" y="159" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1677059582877">
+    <state x="499" y="159" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1678287707476">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="499" y="159" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.824@0.0.1536.824" timestamp="1677059582877" />
-    <state x="243" y="231" width="826" height="593" key="#xdebugger.evaluate" timestamp="1675592186816">
+    <state x="499" y="159" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.824@0.0.1536.824" timestamp="1678287707476" />
+    <state x="607" y="130" width="826" height="593" key="#xdebugger.evaluate" timestamp="1678288742623">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="243" y="231" width="826" height="593" key="#xdebugger.evaluate/0.0.1536.824@0.0.1536.824" timestamp="1675592186816" />
-    <state x="108" y="67" width="1350" height="638" key="DiffContextDialog" timestamp="1677408217947">
+    <state x="607" y="130" width="826" height="593" key="#xdebugger.evaluate/0.0.1536.824@0.0.1536.824" timestamp="1678288742623" />
+    <state x="108" y="67" width="1350" height="638" key="DiffContextDialog" timestamp="1677700848788">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="108" y="67" width="1350" height="638" key="DiffContextDialog/0.0.1536.824@0.0.1536.824" timestamp="1677408217947" />
-    <state x="549" y="167" key="FileChooserDialogImpl" timestamp="1675077709804">
+    <state x="108" y="67" width="1350" height="638" key="DiffContextDialog/0.0.1536.824@0.0.1536.824" timestamp="1677700848788" />
+    <state x="549" y="167" key="FileChooserDialogImpl" timestamp="1677699827917">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1675077709804" />
-    <state x="593" y="314" key="Github.CreateGistDialog" timestamp="1675594364092">
+    <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1677699827917" />
+    <state x="593" y="314" key="Github.CreateGistDialog" timestamp="1677959122689">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="593" y="314" key="Github.CreateGistDialog/0.0.1536.824@0.0.1536.824" timestamp="1675594364092" />
+    <state x="593" y="314" key="Github.CreateGistDialog/0.0.1536.824@0.0.1536.824" timestamp="1677959122689" />
     <state x="647" y="310" key="Github.ShareDialog" timestamp="1675079162002">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -703,82 +836,90 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="553" y="110" key="Github.UntrackedFilesDialog/0.0.1536.824@0.0.1536.824" timestamp="1675079047942" />
-    <state width="1493" height="213" key="GridCell.Tab.0.bottom" timestamp="1677411199967">
+    <state width="1493" height="200" key="GridCell.Tab.0.bottom" timestamp="1678303559004">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="213" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1677411199967" />
+    <state width="1493" height="200" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1678303559004" />
     <state width="1493" height="320" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1674736178189" />
-    <state width="1493" height="213" key="GridCell.Tab.0.center" timestamp="1677411199967">
+    <state width="1493" height="200" key="GridCell.Tab.0.center" timestamp="1678303559004">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="213" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1677411199967" />
+    <state width="1493" height="200" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1678303559004" />
     <state width="1493" height="320" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1674736178183" />
-    <state width="1493" height="213" key="GridCell.Tab.0.left" timestamp="1677411199967">
+    <state width="1493" height="200" key="GridCell.Tab.0.left" timestamp="1678303559004">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="213" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1677411199967" />
+    <state width="1493" height="200" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1678303559004" />
     <state width="1493" height="320" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1674736178179" />
-    <state width="1493" height="213" key="GridCell.Tab.0.right" timestamp="1677411199967">
+    <state width="1493" height="200" key="GridCell.Tab.0.right" timestamp="1678303559004">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="213" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1677411199967" />
+    <state width="1493" height="200" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1678303559004" />
     <state width="1493" height="320" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1674736178187" />
-    <state width="1493" height="213" key="GridCell.Tab.1.bottom" timestamp="1677411199967">
+    <state width="1493" height="200" key="GridCell.Tab.1.bottom" timestamp="1678303559004">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="213" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1677411199967" />
+    <state width="1493" height="200" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1678303559004" />
     <state width="1493" height="320" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1674736178202" />
-    <state width="1493" height="213" key="GridCell.Tab.1.center" timestamp="1677411199967">
+    <state width="1493" height="200" key="GridCell.Tab.1.center" timestamp="1678303559004">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="213" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1677411199967" />
+    <state width="1493" height="200" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1678303559004" />
     <state width="1493" height="320" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1674736178196" />
-    <state width="1493" height="213" key="GridCell.Tab.1.left" timestamp="1677411199967">
+    <state width="1493" height="200" key="GridCell.Tab.1.left" timestamp="1678303559004">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="213" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1677411199967" />
+    <state width="1493" height="200" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1678303559004" />
     <state width="1493" height="320" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1674736178192" />
-    <state width="1493" height="213" key="GridCell.Tab.1.right" timestamp="1677411199967">
+    <state width="1493" height="200" key="GridCell.Tab.1.right" timestamp="1678303559004">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="213" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1677411199967" />
+    <state width="1493" height="200" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1678303559004" />
     <state width="1493" height="320" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1674736178199" />
-    <state width="1493" height="213" key="GridCell.Tab.2.bottom" timestamp="1677411199968">
+    <state width="1493" height="200" key="GridCell.Tab.2.bottom" timestamp="1678303559004">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="213" key="GridCell.Tab.2.bottom/0.0.1536.824@0.0.1536.824" timestamp="1677411199968" />
+    <state width="1493" height="200" key="GridCell.Tab.2.bottom/0.0.1536.824@0.0.1536.824" timestamp="1678303559004" />
     <state width="1493" height="320" key="GridCell.Tab.2.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1674736178204" />
-    <state width="1493" height="213" key="GridCell.Tab.2.center" timestamp="1677411199968">
+    <state width="1493" height="200" key="GridCell.Tab.2.center" timestamp="1678303559004">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="213" key="GridCell.Tab.2.center/0.0.1536.824@0.0.1536.824" timestamp="1677411199968" />
+    <state width="1493" height="200" key="GridCell.Tab.2.center/0.0.1536.824@0.0.1536.824" timestamp="1678303559004" />
     <state width="1493" height="320" key="GridCell.Tab.2.center/0.0.1920.1040@0.0.1920.1040" timestamp="1674736178203" />
-    <state width="1493" height="213" key="GridCell.Tab.2.left" timestamp="1677411199968">
+    <state width="1493" height="200" key="GridCell.Tab.2.left" timestamp="1678303559004">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="213" key="GridCell.Tab.2.left/0.0.1536.824@0.0.1536.824" timestamp="1677411199968" />
+    <state width="1493" height="200" key="GridCell.Tab.2.left/0.0.1536.824@0.0.1536.824" timestamp="1678303559004" />
     <state width="1493" height="320" key="GridCell.Tab.2.left/0.0.1920.1040@0.0.1920.1040" timestamp="1674736178203" />
-    <state width="1493" height="213" key="GridCell.Tab.2.right" timestamp="1677411199968">
+    <state width="1493" height="200" key="GridCell.Tab.2.right" timestamp="1678303559004">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="213" key="GridCell.Tab.2.right/0.0.1536.824@0.0.1536.824" timestamp="1677411199968" />
+    <state width="1493" height="200" key="GridCell.Tab.2.right/0.0.1536.824@0.0.1536.824" timestamp="1678303559004" />
     <state width="1493" height="320" key="GridCell.Tab.2.right/0.0.1920.1040@0.0.1920.1040" timestamp="1674736178204" />
-    <state x="299" y="67" key="Maven.ArtifactSearchDialog" timestamp="1677148617068">
+    <state x="299" y="67" key="Maven.ArtifactSearchDialog" timestamp="1677931231416">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="299" y="67" key="Maven.ArtifactSearchDialog/0.0.1536.824@0.0.1536.824" timestamp="1677148617068" />
+    <state x="299" y="67" key="Maven.ArtifactSearchDialog/0.0.1536.824@0.0.1536.824" timestamp="1677931231416" />
     <state x="562" y="115" key="RollbackChangesDialog" timestamp="1676927010223">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="562" y="115" key="RollbackChangesDialog/0.0.1536.824@0.0.1536.824" timestamp="1676927010223" />
-    <state x="249" y="0" key="SettingsEditor" timestamp="1676277636229">
+    <state x="249" y="0" key="SettingsEditor" timestamp="1678275781899">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="249" y="0" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1676277636229" />
-    <state x="361" y="132" key="Vcs.Push.Dialog.v2" timestamp="1677405721293">
+    <state x="249" y="0" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1678275781899" />
+    <state width="560" height="446" key="SwitcherDM" timestamp="1677930539267">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="361" y="132" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1677405721293" />
+    <state width="560" height="446" key="SwitcherDM/0.0.1536.824@0.0.1536.824" timestamp="1677930539267" />
+    <state x="361" y="132" key="Vcs.Push.Dialog.v2" timestamp="1677413378145">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="361" y="132" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1677413378145" />
+    <state width="775" height="419" key="XDebugger.FullValuePopup" timestamp="1678286672689">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="775" height="419" key="XDebugger.FullValuePopup/0.0.1536.824@0.0.1536.824" timestamp="1678286672689" />
     <state x="349" y="67" key="com.intellij.database.dbimport.ImportDialog" timestamp="1674672836094">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -791,14 +932,18 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="578" y="326" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.824@0.0.1536.824" timestamp="1676239637798" />
-    <state x="217" y="141" width="1102" height="591" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2" timestamp="1675770134250">
+    <state x="540" y="159" key="com.intellij.testIntegration.createTest.CreateTestDialog" timestamp="1677707546861">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="217" y="141" width="1102" height="591" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/0.0.1536.824@0.0.1536.824" timestamp="1675770134250" />
-    <state x="229" y="177" width="892" height="620" key="find.popup" timestamp="1677409715662">
+    <state x="540" y="159" key="com.intellij.testIntegration.createTest.CreateTestDialog/0.0.1536.824@0.0.1536.824" timestamp="1677707546861" />
+    <state x="217" y="141" width="1102" height="628" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2" timestamp="1678290214475">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="229" y="177" width="892" height="620" key="find.popup/0.0.1536.824@0.0.1536.824" timestamp="1677409715662" />
+    <state x="217" y="141" width="1102" height="628" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/0.0.1536.824@0.0.1536.824" timestamp="1678290214475" />
+    <state x="229" y="177" width="892" height="620" key="find.popup" timestamp="1678306215593">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="229" y="177" width="892" height="620" key="find.popup/0.0.1536.824@0.0.1536.824" timestamp="1678306215593" />
     <state x="550" y="125" key="git4idea.branch.GitSmartOperationDialog" timestamp="1676632206659">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -807,42 +952,65 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="447" y="290" key="refactoring.ChangeSignatureDialog/0.0.1536.824@0.0.1536.824" timestamp="1675014427362" />
-    <state x="425" y="187" key="run.anything.popup" timestamp="1677145246640">
+    <state x="425" y="187" key="run.anything.popup" timestamp="1677530662377">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="425" y="187" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1677145246640" />
-    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1677180961741">
+    <state x="425" y="187" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1677530662377" />
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1677707404470">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1677180961741" />
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1677707404470" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/com/example/tinywiny/repository/ReviewRepository.java</url>
-          <line>18</line>
+          <line>16</line>
           <properties class="com.example.tinywiny.repository.ReviewRepository" method="deleteReviewById" />
           <option name="timeStamp" value="23" />
         </line-breakpoint>
         <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/target/generated-sources/annotations/com/example/tinywiny/converter/ProductConverterImpl.java</url>
-          <line>36</line>
+          <line>34</line>
           <option name="timeStamp" value="43" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/example/tinywiny/controller/BucketRestController.java</url>
-          <line>57</line>
-          <option name="timeStamp" value="51" />
+          <line>77</line>
+          <option name="timeStamp" value="56" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/example/tinywiny/controller/ProductsRestController.java</url>
+          <line>98</line>
+          <option name="timeStamp" value="61" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/example/tinywiny/controller/ReviewRestController.java</url>
+          <line>46</line>
+          <option name="timeStamp" value="80" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/example/tinywiny/controller/ReviewRestController.java</url>
+          <line>40</line>
+          <option name="timeStamp" value="82" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/example/tinywiny/security/jwt/JwtProvider.java</url>
+          <line>30</line>
+          <option name="timeStamp" value="83" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/example/tinywiny/security/jwt/JwtProvider.java</url>
+          <line>62</line>
+          <option name="timeStamp" value="84" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
-    <watches-manager>
-      <configuration name="SpringBootApplicationConfigurationType">
-        <watch expression="pageNumber" />
-        <watch expression="((BucketRestController)this).productConverter" custom="com.example.tinywiny.controller.BucketRestController" />
-        <watch expression="product.description" />
-      </configuration>
-    </watches-manager>
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo typeName="com.example.tinywiny.dto.OrderDto" fieldName="deliveryTypeId" />
+      </pinned-members>
+    </pin-to-top-manager>
   </component>
 </project>

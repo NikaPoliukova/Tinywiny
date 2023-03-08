@@ -29,10 +29,19 @@ public class UserService {
 
   public User findUserByUserNameAndPassword(String name, String password) {
     Optional<User> user = userRepository.findUserByUserName(name);
-    if (user.isPresent() && hashPassService.verify(password, user.get().getPassword())){
+    if (user.isPresent() && hashPassService.verify(password, user.get().getPassword())) {
       return user.get();
     } else {
       throw new RuntimeException("enter incorrect password or login");
+    }
+  }
+
+  public User findUserByUserName(String name) {
+    Optional<User> user = userRepository.findUserByUserName(name);
+    if (user.isEmpty()) {
+      throw new RuntimeException("user is not exists");
+    } else {
+      return user.get();
     }
   }
 
@@ -57,9 +66,9 @@ public class UserService {
       String hash = passwordEncoder.encode(userDto.getPassword());
       user.setPassword(hash);
       userRepository.save(user);
+      bucketService.createBucket(user.getUserId());
+      return user;
     }
-    bucketService.createBucket(user.getUserId());
-    return user;
   }
 
   public User findUserByUserId(Long userId) {
@@ -87,7 +96,7 @@ public class UserService {
       if (!(user.getPassword().equals(user.getPassword()))) {
         String hashPass = hashPassService.hashPass(userDto.getPassword());
         user.setPassword(hashPass);
-      }else {
+      } else {
         throw new RuntimeException("this password already exist");
       }
     }

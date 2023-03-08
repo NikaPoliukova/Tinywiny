@@ -24,7 +24,6 @@ public class ProductInOrder {
   private Long id;
 
   private int count;
- // private int sum;
 
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "order_id", referencedColumnName = "order_id")

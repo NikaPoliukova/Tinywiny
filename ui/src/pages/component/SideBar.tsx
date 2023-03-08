@@ -1,41 +1,56 @@
 import * as React from 'react';
-import {useEffect, useState} from "react";
-import {TypeProduct} from "../../model/TypeProduct";
-import TypeProductService from "../../services/TypeProductService";
+import {Box, Divider, Drawer, List, ListItem, ListItemText, Toolbar} from "@mui/material";
+import ListItemButton from "@mui/material/ListItemButton";
 
 
 export const Sidebar: React.FC = (): JSX.Element => {
-    const [types, setTypes] = useState<Array<TypeProduct>>([])
-    useEffect(() => {
-        TypeProductService.findAllTypes()
-            .then(response => setTypes(response));
 
-    }, []);
+    const drawerWidth = 250;
+    const types = [
+        {
+            title: 'Toys',
+            path: '/products/type/toys'
+        },
+        {
+            title: 'Wings',
+            path: '/products/type/wings'
+        },
+        {
+            title: 'Mobiles',
+            path: '/products/type/mobiles'
+        },
+        {
+            title: 'Decorations',
+            path: '/products/type/decorations'
+        }
+    ];
  return (
-
-        <aside >
-            <div >
-                <div >
-                    <span>
-            Types of products
-                    </span>
-                </div>
-                <div>
-                    <a href="/products/type/toys" className="w3-bar-item w3-button w3-border-bottom" >Toys</a>
-                </div>
-                    <div>
-                    <a href="/products/type/wings" className="w3-bar-item w3-button w3-border-bottom">Wings</a>
-                    </div>
-                <div>
-                    <a href="/products/type/mobiles" className="w3-bar-item w3-button">Mobiles</a>
-                </div>
-                <div>
-                    <a href="/products/type/decorations" className="w3-bar-item w3-button">Decorations</a>
-                </div>
-
-            </div>
-        </aside>
-
+     <div>
+           <Box>
+             <Box
+             >
+                 <Drawer
+                     variant="permanent"
+                     sx={{
+                         display: {xs: 'none', sm: 'block'},
+                         '& .MuiDrawer-paper': {boxSizing: 'border-box', width: drawerWidth}
+                     }}
+                 >
+                     <Toolbar/>
+                     <Divider/>
+                     <List>
+                         {types.map((item) => (
+                             <ListItem key={item.title} disablePadding>
+                                 <ListItemButton href={item.path}>
+                                     <ListItemText primary={item.title}/>
+                                 </ListItemButton>
+                             </ListItem>
+                         ))}
+                     </List>
+                 </Drawer>
+             </Box>
+         </Box>
+     </div>
     );
 };
 

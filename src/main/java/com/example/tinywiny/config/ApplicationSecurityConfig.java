@@ -1,36 +1,90 @@
 package com.example.tinywiny.config;
 
 
-import com.example.tinywiny.security.filter.CustomAuthenticationFilter;
-import com.example.tinywiny.security.filter.CustomAuthorizationFilter;
+import com.example.tinywiny.security.filter.JwtTokenFilter;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.oauth2.client.web.OAuth2LoginAuthenticationFilter;
+import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.HttpStatusEntryPoint;
 
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
-public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
-  @Value("${jwt.secretKey}") private String secretKey;
+public class ApplicationSecurityConfig {
 
-  @Override
-  protected void configure(HttpSecurity http) throws Exception {
-   // CustomAuthenticationFilter customAuthenticationFilter = new CustomAuthenticationFilter(authenticationManagerBean(),
-     //   secretKey);
-   //customAuthenticationFilter.setFilterProcessesUrl("/api/v1/login");
-    http.csrf().disable();
-    http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-    http.authorizeRequests().antMatchers("/api/v1/token/refresh").permitAll();
-    http.authorizeRequests().antMatchers("/api/v1/login").permitAll();
+  private final JwtTokenFilter jwtTokenFilter;
 
-
-    http.authorizeRequests().antMatchers("/**").permitAll();
-    //http.addFilter(customAuthenticationFilter);
-    http.addFilterBefore(new CustomAuthorizationFilter(secretKey), UsernamePasswordAuthenticationFilter.class);
+  @Bean
+  public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    return http
+        .csrf().disable()
+        .authorizeRequests(a -> a
+                .antMatchers("/", "/error", "/login", "/api/v1/login", "/api/v1/registration", "/authorization/login").permitAll()
+//                        .antMatchers("/api/v1/user/*").hasRole("ADMIN")
+                .anyRequest().permitAll()
+        )
+        .exceptionHandling(e -> e.authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED)))
+        .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+        .and()
+        .addFilterBefore(jwtTokenFilter, OAuth2LoginAuthenticationFilter.class)
+        .build();
   }
+
+  /*
+  private final JwtFilter jwtFilter;
+  private final ExceptionHandlerFilter exceptionHandlerFilter;
+
+  @Bean
+  public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    return http
+        .csrf().disable()
+        .authorizeRequests(a -> a
+                .antMatchers("/", "/login","/api/v1/login", "/api/v1/registration",
+                    "/api/v1/products/type/**").permitAll()
+            .anyRequest().authenticated()
+        )
+        .exceptionHandling(e -> e.authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED)))
+        .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+        .and()
+        .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
+        .build();
+
+   */
+
+
+       /* .cors()
+        .and()
+        .csrf().disable()
+        .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+        .and()
+        .authorizeHttpRequests(requests -> requests
+            .antMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()
+            .antMatchers("/api/v1/login", "/api/v1/registration",
+                "/api/v1/gallery", "/api/v1/products/type/**", "/api/v1/products/**",
+                "/api/v1/reviews", "/api/v1/contacts").permitAll()
+            .anyRequest().authenticated()
+        )
+        .addFilterBefore(exceptionHandlerFilter, UsernamePasswordAuthenticationFilter.class)
+        .csrf().csrfTokenRepository(csrfTokenRepository())
+        .and()
+        .logout(LogoutConfigurer::permitAll)
+        .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
+
+    return http.build();*/
 }
+
+  /*private CookieCsrfTokenRepository csrfTokenRepository() {
+    final CookieCsrfTokenRepository repository = CookieCsrfTokenRepository.withHttpOnlyFalse();
+    repository.setCookieName(xsrfCookieName);
+    repository.setHeaderName(xsrfHeaderName);
+    repository.setCookieDomain(cookieDomain);
+    return repository;*/
+
+
+

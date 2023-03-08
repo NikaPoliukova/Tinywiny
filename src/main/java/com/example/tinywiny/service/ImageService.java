@@ -31,22 +31,26 @@ public class ImageService {
     imageRepository.setNewImage(imageName, productId);
   }
 
-  public Image findImageByProduct(Product product) {
-    return imageRepository.findImageByProduct(product);
+  public Image findImageByProductId(Long productId) {
+    return imageRepository.findImageByProductId(productId);
   }
 
   public void updateImage(String imageName, Long productId) {
     imageRepository.updateImage(imageName, productId);
   }
 
+  public void upload(InputStream stream, String fileName) {
+    storageService.uploadFile(stream, fileName);
+  }
+
   @Modifying
-  public void addNewImage(Long productId, MultipartFile file) throws IOException {
-    Product product = productService.findProductByProductId(productId);
-    Image image = findImageByProduct(product);
+  public void addImage(String productName, MultipartFile file) throws IOException {
+    Product product = productService.findProductByProductName(productName);
+    Image image = findImageByProductId(product.getProductId());
     if (image != null) {
-      updateImage(file.getOriginalFilename(), productId);
+      updateImage(file.getOriginalFilename(), product.getProductId());
     } else {
-      saveNewImage(file.getOriginalFilename(), productId);
+      saveNewImage(file.getOriginalFilename(), product.getProductId());
     }
     upload(file.getInputStream(), file.getOriginalFilename());
   }
@@ -60,14 +64,11 @@ public class ImageService {
     if (product == null) {
       throw new RuntimeException("no product");
     }
-    String imageName = findImageByProduct(product).getImageName();
+    String imageName = findImageByProductId(productId).getImageName();
     storageService.deleteImage(imageName);
-    imageRepository.deleteImageByProduct(product);
+    imageRepository.deleteImageByProductId(productId);
   }
 
-  public void upload(InputStream stream, String fileName) {
-    storageService.uploadFile(stream, fileName);
-  }
 
  /* public Image findImageByImageName(String imageName) {
     if (imageName == null) {

@@ -1,4 +1,5 @@
 import * as React from 'react';
+import {useEffect, useState} from 'react';
 import AppBar from '@mui/material/AppBar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -6,21 +7,22 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
 import GlobalStyles from '@mui/material/GlobalStyles';
-import {useSessionStore} from "../../Session";
 import {Icon} from "semantic-ui-react";
-import {useEffect, useState} from "react";
+import {Bucket} from 'model/Bucket';
+import {useSessionStore} from "../../SessionState";
 import BucketService from "../../services/BucketService";
-import { Bucket } from 'model/Bucket';
+import {useNavigate} from "react-router-dom";
 
 function PricingContent() {
-    //const {userId} = useParams();
     const [bucket, setBucket] = useState<Bucket>();
     const user = useSessionStore(state => state.user);
+    const navigate = useNavigate();
 
-   /*useEffect(() => {
-         BucketService.findBucketByBucketId(Number(user.userId))
+
+   useEffect(() => {
+         BucketService.findBucketByUserId(Number(user?.userId))
              .then(response => setBucket(response));
-     }, []);*/
+     }, []);
     return (
         <React.Fragment>
             <GlobalStyles styles={{ul: {margin: 0, padding: 0, listStyle: 'none'}}}/>
@@ -60,15 +62,25 @@ function PricingContent() {
                         >
                             Contacts
                         </Link>
+                        <Link
+                            variant="button"
+                            color="text.primary"
+                            href="/reviews"
+                            sx={{my: 1, mx: 1.5}}
+                        >
+                            Reviews
+                        </Link>
                     </nav>
-                    <Button href="/bucket/${bucket.bucketId}">
-                        <Icon name='shop' size='big'/>
+                    <Button
+                        onClick={() =>  navigate(`/bucket/${bucket?.bucketId}`)}
+                        >
+                        <Icon name='shop' size='big' color='brown'/>
                     </Button>
                     <Button href="/users/${user.userId}">
-                        <Icon name='user' size='big'/>
+                        <Icon name='user' size='big'  color='brown'/>
                     </Button>
                     <Button href="/" variant="outlined" sx={{my: 1, mx: 1.5}}>
-                        Log out
+                      <Icon name ='log out' size='big' color='brown'/>
                     </Button>
                 </Toolbar>
             </AppBar>

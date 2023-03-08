@@ -1,7 +1,5 @@
 package com.example.tinywiny.dto;
 
-import com.example.tinywiny.model.Discount;
-import com.example.tinywiny.model.Product;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

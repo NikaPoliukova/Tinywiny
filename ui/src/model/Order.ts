@@ -6,7 +6,7 @@ export interface Order {
     orderId?: number;
     commentOrder?: string;
     userId?: number;
-    deliveryInformation?: DeliveryInformation;
+    deliveryInformationDto?: DeliveryInformation;
     deliveryTypeId?: number;
     statusOrder?: string;
     createdAt?: string;

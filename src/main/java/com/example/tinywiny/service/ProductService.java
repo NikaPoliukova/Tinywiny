@@ -4,7 +4,6 @@ import com.example.tinywiny.converter.ProductConverter;
 import com.example.tinywiny.converter.TypeProductConverter;
 import com.example.tinywiny.dto.ProductDto;
 import com.example.tinywiny.dto.TypeProduct;
-import com.example.tinywiny.dto.TypeProductDto;
 import com.example.tinywiny.model.Product;
 import com.example.tinywiny.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
@@ -31,13 +30,10 @@ public class ProductService {
 
   @Transactional
   @Modifying
-  public Product save(ProductDto productDto) {
-    if (productRepository.findProductByProductName(productDto.getProductName()).isPresent()) {
+  public Product save(Product product) {
+    if (productRepository.findProductByProductName(product.getProductName()).isPresent()) {
       throw new RuntimeException("User already exists");
     }
-    TypeProduct typeProduct = typeProductService.getType(productDto.getIdType());
-    TypeProductDto typeProductDto = typeProductConverter.toDto(typeProduct);
-    Product product = converter.toProduct(productDto, typeProductDto);
     return productRepository.save(product);
   }
 
@@ -95,6 +91,14 @@ public class ProductService {
     }
     return product.get();
   }
+
+  public Product findProductByProductName(String productName) {
+    Optional<Product> product = productRepository.findProductByProductName(productName);
+    if (product.isEmpty()) {
+      throw new RuntimeException("no such product");
+    }
+    return product.get();
+  }
 /*
   public int findProductPrice(Long productId) {
     return productRepository.findProductPrice(productId);
@@ -106,6 +110,6 @@ public class ProductService {
 
 
   public List<Product> findAllProducts() {
-   return productRepository.findAll();
+    return productRepository.findAll();
   }
 }

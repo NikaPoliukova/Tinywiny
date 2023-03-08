@@ -1,4 +1,4 @@
-package com.example.tinywiny.service;
+package com.example.tinywiny.security;
 
 
 import com.example.tinywiny.model.User;
@@ -11,8 +11,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Collection;
+import java.util.List;
 
 @Log4j2
 @Service
@@ -22,15 +21,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
   private final UserRepository userRepository;
 
   @Override
-  public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-    User user = userRepository.getUserByUserName(username);
-    if (user == null) {
-      throw new RuntimeException("username not found in database");
-    } else {
-      log.info("user found in database");
-    }
-    Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
-    authorities.add(new SimpleGrantedAuthority("USER"));
-    return new org.springframework.security.core.userdetails.User(user.getUserName(), user.getPassword(), authorities);
+  public UserDetails loadUserByUsername(final String username) throws UsernameNotFoundException {
+    final User user = userRepository.getUserByUserName(username);
+    return new org.springframework.security.core.userdetails.User(user.getUserName(), user.getPassword(),
+        List.of(new SimpleGrantedAuthority("ROLE_" + user.getRole())));//??????
   }
 }

@@ -17,6 +17,6 @@ public class BucketDto {
 
   Long bucketId;
   Long userId;
-  List<ProductInBucketDto> productInBucketDto;
+  List<ProductInBucketDto> productsInBucketDto;
 
 }

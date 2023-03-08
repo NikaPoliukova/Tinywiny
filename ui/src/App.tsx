@@ -1,9 +1,9 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Route, Routes} from 'react-router-dom';
 import UsersPage from './pages/UsersPage/UsersPage';
 import HomePage from "./pages/HomePage/HomePage";
 import {Registry} from "./pages/RegistrationPage/RegistryPage";
-import {SignIn} from "./pages/LoginPage/LoginPage";
+
 import ReviewsPage from "./pages/AdminPage/ReviewsPage";
 import BucketPage from "./pages/BucketPage/BucketPage";
 import OrdersPage from "./pages/AdminPage/OrdersPage";
@@ -22,9 +22,17 @@ import {CreateProduct} from "./pages/AdminPage/CreateNewProductPage";
 import Contacts from "./pages/ContactPage/ContactPage";
 import ReviewForUsers from "./pages/ReviewsPage/ReviewForUsers";
 import {UpdateUserPage} from "./pages/UserPage/UpdateUserPage";
+import SignIn from "./pages/LoginPage/LoginPage";
+import {useSessionStore} from "./store";
 
 
 function App() {
+    const getSession = useSessionStore(state => state.getSession);
+
+    useEffect(() => {
+        getSession();
+    }, []);
+
     return (
         <Routes>
             <Route path={'/'} element={<HomePage/>}/>
@@ -42,7 +50,7 @@ function App() {
             <Route path={'/orders/:userId'} element={<MyOrdersPage/>}/>
             <Route path={'/orders/order/:orderId'} element={<OrderPage/>}/>
             <Route path={'/orders/create'} element={<CreateOrderPage/>}/>
-            <Route path={'/products'} element={<CreateProduct/>}/>
+            <Route path={'/admin/product/create'} element={<CreateProduct/>}/>
             <Route path={'/contacts'} element={<Contacts/>}/>
             <Route path={'/review/create'} element={<CreateReview/>}/>
             <Route path={'/admin'} element={<AdminPage/>}/>

@@ -1,34 +1,25 @@
 package com.example.tinywiny.controller;
 
 import com.example.tinywiny.converter.UserConverter;
-import com.example.tinywiny.dto.TokensDto;
 import com.example.tinywiny.dto.UserDto;
 import com.example.tinywiny.model.User;
+import com.example.tinywiny.security.PrincipalUser;
 import com.example.tinywiny.service.UserService;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import java.util.List;
 
-import static com.example.tinywiny.security.jwt.JwtUtils.generateRefreshedAccessToken;
-import static com.example.tinywiny.security.jwt.JwtUtils.getUsernameFromRefreshToken;
-import static org.springframework.http.HttpHeaders.AUTHORIZATION;
-import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @Slf4j
 @RequestMapping("/api/v1/users")
@@ -45,6 +36,12 @@ public class UserRestController {
     userService.updateUser(userDto, user);
   }
 
+  @GetMapping("/me")
+  public ResponseEntity<UserDto> get(Authentication authentication) {
+    Long userId = ((PrincipalUser) authentication.getPrincipal()).getUserId();
+    return ResponseEntity.ok(userConverter.toDto(userService.findUserByUserId(userId)));
+  }
+
   @GetMapping
   protected List<UserDto> findAllUsersByPage(@RequestParam(value = "pageNumber", required = false, defaultValue = "1") Integer pageNumber,
                                              @RequestParam(value = "pageSize", required = false, defaultValue = "20") Integer pageSize) {
@@ -58,9 +55,10 @@ public class UserRestController {
     User user = userService.findUserByUserId(userId);
     return userConverter.toDto(user);
   }
+
   @GetMapping("/user")
-  protected UserDto findUserByUserNameAndPassword(@RequestParam String userName,@RequestParam String password) {
-    User user = userService.findUserByUserNameAndPassword(userName,password);
+  protected UserDto findUserByUserNameAndPassword(@RequestParam String userName, @RequestParam String password) {
+    User user = userService.findUserByUserNameAndPassword(userName, password);
     return userConverter.toDto(user);
   }
 

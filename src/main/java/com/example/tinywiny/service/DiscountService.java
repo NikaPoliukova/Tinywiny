@@ -24,7 +24,7 @@ public class DiscountService {
     }
     if (sum >= 200) {
       return discountRepository.findDiscountByDiscountId(4);
-    }else
+    } else
       return null;
   }
 }

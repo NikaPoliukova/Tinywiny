@@ -1,16 +1,17 @@
 import axios from "axios";
 import {Order} from "../model/Order";
 
+
 class OrderService {
 
-    async createOrder(order: Order): Promise<void> {
-        await axios.post('http://localhost:8080/api/v1/orders/create', order);
-    }
-
-    async findAllOrdersByStatus(status: string): Promise<Array<Order>> {
-        const response = await axios.get<Array<Order>>('http://localhost:8080/api/v1/orders/status');
+    async createOrder(order: Order): Promise<Order> {
+        const response =await axios.post<Order>('http://localhost:8080/api/v1/orders/create', order);
         return response.data;
     }
+  /*  async findAllOrdersByStatus(status: string): Promise<Array<Order>> {
+        const response = await axios.get<Array<Order>>('http://localhost:8080/api/v1/orders/status');
+        return response.data;
+    }*/
 
     async findAllOrdersByPage(): Promise<Array<Order>> {
         const response = await axios.get<Array<Order>>('http://localhost:8080/api/v1/orders');

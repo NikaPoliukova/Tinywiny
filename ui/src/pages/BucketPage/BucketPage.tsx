@@ -1,5 +1,16 @@
 import React, {useEffect, useState} from 'react';
-import {Button, Card, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography} from "@mui/material";
+import {
+    Box,
+    Button,
+    Card,
+    TableBody,
+    TableCell,
+    TableContainer,
+    TableHead,
+    TableRow,
+    TextField,
+    Typography
+} from "@mui/material";
 import BucketService from "../../services/BucketService";
 import {useNavigate, useParams} from "react-router-dom";
 import {Footer} from "../component/Footer";
@@ -7,18 +18,15 @@ import {Icon, Table} from 'semantic-ui-react'
 import MyHeader from "../component/MyHeader";
 import {ProductInBucket} from "../../model/ProductInBucket";
 import {Product} from "../../model/Product";
-import {useSessionStore} from "../../Session";
-import ProductService from "../../services/ProductService";
 
 
 function BucketPage() {
     const [products, setProducts] = useState<Array<ProductInBucket>>([])
-    const user = useSessionStore(state => state.user);
 
     const {bucketId} = useParams();
     const id = Number(bucketId)
     const [count, setCount] = useState(1);
-    const [productDto, setProduct] = useState<Product>();
+    const [productDto, setProductDto] = useState<Product>();
     const navigate = useNavigate();
     const [sumProducts, setSumProducts] = useState(0);
 
@@ -35,15 +43,16 @@ function BucketPage() {
         BucketService.deleteProductInBucket(id).then(() => navigate(`/bucket/${bucketId}`))
     }
 
+
     useEffect(() => {
         BucketService.findAllProductsInBucket(Number(bucketId))
             .then(response => {
                 setProducts(response);
                 return products;
             })
-        BucketService.getSumProductInBucket(Number(bucketId)).then(sum=>setSumProducts(sum));
+        BucketService.getSumProductInBucket(Number(bucketId)).then(sumProducts=>setSumProducts(sumProducts.sum));
     }, []);
-    console.log(sumProducts)
+
     return (
         <div>
             <MyHeader/>
@@ -70,14 +79,11 @@ function BucketPage() {
                                         {item.productDto?.productName}
                                     </TableCell>
                                     <TableCell component="th" scope="row">
-                                        <button type='button' className='count__up' onClick={() => setCount(count - 1)}>
-                                            <Icon name="plus"/>
-                                        </button>
-                                        {item.count}
-                                        <button type='button' className='count__down'
-                                                onClick={() => setCount(count + 1)}>
-                                            <Icon name="minus"/>
-                                        </button>
+                                        <TextField label="Count"
+                                                   type={'number'}
+                                                   value={count}
+                                                   onChange={e => setCount(Number(e.target.value))} />
+
                                     </TableCell>
                                     <TableCell component="th" scope="row">
                                         {item.productDto?.price}

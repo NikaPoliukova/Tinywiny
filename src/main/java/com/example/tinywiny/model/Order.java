@@ -4,7 +4,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.DynamicInsert;
 
-
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
@@ -48,6 +47,6 @@ public class Order {
   @JoinColumn(name = "delivery_information_id", referencedColumnName = "delivery_information_id")
   private DeliveryInformation deliveryInformation;
 
-  @OneToMany(mappedBy = "order", fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+  @OneToMany(mappedBy = "order", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
   private List<ProductInOrder> productsInOrder = new ArrayList<>();
 }

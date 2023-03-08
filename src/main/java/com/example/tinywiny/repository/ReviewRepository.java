@@ -10,18 +10,16 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-
 @Repository
 public interface ReviewRepository extends JpaRepository<Review, String> {
-   @Transactional
-   @Modifying
-   void deleteReviewById(@Param("reviewId") Long reviewId);
+  @Transactional
+  @Modifying
+  void deleteReviewById(@Param("reviewId") Long reviewId);
 
-   Page<Review> findAllBy(Pageable page);
+  Page<Review> findAllBy(Pageable page);
 
-   @Transactional
-   @Modifying
-   @Query(value = "insert into review (text_review, user_id) values (:text, :userId)", nativeQuery = true)
-   Review createReview(@Param("text") String text, @Param("userId") Long userId);
+  @Transactional
+  @Modifying
+  @Query(value = "insert into review (text_review, user_id) values (:text, :userId)", nativeQuery = true)
+  Review createReview(@Param("text") String text, @Param("userId") Long userId);
 }

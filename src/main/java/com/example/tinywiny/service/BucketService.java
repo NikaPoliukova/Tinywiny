@@ -5,7 +5,6 @@ import com.example.tinywiny.model.Bucket;
 import com.example.tinywiny.model.Discount;
 import com.example.tinywiny.model.Product;
 import com.example.tinywiny.model.ProductInBucket;
-import com.example.tinywiny.model.User;
 import com.example.tinywiny.repository.BucketRepository;
 import com.example.tinywiny.repository.ProductInBucketRepository;
 import com.example.tinywiny.repository.ProductRepository;
@@ -45,12 +44,10 @@ public class BucketService {
     }
     return bucket.get();
   }
+
   public Bucket findBucketByUserId(Long userId) {
-    Optional<User> user = userRepository.findUserByUserId(userId);
-    if (user.isEmpty()) {
-      throw new RuntimeException("no such user exists");
-    }
-    return user.get().getBucket();
+    Optional<Bucket> bucket = bucketRepository.findBucketByUserUserId(userId);
+    return bucket.get();
   }
 
   public ProductInBucket updateCountProduct(ProductInBucketDto productInBucketDto) {
@@ -76,12 +73,15 @@ public class BucketService {
       discount = discountService.findDiscount(sum);
       int sumDiscount = (sum / 100) * discount.getSize();
       return sum - sumDiscount;
+    } else {
+      throw new RuntimeException("sum order incorrect");
     }
-    return sum;
   }
+
   public int findProductPrice(Long productId) {
     return productRepository.findProductPrice(productId);
   }
+
   public int getSumProductInBucket(List<ProductInBucket> productInBucket) {
     int sum = 0;
     for (ProductInBucket product : productInBucket) {
@@ -94,8 +94,9 @@ public class BucketService {
   public void deleteProductInBucket(Long productInBucketId) {
     productInBucketRepository.deleteProductInBucketById(productInBucketId);
   }
+
   public void deleteAllProductsInBucket(Long bucketId) {
-    Optional<Bucket> bucket =bucketRepository.findBucketByBucketId(bucketId);
+    Optional<Bucket> bucket = bucketRepository.findBucketByBucketId(bucketId);
     productInBucketRepository.deleteAllByBucket(bucket.get());
   }
 

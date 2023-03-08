@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {useState} from 'react';
 import {
+    Alert, AlertTitle,
     Avatar,
     Box,
     Button,
@@ -140,6 +141,7 @@ export function Registry() {
                         >
                             Log In
                         </Button>
+
                     </Box>
                 </Box>
             </Container>

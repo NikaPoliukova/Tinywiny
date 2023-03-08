@@ -1,26 +1,22 @@
-import * as React from 'react';
-import Header from '../component/MyHeader';
-import {Footer} from "../component/Footer";
+import MyHeader from 'pages/component/MyHeader';
+import React, {useState} from 'react';
 import {Container} from "react-bootstrap";
 
-export default function GalleryPage() {
+function App() {
+
     return (
 
-        <React.Fragment>
-            <Header />
+        <div>
+            hi
+        </div>
 
-            <Container >
+            );
 
-                <p >
-                   ABOUT TINY-WINY
 
-                </p>
-
-            </Container>
-            <Footer />
-        </React.Fragment>
-    )
 
 }
+
+
+export default App;
 
 

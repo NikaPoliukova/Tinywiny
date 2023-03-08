@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import {Button, Comment, Form} from 'semantic-ui-react'
+import {Button, Comment, Form, Icon} from 'semantic-ui-react'
 import {Review} from "../../model/Review";
 import ReviewService from "../../services/ReviewService";
 import {useNavigate} from "react-router-dom";
@@ -24,10 +24,10 @@ function ReviewForUsers ()  {
     }, []);
     return (
 
-
-        <Comment.Group>
+        <Comment.Group >
             {reviews.map((review) => (
                 <Comment >
+                   <Icon name='user' color='brown'/>
                     <Comment.Content>
                         <Comment.Author> user: {review.userId}</Comment.Author>
                         <Comment.Metadata>
@@ -55,6 +55,7 @@ function ReviewForUsers ()  {
                 </Button>
             </Form>
         </Comment.Group>
+
     )
 };
 

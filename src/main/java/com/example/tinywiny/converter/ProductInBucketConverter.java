@@ -14,6 +14,11 @@ public interface ProductInBucketConverter {
 
   @Mapping(target = "productDto", source = "productInBucket.product")
   @Mapping(target = "bucketId", source = "productInBucket.bucket.bucketId")
-  //@Mapping(target = "discountId", source = "productInBucket.discount.discountId")
   ProductInBucketDto toProductInBucketDto(ProductInBucket productInBucket);
+
+  List<ProductInBucket> toProductInBucket(List<ProductInBucketDto> productsInBucketDto);
+
+  /*@Mapping(target = "productInBucket.product", source = "productDto")
+  @Mapping(target = "productInBucket.bucket.bucketId", source = "bucketId")
+  ProductInBucket toProductInBucket(ProductInBucketDto productInBucketDto);*/
 }

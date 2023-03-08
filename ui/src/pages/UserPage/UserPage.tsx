@@ -1,11 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import {User} from "../../model/User";
 import UserService from "../../services/UserService";
-import {Button, Card, Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@mui/material";
+import { Card, Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@mui/material";
 import {Link, useParams} from "react-router-dom";
 import {Footer} from "../component/Footer";
 import {Header, Icon} from "semantic-ui-react";
 import MyHeader from 'pages/component/MyHeader';
+import { Button } from 'semantic-ui-react'
 
 
 export const UserPage = () => {
@@ -29,9 +30,12 @@ export const UserPage = () => {
 
                 <div className="col-lg-6">
                     <div className="card">
-                        <Button size="small"
+                        <Button
+                            basic color='brown'
+                            content='Update profile information'
+                            size="small"
                                 href={"/users/update/userId"}
-                        >Update profile information</Button>
+                        ></Button>
                     </div>
                 </div>
                 <Card style={{width: 1000}}>
@@ -67,13 +71,14 @@ export const UserPage = () => {
                     </TableContainer>
                 </Card>
                 <Button
+                    basic color='brown' content='My orders'
                     component={Link}
                     type="submit"
                     size="small"
                     sx={{mt: 1, mb: 1}}
                     to={'/orders/' + userId}
                 >
-                    My orders
+
                 </Button>
                 <Footer/>
             </div>

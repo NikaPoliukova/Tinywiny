@@ -16,7 +16,6 @@ import {Divider, Form, Header, Icon, Table} from 'semantic-ui-react'
 import MyHeader from 'pages/component/MyHeader';
 import {IconButton} from "@mui/material";
 import {AddAPhoto, AutoDelete} from "@mui/icons-material";
-import ImageService from "../../services/ImageService";
 
 
 const theme = createTheme();
@@ -56,9 +55,9 @@ export function UpdateProductPage() {
         const deleteProduct = () => {
             ProductService.deleteProduct(Number(productId)).then(() => navigate("/admin/products"));
         }
-        const deleteImage = () => {
+       /* const deleteImage = () => {
             ImageService.deleteImage(Number(productId)).then(() => navigate("/admin/products"));
-        }
+        }*/
 
         return (
             <ThemeProvider theme={theme}>
@@ -86,7 +85,7 @@ export function UpdateProductPage() {
                                     <IconButton color="primary"
                                                 aria-label="delete picture"
                                                 component="label"
-                                        onClick={deleteImage}
+                                    //    onClick={deleteImage}
                                     >
                                         <AutoDelete/>
                                     </IconButton>

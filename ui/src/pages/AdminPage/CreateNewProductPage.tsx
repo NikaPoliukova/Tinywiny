@@ -1,27 +1,21 @@
-import React, {useEffect, useState} from 'react'
-import {Form, Header, Icon, Segment} from 'semantic-ui-react'
-import {IconButton} from "@mui/material";
-import {AddAPhoto} from "@mui/icons-material";
-import {Product} from "../../model/Product";
-import ProductService from "../../services/ProductService";
-import {useNavigate} from 'react-router-dom';
+import React, {useEffect, useRef, useState} from 'react'
+import {Form, Header, Segment} from 'semantic-ui-react'
+import {Button} from "@mui/material";
 import MyHeader from 'pages/component/MyHeader';
-import {Image} from "../../model/Image";
-import ImageService from "../../services/ImageService";
 import {TypeProduct} from "../../model/TypeProduct";
 import TypeProductService from "../../services/TypeProductService";
+import ProductService from "../../services/ProductService";
 
 //выводить сообщение,если не корректные параметры
 
 export function CreateProduct() {
-
+    const [image, setImage] = useState('');
     const [productName, setProductName] = useState('');
     const [price, setPrice] = useState(Number);
     const [countInStock, setCountInStock] = useState(Number);
     const [description, setDescription] = useState('');
     const [idType, setIdType] = useState(Number);
-    const [productId, setProductId] = useState(0);
-    const [imageName, setImageName] = useState('');
+    const fileInput = useRef<HTMLInputElement | null>(null);
     const [types, setTypes] = useState<Array<TypeProduct>>([]);
 
     useEffect(() => {
@@ -32,44 +26,41 @@ export function CreateProduct() {
     const options = types.map((type, idType) => {
         return <option key={idType} value={idType}>{type.name}</option>;
     });
-    const navigate = useNavigate();
-    const addProduct = () => {
-        const product: Product = {
-            productName,
-            price,
-            countInStock,
-            description,
-            idType
-        };
-        ProductService.createProduct(product).then(() => navigate("/admin"));
-    }
-    const addImage = () => {
-        const image: Image = {
-            imageName,
-            productId
-            //не могу указать айди продукта-не создан
-        }
-        //ImageService.updateImage(image).then(response => navigate("/products"));
-    }
+    useEffect(() => {
+        ProductService.downloadImage()
+            .then(response => {
+                setImage(response);
+            });
+    }, []);
+
+    const uploadProduct = () => {
+        ProductService.uploadFile({
+            productName, price, countInStock, description, idType,
+            file: fileInput?.current?.files && fileInput?.current?.files[0]
+        })
+            .then(response => {
+                setImage(response);
+            })
+    };
 
     return (
         <>
             <MyHeader/>
             <Segment placeholder>
                 <Header icon>
-                    <Icon name='photo'/>
+                    <img src={`data:image/png;base64,${image}`}/>
                 </Header>
-                <IconButton color="primary"
-                            aria-label="upload picture"
-                            component="label"
-                            onClick={addImage}
+                <Button
+                    variant="contained"
+                    component="label"
                 >
-                    <input hidden accept="image/*" type="file"
-                        // value={file}
-                        // onChange={e => setFile(e.target.value)}
+                    Upload Photo
+                    <input
+                        ref={fileInput}
+                        type="file"
+                        hidden
                     />
-                    <AddAPhoto/>
-                </IconButton>
+                </Button>
             </Segment>
             <Form>
                 <Form.Group widths='equal'>
@@ -98,9 +89,13 @@ export function CreateProduct() {
                                value={description}
                                onChange={e => setDescription(e.target.value)}/>
 
-                <Form.Button
-                    onClick={addProduct}
-                >Add product</Form.Button>
+                <Button
+                    variant="contained"
+                    component="label"
+                    onClick={uploadProduct}
+                >
+                    Save product
+                </Button>
             </Form>
         </>
     )

@@ -3,6 +3,7 @@ package com.example.tinywiny.controller;
 import com.example.tinywiny.converter.BucketConverter;
 import com.example.tinywiny.converter.ProductInBucketConverter;
 import com.example.tinywiny.dto.BucketDto;
+import com.example.tinywiny.dto.OrderSumDto;
 import com.example.tinywiny.dto.ProductInBucketDto;
 import com.example.tinywiny.model.Bucket;
 import com.example.tinywiny.model.ProductInBucket;
@@ -37,26 +38,20 @@ public class BucketRestController {
   }
 
   @GetMapping("/sum/all")
-  public int getSumProductInBucket(@RequestParam Long bucketId) {
-    Bucket bucket =bucketService.findBucketByBucketId(bucketId);
+  public OrderSumDto getSumProductInBucket(@RequestParam Long bucketId) {
+    Bucket bucket = bucketService.findBucketByBucketId(bucketId);
     List<ProductInBucket> productInBucket = bucketService.findAllProductInBucket(bucket.getBucketId());
-    return bucketService.getSumProductInBucket(productInBucket);
-  }
-/*
-  @GetMapping
-  public BucketDto findBucketByBucketId(@RequestBody Long bucketId) {
-    return bucketConverter.toBucket(bucketService.findBucketByBucketId(bucketId));
+    int sum = bucketService.getSumProductInBucket(productInBucket);
+    int sumWithDiscount = bucketService.getSumWithDiscount(sum);
+    return new OrderSumDto(sum, sumWithDiscount);
   }
 
-  @GetMapping("/sum/all")
-  protected int getSumProductInBucket(@RequestBody List<ProductInBucketDto> productInBucketDto) {
-    return bucketService.getSumProductInBucket(productInBucketDto);
-  }*/
-  //ТУТ ДОЛЖНО БЫТЬ ДРОБНОЕ ЧИСЛО
+
+  /*//ТУТ ДОЛЖНО БЫТЬ ДРОБНОЕ ЧИСЛО
   @GetMapping("/final-sum")
   protected int getSumWithDiscount(@RequestParam int sum) {
     return bucketService.getSumWithDiscount(sum);
-  }
+  }*/
 
   @PostMapping
   protected void addProductInBucket(@RequestBody ProductInBucketDto productInBucketDto) {
@@ -72,8 +67,27 @@ public class BucketRestController {
   public void deleteProductInBucket(@RequestParam Long productInBucketId) {
     bucketService.deleteProductInBucket(productInBucketId);
   }
+
   @DeleteMapping("/{bucketId}")
-  public void deleteAllProductsInBucket (@PathVariable Long bucketId){
+  public void deleteAllProductsInBucket(@PathVariable Long bucketId) {
     bucketService.deleteAllProductsInBucket(bucketId);
   }
+
+  @GetMapping("/user")
+  public BucketDto findBucketByUserId(@RequestParam Long userId) {
+    Bucket bucket = bucketService.findBucketByUserId(userId);
+    List<ProductInBucket> productsInBucket = bucket.getProductsInBucket();
+    return bucketConverter.toBucketDto(bucket, productsInBucket);
+  }
+
+/*
+  @GetMapping
+  public BucketDto findBucketByBucketId(@RequestBody Long bucketId) {
+    return bucketConverter.toBucket(bucketService.findBucketByBucketId(bucketId));
+  }
+
+  @GetMapping("/sum/all")
+  protected int getSumProductInBucket(@RequestBody List<ProductInBucketDto> productInBucketDto) {
+    return bucketService.getSumProductInBucket(productInBucketDto);
+  }*/
 }

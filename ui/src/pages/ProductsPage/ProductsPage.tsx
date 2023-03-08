@@ -19,42 +19,53 @@ import {Link, useNavigate, useParams} from "react-router-dom";
 import {Sidebar} from "../component/SideBar";
 import {ProductInBucket} from "../../model/ProductInBucket";
 import {Bucket} from "../../model/Bucket";
-import {useSessionStore} from "../../Session";
 import BucketService from "../../services/BucketService";
+import SessionService from "../../services/SessionService";
+import UserService from "../../services/UserService";
+import {User} from "../../model/User";
 
+//не отображает корректно бакет айди
 
 const theme = createTheme();
 export default function Products() {
     const [products, setProducts] = useState<Array<Product>>([]);
     const {type} = useParams();
     const [bucket, setBucket] = useState<Bucket>();
-  //Как получить продукта айди
-    //достать пбакет айди из сессии юзер
+    const [user, serUser] = useState<User>();
 
-    const user = useSessionStore(state => state.user);
-    /* useEffect(() => {
-         BucketService.findBucketByUserId(Number(user.userId))
-             .then(response => setBucket(response));
-     }, []);*/
+    useEffect(() => {
+        SessionService.getSession()
+            .then(response => serUser(response))
+    }, []);
+
+    const count = 1;
+
+    useEffect(() => {
+        BucketService.findBucketByUserId(Number(user?.userId))
+            .then(response => setBucket(response));
+    }, []);
     useEffect(() => {
         ProductService.findAllProductsByTypeAndPage(String(type))
             .then(response => setProducts(response));
     }, []);
     const navigate = useNavigate();
-  /* const addProductInBucket = () => {
-         const productInBucket: ProductInBucket = {
-           productId,
-          bucketId
 
-          };
-         BucketService.addProductInBucket(productInBucket).then(response => navigate("/products/toys"));
-      }*/
+    const addProductInBucket = (productId: number) => {
+        const productDto: Product = {
+            productId,
+        };
+        const productInBucket: ProductInBucket = {
+            productDto,
+            count,
+            bucketId: Number(bucket?.bucketId)
+        };
+        BucketService.addProductInBucket(productInBucket).then(() => navigate("/products/type/wings"));
+    }
 
     return (
         <ThemeProvider theme={theme}>
             <CssBaseline/>
-            <MyHeader />
-
+            <MyHeader/>
             <main>
                 <Sidebar/>
                 <Box
@@ -96,10 +107,10 @@ export default function Products() {
                                             type="submit"
                                             size="small"
                                             sx={{mt: 1, mb: 1}}
-                                            to={'/products/'+ product.productId}
+                                            to={'/products/' + product.productId}
                                         >Open</Button>
                                         <Button
-                                        //   onClick={addProductInBucket}
+                                            onClick={() => addProductInBucket(Number(product.productId))}
                                         >Add in bucket</Button>
 
                                     </CardActions>

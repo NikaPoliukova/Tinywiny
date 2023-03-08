@@ -16,9 +16,10 @@ public class MvcConfig implements WebMvcConfigurer {
   private final String uiUrl;
 
   @Autowired
-public MvcConfig(@Value("http://localhost:3000") final String uiUrl){
-    this.uiUrl=uiUrl;
+  public MvcConfig(@Value("http://localhost:3000") final String uiUrl) {
+    this.uiUrl = uiUrl;
   }
+
   @Override
   public void addCorsMappings(@NotNull final CorsRegistry registry) {
     registry.addMapping("/**")

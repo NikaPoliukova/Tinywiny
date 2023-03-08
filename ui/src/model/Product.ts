@@ -7,6 +7,5 @@ export interface Product {
     description?: string;
     countInStock?: number;
     idType?: number;
-    image?: Image;
 
 }

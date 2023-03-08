@@ -2,14 +2,15 @@ package com.example.tinywiny.service;
 
 import com.example.tinywiny.converter.DeliveryInformationConverter;
 import com.example.tinywiny.converter.OrderConverter;
-import com.example.tinywiny.converter.ProductInOrderConverter;
 import com.example.tinywiny.converter.UserConverter;
 import com.example.tinywiny.dto.OrderDto;
-import com.example.tinywiny.dto.ProductInBucketDto;
 import com.example.tinywiny.dto.UserDto;
 import com.example.tinywiny.model.DeliveryInformation;
 import com.example.tinywiny.model.Order;
+import com.example.tinywiny.model.ProductInBucket;
 import com.example.tinywiny.model.ProductInOrder;
+import com.example.tinywiny.model.User;
+import com.example.tinywiny.repository.BucketRepository;
 import com.example.tinywiny.repository.OrderRepository;
 import com.example.tinywiny.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -21,6 +22,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,23 +34,34 @@ public class OrderService {
   private final OrderRepository orderRepository;
   private final OrderConverter orderConverter;
   private final UserRepository userRepository;
-  private final UserService userService;
   private final UserConverter userConverter;
-  private final ProductService productService;
   private final DeliveryInformationConverter deliveryInformationConverter;
-  private final ProductInOrderConverter productInOrderConverter;
+  private final BucketRepository bucketRepository;
 
   @Transactional
   @Modifying
   public Order save(OrderDto orderDto) {
+    User user = userRepository.findUserByUserId(orderDto.getUserId()).get();
     Order order = orderConverter.toOrder(orderDto);
-    UserDto userDto = userConverter.toDto(userService.findUserByUserId(orderDto.getUserId()));
+    UserDto userDto = userConverter.toDto(user);
     DeliveryInformation deliveryInformation = deliveryInformationConverter
-        .toDeliveryInformation(orderDto.getDeliveryInformation(), userDto);
+        .toDeliveryInformation(orderDto.getDeliveryInformationDto(), userDto);
     order.setDeliveryInformation(deliveryInformation);
-    List<ProductInOrder> products = productInOrderConverter.toProductInOrder(orderDto.getProductsInOrder());
-    order.setProductsInOrder(products);
+    List<ProductInBucket> productsInBucket = bucketRepository.findBucketByUserUserId(user.getUserId()).get().getProductsInBucket();
+    List<ProductInOrder> productsInOrder = addProductsInOrder(productsInBucket);
+    order.setProductsInOrder(productsInOrder);
     return orderRepository.save(order);
+  }
+
+  private List<ProductInOrder> addProductsInOrder(List<ProductInBucket> productInBucket) {
+    List<ProductInOrder> productsInOrder = new ArrayList<>();
+    for (ProductInBucket products : productInBucket) {
+      ProductInOrder product = new ProductInOrder();
+      product.setCount(products.getCount());
+      product.setProduct(product.getProduct());
+      productsInOrder.add(product);
+    }
+    return productsInOrder;
   }
 
   public Page<Order> getOrdersByPage(int pageNumber, int pageSize) {

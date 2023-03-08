@@ -1,6 +1,5 @@
 package com.example.tinywiny.dto;
 
-import com.example.tinywiny.model.Image;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -19,7 +18,6 @@ public class ProductDto {
   String description;
   int countInStock;
   int idType;
-  ImageDto imageDto;
 
 
- }
+}

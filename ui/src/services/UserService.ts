@@ -13,19 +13,12 @@ class UserService {
         return response.data;
     }
 
-    async saveUser(user: User): Promise<void> {
+    async saveUser(user: User) {
         await axios.post('http://localhost:8080/api/v1/registration', user);
     }
 
     async updateUser(user: User): Promise<void> {
         await axios.put('http://localhost:8080/api/v1/users', user);
-    }
-
-    getToken = async (username: string, password: string) => {
-        let response;
-        response = await axios.post('http://localhost:8080/api/v1/login',
-            {username: username, password: password}, {withCredentials: true});
-        return response?.status == 200;
     }
 }
 

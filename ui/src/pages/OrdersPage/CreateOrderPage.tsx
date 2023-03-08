@@ -2,7 +2,6 @@ import React, {useEffect, useState} from 'react';
 import {Button, Card, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography} from "@mui/material";
 import Header from '../component/MyHeader';
 import {Footer} from "../component/Footer";
-import {ProductInOrder} from "../../model/ProductInOrder";
 import {useNavigate} from "react-router-dom";
 import {DeliveryInformation} from "../../model/DeliveryInformation";
 import {Form, Table} from "semantic-ui-react";
@@ -12,65 +11,63 @@ import BucketService from "../../services/BucketService";
 import {ProductInBucket} from "../../model/ProductInBucket";
 import Container from "@mui/material/Container";
 import {Bucket} from 'model/Bucket';
+import {OrderSumDto} from "../../model/OrderSumDto";
 import SessionService from "../../services/SessionService";
 
-
+//ДОСТАТЬ  юзера ИЗ СЕССИИ
 export default function CreateOrderPage() {
-    const user = SessionService.getSession();
-    const [userId, setUserId] = useState(1);//ДОСТАТЬ ИЗ СЕССИИ
+   // const user = SessionService.getSession();
+
+    const userId = 3;
     const [customerName, setFirstName] = useState('');
     const [customerLastName, setLastName] = useState('');
     const [customerSurname, setSureName] = useState('');
     const [addressDelivery, setAddress] = useState('');
     const [commentOrder, setComment] = useState('');
     const [deliveryTypeId, setDeliveryType] = useState(0);
-    const [productsInOrder, setProductsInOrder] = useState<Array<ProductInOrder>>([]);
     const [products, setProducts] = useState<Array<ProductInBucket>>([])
-    const [sumProducts, setSumProducts] = useState(Number);
-    const [finalSum, setFinalSum] = useState(Number);
+    const [orderSumDto, setOrderSumDto] = useState<OrderSumDto>();
+    const [finalSum, setFinalSum] = useState(0);
     const [bucket, setBucket] = useState<Bucket>();
 
-    useEffect(() => {
-        BucketService.findBucketByUserId(Number(2))
-            .then(bucket => setBucket(bucket));
-    }, []);
 
     useEffect(() => {
-        BucketService.findAllProductsInBucket(Number(2))
-            .then(response => {
-                setProducts(response);
-                return products;
+        BucketService.findBucketByUserId(userId)
+            .then(bucket => {
+                setBucket(bucket);
+                return bucket;
             })
-        BucketService.getSumProductInBucket(Number(2)).then(sum => {
-            setSumProducts(sum);
-            return sumProducts;
-        })
-        BucketService.getSumWithDiscount(sumProducts).then(finalSum => setFinalSum(finalSum));
+            .then(bucket => BucketService.findAllProductsInBucket(Number(bucket?.bucketId))
+                .then(products => {
+                    setProducts(products);
+                    return products;
+                }))
+          BucketService.getSumProductInBucket(Number(bucket?.bucketId))
+            .then(orderSumDto => setOrderSumDto(orderSumDto))
     }, []);
 
-    const deliveryInformation: DeliveryInformation = {
+    const deliveryInformationDto: DeliveryInformation = {
         customerName,
         customerLastName,
         customerSurname,
         addressDelivery,
         userId
     }
-//Переложить продукты в ордер карзину
-
     const navigate = useNavigate();
     const createOrder = () => {
-
         const order: Order = {
             commentOrder,
             userId,
-            deliveryInformation,
+            deliveryInformationDto,
             deliveryTypeId,
-            productsInOrder,
             sum: finalSum
         };
-
-        OrderService.createOrder(order).then(response => navigate("/products/type/toys"));
-        BucketService.deleteAllProductsInBucket(Number(bucket?.bucketId)).then(() => navigate("/products/type/toys"));
+        OrderService.createOrder(order)
+            .then(() => {
+                    BucketService.deleteAllProductsInBucket(Number(bucket?.bucketId))
+                        .then(() => navigate("/products/type/toys"));
+                }
+            );
     }
     return (
         <React.Fragment>
@@ -90,7 +87,6 @@ export default function CreateOrderPage() {
                       display: 'flex',
                       flexDirection: 'column',
                       alignItems: 'center',
-
                   }}>
                 <h2> Product in order</h2>
                 <TableContainer>
@@ -123,8 +119,8 @@ export default function CreateOrderPage() {
                         </TableBody>
                     </Table>
                 </TableContainer>
-                <div>Sum order consist: {sumProducts}</div>
-                <div>Final sum with discount : {finalSum}</div>
+                <div>Sum order consist: {orderSumDto?.sum}</div>
+                <div>Final sum with discount : {orderSumDto?.sumWithDiscount}</div>
             </Card>
             <h2> Add information</h2>
             <Form>

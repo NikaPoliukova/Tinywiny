@@ -27,11 +27,6 @@ public class ProductInBucket {
   private Long id;
 
   private int count;
-  //private int sum;
-
-  /*@ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "discount_id")
-  private Discount discount;*/
 
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "bucket_id")

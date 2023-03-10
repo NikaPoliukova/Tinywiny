@@ -20,11 +20,11 @@ public class SessionController {
 
   @GetMapping
   public ResponseEntity<User> getCurrentUser() {
-    DefaultOAuth2User principal = (DefaultOAuth2User) SecurityContextHolder
+    org.springframework.security.core.userdetails.User principal = (org.springframework.security.core.userdetails.User) SecurityContextHolder
         .getContext()
         .getAuthentication()
         .getPrincipal();
-    Long userId = Long.valueOf(principal.getName());
-    return new ResponseEntity<User>(userService.findUserByUserId(userId), HttpStatus.OK);
+    String userName = principal.getUsername();
+    return new ResponseEntity(userService.findUserByUserName(userName), HttpStatus.OK);
   }
 }

@@ -9,15 +9,16 @@ import Link from '@mui/material/Link';
 import GlobalStyles from '@mui/material/GlobalStyles';
 import {Icon} from "semantic-ui-react";
 import {Bucket} from 'model/Bucket';
-import {useSessionStore} from "../../SessionState";
+
 import BucketService from "../../services/BucketService";
 import {useNavigate} from "react-router-dom";
+import {useSessionStore} from "../LoginPage/SignInStore";
 
 function PricingContent() {
     const [bucket, setBucket] = useState<Bucket>();
     const user = useSessionStore(state => state.user);
     const navigate = useNavigate();
-
+console.log(user);
 
    useEffect(() => {
          BucketService.findBucketByUserId(Number(user?.userId))

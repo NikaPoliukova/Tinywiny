@@ -35,7 +35,7 @@ export function Registry() {
             email,
             phoneNumber
         };
-        UserService.saveUser(user).then(response => navigate("/login"));
+        UserService.saveUser(user).then(() => navigate("/login"));
     }
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {

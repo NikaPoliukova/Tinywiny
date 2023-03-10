@@ -7,6 +7,7 @@ class SessionService {
             'http://localhost:8080/api/v1/sessions',
             { withCredentials: true }
         );
+       
         return response.data;
     }
 }
@@ -25,12 +26,6 @@ export default new SessionService();
 //         }
 //         return response?.status == 200;
 //     }
-//      async getSession(): Promise<User> {
-//         const response = await axios.get<User>(
-//             'http://localhost:8080/api/v1/users/me',
-//             { withCredentials: true }
-//         );
-//         return response.data;
-//     }
+//
 // }
 // export default new SessionService();

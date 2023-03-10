@@ -68,6 +68,11 @@ public class JwtUtils {
     return false;
   }
 
+  private boolean validateToken(String token, String secret) {
+    Jwts.parser().setSigningKey(secret).parseClaimsJws(token);
+    return true;
+  }
+
   public boolean validateAccessToken(String accessToken) {
     return validateToken(accessToken);
   }
@@ -76,75 +81,16 @@ public class JwtUtils {
     return validateToken(refreshToken);
   }
 
-  public String getLoginFromToken(String token) {
-    Claims claims = Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody();
+  private String getLoginFromToken(String token, String secret) {
+    Claims claims = Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody();
     return claims.getSubject();
   }
 
-  public Claims getTokenClaims(final String token) {
-    return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody();
-  }
-/*
-  public static String generateAccessToken(User user, String requestUrl, Algorithm algorithm) {
-    return JWT.create()
-        .withSubject(user.getUsername())
-        .withExpiresAt(new Date(System.currentTimeMillis() + 60 * 60 * 1000))
-        .withIssuer(requestUrl)
-        .withClaim("roles", user.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList()))
-        .sign(algorithm);
+  public String getLoginFromAccessToken(String token) {
+    return getLoginFromToken(token, secretKey);
   }
 
-  public static String generateRefreshToken(User user, String requestUrl, Algorithm algorithm) {
-    return JWT.create()
-        .withSubject(user.getUsername())
-        .withExpiresAt(new Date(System.currentTimeMillis() + 120 * 60 * 1000))
-        .withIssuer(requestUrl)
-        .withClaim("roles", user.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList()))
-        .sign(algorithm);
+  public String getLoginFromRefreshToken(String token) {
+    return getLoginFromToken(token, jwtRefreshSecret);
   }
-
-  public static String generateRefreshedAccessToken(String username, String requestUrl, String secretKey) {
-    Algorithm algorithm = Algorithm.HMAC256(secretKey.getBytes());
-    List<String> roles = new ArrayList<>();
-    roles.add("USER");
-    return JWT.create()
-        .withSubject(username)
-        .withExpiresAt(new Date(System.currentTimeMillis() + 60 * 60 * 1000))
-        .withIssuer(requestUrl)
-        .withClaim("roles", roles)
-        .sign(algorithm);
-  }
-
-  public static String generateRefreshedRefreshToken(String username, String requestUrl, String secretKey) {
-    Algorithm algorithm = Algorithm.HMAC256(secretKey.getBytes());
-    List<String> roles = new ArrayList<>();
-    roles.add("USER");
-    return JWT.create()
-        .withSubject(username)
-        .withExpiresAt(new Date(System.currentTimeMillis() + 120 * 60 * 1000))
-        .withIssuer(requestUrl)
-        .withClaim("roles", roles)
-        .sign(algorithm);
-  }
-
-  public static String getUsernameFromRefreshToken(String refreshToken, String secretKey) {
-    Algorithm algorithm = Algorithm.HMAC256(secretKey.getBytes());
-    JWTVerifier verifier = JWT.require(algorithm).build();
-    DecodedJWT decodedJWT = verifier.verify(refreshToken);
-    return decodedJWT.getSubject();
-  }
-
-  public static DecodedJWT getDecodedJWTToken(String token, String secretKey) {
-    Algorithm algorithm = Algorithm.HMAC256(secretKey.getBytes());
-    JWTVerifier verifier = JWT.require(algorithm).build();
-    return verifier.verify(token);
-  }
-
-  public static String generateAccessTokenV2(com.example.tinywiny.model.User user) {
-    return JWT.create()
-        .withSubject(user.getUserId().toString())
-        .withExpiresAt(new Date(System.currentTimeMillis() + 60 * 60 * 1000)) //TODO move it to property
-        .withClaim("login", user.getUserName())
-        .sign(Algorithm.HMAC256("nika".getBytes()));
-  }*/
 }

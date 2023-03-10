@@ -13,8 +13,8 @@ import java.util.Collection;
 public class PrincipalUser extends User {
   Long userId;
 
-  public PrincipalUser(String username, String password, Collection<? extends GrantedAuthority> authorities, Long userId) {
-    super(username, password, authorities);
+  public PrincipalUser(String userName, String password, Collection<? extends GrantedAuthority> authorities, Long userId) {
+    super(userName, password, authorities);
     this.userId = userId;
   }
 }

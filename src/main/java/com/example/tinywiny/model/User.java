@@ -55,6 +55,6 @@ public class User {
   @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
   private List<DeliveryInformation> deliveryInformation = new ArrayList<>();
 
-  @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
-  private Bucket bucket;
+ /* @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+  private Bucket bucket;*/
 }

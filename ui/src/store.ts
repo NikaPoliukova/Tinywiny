@@ -1,6 +1,11 @@
+/*
+ * Copyright (C) 2022 Spanning Cloud Apps.  All rights reserved.
+ */
+
 import create from 'zustand';
-import {User} from "./model/User";
 import SessionService from "./services/SessionService";
+import {User} from "./model/User";
+
 export interface SessionState {
     user: User | null;
     loading: boolean;

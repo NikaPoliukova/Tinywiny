@@ -1,36 +1,25 @@
 import {create} from "zustand";
 import SessionService from "../../services/SessionService";
+import {User} from "../../model/User";
 
-export interface SignInStore {
-    userName: string;
-    password: string;
-    isAuthorized: boolean;
-    setUserName: (userName: string) => void;
-    setPassword: (password: string) => void;
-    setIsAuthorized: (flag: boolean) => void;
-    getToken: () => void;
-
+export interface SessionState {
+    user: User | null;
+    loading: boolean;
+    getSession: () => void;
 }
 
-export const useSignInStore = create<SignInStore>((set: any, get: any) => ({
-    userName: '',
-    password: '',
-    isAuthorized: false,
+export const useSessionStore = create<SessionState>(set => ({
+    user: null,
+    loading: true,
 
-    setUserName: async (userName: string) => {
-        set({userName: userName})
-    },
-    setPassword: async (password: string) => {
-        set({password: password})
-    },
-    setIsAuthorized: async (flag: boolean) => {
-        set({isAuthorized: flag})
-    },
-    getToken: async () => {
-        set({isAuthorized: false})
-        await SessionService.getToken(get().userName, get().password)
-            ? set({isAuthorized: true})
-            : set({isAuthorized: true})
-
+    getSession: async () => {
+        try {
+            const user = await SessionService.getSession();
+            set({ user });
+        } catch (error) {
+            set({ user: null });
+        } finally {
+            set({ loading: false });
+        }
     }
-}))
+}));

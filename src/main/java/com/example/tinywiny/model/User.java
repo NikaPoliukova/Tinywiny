@@ -46,14 +46,14 @@ public class User {
 
   private String role;
 
-  @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+  /*@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
   private List<Order> orders = new ArrayList<>();
 
   @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
   private List<Review> reviews = new ArrayList<>();
 
   @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-  private List<DeliveryInformation> deliveryInformation = new ArrayList<>();
+  private List<DeliveryInformation> deliveryInformation = new ArrayList<>();*/
 
  /* @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
   private Bucket bucket;*/

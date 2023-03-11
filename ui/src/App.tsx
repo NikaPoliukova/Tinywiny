@@ -3,7 +3,7 @@ import {Route, Routes} from 'react-router-dom';
 import UsersPage from './pages/UsersPage/UsersPage';
 import HomePage from "./pages/HomePage/HomePage";
 import {Registry} from "./pages/RegistrationPage/RegistryPage";
-
+import 'bootstrap/dist/css/bootstrap.min.css';
 import ReviewsPage from "./pages/AdminPage/ReviewsPage";
 import BucketPage from "./pages/BucketPage/BucketPage";
 import OrdersPage from "./pages/AdminPage/OrdersPage";
@@ -24,6 +24,9 @@ import ReviewForUsers from "./pages/ReviewsPage/ReviewForUsers";
 import {UpdateUserPage} from "./pages/UserPage/UpdateUserPage";
 import SignIn from "./pages/LoginPage/LoginPage";
 import {useSessionStore} from "./store";
+import PaymentPage from 'pages/PaymentPage/PaymentPage';
+import {createTheme, ThemeProvider} from "@mui/material";
+
 
 
 function App() {
@@ -34,6 +37,7 @@ function App() {
     }, []);
 
     return (
+
         <Routes>
             <Route path={'/'} element={<HomePage/>}/>
             <Route path={'/login'} element={<SignIn/>}/>
@@ -57,7 +61,9 @@ function App() {
             <Route path={'/admin/products/:productId'} element={<UpdateProductPage/>}/>
             <Route path={'/admin/products'} element={<ProductsUpdatePage/>}/>
             <Route path={'/users/update/:userId'} element={<UpdateUserPage/>}/>
+            <Route path={'/payment-page'} element={<PaymentPage/>}/>
         </Routes>
+
     );
 }
 

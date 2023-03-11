@@ -1,21 +1,14 @@
-import MyHeader from 'pages/component/MyHeader';
-import React, {useState} from 'react';
-import {Container} from "react-bootstrap";
+
 
 function App() {
 
     return (
+      <div>
+          <h2 color='red'>Hello</h2>
+      </div>
 
-        <div>
-            hi
-        </div>
-
-            );
-
-
-
+    );
 }
-
 
 export default App;
 

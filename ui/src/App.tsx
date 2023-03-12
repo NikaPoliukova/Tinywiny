@@ -25,8 +25,10 @@ import {UpdateUserPage} from "./pages/UserPage/UpdateUserPage";
 import SignIn from "./pages/LoginPage/LoginPage";
 import {useSessionStore} from "./store";
 import PaymentPage from 'pages/PaymentPage/PaymentPage';
-import {createTheme, ThemeProvider} from "@mui/material";
+import {createTheme, ThemeProvider} from '@mui/material/styles';
+import { Theme } from '@mui/material/styles/createTheme';
 
+const theme: Theme = createTheme();
 
 
 function App() {
@@ -37,7 +39,7 @@ function App() {
     }, []);
 
     return (
-
+        <ThemeProvider theme={theme}>
         <Routes>
             <Route path={'/'} element={<HomePage/>}/>
             <Route path={'/login'} element={<SignIn/>}/>
@@ -63,7 +65,7 @@ function App() {
             <Route path={'/users/update/:userId'} element={<UpdateUserPage/>}/>
             <Route path={'/payment-page'} element={<PaymentPage/>}/>
         </Routes>
-
+        </ThemeProvider>
     );
 }
 

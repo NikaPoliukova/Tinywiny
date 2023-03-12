@@ -10,7 +10,6 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import {createTheme, ThemeProvider} from '@mui/material/styles';
 import MyHeader from 'pages/component/MyHeader';
 import {Footer} from "../component/Footer";
 import {Product} from "../../model/Product";
@@ -21,10 +20,11 @@ import {ProductInBucket} from "../../model/ProductInBucket";
 import {Bucket} from "../../model/Bucket";
 import BucketService from "../../services/BucketService";
 import SessionService from "../../services/SessionService";
-import UserService from "../../services/UserService";
 import {User} from "../../model/User";
+import {ThemeProvider} from "react-bootstrap";
+import {createTheme} from "@mui/material";
 
-//не отображает корректно бакет айди
+
 
 const theme = createTheme();
 export default function Products() {
@@ -64,6 +64,7 @@ export default function Products() {
 
     return (
         <ThemeProvider theme={theme}>
+
             <CssBaseline/>
             <MyHeader/>
             <main>
@@ -76,11 +77,11 @@ export default function Products() {
                     }}
                 >
                     <Container maxWidth="sm">
-                        <Typography
-                            component="h1"
-                            variant="h2"
-                            align="center"
-                            color="text.primary">
+                        <Typography style={{color: 'var(--primary-color)'}}
+                                    component="h1"
+                                    variant="h2"
+                                    align="center"
+                        >
                             Products
                         </Typography>
                     </Container>
@@ -121,6 +122,7 @@ export default function Products() {
                 </Container>
             </main>
             <Footer/>
+
         </ThemeProvider>
     );
 }

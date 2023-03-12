@@ -12,16 +12,16 @@ import {Bucket} from 'model/Bucket';
 
 import BucketService from "../../services/BucketService";
 import {useNavigate} from "react-router-dom";
-import Cookies from 'js-cookie';
+import {useSessionStore} from "../../store";
 
 function PricingContent() {
     const [bucket, setBucket] = useState<Bucket>();
-    const userId = Cookies.get('userId');
+    const user = useSessionStore(state => state.user);
     const navigate = useNavigate();
-    console.log(userId);
+    console.log(bucket);
 
     useEffect(() => {
-        BucketService.findBucketByUserId(Number(userId))
+        BucketService.findBucketByUserId(Number(user?.userId))
             .then(response => setBucket(response));
     }, []);
     return (
@@ -77,7 +77,7 @@ function PricingContent() {
                     >
                         <Icon name='shop' size='big' color='brown'/>
                     </Button>
-                    <Button href="/users/${user.userId}">
+                    <Button onClick={() => navigate(`/users/${user?.userId}`)}>
                         <Icon name='user' size='big' color='brown'/>
                     </Button>
                     <Button href="/" variant="outlined" sx={{my: 1, mx: 1.5}}>

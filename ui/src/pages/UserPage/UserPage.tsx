@@ -13,6 +13,7 @@ export const UserPage = () => {
     const Profile = () => {
         const {userId} = useParams();
         const [user, setUser] = useState<User>();
+        console.log(user?.userName);
         useEffect(() => {
             UserService.getUser(Number(userId))
                 .then(response => setUser(response));

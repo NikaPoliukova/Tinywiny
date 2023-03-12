@@ -12,18 +12,18 @@ import {Bucket} from 'model/Bucket';
 
 import BucketService from "../../services/BucketService";
 import {useNavigate} from "react-router-dom";
-import {useSessionStore} from "../LoginPage/SignInStore";
+import Cookies from 'js-cookie';
 
 function PricingContent() {
     const [bucket, setBucket] = useState<Bucket>();
-    const user = useSessionStore(state => state.user);
+    const userId = Cookies.get('userId');
     const navigate = useNavigate();
-console.log(user);
+    console.log(userId);
 
-   useEffect(() => {
-         BucketService.findBucketByUserId(Number(user?.userId))
-             .then(response => setBucket(response));
-     }, []);
+    useEffect(() => {
+        BucketService.findBucketByUserId(Number(userId))
+            .then(response => setBucket(response));
+    }, []);
     return (
         <React.Fragment>
             <GlobalStyles styles={{ul: {margin: 0, padding: 0, listStyle: 'none'}}}/>
@@ -73,15 +73,15 @@ console.log(user);
                         </Link>
                     </nav>
                     <Button
-                        onClick={() =>  navigate(`/bucket/${bucket?.bucketId}`)}
-                        >
+                        onClick={() => navigate(`/bucket/${bucket?.bucketId}`)}
+                    >
                         <Icon name='shop' size='big' color='brown'/>
                     </Button>
                     <Button href="/users/${user.userId}">
-                        <Icon name='user' size='big'  color='brown'/>
+                        <Icon name='user' size='big' color='brown'/>
                     </Button>
                     <Button href="/" variant="outlined" sx={{my: 1, mx: 1.5}}>
-                      <Icon name ='log out' size='big' color='brown'/>
+                        <Icon name='log out' size='big' color='brown'/>
                     </Button>
                 </Toolbar>
             </AppBar>

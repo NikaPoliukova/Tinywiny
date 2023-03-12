@@ -21,8 +21,6 @@ import java.io.IOException;
 @RequiredArgsConstructor
 public class JwtFilter extends OncePerRequestFilter {
 
-  public static final String AUTHORIZATION = "Authorization";
-
   private final JwtUtils jwtUtils;
   private final UserDetailsServiceImpl userDetailsService;
 
@@ -41,15 +39,10 @@ public class JwtFilter extends OncePerRequestFilter {
   }
 
   private String getTokenFromRequest(HttpServletRequest request) {
-    String bearer = request.getHeader(AUTHORIZATION);
-    if (bearer != null && bearer.startsWith("Bearer ")) {
-      return bearer.substring(7);
-    } else {
       Cookie cookie = WebUtils.getCookie(request, "JWT");
       if (cookie != null) {
         return cookie.getValue();
       }
-    }
-    return null;
+      return  null;
   }
 }

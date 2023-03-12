@@ -8,6 +8,7 @@ import com.example.tinywiny.dto.ProductInBucketDto;
 import com.example.tinywiny.model.Bucket;
 import com.example.tinywiny.model.ProductInBucket;
 import com.example.tinywiny.service.BucketService;
+import com.example.tinywiny.service.CookiesUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -31,9 +32,12 @@ public class BucketRestController {
   private final BucketService bucketService;
   private final ProductInBucketConverter converter;
   private final BucketConverter bucketConverter;
+  private final CookiesUtils cookiesUtils;
+
 
   @GetMapping("/{bucketId}")
   public List<ProductInBucketDto> findAllProductsInBucket(@PathVariable Long bucketId) {
+   // Long userId = cookiesUtils.getUserIdFromCookies();
     return converter.toProductInBucketDto(bucketService.findAllProductInBucket(bucketId));
   }
 
@@ -79,7 +83,6 @@ public class BucketRestController {
     List<ProductInBucket> productsInBucket = bucket.getProductsInBucket();
     return bucketConverter.toBucketDto(bucket, productsInBucket);
   }
-
 /*
   @GetMapping
   public BucketDto findBucketByBucketId(@RequestBody Long bucketId) {

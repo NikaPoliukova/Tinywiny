@@ -36,6 +36,10 @@ public class AuthController {
       cookie.setHttpOnly(true);
       cookie.setMaxAge((int) EXPIRATION);
       response.addCookie(cookie);
+
+      Cookie userIdCookie = new Cookie("userId", user.getUserId().toString());
+      response.addCookie(userIdCookie);
+
       response.setStatus(HttpStatus.OK.value());
     } else {
       response.setStatus(HttpStatus.CONFLICT.value());

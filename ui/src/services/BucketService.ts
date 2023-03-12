@@ -6,18 +6,21 @@ import {OrderSumDto} from "../model/OrderSumDto";
 class BucketService {
 
     async findAllProductsInBucket(bucketId: number): Promise<Array<ProductInBucket>> {
-        const response = await axios.get<Array<ProductInBucket>>('http://localhost:8080/api/v1/bucket/' + bucketId);
+        const response = await axios.get<Array<ProductInBucket>>('http://localhost:8080/api/v1/bucket/' + bucketId,
+            {withCredentials: true});
         return response.data;
     }
 
     async findBucketByUserId(userId: number): Promise<Bucket> {
         const params = {userId: userId}
-        const response = await axios.get<Bucket>('http://localhost:8080/api/v1/bucket' ,{params});
+        const response = await axios.get<Bucket>('http://localhost:8080/api/v1/bucket/user' ,
+            {params, withCredentials: true});
         return response.data;
     }
 
     async findBucketByBucketId(bucketId: number): Promise<Bucket> {
-        const response = await axios.get<Bucket>('http://localhost:8080/api/v1/bucket/' + bucketId);
+        const response = await axios.get<Bucket>('http://localhost:8080/api/v1/bucket/' + bucketId,
+            {withCredentials: true});
         return response.data;
     }
 
@@ -32,31 +35,34 @@ class BucketService {
     async getSumProductInBucket(bucketId: number): Promise<OrderSumDto> {
         const params = {bucketId: bucketId};
         const response = await axios.get<OrderSumDto>('http://localhost:8080/api/v1/bucket/sum/all',
-            {params}
+            {params,withCredentials: true}
         );
         return response.data;
     }
 
     async addProductInBucket(productInBucket: ProductInBucket): Promise<ProductInBucket> {
-        const response = await axios.post<ProductInBucket>('http://localhost:8080/api/v1/bucket', productInBucket);
+        const response = await axios.post<ProductInBucket>('http://localhost:8080/api/v1/bucket', productInBucket,
+            {withCredentials: true});
         return response.data;
     }
 
     async deleteProductInBucket(id: number): Promise<void> {
         const params = {productInBucketId: id};
         const response = await axios.delete('http://localhost:8080/api/v1/bucket', {
-            params: params
+            params: params,withCredentials: true
         });
         return response.data;
     }
 
     async deleteAllProductsInBucket(bucketId: number): Promise<void> {
-        const response = await axios.delete('http://localhost:8080/api/v1/bucket/' + bucketId);
+        const response = await axios.delete('http://localhost:8080/api/v1/bucket/' + bucketId,
+            {withCredentials: true});
         return response.data;
     }
 
     async updateCountProduct(productInBucket: ProductInBucket): Promise<ProductInBucket> {
-        const response = await axios.put<ProductInBucket>('http://localhost:8080/api/v1/bucket', productInBucket);
+        const response = await axios.put<ProductInBucket>('http://localhost:8080/api/v1/bucket', productInBucket,
+            {withCredentials: true});
         return response.data
     }
 }

@@ -1,11 +1,15 @@
 package com.example.tinywiny.controller;
 
-import com.example.tinywiny.model.User;
+import com.example.tinywiny.converter.UserConverter;
+import com.example.tinywiny.dto.CredentialsDto;
+import com.example.tinywiny.dto.UserDto;
+import com.example.tinywiny.security.PrincipalUser;
 import com.example.tinywiny.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.oauth2.core.user.DefaultOAuth2User;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,14 +21,13 @@ import org.springframework.web.bind.annotation.RestController;
 public class SessionController {
 
   private final UserService userService;
-
+  private final UserConverter converter;
   @GetMapping
-  public ResponseEntity<User> getCurrentUser() {
-    org.springframework.security.core.userdetails.User principal = (org.springframework.security.core.userdetails.User) SecurityContextHolder
+  public UserDto getCurrentUser() {
+    User principal = (User) SecurityContextHolder
         .getContext()
         .getAuthentication()
         .getPrincipal();
-    String userName = principal.getUsername();
-    return new ResponseEntity(userService.findUserByUserName(userName), HttpStatus.OK);
+    return converter.toDto(userService.findUserByUserName(principal.getUsername()));
   }
 }

@@ -20,15 +20,16 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @RequiredArgsConstructor
 public class ApplicationSecurityConfig {
 
-  private final JwtFilter jwtTokenFilter;
 
+private final JwtFilter jwtFilter;
   @Bean
   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
     return http
         .csrf().disable()
         .authorizeHttpRequests(requests -> requests
             .antMatchers("/", "/error", "/login", "/api/v1/login",
-                "/api/v1/registration", "/authorization/login", "/api/v1/sessions").permitAll()
+                "/api/v1/registration", "/authorization/login", "/api/v1/sessions","/api/v1/products/**",
+                "/api/v1/reviews").permitAll()
             //.antMatchers("/api/v1/reviews").hasRole("USER")
             .anyRequest().authenticated()
         )
@@ -36,7 +37,7 @@ public class ApplicationSecurityConfig {
             (new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED)))
         .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
         .and()
-        .addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class)
+        .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
         .build();
   }
 

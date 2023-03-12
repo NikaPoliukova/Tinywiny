@@ -4,15 +4,16 @@ import {Review} from "../model/Review";
 class ReviewService {
 
     async getReviews(): Promise<Array<Review>> {
-        const response = await axios.get<Array<Review>>('http://localhost:8080/api/v1/reviews');
+        const response = await axios.get<Array<Review>>('http://localhost:8080/api/v1/reviews',
+            {withCredentials: true});
         return response.data;
     }
 
     async saveReview(review: Review): Promise<void> {
-        await axios.post('http://localhost:8080/api/v1/reviews', review);
+        await axios.post('http://localhost:8080/api/v1/reviews/create', review, {withCredentials: true});
     }
     async deleteReview(id: number): Promise<void> {
-        await axios.delete('http://localhost:8080/api/v1/reviews/'+id);
+        await axios.delete('http://localhost:8080/api/v1/admin/reviews/'+id,{withCredentials: true});
     }
 
 

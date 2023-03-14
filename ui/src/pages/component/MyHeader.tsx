@@ -13,12 +13,12 @@ import {Bucket} from 'model/Bucket';
 import BucketService from "../../services/BucketService";
 import {useNavigate} from "react-router-dom";
 import {useSessionStore} from "../../store";
+import AuthorizationService from "../../services/AuthorizationService";
 
 function PricingContent() {
     const [bucket, setBucket] = useState<Bucket>();
     const user = useSessionStore(state => state.user);
     const navigate = useNavigate();
-
 
     useEffect(() => {
         if (user?.userId) {
@@ -82,7 +82,8 @@ function PricingContent() {
                     <Button onClick={() => navigate(`/users/${user?.userId}`)}>
                         <Icon name='user' size='big' color='brown'/>
                     </Button>
-                    <Button href="/" variant="outlined" sx={{my: 1, mx: 1.5}}>
+                    <Button
+                       onClick={()=>AuthorizationService.logout()}>
                         <Icon name='log out' size='big' color='brown'/>
                     </Button>
                 </Toolbar>

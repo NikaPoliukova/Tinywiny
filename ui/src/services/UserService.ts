@@ -21,7 +21,7 @@ class UserService {
     }
 
     async updateUser(user: User) {
-        await axios.post('http://localhost:8080/api/v1/users', user,
+        await axios.put('http://localhost:8080/api/v1/users', user,
             {withCredentials: true});
     }
 }

@@ -12,8 +12,8 @@ import {useSessionStore} from "../../store";
 export const UpdateUserPage = () => {
     const Profile = () => {
         const me = useSessionStore(state => state.user);
-        const [userName, setUserName] = useState('');
-        const [password, setPassword] = useState('');
+        const [userName, setUserName] = useState("");
+        const [password, setPassword] = useState("");
         const [email, setEmail] = useState("");
         const [phoneNumber, setPhoneNumber] = useState("");
         const navigate = useNavigate();

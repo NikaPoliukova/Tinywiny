@@ -1,8 +1,8 @@
 import axios from 'axios';
 
 class AuthorizationService {
-   async login(userName: string, password: string){
-        const response = await axios.post<string>( 'http://localhost:8080/api/v1/login',
+    async login(userName: string, password: string) {
+        const response = await axios.post<string>('http://localhost:8080/api/v1/login',
             {userName: userName, password: password},
             {withCredentials: true}
         ).catch(function (error) {
@@ -11,5 +11,10 @@ class AuthorizationService {
         return response.status;
     }
 
+    async logout() {
+        const response = await axios.get('http://localhost:8080/api/v1/logout')
+        return response.status;
+    }
 }
+
 export default new AuthorizationService();

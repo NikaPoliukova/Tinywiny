@@ -33,7 +33,7 @@ public class UserRestController {
   private final UserConverter userConverter;
   private final UtilClass utilClass;
 
-  @PostMapping
+  @PutMapping
   protected void updateUser(@RequestBody UserDto user) {
     User userDB = userService.findUserByUserId( user.getUserId());
     userService.updateUser(user, userDB);

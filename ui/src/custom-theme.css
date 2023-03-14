@@ -1,0 +1,14 @@
+:root {
+    --primary-color: rgba(246, 165, 67, 0.51);
+    --secondary-color: rgba(184, 18, 142, 0.05);
+    --font-family: "Helvetica Neue", sans-serif;
+}
+
+body {
+    font-family: var(--font-family);
+    background-color: var(--secondary-color);
+}
+
+h1, h2, h3 {
+    color: var(--primary-color);
+}

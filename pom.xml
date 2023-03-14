@@ -21,7 +21,7 @@
         <spring-context.version>5.3.23</spring-context.version>
         <lombok-mapstruct.version>0.2.0</lombok-mapstruct.version>
         <org.mapstruct.version>1.4.2.Final</org.mapstruct.version>
-
+        <springfox.version>3.0.0</springfox.version>
 
     </properties>
     <dependencies>
@@ -71,7 +71,11 @@
             <artifactId>javax.persistence-api</artifactId>
             <version>2.2</version>
         </dependency>
-
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-boot-starter</artifactId>
+            <version>${springfox.version}</version>
+        </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-core</artifactId>

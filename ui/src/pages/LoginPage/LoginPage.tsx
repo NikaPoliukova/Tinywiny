@@ -15,7 +15,8 @@ import {Button} from 'semantic-ui-react'
 import PersonIcon from '@mui/icons-material/Person';
 import React from "react";
 import AuthorizationService from "../../services/AuthorizationService";
-import { useNavigate } from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
+import HeaderForNoAuthorized from "pages/component/HeaderForNoAuthorized";
 
 
 const theme = createTheme();
@@ -65,7 +66,9 @@ const SignIn = () => {
     };
 
     return (
+
         <ThemeProvider theme={theme}>
+            <HeaderForNoAuthorized />
             <Box sx={{
                 display: 'flex',
                 flexDirection: 'column',
@@ -119,15 +122,26 @@ const SignIn = () => {
                             <strong>{alertText}</strong>
                         </Alert>
                         <Button
+                            basic color='brown'
+                            content=' Log in '
                             type="submit"
-                            fullWidth
-                            variant="contained"
-                            sx={{mt: 3, mb: 2}}
-
-                        >
-                            Sign In
+                            size="small"
+                            sx={{mt: 1, mb: 1}}
+                                                >
                         </Button>
+
                     </Box>
+                    <Button
+                        basic color='brown' content='Registration'
+                        component={Link}
+                        type="submit"
+                        size="small"
+                        sx={{mt: 1, mb: 1}}
+                        to={'/registration'}
+                    >
+
+                    </Button>
+
                 </Box>
             </Container>
         </ThemeProvider>

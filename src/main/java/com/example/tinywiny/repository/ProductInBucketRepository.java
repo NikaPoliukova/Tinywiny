@@ -15,7 +15,7 @@ public interface ProductInBucketRepository extends JpaRepository<ProductInBucket
   List<ProductInBucket> findProductInBucketsByBucket(@Param("bucket") Bucket bucket);
 
 
-  ProductInBucket findProductInBucketByBucket(@Param("bucket") Bucket bucket);
+  //ProductInBucket findProductInBucketByBucket(@Param("bucket") Bucket bucket);
 
   ProductInBucket findProductInBucketById(@Param("productId") Long productId);
 

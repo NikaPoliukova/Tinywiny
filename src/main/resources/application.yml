@@ -1,11 +1,13 @@
 spring:
   mvc:
-    static-path-pattern: /static/**
+    pathmatch:
+      matching-strategy: ant_path_matcher
   datasource:
     driver-class-name: org.postgresql.Driver
     username: postgres
     password: postgres
     url: jdbc:postgresql://localhost:35432/tinywiny_network
+
 
 aws:
   region: "us-east-1"

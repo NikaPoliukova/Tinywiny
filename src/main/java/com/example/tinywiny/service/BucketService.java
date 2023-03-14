@@ -8,7 +8,6 @@ import com.example.tinywiny.model.ProductInBucket;
 import com.example.tinywiny.repository.BucketRepository;
 import com.example.tinywiny.repository.ProductInBucketRepository;
 import com.example.tinywiny.repository.ProductRepository;
-import com.example.tinywiny.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
@@ -26,7 +25,7 @@ public class BucketService {
   private final ProductService productService;
   private final ProductInBucketRepository productInBucketRepository;
   private final DiscountService discountService;
-  private final UserRepository userRepository;
+  private final UtilClass utilClass;
   private final ProductRepository productRepository;
 
   public List<ProductInBucket> findAllProductInBucket(Long bucketId) {
@@ -51,19 +50,21 @@ public class BucketService {
   }
 
   public ProductInBucket updateCountProduct(ProductInBucketDto productInBucketDto) {
-    Optional<Bucket> bucket = bucketRepository.findBucketByBucketId(productInBucketDto.getBucketId());
-    ProductInBucket productInBucket = productInBucketRepository.findProductInBucketByBucket(bucket.get());
+    ProductInBucket productInBucket = productInBucketRepository.findProductInBucketById(productInBucketDto.getId());
     productInBucket.setCount(productInBucketDto.getCount());
     return productInBucketRepository.save(productInBucket);
   }
 
-  public void addProductInBucket(ProductInBucketDto productInBucketDto) {
-    Optional<Bucket> bucket = bucketRepository.findBucketByBucketId(productInBucketDto.getBucketId());
+
+  public void addProductInBucket(Long productId) {
+    final int count = 1;
+    Long userId =utilClass.getIdCurrentUser();
+    Optional<Bucket> bucket = bucketRepository.findBucketByUserUserId(userId);
     ProductInBucket productInBucket = new ProductInBucket();
-    Product product = productService.findProductByProductId(productInBucketDto.getProductDto().getProductId());
+    Product product = productService.findProductByProductId(productId);
     productInBucket.setBucket(bucket.get());
     productInBucket.setProduct(product);
-    productInBucket.setCount(productInBucketDto.getCount());
+    productInBucket.setCount(count);
     productInBucketRepository.save(productInBucket);
   }
 

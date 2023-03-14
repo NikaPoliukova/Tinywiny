@@ -1,43 +1,42 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {User} from "../../model/User";
 import UserService from "../../services/UserService";
 import {Card, TableContainer} from "@mui/material";
-import {useNavigate, useParams} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import {Footer} from "../component/Footer";
 import {Form, Header, Icon, Table} from "semantic-ui-react";
 import MyHeader from 'pages/component/MyHeader';
+import {useSessionStore} from "../../store";
 
 
 export const UpdateUserPage = () => {
     const Profile = () => {
-        const {userId} = useParams();
-        const [user, setUser] = useState<User>();
+        const me = useSessionStore(state => state.user);
         const [userName, setUserName] = useState('');
         const [password, setPassword] = useState('');
         const [email, setEmail] = useState("");
         const [phoneNumber, setPhoneNumber] = useState("");
         const navigate = useNavigate();
+        const userId = me?.userId;
+
         const updateUser = () => {
-            const userUpdate: User = {
+            const user: User = {
+                userId,
                 userName,
                 password,
                 email,
                 phoneNumber
             };
-            UserService.updateUser(userUpdate).then(() => navigate("/users/userId"));
-        }
+            UserService.updateUser(user).then(() => navigate(`/gallery`));
 
-        useEffect(() => {
-            UserService.getUser(Number(userId))
-                .then(response => setUser(response));
-        }, []);
+        }
         return (
             <div className="card">
                 <MyHeader/>
                 <div>
                     <Header as='h2' icon textAlign='center'>
                         <Icon name='user' circular size='big'/>
-                        <Header.Content>User, {user?.userName}</Header.Content>
+                        <Header.Content>User, {me?.userName}</Header.Content>
                     </Header>
                 </div>
                 <Card style={{width: 1500}}>

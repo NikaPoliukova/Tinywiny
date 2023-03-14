@@ -21,7 +21,7 @@ export const AdminPage = () => {
                 <Button type="submit"
                         variant="contained"
                         sx={{mt: 3, mb: 2}}
-                        href="/products">Add product </Button>
+                        href="/admin/product/create">Add product </Button>
             </ Grid>
             <div>Просмотреть все заказы</div>
             < Grid  container spacing={4}>

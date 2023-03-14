@@ -13,7 +13,7 @@ export const UserPage = () => {
     const Profile = () => {
         const {userId} = useParams();
         const [user, setUser] = useState<User>();
-        console.log(user?.userName);
+
         useEffect(() => {
             UserService.getUser(Number(userId))
                 .then(response => setUser(response));
@@ -30,14 +30,14 @@ export const UserPage = () => {
                 </div>
 
                 <div className="col-lg-6">
-                    <div className="card">
+
                         <Button
                             basic color='brown'
                             content='Update profile information'
                             size="small"
-                                href={"/users/update/userId"}
+                                href={`/users/update/${userId}`}
                         ></Button>
-                    </div>
+
                 </div>
                 <Card style={{width: 1000}}>
                     <TableContainer>

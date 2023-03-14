@@ -12,13 +12,13 @@ import {ProductInBucket} from "../../model/ProductInBucket";
 import Container from "@mui/material/Container";
 import {Bucket} from 'model/Bucket';
 import {OrderSumDto} from "../../model/OrderSumDto";
-import SessionService from "../../services/SessionService";
+import {useSessionStore} from "../../store";
 
-//ДОСТАТЬ  юзера ИЗ СЕССИИ
+
 export default function CreateOrderPage() {
-   // const user = SessionService.getSession();
+    const user = useSessionStore(state => state.user);
 
-    const userId = 3;
+
     const [customerName, setFirstName] = useState('');
     const [customerLastName, setLastName] = useState('');
     const [customerSurname, setSureName] = useState('');
@@ -32,7 +32,7 @@ export default function CreateOrderPage() {
 
 
     useEffect(() => {
-        BucketService.findBucketByUserId(userId)
+        BucketService.findBucketByUserId(Number(user?.userId))
             .then(bucket => {
                 setBucket(bucket);
                 return bucket;
@@ -51,13 +51,13 @@ export default function CreateOrderPage() {
         customerLastName,
         customerSurname,
         addressDelivery,
-        userId
+        userId: Number(user?.userId)
     }
     const navigate = useNavigate();
     const createOrder = () => {
         const order: Order = {
             commentOrder,
-            userId,
+            userId: Number(user?.userId),
             deliveryInformationDto,
             deliveryTypeId,
             sum: finalSum

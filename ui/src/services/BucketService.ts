@@ -13,7 +13,7 @@ class BucketService {
 
     async findBucketByUserId(userId: number): Promise<Bucket> {
         const params = {userId: userId}
-        const response = await axios.get<Bucket>('http://localhost:8080/api/v1/bucket/user' ,
+        const response = await axios.get<Bucket>('http://localhost:8080/api/v1/bucket/user',
             {params, withCredentials: true});
         return response.data;
     }
@@ -24,33 +24,33 @@ class BucketService {
         return response.data;
     }
 
-   /* async getSumWithDiscount(sum: number) {
-        const params = {sum: sum};
-        const response = await axios.get<number>('http://localhost:8080/api/v1/bucket/final-sum', {
-            params
-        });
-        return response.data;
-    }*/
+    /* async getSumWithDiscount(sum: number) {
+         const params = {sum: sum};
+         const response = await axios.get<number>('http://localhost:8080/api/v1/bucket/final-sum', {
+             params
+         });
+         return response.data;
+     }*/
 
     async getSumProductInBucket(bucketId: number): Promise<OrderSumDto> {
         const params = {bucketId: bucketId};
         const response = await axios.get<OrderSumDto>('http://localhost:8080/api/v1/bucket/sum/all',
-            {params,withCredentials: true}
+            {params, withCredentials: true}
         );
         return response.data;
     }
 
-    async addProductInBucket(productInBucket: ProductInBucket): Promise<ProductInBucket> {
-        const response = await axios.post<ProductInBucket>('http://localhost:8080/api/v1/bucket', productInBucket,
-            {withCredentials: true});
+    async addProductInBucket(productId: number) {
+        const params = {productId: productId};
+        const response = await axios.post('http://localhost:8080/api/v1/bucket',
+            {params: params}, {withCredentials: true});
         return response.data;
     }
 
-    async deleteProductInBucket(id: number): Promise<void> {
-        const params = {productInBucketId: id};
-        const response = await axios.delete('http://localhost:8080/api/v1/bucket', {
-            params: params,withCredentials: true
-        });
+    async deleteProductInBucket(productInBucketId: number) {
+        const response = await axios.delete('http://localhost:8080/api/v1/bucket/product/' + productInBucketId,
+            {withCredentials: true}
+        );
         return response.data;
     }
 

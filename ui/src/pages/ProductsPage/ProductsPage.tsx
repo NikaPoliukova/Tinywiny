@@ -16,51 +16,22 @@ import {Product} from "../../model/Product";
 import ProductService from "../../services/ProductService";
 import {Link, useNavigate, useParams} from "react-router-dom";
 import {Sidebar} from "../component/SideBar";
-import {ProductInBucket} from "../../model/ProductInBucket";
 import {Bucket} from "../../model/Bucket";
 import BucketService from "../../services/BucketService";
-import SessionService from "../../services/SessionService";
-import {User} from "../../model/User";
 import {ThemeProvider} from "react-bootstrap";
 import {createTheme} from "@mui/material";
-
+import {useSessionStore} from "../../store";
 
 
 const theme = createTheme();
 export default function Products() {
     const [products, setProducts] = useState<Array<Product>>([]);
     const {type} = useParams();
-    const [bucket, setBucket] = useState<Bucket>();
-    const [user, serUser] = useState<User>();
 
-    useEffect(() => {
-        SessionService.getSession()
-            .then(response => serUser(response))
-    }, []);
-
-    const count = 1;
-
-    useEffect(() => {
-        BucketService.findBucketByUserId(Number(user?.userId))
-            .then(response => setBucket(response));
-    }, []);
     useEffect(() => {
         ProductService.findAllProductsByTypeAndPage(String(type))
             .then(response => setProducts(response));
     }, []);
-    const navigate = useNavigate();
-
-    const addProductInBucket = (productId: number) => {
-        const productDto: Product = {
-            productId,
-        };
-        const productInBucket: ProductInBucket = {
-            productDto,
-            count,
-            bucketId: Number(bucket?.bucketId)
-        };
-        BucketService.addProductInBucket(productInBucket).then(() => navigate("/products/type/wings"));
-    }
 
     return (
         <ThemeProvider theme={theme}>
@@ -76,15 +47,13 @@ export default function Products() {
                         pb: 10,
                     }}
                 >
-                    <Container maxWidth="sm">
-                        <Typography style={{color: 'var(--primary-color)'}}
-                                    component="h1"
-                                    variant="h2"
-                                    align="center"
-                        >
-                            Products
-                        </Typography>
-                    </Container>
+                    <Typography style={{color: 'var(--primary-color)'}}
+                                component="h1"
+                                variant="h2"
+                                align="center"
+                    >
+                        Products
+                    </Typography>
                 </Box>
                 <Container sx={{py: 8}} maxWidth="md">
                     <Grid container spacing={4}>
@@ -111,7 +80,7 @@ export default function Products() {
                                             to={'/products/' + product.productId}
                                         >Open</Button>
                                         <Button
-                                            onClick={() => addProductInBucket(Number(product.productId))}
+                                            onClick={() => BucketService.addProductInBucket(Number(product.productId))}
                                         >Add in bucket</Button>
 
                                     </CardActions>

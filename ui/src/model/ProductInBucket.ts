@@ -5,5 +5,5 @@ export interface ProductInBucket {
     id?: number;
     count?: number;
     productDto?: Product;
-    bucketId: number;
+    bucketId?: number;
 }

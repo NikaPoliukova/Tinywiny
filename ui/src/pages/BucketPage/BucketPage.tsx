@@ -1,8 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {
-    Box,
-    Button,
-    Card,
+    Card, Link,
     TableBody,
     TableCell,
     TableContainer,
@@ -11,32 +9,29 @@ import {
     TextField,
     Typography
 } from "@mui/material";
+import {Button} from 'semantic-ui-react'
 import BucketService from "../../services/BucketService";
 import {useNavigate, useParams} from "react-router-dom";
 import {Footer} from "../component/Footer";
 import {Icon, Table} from 'semantic-ui-react'
 import MyHeader from "../component/MyHeader";
 import {ProductInBucket} from "../../model/ProductInBucket";
-import {Product} from "../../model/Product";
 
 
 function BucketPage() {
     const [products, setProducts] = useState<Array<ProductInBucket>>([])
-
     const {bucketId} = useParams();
-    const id = Number(bucketId)
     const [count, setCount] = useState(1);
-    const [productDto, setProductDto] = useState<Product>();
     const navigate = useNavigate();
     const [sumProducts, setSumProducts] = useState(0);
 
-    const updateCountProduct = () => {
+
+    const updateCountProductInBucket = (id: number) => {
         const productInBucket: ProductInBucket = {
-            productDto,
-            count,
-            bucketId: id
+            id,
+            count
         }
-        BucketService.updateCountProduct(productInBucket).then(() => navigate(`/bucket/${bucketId}`))
+        BucketService.updateCountProduct(productInBucket).then(() =>navigate(`/bucket/`+bucketId));
     }
 
     const deleteProduct = (id: number) => {
@@ -50,7 +45,7 @@ function BucketPage() {
                 setProducts(response);
                 return products;
             })
-        BucketService.getSumProductInBucket(Number(bucketId)).then(sumProducts=>setSumProducts(sumProducts.sum));
+        BucketService.getSumProductInBucket(Number(bucketId)).then(sumProducts => setSumProducts(sumProducts.sum));
     }, []);
 
     return (
@@ -72,7 +67,7 @@ function BucketPage() {
                         <TableBody>
                             {products.map((item) => (
                                 <TableRow
-                                    key={item.productDto?.productId}
+                                    key={item.id}
                                     sx={{'&:last-child td, &:last-child th': {border: 0}}}
                                 >
                                     <TableCell component="th" scope="row">
@@ -82,7 +77,12 @@ function BucketPage() {
                                         <TextField label="Count"
                                                    type={'number'}
                                                    value={count}
-                                                   onChange={e => setCount(Number(e.target.value))} />
+                                                   onChange={e => {
+                                                       setCount(Number(e.target.value));
+                                                       updateCountProductInBucket(Number(item.id))
+                                                   }}
+                                        >
+                                        </TextField>
 
                                     </TableCell>
                                     <TableCell component="th" scope="row">
@@ -101,12 +101,12 @@ function BucketPage() {
                 </TableContainer>
                 Sum products in order :{sumProducts}
             </Card>
-            <Button sx={{mt: 4}}
-                    type="submit"
-                    variant="contained"
-                    href={'/orders/create'}
-            > Go to order
-            </Button>
+            <Button
+                basic color='brown'
+                content='Create order'
+                size="small"
+                href={`/orders/create`}
+            ></Button>
             <Footer/>
         </div>
     );

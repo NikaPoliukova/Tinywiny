@@ -15,8 +15,7 @@ export const useSessionStore = create<SessionState>(set => ({
     getSession: async () => {
         try {
             const user = await SessionService.getSession();
-            console.log("юзер из сессион сторе")
-            console.log(user);
+
             set({ user });
         } catch (error) {
             set({ user: null });

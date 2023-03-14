@@ -8,7 +8,6 @@ import com.example.tinywiny.dto.ProductInBucketDto;
 import com.example.tinywiny.model.Bucket;
 import com.example.tinywiny.model.ProductInBucket;
 import com.example.tinywiny.service.BucketService;
-import com.example.tinywiny.service.CookiesUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -32,12 +31,12 @@ public class BucketRestController {
   private final BucketService bucketService;
   private final ProductInBucketConverter converter;
   private final BucketConverter bucketConverter;
-  private final CookiesUtils cookiesUtils;
+
 
 
   @GetMapping("/{bucketId}")
   public List<ProductInBucketDto> findAllProductsInBucket(@PathVariable Long bucketId) {
-   // Long userId = cookiesUtils.getUserIdFromCookies();
+
     return converter.toProductInBucketDto(bucketService.findAllProductInBucket(bucketId));
   }
 
@@ -58,8 +57,8 @@ public class BucketRestController {
   }*/
 
   @PostMapping
-  protected void addProductInBucket(@RequestBody ProductInBucketDto productInBucketDto) {
-    bucketService.addProductInBucket(productInBucketDto);
+  protected void addProductInBucket(@RequestBody Long productId) {
+    bucketService.addProductInBucket(productId);
   }
 
   @PutMapping
@@ -67,8 +66,8 @@ public class BucketRestController {
     return converter.toProductInBucketDto(bucketService.updateCountProduct(productInBucketDto));
   }
 
-  @DeleteMapping
-  public void deleteProductInBucket(@RequestParam Long productInBucketId) {
+  @DeleteMapping("/product/{productInBucketId}")
+  public void deleteProductInBucket(@PathVariable Long productInBucketId) {
     bucketService.deleteProductInBucket(productInBucketId);
   }
 

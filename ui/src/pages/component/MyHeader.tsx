@@ -18,12 +18,14 @@ function PricingContent() {
     const [bucket, setBucket] = useState<Bucket>();
     const user = useSessionStore(state => state.user);
     const navigate = useNavigate();
-    console.log(bucket);
+
 
     useEffect(() => {
-        BucketService.findBucketByUserId(Number(user?.userId))
-            .then(response => setBucket(response));
-    }, []);
+        if (user?.userId) {
+            BucketService.findBucketByUserId(Number(user?.userId))
+                .then(response => setBucket(response));
+        }
+    }, [user]);
     return (
         <React.Fragment>
             <GlobalStyles styles={{ul: {margin: 0, padding: 0, listStyle: 'none'}}}/>

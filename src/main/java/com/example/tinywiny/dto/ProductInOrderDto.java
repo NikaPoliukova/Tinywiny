@@ -14,6 +14,6 @@ import lombok.Setter;
 public class ProductInOrderDto {
   Long id;
   int count;
-  Long productId;
+  ProductDto productDto;
   Long orderId;
 }

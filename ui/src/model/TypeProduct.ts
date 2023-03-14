@@ -1,4 +1,4 @@
 export interface TypeProduct {
     id: number;
-    name: String;
+    name: string;
 }

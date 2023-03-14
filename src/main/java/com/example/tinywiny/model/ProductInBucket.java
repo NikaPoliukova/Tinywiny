@@ -1,12 +1,9 @@
 package com.example.tinywiny.model;
 
-import com.example.tinywiny.model.Bucket;
-import com.example.tinywiny.model.Product;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.DynamicInsert;
-
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;

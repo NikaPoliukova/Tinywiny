@@ -1,7 +1,7 @@
 import React from 'react';
-import {Button, TableCell} from "@mui/material";
+import {Button} from "@mui/material";
 import {Footer} from "../component/Footer";
-import {Header, Icon} from "semantic-ui-react";
+import {Grid, Header, Icon} from "semantic-ui-react";
 import MyHeader from 'pages/component/MyHeader';
 
 
@@ -16,44 +16,43 @@ export const AdminPage = () => {
                     <Header.Content>Admin page</Header.Content>
                 </Header>
             </div>
-
-            <TableCell>
-                <div>Добавить продукт</div>
+            <div>Добавить продукт</div>
+            < Grid  container spacing={4}>
                 <Button type="submit"
                         variant="contained"
                         sx={{mt: 3, mb: 2}}
-                        href="/products/create">Add product </Button>
-            </TableCell>
-            <TableCell>
-                <div>Просмотреть все заказы</div>
+                        href="/admin/product/create">Add product </Button>
+            </ Grid>
+            <div>Просмотреть все заказы</div>
+            < Grid  container spacing={4}>
                 <Button type="submit"
                         variant="contained"
                         sx={{mt: 3, mb: 2}}
                         href="/orders"> Open list orders </Button>
-            </TableCell>
-            <TableCell>
-                <div>Просмотреть все отзывы</div>
+            </ Grid>
+            <div>Просмотреть все отзывы</div>
+            < Grid  container spacing={4}>
                 <Button type="submit"
                         variant="contained"
                         sx={{mt: 3, mb: 2}}
-                        href="/reviews"> Open list reviews </Button>
-                </TableCell>
-                <TableCell>
-                    <div>Просмотреть всех пользвоателей</div>
-                    <Button type="submit"
-                            variant="contained"
-                            sx={{mt: 3, mb: 2}}
-                            href="/users"> Open list users </Button>
-                </TableCell>
-            <TableCell>
-                <div>Редактировать продукт</div>
+                        href="/admin/reviews"> Open list reviews </Button>
+            </ Grid >
+            <div>Просмотреть всех пользвоателей</div>
+            < Grid  container spacing={4}>
                 <Button type="submit"
                         variant="contained"
                         sx={{mt: 3, mb: 2}}
-                        href="/admin/products">Update product </Button>
-            </TableCell>
-                <Footer/>
+                        href="/users"> Open list users </Button>
+            </ Grid>
+            <div>Редактировать продукт</div>
+            < Grid  container spacing={4}>
+                <Button type="submit"
+                        variant="contained"
+                        sx={{mt: 3, mb: 2}}
+                        href="/admin/products">Update products </Button>
+            </ Grid>
+            <Footer/>
         </div>
-);
+    );
 
 }

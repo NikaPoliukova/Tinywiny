@@ -23,6 +23,6 @@ public class Bucket {
   private User user;
 
   @OneToMany(mappedBy = "bucket", fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
-  private List<ProductInBucket> productInBuckets = new ArrayList<>();
+  private List<ProductInBucket> productsInBucket = new ArrayList<>();
 
 }

@@ -4,7 +4,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.DynamicInsert;
 
-
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
@@ -21,6 +20,8 @@ public class Order {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "order_id")
   private Long orderId;
+
+  private int sum;
 
   @Column(name = "comment_order")
   private String commentOrder;
@@ -39,10 +40,6 @@ public class Order {
   private User user;
 
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "discount_id")
-  private Discount discount;
-
-  @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "id_type")
   private DeliveryType deliveryType;
 
@@ -50,6 +47,6 @@ public class Order {
   @JoinColumn(name = "delivery_information_id", referencedColumnName = "delivery_information_id")
   private DeliveryInformation deliveryInformation;
 
-  @OneToMany(mappedBy = "order", fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+  @OneToMany(mappedBy = "order", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
   private List<ProductInOrder> productsInOrder = new ArrayList<>();
 }

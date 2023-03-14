@@ -16,8 +16,6 @@ import {Divider, Form, Header, Icon, Table} from 'semantic-ui-react'
 import MyHeader from 'pages/component/MyHeader';
 import {IconButton} from "@mui/material";
 import {AddAPhoto, AutoDelete} from "@mui/icons-material";
-import ImageService from "../../services/ImageService";
-import {Image} from "../../model/Image";
 
 
 const theme = createTheme();
@@ -31,24 +29,14 @@ export function UpdateProductPage() {
         const [countInStock, setCountInStock] = useState(0);
         const [description, setDescription] = useState('');
         const [imageName, setImageName] = useState('');
-
-
         const navigate = useNavigate();
-      /*  const updateImage = () => {
-            const image: Image = {
-                imageName,
-                //productId
-            };
-            // ImageService.updateImage(image).then(response => navigate("/products"));
-        }
-
-        const deleteImage = () => {
-            const image: Image = {
-                //productId
-            };
-            ImageService.deleteImage(image).then(response => navigate("/products"));
-        }*/
-
+        /*  const updateImage = () => {
+              const image: Image = {
+                  imageName,
+                  //productId
+              };
+              // ImageService.updateImage(image).then(response => navigate("/products"));
+          }*/
 
         const updateProduct = () => {
             const product: Product = {
@@ -56,15 +44,21 @@ export function UpdateProductPage() {
                 price,
                 countInStock,
                 description
-
             };
-            ProductService.updateProduct(product).then(response => navigate("/admin/products"));
+            ProductService.updateProduct(Number(productId), product).then(response => navigate("/admin/products"));
         }
-
         useEffect(() => {
             ProductService.getProduct(Number(productId))
                 .then(response => setProduct(response));
         }, []);
+
+        const deleteProduct = () => {
+            ProductService.deleteProduct(Number(productId)).then(() => navigate("/admin/products"));
+        }
+       /* const deleteImage = () => {
+            ImageService.deleteImage(Number(productId)).then(() => navigate("/admin/products"));
+        }*/
+
         return (
             <ThemeProvider theme={theme}>
                 <CssBaseline/>
@@ -83,7 +77,7 @@ export function UpdateProductPage() {
                                                 aria-label="upload picture"
                                                 component="label">
                                         <input hidden accept="image/*" type="file"
-                                              // onClick={updateImage}
+                                           // onClick={updateImage}
                                         />
                                         <AddAPhoto/>
                                     </IconButton>
@@ -91,13 +85,15 @@ export function UpdateProductPage() {
                                     <IconButton color="primary"
                                                 aria-label="delete picture"
                                                 component="label"
-                                               // onClick={deleteImage}
+                                    //    onClick={deleteImage}
                                     >
                                         <AutoDelete/>
                                     </IconButton>
-
                                 </Card>
                             </Col>
+                            <Form.Button
+                                onClick={deleteProduct}
+                            >Delete product</Form.Button>
                             <Divider horizontal>
                                 <Header as='h4'>
                                     <Icon name='setting'/>
@@ -121,7 +117,6 @@ export function UpdateProductPage() {
                                                     value={price}
                                                     onChange={e => setPrice(Number(e.target.value))}/>
                                     </Table.Row>
-
                                     <Table.Row>
                                         <Table.Cell>Count in stock</Table.Cell>
                                         <Table.Cell>{product?.countInStock}</Table.Cell>
@@ -129,7 +124,6 @@ export function UpdateProductPage() {
                                                     value={countInStock}
                                                     onChange={e => setCountInStock(Number(e.target.value))}/>
                                     </Table.Row>
-
                                     <Table.Row>
                                         <Table.Cell>Description</Table.Cell>
                                         <Table.Cell>{product?.description}</Table.Cell>

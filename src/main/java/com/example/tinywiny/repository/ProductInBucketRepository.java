@@ -12,15 +12,19 @@ import java.util.List;
 public interface ProductInBucketRepository extends JpaRepository<ProductInBucket, Long> {
 
 
-  List<ProductInBucket> findAllByBucket(@Param("bucket") Bucket bucket);
+  List<ProductInBucket> findProductInBucketsByBucket(@Param("bucket") Bucket bucket);
 
 
-  ProductInBucket findProductInBucketByBucket(@Param("bucket") Bucket bucket);
+  //ProductInBucket findProductInBucketByBucket(@Param("bucket") Bucket bucket);
 
   ProductInBucket findProductInBucketById(@Param("productId") Long productId);
 
   @Transactional
   @Modifying
   void deleteProductInBucketById(@Param("id") Long id);
+
+  @Transactional
+  @Modifying
+  void deleteAllByBucket(@Param("bucket") Bucket bucket);
 }
 

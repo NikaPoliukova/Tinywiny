@@ -1,6 +1,6 @@
 CREATE TABLE delivery_information (
 
-  delivery_information_id         BIGSERIAL NOT NULL PRIMARY KEY,
+  delivery_information_id         BIGSERIAL PRIMARY KEY,
   customer_name                   VARCHAR NOT NULL,
   customer_last_name               VARCHAR NOT NULL,
   customer_surname                VARCHAR NOT NULL,

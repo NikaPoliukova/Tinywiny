@@ -4,4 +4,5 @@ export interface ProductInOrder {
     count: number;
     productId: number;
     orderId: number;
+  //  sum?:number;
 }

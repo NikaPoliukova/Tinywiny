@@ -1,37 +1,28 @@
 import React, {useEffect, useState} from 'react';
-import {
-    Button,
-    Card,
-    Table,
-    TableBody,
-    TableCell,
-    TableContainer,
-    TableHead,
-    TableRow,
-
-} from "@mui/material";
+import {Button, Card, Table, TableBody, TableCell, TableContainer, TableHead, TableRow,} from "@mui/material";
 import {Review} from "../../model/Review";
 import ReviewService from "../../services/ReviewService";
-import Header from 'pages/component/MyHeader';
+import MyHeader from 'pages/component/MyHeader';
 import {Footer} from "../component/Footer";
-import {Comment} from "semantic-ui-react";
-
+import {useNavigate, useParams} from "react-router-dom";
 
 
 const ReviewsPage = () => {
     const [reviews, setReviews] = useState<Array<Review>>([]);
-    const [error, setError] = useState<string>('');
-
+    const {id} = useParams();
+    const navigate = useNavigate();
+const deleteReview = () =>{
+    ReviewService.deleteReview(Number(id)).then(()=>navigate("/admin/reviews"))
+}
     useEffect(() => {
         ReviewService.getReviews()
-            .then(response => setReviews(response))
-            .catch(error => setError(error.message));
+            .then(response => setReviews(response));
     }, []);
 
     return (
 
         <div>
-            <Header />
+            <MyHeader />
 
                 <h1>Reviews </h1>
 

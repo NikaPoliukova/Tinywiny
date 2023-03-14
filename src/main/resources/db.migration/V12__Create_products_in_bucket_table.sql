@@ -6,13 +6,13 @@ CREATE TABLE products_in_bucket (
   count                 INT NOT NULL
   );
 
-  INSERT INTO products_in_bucket (bucket_id,product_id, count )
+INSERT INTO products_in_bucket (bucket_id,product_id, count)
 VALUES (1, 2, 8);
-  INSERT INTO products_in_bucket (bucket_id,product_id, count )
+ INSERT INTO products_in_bucket (bucket_id,product_id, count)
 VALUES (2, 2, 1);
-  INSERT INTO products_in_bucket (bucket_id,product_id, count )
+INSERT INTO products_in_bucket (bucket_id,product_id, count)
 VALUES (3, 1, 1);
-  INSERT INTO products_in_bucket (bucket_id,product_id, count )
+ INSERT INTO products_in_bucket (bucket_id,product_id, count)
 VALUES (3, 1, 1);
-  INSERT INTO products_in_bucket (bucket_id,product_id, count )
+ INSERT INTO products_in_bucket (bucket_id,product_id, count)
 VALUES (2, 2, 1);

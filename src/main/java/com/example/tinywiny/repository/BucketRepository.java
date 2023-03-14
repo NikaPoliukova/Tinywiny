@@ -1,7 +1,6 @@
 package com.example.tinywiny.repository;
 
 import com.example.tinywiny.model.Bucket;
-import com.example.tinywiny.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -18,5 +17,5 @@ public interface BucketRepository extends JpaRepository<Bucket, Long> {
 
   Optional<Bucket> findBucketByBucketId(@Param("id") Long id);
 
-  Optional<Bucket> findBucketByUser(@Param("user") User user);
+  Optional<Bucket> findBucketByUserUserId(@Param("userId") Long userId);
 }

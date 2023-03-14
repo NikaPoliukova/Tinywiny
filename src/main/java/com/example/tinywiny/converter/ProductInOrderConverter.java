@@ -1,5 +1,6 @@
 package com.example.tinywiny.converter;
 
+import com.example.tinywiny.dto.ProductDto;
 import com.example.tinywiny.dto.ProductInOrderDto;
 import com.example.tinywiny.model.ProductInOrder;
 import org.mapstruct.Mapper;
@@ -12,13 +13,16 @@ public interface ProductInOrderConverter {
 
   List<ProductInOrder> toProductInOrder(List<ProductInOrderDto> productInOrderDto);
 
-  @Mapping(target = "order.orderId", source = "orderId")
-  @Mapping(target = "product.productId", source = "productId")
-  ProductInOrder toProductInOrder(ProductInOrderDto productInOrderDto);
+  @Mapping(target = "order.orderId", source = "productInOrderDto.orderId")
+  @Mapping(target = "product", source = "productDto")
+  ProductInOrder toProductInOrder(ProductInOrderDto productInOrderDto, ProductDto productDto);
 
   List<ProductInOrderDto> toProductInOrderDto(List<ProductInOrder> products);
 
   @Mapping(target = "orderId", source = "order.orderId")
-  @Mapping(target = "productId", source = "product.productId")
+  @Mapping(target = "productDto", source = "product")
   ProductInOrderDto toProductInOrderDto(ProductInOrder productInOrder);
+
+
 }
+

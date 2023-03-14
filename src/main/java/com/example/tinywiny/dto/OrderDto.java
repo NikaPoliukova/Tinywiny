@@ -18,11 +18,13 @@ public class OrderDto {
   Long orderId;
   String commentOrder;
   Long userId;
-  DeliveryInformationDto deliveryInformation;
+  DeliveryInformationDto deliveryInformationDto;
   int deliveryTypeId;
   String statusOrder;
-  List<ProductInOrderDto> productsInOrder;
   Date createdAt;
+  String paymentStatus;
+  int sum;
+  List<ProductInOrderDto> productsInOrder;
 
 
 }

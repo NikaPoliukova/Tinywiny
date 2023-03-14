@@ -14,6 +14,6 @@ import lombok.Setter;
 public class ProductInBucketDto {
   Long id;
   int count;
-  Long productId;
+  ProductDto productDto;
   Long bucketId;
 }

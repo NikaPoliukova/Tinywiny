@@ -18,11 +18,12 @@ public class TypeProductService {
   public TypeProduct getType(String typeName) {
     return repository.findByName(typeName);
   }
+
   public TypeProduct getType(int typeId) {
     return repository.findById(typeId);
   }
 
-  public Page<TypeProduct> findAllType( int pageNumber, int pageSize) {
+  public Page<TypeProduct> findAllType(int pageNumber, int pageSize) {
     Pageable page = PageRequest.of(pageNumber, pageSize);
     return repository.findAll(page);
   }

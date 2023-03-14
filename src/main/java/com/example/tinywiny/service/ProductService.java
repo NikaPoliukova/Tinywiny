@@ -2,14 +2,9 @@ package com.example.tinywiny.service;
 
 import com.example.tinywiny.converter.ProductConverter;
 import com.example.tinywiny.converter.TypeProductConverter;
-import com.example.tinywiny.dto.ImageDto;
 import com.example.tinywiny.dto.ProductDto;
 import com.example.tinywiny.dto.TypeProduct;
-import com.example.tinywiny.dto.TypeProductDto;
-import com.example.tinywiny.dto.UserDto;
-import com.example.tinywiny.model.Image;
 import com.example.tinywiny.model.Product;
-import com.example.tinywiny.model.User;
 import com.example.tinywiny.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -35,20 +30,17 @@ public class ProductService {
 
   @Transactional
   @Modifying
-  public Product save(ProductDto productDto) {
-    if (productRepository.findProductByProductName(productDto.getProductName()).isPresent()) {
+  public Product save(Product product) {
+    if (productRepository.findProductByProductName(product.getProductName()).isPresent()) {
       throw new RuntimeException("User already exists");
     }
-    TypeProduct typeProduct = typeProductService.getType(productDto.getIdType());
-    TypeProductDto typeProductDto = typeProductConverter.toDto(typeProduct);
-    Product product = converter.toProduct(productDto, typeProductDto);
     return productRepository.save(product);
   }
 
   @Transactional
   @Modifying
-  public void updateProduct(ProductDto productDto) {
-    Optional<Product> product = productRepository.findProductByProductId(productDto.getProductId());
+  public void updateProduct(ProductDto productDto, Long productId) {
+    Optional<Product> product = productRepository.findProductByProductId(productId);
     if (product.isEmpty()) {
       throw new RuntimeException("no product");
     }
@@ -100,9 +92,17 @@ public class ProductService {
     return product.get();
   }
 
+  public Product findProductByProductName(String productName) {
+    Optional<Product> product = productRepository.findProductByProductName(productName);
+    if (product.isEmpty()) {
+      throw new RuntimeException("no such product");
+    }
+    return product.get();
+  }
+/*
   public int findProductPrice(Long productId) {
     return productRepository.findProductPrice(productId);
-  }
+  }*/
 
   public void deleteProduct(Long productId) {
     productRepository.deleteProductByProductId(productId);
@@ -110,6 +110,6 @@ public class ProductService {
 
 
   public List<Product> findAllProducts() {
-   return productRepository.findAll();
+    return productRepository.findAll();
   }
 }

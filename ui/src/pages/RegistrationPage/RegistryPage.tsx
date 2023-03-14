@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {useState} from 'react';
 import {
+    Alert, AlertTitle,
     Avatar,
     Box,
     Button,
@@ -11,11 +12,11 @@ import {
     ThemeProvider,
     Typography
 } from "@mui/material";
-import MyHeader from "../component/MyHeader";
 import {Footer} from "../component/Footer";
 import {User} from "../../model/User";
 import UserService from "../../services/UserService";
 import {useNavigate} from "react-router-dom";
+import HeaderForNoAuthorized from "../component/HeaderForNoAuthorized";
 
 
 const theme = createTheme();
@@ -34,7 +35,7 @@ export function Registry() {
             email,
             phoneNumber
         };
-        UserService.saveUser(user).then(response => navigate("/"));
+        UserService.saveUser(user).then(() => navigate("/login"));
     }
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -55,10 +56,9 @@ export function Registry() {
         setPhoneNumber(event.target.value);
     }
 
-
     return (
         <ThemeProvider theme={theme}>
-        <MyHeader />
+            <HeaderForNoAuthorized />
             <Container component="main" maxWidth="xs">
                 <CssBaseline/>
                 <Box
@@ -69,7 +69,6 @@ export function Registry() {
                         alignItems: 'center',
                     }}
                 >
-
                     <Avatar sx={{m: 1, bgcolor: 'secondary.main'}}>
                     </Avatar>
                     <Typography component="h1" variant="h5">
@@ -142,6 +141,7 @@ export function Registry() {
                         >
                             Log In
                         </Button>
+
                     </Box>
                 </Box>
             </Container>

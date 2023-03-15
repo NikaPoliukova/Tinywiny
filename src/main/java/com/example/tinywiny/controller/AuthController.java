@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.time.Duration;
 
 
@@ -50,8 +49,7 @@ public class AuthController {
     final Cookie cookie = new Cookie(TOKEN_NAME, "");
     cookie.setMaxAge(0);
     response.addCookie(cookie);
-    response.setStatus(HttpStatus.OK.value());
-
+    request.getSession().invalidate();
   }
 }
 

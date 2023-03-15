@@ -12,7 +12,7 @@ class AuthorizationService {
     }
 
     async logout() {
-        const response = await axios.get('http://localhost:8080/api/v1/logout')
+        const response = await axios.get('http://localhost:8080/api/v1/logout', {withCredentials: true})
         return response.status;
     }
 }

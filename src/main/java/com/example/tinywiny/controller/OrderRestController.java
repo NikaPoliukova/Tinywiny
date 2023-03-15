@@ -3,11 +3,8 @@ package com.example.tinywiny.controller;
 import com.example.tinywiny.converter.DeliveryInformationConverter;
 import com.example.tinywiny.converter.OrderConverter;
 import com.example.tinywiny.converter.ProductInOrderConverter;
-import com.example.tinywiny.dto.DeliveryInformationDto;
 import com.example.tinywiny.dto.OrderDto;
-import com.example.tinywiny.dto.ProductInOrderDto;
 import com.example.tinywiny.model.Order;
-import com.example.tinywiny.model.ProductInOrder;
 import com.example.tinywiny.service.OrderService;
 import com.example.tinywiny.service.ProductInOrderService;
 import lombok.AllArgsConstructor;
@@ -36,14 +33,13 @@ public class OrderRestController {
   private final DeliveryInformationConverter deliveryInformationConverter;
   //КОГДА ДЕЛАЕТСЯ ЗАКАЗ ЧИСЛО НА СКЛАДЕ ДОЛЖНО УМЕНЬШАТЬСЯ
 
-
   @PostMapping("/create")
   public OrderDto createOrder(@RequestBody OrderDto order) {
     return orderConverter.toOrderDto(orderService.save(order));
   }
 
-  @GetMapping("status")
-  public List<OrderDto> findAllOrdersByStatus(@RequestBody String status,
+  @GetMapping("/status/{status}")
+  public List<OrderDto> findAllOrdersByStatus(@PathVariable String status,
                                               @RequestParam(value = "pageNumber", required = false, defaultValue = "1") Integer pageNumber,
                                               @RequestParam(value = "pageSize", required = false, defaultValue = "20") Integer pageSize) {
     Page<Order> page = orderService.findOrdersByStatus(status, pageNumber - 1, pageSize);
@@ -62,10 +58,11 @@ public class OrderRestController {
   @GetMapping("/order/{orderId}")
   public OrderDto findOrderByOrderId(@PathVariable Long orderId) {
     Order order = orderService.findOrderByOrderId(orderId);
-    DeliveryInformationDto deliveryInformationDto = deliveryInformationConverter.toDeliveryInformationDto(order.getDeliveryInformation());
-    List<ProductInOrderDto> productInOrderDto = productInOrderConverter
-        .toProductInOrderDto(productInOrderService.findAllProductsByOrder(orderId));
-    return orderConverter.toOrderDto(order, deliveryInformationDto, productInOrderDto);
+    //DeliveryInformationDto deliveryInformationDto = deliveryInformationConverter.toDeliveryInformationDto(order.getDeliveryInformation());
+    // List<ProductInOrderDto> productInOrderDto = productInOrderConverter
+    //.toProductInOrderDto(productInOrderService.findAllProductsByOrder(orderId));
+    return orderConverter.toOrderDto(order, order.getDeliveryInformation(),
+        productInOrderService.findAllProductsByOrder(orderId));
   }
 
   @GetMapping("/{userId}")
@@ -73,8 +70,8 @@ public class OrderRestController {
     return orderConverter.toOrderDto(orderService.findOrdersByUserId(userId));
   }
 
-  @PutMapping("/status/update")
-  public void updateOrderStatus(@RequestBody String status,Long orderId) {
+  @PutMapping("/status")
+  public void updateOrderStatus(@RequestBody String status, Long orderId) {
     orderService.updateOrderStatus(status, orderId);
   }
 

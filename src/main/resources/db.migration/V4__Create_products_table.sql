@@ -5,8 +5,8 @@ CREATE TABLE products
    price            INT NOT NULL,
    description       TEXT,
    count_in_stock    INT,
-   id_type           INT NOT NULL REFERENCES type_product (id_type),
-   image_id          BIGINT REFERENCES image (image_id)
+   id_type           INT NOT NULL REFERENCES type_product (id_type)
+
 
   );
 

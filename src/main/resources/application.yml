@@ -1,16 +1,20 @@
 spring:
   mvc:
-    static-path-pattern: /static/**
+    pathmatch:
+      matching-strategy: ant_path_matcher
   datasource:
     driver-class-name: org.postgresql.Driver
     username: postgres
     password: postgres
     url: jdbc:postgresql://localhost:35432/tinywiny_network
-  jpa:
-    properties:
-      hibernate:
-        show_sql: true
-        format_sql: true
+
+  servlet:
+    multipart:
+      max-file-size: -1
+      max-request-size: -1
+      file-size-threshold: 1048576
+      location: '/tmp'
+
 aws:
   region: "us-east-1"
   s3:
@@ -21,8 +25,20 @@ management:
     web:
       exposure:
         include: '*'
+security:
+  secretKey: "secretKeyNika"
+  refresh_secret: "secretRefresh"
+  allowed-origin: "http://localhost:3000"
+  session-duration-minutes: 86400
+
 jwt:
-  secretKey: secretKeyNika
+  access_token_name: "JWT"
+  refresh_token_name: "JWT_REFRESH"
+
+csrf:
+  xsrf_cookie_name: 'XSRF'
+  xsrf_header_name: "X-XSRF"
+  cookie_domain: "localhost"
 
 logging:
   level:

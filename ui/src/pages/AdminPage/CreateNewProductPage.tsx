@@ -1,68 +1,63 @@
-import React, {useState} from 'react'
-import {Form, Header, Icon, Segment} from 'semantic-ui-react'
-import {IconButton} from "@mui/material";
-import {AddAPhoto} from "@mui/icons-material";
-import {Product} from "../../model/Product";
-import ProductService from "../../services/ProductService";
-import {useNavigate} from 'react-router-dom';
+import React, {useEffect, useRef, useState} from 'react'
+import {Form, Header, Segment} from 'semantic-ui-react'
+import {Button} from "@mui/material";
 import MyHeader from 'pages/component/MyHeader';
-import {Image} from "../../model/Image";
+import {TypeProduct} from "../../model/TypeProduct";
+import TypeProductService from "../../services/TypeProductService";
+import ProductService from "../../services/ProductService";
 import ImageService from "../../services/ImageService";
 
-const getTypeProduct = [
-    {key: 'm', text: 'mobil', value: 'male'},
-    {key: 'f', text: 'toy', value: 'female'},
-    {key: 'o', text: 'Other', value: 'other'},
-]
-
 export function CreateProduct() {
-
+    const [image, setImage] = useState('');
     const [productName, setProductName] = useState('');
     const [price, setPrice] = useState(0);
     const [countInStock, setCountInStock] = useState(0);
     const [description, setDescription] = useState('');
     const [idType, setIdType] = useState(0);
-    const [productId, setProductId] = useState(0);
-    const [imageName, setImageName] = useState('');
+    const fileInput = useRef<HTMLInputElement | null>(null);
+    const [types, setTypes] = useState<Array<TypeProduct>>([]);
 
-    const navigate = useNavigate();
-    const addProduct = () => {
-        const product: Product = {
-            productName,
-            price,
-            countInStock,
-            description,
-            idType
-        };
-        ProductService.createProduct(product).then(response => navigate("/products"));
-    }
-    const addImage = () => {
-        const image: Image = {
-            imageName,
-            productId
-            // Хочу сразу загружать фото,но нету поля картинки(id продукт)
-        }
-        ImageService.updateImage(image).then(response => navigate("/products"));
-    }
+    useEffect(() => {
+        TypeProductService.findAllTypes()
+            .then(response => setTypes(response))
+            .then(() => ImageService.downloadImage()
+                .then(response => {
+                    setImage(response)
+                }))
+    }, []);
+
+    const options = types.map((type, idType) => {
+        return <option key={idType} value={idType}>{type.name}</option>;
+    });
+
+    const uploadProduct = () => {
+        ProductService.uploadFile({
+            productName, price, countInStock, description, idType,
+            file: fileInput?.current?.files && fileInput?.current?.files[0]
+        })
+            .then(response => {
+                setImage(response);
+            })
+    };
 
     return (
         <>
             <MyHeader/>
             <Segment placeholder>
                 <Header icon>
-                    <Icon name='photo'/>
+                    <img src={`data:image/png;base64,${image}`}/>
                 </Header>
-                <IconButton color="primary"
-                            aria-label="upload picture"
-                            component="label"
-                            onClick={addImage}
+                <Button
+                    variant="contained"
+                    component="label"
                 >
-                    <input hidden accept="image/*" type="file"
-                        // value={file}
-                        // onChange={e => setFile(e.target.value)}
+                    Upload Photo
+                    <input
+                        ref={fileInput}
+                        type="file"
+                        hidden
                     />
-                    <AddAPhoto/>
-                </IconButton>
+                </Button>
             </Segment>
             <Form>
                 <Form.Group widths='equal'>
@@ -70,15 +65,11 @@ export function CreateProduct() {
                                 value={productName}
                                 onChange={e => setProductName(e.target.value)}/>
                 </Form.Group>
+                <div>Type product</div>
                 <Form.Group widths='equal'>
-                    <Form.Select
-                        fluid
-                        label='Type product'
-                        options={getTypeProduct}
-                        placeholder='Type product'
-                        value={idType}
-                        // onChange={e => setIdType(Number(e.target.value))}
-                    />
+                    <select value={idType} onChange={event => setIdType(Number(event.target.value))}>
+                        {options}
+                    </select>
                 </Form.Group>
                 <Form.Group widths='equal'>
                     <Form.Input fluid label='Price' placeholder='Price' value={price}
@@ -95,12 +86,14 @@ export function CreateProduct() {
                                value={description}
                                onChange={e => setDescription(e.target.value)}/>
 
-                <Form.Button
-                    onClick={addProduct}
-                >Add product</Form.Button>
+                <Button
+                    variant="contained"
+                    component="label"
+                    onClick={uploadProduct}
+                >
+                    Save product
+                </Button>
             </Form>
         </>
     )
 }
-
-

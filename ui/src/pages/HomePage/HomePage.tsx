@@ -1,24 +1,17 @@
+import HeaderForNoAuthorized from 'pages/component/HeaderForNoAuthorized';
 import * as React from 'react';
-import Header from '../component/MyHeader';
-import {Footer} from "../component/Footer";
-import {Container} from "react-bootstrap";
 
-export default function GalleryPage() {
+function App() {
+
     return (
+      <div>
+          <HeaderForNoAuthorized/>
+          <h2 color='red'>Hello</h2>
+      </div>
 
-        <React.Fragment>
-            <Header />
-
-            <Container >
-
-                <p >
-                   ABOUT TINY-WINY
-                </p>
-            </Container>
-            <Footer />
-        </React.Fragment>
-    )
-
+    );
 }
+
+export default App;
 
 

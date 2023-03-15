@@ -6,14 +6,17 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ImageDto {
-  Long id;
-  String imageName;
-  Long productId;
+public class BucketDto {
+
+  Long bucketId;
+  Long userId;
+  List<ProductInBucketDto> productsInBucketDto;
 
 }

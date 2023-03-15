@@ -1,10 +1,9 @@
 package com.example.tinywiny.model;
 
-import javax.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,7 +34,7 @@ public class DeliveryInformation {
   @JoinColumn(name = "user_id")
   private User user;
 
-  @OneToMany(mappedBy = "deliveryInformation", fetch = FetchType.LAZY,cascade = {CascadeType.ALL})
+  @OneToMany(mappedBy = "deliveryInformation", fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
   private List<Order> orders = new ArrayList<>();
 
 }

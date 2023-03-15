@@ -1,84 +1,96 @@
 import React, {useEffect, useState} from 'react';
-import {Button, Card, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography} from "@mui/material";
+import {
+    Card, Link,
+    TableBody,
+    TableCell,
+    TableContainer,
+    TableHead,
+    TableRow,
+    TextField,
+    Typography
+} from "@mui/material";
+import {Button} from 'semantic-ui-react'
 import BucketService from "../../services/BucketService";
-import {Link, useNavigate, useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import {Footer} from "../component/Footer";
 import {Icon, Table} from 'semantic-ui-react'
-import {Product} from "../../model/Product";
 import MyHeader from "../component/MyHeader";
 import {ProductInBucket} from "../../model/ProductInBucket";
 
 
 function BucketPage() {
-    const [products, setProducts] = useState<Array<Product>>([])
+    const [products, setProducts] = useState<Array<ProductInBucket>>([])
     const {bucketId} = useParams();
     const [count, setCount] = useState(1);
-    const [productId, setProductId] = useState(0);
     const navigate = useNavigate();
+    const [sumProducts, setSumProducts] = useState(0);
 
-    const addCountProduct = () => {
+
+    const updateCountProductInBucket = (id: number) => {
         const productInBucket: ProductInBucket = {
-            productId,
-            count,
-            //bucketId
+            id,
+            count
         }
-        BucketService.updateCountProduct(productInBucket).then(response => navigate("/bucket/${bucketId}"))
+        BucketService.updateCountProduct(productInBucket).then(() =>navigate(`/bucket/`+bucketId));
     }
-    const deleteProduct = () => {
-        const productForDelete: ProductInBucket = {
-            productId,
-            //bucketId
-        }
-        BucketService.deleteProductInBucket(productForDelete).then(response => navigate("/bucket/${bucketId}"))
+
+    const deleteProduct = (id: number) => {
+        BucketService.deleteProductInBucket(id).then(() => navigate(`/bucket/${bucketId}`))
     }
+
+
     useEffect(() => {
         BucketService.findAllProductsInBucket(Number(bucketId))
-            .then(response => setProducts(response));
+            .then(response => {
+                setProducts(response);
+                return products;
+            })
+        BucketService.getSumProductInBucket(Number(bucketId)).then(sumProducts => setSumProducts(sumProducts.sum));
     }, []);
 
     return (
         <div>
             <MyHeader/>
             <Typography component="h1" variant="h5">
-                <h1><Icon name='bitbucket' size='big'/>Bucket</h1>
+                <React.Fragment><Icon name='bitbucket' size='big'/>Bucket</React.Fragment>
             </Typography>
             <Card style={{width: 1000}}>
                 <TableContainer>
                     <Table celled padded>
                         <TableHead>
                             <Table.Row>
-                                <Table.HeaderCell>Id product</Table.HeaderCell>
-                                <Table.HeaderCell>Name product</Table.HeaderCell>
+                                <Table.HeaderCell>Product Name</Table.HeaderCell>
+                                <Table.HeaderCell>Count</Table.HeaderCell>
                                 <Table.HeaderCell>Price</Table.HeaderCell>
-                                <Table.HeaderCell>Type product</Table.HeaderCell>
                             </Table.Row>
                         </TableHead>
                         <TableBody>
-                            {products.map((product) => (
+                            {products.map((item) => (
                                 <TableRow
-                                    key={product.productId}
+                                    key={item.id}
                                     sx={{'&:last-child td, &:last-child th': {border: 0}}}
-                                > <TableCell component="th" scope="row">
-                                    {product.productId}
-                                </TableCell>
+                                >
                                     <TableCell component="th" scope="row">
-                                        {product.productName}
+                                        {item.productDto?.productName}
                                     </TableCell>
                                     <TableCell component="th" scope="row">
-                                        {product.price}
+                                        <TextField label="Count"
+                                                   type={'number'}
+                                                   value={count}
+                                                   onChange={e => {
+                                                       setCount(Number(e.target.value));
+                                                       updateCountProductInBucket(Number(item.id))
+                                                   }}
+                                        >
+                                        </TextField>
+
                                     </TableCell>
                                     <TableCell component="th" scope="row">
-                                        {product.idType}
+                                        {item.productDto?.price}
                                     </TableCell>
                                     <TableCell>
                                         <Button sx={{mt: 4}}
-                                           onClick={() => setCount(count+1)}
-                                        ><Icon name='add to cart' size='big'/>
-                                            add count </Button>
-                                    </TableCell>
-                                    <TableCell>
-                                        <Button sx={{mt: 4}}
-                                                onClick={deleteProduct}
+                                                onClick={() => deleteProduct(Number(item.id))}
                                         ><Icon name='delete' size='big'/>
                                         </Button>
                                     </TableCell>
@@ -86,16 +98,15 @@ function BucketPage() {
                             ))}
                         </TableBody>
                     </Table>
-
                 </TableContainer>
+                Sum products in order :{sumProducts}
             </Card>
-            <Button sx={{mt: 4}}
-                    component={Link}
-                    type="submit"
-                    variant="contained"
-                    to={'/orders/create'}
-            > Go to order
-            </Button>
+            <Button
+                basic color='brown'
+                content='Create order'
+                size="small"
+                href={`/orders/create`}
+            ></Button>
             <Footer/>
         </div>
     );

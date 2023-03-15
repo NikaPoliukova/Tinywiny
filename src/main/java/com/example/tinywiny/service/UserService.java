@@ -28,13 +28,22 @@ public class UserService {
 
 
   public User findUserByUserNameAndPassword(String name, String password) {
-    Optional<User> user = userRepository.findUserByUserNameAndPassword(name, passwordEncoder.encode(password));
-    if (user.isEmpty()) {
+    Optional<User> user = userRepository.findUserByUserName(name);
+    if (user.isPresent() && hashPassService.verify(password, user.get().getPassword())) {
+      return user.get();
+    } else {
       throw new RuntimeException("enter incorrect password or login");
     }
-    return user.get();
   }
 
+  public User findUserByUserName(String name) {
+    Optional<User> user = userRepository.findUserByUserName(name);
+    if (user.isEmpty()) {
+      throw new RuntimeException("user is not exists");
+    } else {
+      return user.get();
+    }
+  }
 
   @Transactional
   @Modifying
@@ -54,11 +63,12 @@ public class UserService {
       throw new RuntimeException("User already exists");
     } else {
       user = userConverter.toUser(userDto);
-      user.setPassword(passwordEncoder.encode(userDto.getPassword()));
+      String hash = passwordEncoder.encode(userDto.getPassword());
+      user.setPassword(hash);
       userRepository.save(user);
+      bucketService.createBucket(user.getUserId());
+      return user;
     }
-    bucketService.createBucket(user.getUserId());
-    return user;
   }
 
   public User findUserByUserId(Long userId) {
@@ -75,25 +85,21 @@ public class UserService {
   }
 
   private User prepareUserForUpdate(UserDto userDto, User user) {
-    if (userDto.getUserName() != null) {
+    if (!userDto.getUserName().isBlank()) {
       if (userRepository.findUserByUserName(userDto.getUserName()).isPresent()) {
         throw new RuntimeException("this name already exist");
       } else {
         user.setUserName(userDto.getUserName());
       }
     }
-    if (userDto.getPassword() != null) {
-      if (!(user.getPassword().equals(user.getPassword()))) {
-        String hashPass = hashPassService.hashPass(userDto.getPassword());
-        user.setPassword(hashPass);
-      }else {
-        throw new RuntimeException("this password already exist");
-      }
+    if (!userDto.getPassword().isBlank()) {
+      String hashPass = hashPassService.hashPass(userDto.getPassword());
+      user.setPassword(hashPass);
     }
-    if (userDto.getEmail() != null) {
+    if (!userDto.getEmail().isBlank()) {
       user.setEmail(userDto.getEmail());
     }
-    if (userDto.getPhoneNumber() != null) {
+    if (!userDto.getPhoneNumber().isBlank()) {
       user.setPhoneNumber(userDto.getPhoneNumber());
     }
     return user;

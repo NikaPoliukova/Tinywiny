@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {
     Button,
-    Card,
+    Card, Select,
     Table,
     TableBody,
     TableCell,
@@ -20,10 +20,16 @@ import Grid from "@mui/material/Grid";
 
 const OrdersPage = () => {
     const [orders, setOrders] = useState<Array<Order>>([]);
-    const [statusOrder, setStatus] = useState<string>('');
     const navigate = useNavigate();
-    const updateStatus = (statusOrder: string, orderId: number) => {
-        OrderService.updateOrderStatus(statusOrder, orderId).then(response => navigate("/orders"))
+    const statuses = ['NEW', 'PROCESS', 'FINISH'];
+    const [statusOrder, setStatus] = useState<string>('');
+    //const [orderId, setOrderId] = useState(Number);
+
+    const options = statuses.map((status, orderId) => {
+        return <option key={orderId}>{status}</option>;
+    });
+    const updateStatus = (orderId: number) => {
+        OrderService.updateOrderStatus(statusOrder, orderId).then(() => navigate("/admin"))
     }
 
     useEffect(() => {
@@ -32,24 +38,24 @@ const OrdersPage = () => {
         ;
     }, []);
 
-
     return (
         <div>
             <Header/>
-
             <Typography component="h1" variant="h5">
                 <h1>Orders</h1>
+
             </Typography>
             <Card style={{width: 1000}}>
                 <TableContainer>
                     <Table sx={{minWidth: 800}} aria-label="simple table">
                         <TableHead>
                             <TableRow>
-                                <TableCell align="center">orderId</TableCell>
+                                <TableCell align="center">Number order</TableCell>
                                 <TableCell align="center">statusOrder</TableCell>
                                 <TableCell align="center">commentOrder</TableCell>
                                 <TableCell align="center">userId</TableCell>
                                 <TableCell align="center">createdAt</TableCell>
+                                <TableCell align="center">Payment status</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
@@ -59,24 +65,20 @@ const OrdersPage = () => {
                                     sx={{'&:last-child td, &:last-child th': {border: 0}}}
                                 >
                                     <TableCell component="th" scope="row">
-                                        value={order.orderId}
+                                        {order.orderId}
                                     </TableCell>
                                     <TableCell component="th" scope="row">
                                         {order.statusOrder}
                                         <Grid item xs={12} sm={5}>
-                                            <select>
-                                                <option value="new">NEW</option>
-                                                <option value="finish">FINISH</option>
-                                                <option value="prosess">IN PROCESS</option>
+                                            <select value={statusOrder} onChange={(event) =>
+                                                setStatus(event.target.value)}>
+                                                {options}
                                             </select>
                                         </Grid>
                                         <Button
-                                            //      component={Link}
-                                            //   type="submit"
-                                            //   fullWidth
-                                            //   variant="contained"
-                                            //   sx={{mt: 1, mb: 1}}
-                                            //   onClick={updateStatus(statusOrder, orderId)}
+                                            type="submit"
+                                            fullWidth
+                                            onClick={() => updateStatus(Number(order.orderId))}
                                         >
                                             update status
                                         </Button>
@@ -90,13 +92,16 @@ const OrdersPage = () => {
                                     <TableCell align="right">
                                         {order.createdAt}
                                     </TableCell>
+                                    <TableCell align="right">
+                                        {order.paymentStatus}
+                                    </TableCell>
                                     <Button
                                         component={Link}
                                         type="submit"
                                         fullWidth
                                         variant="contained"
                                         sx={{mt: 1, mb: 1}}
-                                        to={'product/${order.orderId}'}
+                                        to={'/orders/order/' + order.orderId}
                                     >
                                         Open
                                     </Button>

@@ -1,6 +1,9 @@
+import {Product} from "./Product";
+
 export interface ProductInBucket {
     id?: number;
     count?: number;
-    productId?: number;
+    productDto?: Product;
     bucketId?: number;
+
 }

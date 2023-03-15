@@ -10,26 +10,22 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
 import java.util.Optional;
 
 public interface ProductRepository extends JpaRepository<Product, String> {
 
   Optional<Product> findProductByProductId(@Param("productId") Long productId);
 
+  Optional<Product> findProductByProductName(@Param("productName") String productName);
+
   @Query(value = "select price from products where product_id=:productId", nativeQuery = true)
   int findProductPrice(@Param("productId") Long productId);
-
-  Optional<Product> findProductByProductName(@Param("name") String name);
 
   @Transactional
   @Modifying
   void deleteProductByProductId(@Param("productId") Long productId);
 
   Page<Product> findAllByTypeProduct(TypeProduct type, Pageable page);
-
-  //Page<Product> findAllBy(Pageable page);
-
 
 
 }

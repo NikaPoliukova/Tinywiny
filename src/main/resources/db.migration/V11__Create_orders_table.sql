@@ -8,15 +8,15 @@ create table orders
      user_id                    BIGINT NOT NULL references users(user_id),
      delivery_information_id    BIGINT NOT NULL references delivery_information(delivery_information_id),
      id_type                    INT NOT NULL references delivery_type(id_type),
-     discount_id                INT references discount(discount_id)
+     sum                        INT NOT NULL
 );
-INSERT INTO orders (comment_order,user_id, delivery_information_id, id_type,discount_id)
-VALUES ('comment', 1, 1, 1, 1);
-INSERT INTO orders (comment_order,user_id, delivery_information_id, id_type,discount_id)
-VALUES ('comment2', 2, 2, 1, 1);
-INSERT INTO orders (comment_order,user_id, delivery_information_id, id_type,discount_id)
-VALUES ('comment3', 3, 3, 1, 1);
-INSERT INTO orders (comment_order,user_id, delivery_information_id, id_type,discount_id)
-VALUES ('comment4', 4, 4, 1, 1);
-INSERT INTO orders (comment_order,user_id, delivery_information_id, id_type,discount_id)
-VALUES ('comment5', 5, 5, 1, 1);
+INSERT INTO orders (comment_order,user_id, delivery_information_id, id_type,sum)
+VALUES ('comment', 1, 1, 1, 125);
+INSERT INTO orders (comment_order,user_id, delivery_information_id, id_type,sum)
+VALUES ('comment2', 2, 2, 1, 35);
+INSERT INTO orders (comment_order,user_id, delivery_information_id, id_type,sum)
+VALUES ('comment3', 3, 3, 1, 25);
+INSERT INTO orders (comment_order,user_id, delivery_information_id, id_type,sum)
+VALUES ('comment4', 4, 4, 1, 100);
+INSERT INTO orders (comment_order,user_id, delivery_information_id, id_type,sum)
+VALUES ('comment5', 5, 5, 1, 100);

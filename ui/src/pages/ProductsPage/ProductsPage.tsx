@@ -10,48 +10,41 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import {createTheme, ThemeProvider} from '@mui/material/styles';
 import MyHeader from 'pages/component/MyHeader';
 import {Footer} from "../component/Footer";
 import {Product} from "../../model/Product";
 import ProductService from "../../services/ProductService";
 import {Link, useNavigate, useParams} from "react-router-dom";
 import {Sidebar} from "../component/SideBar";
-import {ProductInBucket} from "../../model/ProductInBucket";
-import {Bucket} from "../../model/Bucket";
-import {useSessionStore} from "../../Session";
+import BucketService from "../../services/BucketService";
+import {ThemeProvider} from "react-bootstrap";
+import {createTheme} from "@mui/material";
 
 
 const theme = createTheme();
+
 export default function Products() {
     const [products, setProducts] = useState<Array<Product>>([]);
     const {type} = useParams();
-    const [productInBucket, setProductInBucket] = useState<ProductInBucket>();
-    const [bucket, setBucket] = useState<Bucket>();
-    const user = useSessionStore(state => state.user);
-    /* useEffect(() => {
-         BucketService.findBucketByUserId(Number(user.userId))
-             .then(response => setBucket(response));
-     }, []);*/
-    useEffect(() => {
-        ProductService.findAllProductsByTypeAndPage(String(type))
-            .then(response => setProducts(response));
-    }, []);
     const navigate = useNavigate();
-    const addProductInBucket = () => {
-        const productInBucket: ProductInBucket = {
-            //productId,
-           // bucketId
 
-        };
-        ProductService.addProductInBucket(productInBucket).then(response => navigate("/products/toys"));
+
+    useEffect(() => {
+            ProductService.findAllProductsByTypeAndPage(String(type))
+                .then(response => {
+                    setProducts(response);
+                })
+        }
+        , []);
+
+    const addProduct = (productId : number) => {
+        BucketService.addProductInBucket(productId).then(() => navigate(`/products/type/toys`));
     }
-
     return (
         <ThemeProvider theme={theme}>
-            <CssBaseline/>
-            <MyHeader />
 
+            <CssBaseline/>
+            <MyHeader/>
             <main>
                 <Sidebar/>
                 <Box
@@ -61,15 +54,13 @@ export default function Products() {
                         pb: 10,
                     }}
                 >
-                    <Container maxWidth="sm">
-                        <Typography
-                            component="h1"
-                            variant="h2"
-                            align="center"
-                            color="text.primary">
-                            Products
-                        </Typography>
-                    </Container>
+                    <Typography style={{color: 'var(--primary-color)'}}
+                                component="h1"
+                                variant="h2"
+                                align="center"
+                    >
+                        Products
+                    </Typography>
                 </Box>
                 <Container sx={{py: 8}} maxWidth="md">
                     <Grid container spacing={4}>
@@ -93,10 +84,10 @@ export default function Products() {
                                             type="submit"
                                             size="small"
                                             sx={{mt: 1, mb: 1}}
-                                            to={'/products/product/' + product.productId}
+                                            to={'/products/' + product.productId}
                                         >Open</Button>
                                         <Button
-                                        //    onClick={addProductInBucket}
+                                            onClick={() => addProduct(Number(product?.productId))}
                                         >Add in bucket</Button>
 
                                     </CardActions>
@@ -107,6 +98,7 @@ export default function Products() {
                 </Container>
             </main>
             <Footer/>
+
         </ThemeProvider>
     );
 }

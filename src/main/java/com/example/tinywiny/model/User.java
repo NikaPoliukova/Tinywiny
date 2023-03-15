@@ -1,13 +1,19 @@
 package com.example.tinywiny.model;
 
-import javax.persistence.*;
-
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.extern.jackson.Jacksonized;
 import org.hibernate.annotations.DynamicInsert;
 
 
-
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -16,6 +22,7 @@ import java.util.List;
 @Entity
 @DynamicInsert
 @Data
+@Jacksonized
 @Table(name = "users")
 public class User {
 
@@ -39,15 +46,15 @@ public class User {
 
   private String role;
 
-  @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+  /*@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
   private List<Order> orders = new ArrayList<>();
 
   @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
   private List<Review> reviews = new ArrayList<>();
 
   @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-  private List<DeliveryInformation> deliveryInformation = new ArrayList<>();
+  private List<DeliveryInformation> deliveryInformation = new ArrayList<>();*/
 
-  @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
-  private Bucket bucket;
+ /* @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+  private Bucket bucket;*/
 }

@@ -1,35 +1,54 @@
 package com.example.tinywiny.config;
 
 
-import com.example.tinywiny.security.filter.CustomAuthenticationFilter;
-import com.example.tinywiny.security.filter.CustomAuthorizationFilter;
+import com.example.tinywiny.security.filter.JwtFilter;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.HttpStatusEntryPoint;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
-public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
-  @Value("${jwt.secretKey}") private String secretKey;
-
-  @Override
-  protected void configure(HttpSecurity http) throws Exception {
-    CustomAuthenticationFilter customAuthenticationFilter = new CustomAuthenticationFilter(authenticationManagerBean(), secretKey);
-    customAuthenticationFilter.setFilterProcessesUrl("/api/v1/login");
-    http.csrf().disable();
-    http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-    http.authorizeRequests().antMatchers("/api/v1/token/refresh").permitAll();
-    http.authorizeRequests().antMatchers("/api/v1/login").permitAll();
+public class ApplicationSecurityConfig {
 
 
-    http.authorizeRequests().antMatchers("/**").permitAll();
-    http.addFilter(customAuthenticationFilter);
-    http.addFilterBefore(new CustomAuthorizationFilter(secretKey), UsernamePasswordAuthenticationFilter.class);
+  private final JwtFilter jwtFilter;
+
+  @Bean
+  public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    return http
+        .cors().and()
+        .csrf().disable()
+        .authorizeHttpRequests(requests -> requests
+            .antMatchers("/", "/error", "/login", "/api/v1/login",
+                "/api/v1/registration", "/authorization/login", "/api/v1/sessions", "/api/v1/products/**",
+                "/api/v1/reviews").permitAll()
+            .antMatchers("/swagger-ui/**", "/v3/api-docs/**", "**/swagger-resources/**",
+                "/swagger-ui.html", "/webjars/**").permitAll()
+            //.antMatchers("/api/v1/reviews").hasRole("USER")
+            .anyRequest().authenticated()
+        )
+        .exceptionHandling(e -> e.authenticationEntryPoint
+            (new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED)))
+        .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+        .and()
+        .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
+        .build();
+  }
+
+  @Bean
+  PasswordEncoder passwordEncoder() {
+    return new BCryptPasswordEncoder();
   }
 }
+
+

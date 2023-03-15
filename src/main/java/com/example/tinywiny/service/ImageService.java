@@ -1,9 +1,5 @@
 package com.example.tinywiny.service;
 
-import com.example.tinywiny.converter.ImageConverter;
-import com.example.tinywiny.converter.ProductConverter;
-import com.example.tinywiny.dto.ImageDto;
-import com.example.tinywiny.dto.ProductDto;
 import com.example.tinywiny.model.Image;
 import com.example.tinywiny.model.Product;
 import com.example.tinywiny.repository.ImageRepository;
@@ -27,33 +23,34 @@ public class ImageService {
 
   private final AwsService storageService;
   private final ImageRepository imageRepository;
-  private final ImageConverter converter;
   private final ProductService productService;
-  private final ProductConverter productConverter;
 
   @Transactional
   @Modifying
-  public void saveNewImage(Image image) {
-    if (image != null) {
-      imageRepository.save(image);
-    } else {
-      throw new RuntimeException("no image");
-    }
+  public void saveNewImage(String imageName, Long productId) {
+    imageRepository.setNewImage(imageName, productId);
   }
-  public Image findImageByProduct(Product product) {
-    return imageRepository.findImageByProduct(product);
+
+  public Image findImageByProductId(Long productId) {
+    return imageRepository.findImageByProductId(productId);
+  }
+
+  public void updateImage(String imageName, Long productId) {
+    imageRepository.updateImage(imageName, productId);
+  }
+
+  public void upload(InputStream stream, String fileName) {
+    storageService.uploadFile(stream, fileName);
   }
 
   @Modifying
-  public void updateImage(ImageDto imageDto, MultipartFile file) throws IOException {
-    Product product = productService.findProductByProductId(imageDto.getProductId());
-    ProductDto productDto = productConverter.toProductDto(product);
-    Image image = converter.toImage(imageDto, productDto);
-    if (findImageByProduct(product) != null) {
-      image.setImageName(imageDto.getImageName());
-      imageRepository.save(image);
+  public void addImage(String productName, MultipartFile file) throws IOException {
+    Product product = productService.findProductByProductName(productName);
+    Image image = findImageByProductId(product.getProductId());
+    if (image != null) {
+      updateImage(file.getOriginalFilename(), product.getProductId());
     } else {
-      saveNewImage(image);
+      saveNewImage(file.getOriginalFilename(), product.getProductId());
     }
     upload(file.getInputStream(), file.getOriginalFilename());
   }
@@ -61,20 +58,17 @@ public class ImageService {
   public URI getImagePath(String imageName) throws URISyntaxException {
     return storageService.getImagePath(imageName);
   }
-//может удалять по айди картинки?
+
   public void deleteImage(Long productId) {
     Product product = productService.findProductByProductId(productId);
     if (product == null) {
       throw new RuntimeException("no product");
     }
-    String imageName = findImageByProduct(product).getImageName();
+    String imageName = findImageByProductId(productId).getImageName();
     storageService.deleteImage(imageName);
-    imageRepository.deleteImageByProduct(product);
+    imageRepository.deleteImageByProductId(productId);
   }
 
-  public void upload(InputStream stream, String fileName) {
-    storageService.uploadFile(stream, fileName);
-  }
 
  /* public Image findImageByImageName(String imageName) {
     if (imageName == null) {

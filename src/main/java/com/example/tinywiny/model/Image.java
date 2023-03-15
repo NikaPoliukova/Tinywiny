@@ -8,8 +8,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -26,8 +24,7 @@ public class Image {
   @Column(name = "image_name")
   private String imageName;
 
-  @OneToOne
-  @JoinColumn(name = "product_id")
-  private Product product;
+  @Column(name = "product_id")
+  private Long productId;
 
 }

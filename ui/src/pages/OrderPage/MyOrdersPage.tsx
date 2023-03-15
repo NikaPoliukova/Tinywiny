@@ -15,6 +15,7 @@ import {Order} from "../../model/Order";
 import OrderService from "../../services/OrderService";
 import {Link, useNavigate, useParams} from "react-router-dom";
 import {Footer} from "../component/Footer";
+import MyHeader from '../component/MyHeader';
 
 
 export default function MyOrdersPage() {
@@ -27,8 +28,8 @@ export default function MyOrdersPage() {
     }, []);
     return (
         <div>
-            <Header/>
-            <Typography component="h1" variant="h5">
+           <MyHeader />
+            <Typography>
                 <h2>Orders User {userId}</h2>
             </Typography>
             <Card style={{width: 1000}}>

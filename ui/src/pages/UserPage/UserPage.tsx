@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import {User} from "../../model/User";
 import UserService from "../../services/UserService";
-import {Button, Card, Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@mui/material";
-import {Link, useParams} from "react-router-dom";
+import {Card, Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@mui/material";
+import {useParams} from "react-router-dom";
 import {Footer} from "../component/Footer";
-import {Header, Icon} from "semantic-ui-react";
+import {Button, Header, Icon} from "semantic-ui-react";
 import MyHeader from 'pages/component/MyHeader';
 
 
@@ -12,12 +12,13 @@ export const UserPage = () => {
     const Profile = () => {
         const {userId} = useParams();
         const [user, setUser] = useState<User>();
+
         useEffect(() => {
             UserService.getUser(Number(userId))
                 .then(response => setUser(response));
         }, []);
         return (
-            <div className="container mb-5 mt-5 row inner-wrap">
+            <div className="card">
                 <MyHeader/>
                 <div>
                     <Header as='h2' icon textAlign='center'>
@@ -28,9 +29,14 @@ export const UserPage = () => {
                 </div>
 
                 <div className="col-lg-6">
-                    <div className="card">
-                        <Button size="small">Update profile information</Button>
-                    </div>
+
+                    <Button
+                        basic color='brown'
+                        content='Update profile information'
+                        size="small"
+                        href={`/users/update/${userId}`}
+                    ></Button>
+
                 </div>
                 <Card style={{width: 1000}}>
                     <TableContainer>
@@ -65,13 +71,12 @@ export const UserPage = () => {
                     </TableContainer>
                 </Card>
                 <Button
-                    component={Link}
-                    type="submit"
+                    basic color='brown'
+                    content='Update profile information'
                     size="small"
-                    sx={{mt: 1, mb: 1}}
-                    to={'/orders/' + userId}
+                    href={`/orders/${userId}`}
                 >
-                    Orders
+
                 </Button>
                 <Footer/>
             </div>

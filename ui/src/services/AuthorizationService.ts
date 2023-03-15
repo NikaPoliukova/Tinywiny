@@ -1,10 +1,18 @@
 import axios from 'axios';
-import {User} from "../model/User";
 
 class AuthorizationService {
-    async login(user: User): Promise<number> {
-        const response = await axios.post('http://localhost:8080/api/v1/login',
-            user);
+    async login(userName: string, password: string) {
+        const response = await axios.post<string>('http://localhost:8080/api/v1/login',
+            {userName: userName, password: password},
+            {withCredentials: true}
+        ).catch(function (error) {
+            return error.response.status;
+        })
+        return response.status;
+    }
+
+    async logout() {
+        const response = await axios.get('http://localhost:8080/api/v1/logout', {withCredentials: true})
         return response.status;
     }
 }

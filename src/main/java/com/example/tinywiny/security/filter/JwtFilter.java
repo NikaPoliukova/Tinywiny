@@ -24,25 +24,39 @@ public class JwtFilter extends OncePerRequestFilter {
   private final JwtUtils jwtUtils;
   private final UserDetailsServiceImpl userDetailsService;
 
-
   @Override
   protected void doFilterInternal(HttpServletRequest servletRequest, HttpServletResponse servletResponse, FilterChain filterChain) throws ServletException, IOException {
-    String token = getTokenFromRequest(servletRequest);
+    String token = getAccessTokenFromRequest(servletRequest);
+    String refreshToken = getRefreshTokenFromRequest(servletRequest);
     if (token != null && jwtUtils.validateAccessToken(token)) {
-      String userName = jwtUtils.getLoginFromAccessToken(token);
-      UserDetails customUserDetails = userDetailsService.loadUserByUsername(userName);
-      UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(
-          customUserDetails, null, customUserDetails.getAuthorities());
-      SecurityContextHolder.getContext().setAuthentication(auth);
+      setAuthentication(token);
+    } else if (jwtUtils.isTokenExpired(token)&& jwtUtils.validateRefreshToken(refreshToken)) {
+      final String refreshedToken = jwtUtils.generateRefreshedToken(token);
+      setAuthentication(refreshedToken);
     }
     filterChain.doFilter(servletRequest, servletResponse);
   }
 
-  private String getTokenFromRequest(HttpServletRequest request) {
+  private String getAccessTokenFromRequest(HttpServletRequest request) {
       Cookie cookie = WebUtils.getCookie(request, "JWT");
       if (cookie != null) {
         return cookie.getValue();
       }
       return  null;
   }
+  private String getRefreshTokenFromRequest(HttpServletRequest request) {
+    Cookie cookie = WebUtils.getCookie(request, "JWT-REFRESH");
+    if (cookie != null) {
+      return cookie.getValue();
+    }
+    return  null;
+  }
+  private void setAuthentication(String token) {
+    String userName = jwtUtils.getLoginFromAccessToken(token);
+    UserDetails customUserDetails = userDetailsService.loadUserByUsername(userName);
+    UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(
+        customUserDetails, null, customUserDetails.getAuthorities());
+    SecurityContextHolder.getContext().setAuthentication(auth);
+  }
+
 }

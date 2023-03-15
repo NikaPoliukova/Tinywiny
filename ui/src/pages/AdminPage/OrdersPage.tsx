@@ -23,7 +23,7 @@ const OrdersPage = () => {
     const navigate = useNavigate();
     const statuses = ['NEW', 'PROCESS', 'FINISH'];
     const [statusOrder, setStatus] = useState<string>('');
-    //const [orderId, setOrderId] = useState(Number);
+
 
     const options = statuses.map((status, orderId) => {
         return <option key={orderId}>{status}</option>;
@@ -70,8 +70,9 @@ const OrdersPage = () => {
                                     <TableCell component="th" scope="row">
                                         {order.statusOrder}
                                         <Grid item xs={12} sm={5}>
-                                            <select value={statusOrder} onChange={(event) =>
-                                                setStatus(event.target.value)}>
+                                            <select value={statusOrder}
+                                                    onChange={(e) =>
+                                                setStatus(e.target.value)}>
                                                 {options}
                                             </select>
                                         </Grid>

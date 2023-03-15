@@ -12,13 +12,12 @@ import {useSessionStore} from "../../store";
 export const UpdateUserPage = () => {
     const Profile = () => {
         const me = useSessionStore(state => state.user);
-        const [userName, setUserName] = useState("");
         const [password, setPassword] = useState("");
         const [email, setEmail] = useState("");
         const [phoneNumber, setPhoneNumber] = useState("");
         const navigate = useNavigate();
         const userId = me?.userId;
-
+        const userName = me?.userName;
         const updateUser = () => {
             const user: User = {
                 userId,
@@ -43,13 +42,7 @@ export const UpdateUserPage = () => {
                     <TableContainer>
                         <Table>
                             <Table.Body>
-                                <Table.Row>
-                                    <Table.Cell width={1}>User Name</Table.Cell>
 
-                                    <Form.Input fluid placeholder='Write new name'
-                                                value={userName}
-                                                onChange={e => setUserName(e.target.value)}/>
-                                </Table.Row>
                                 <Table.Row>
                                     <Table.Cell width={1}>Password</Table.Cell>
 

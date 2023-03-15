@@ -27,12 +27,10 @@ public class JwtUtils {
   private static String jwtRefreshSecret;
 
   public String generateAccessToken(User user) {
-    LocalDateTime now = LocalDateTime.now();
-    Instant accessExpirationInstant = now.plusMinutes(15).atZone(ZoneId.systemDefault()).toInstant();
-    Date date = Date.from(accessExpirationInstant);
+    Date expirationDate = generateExpirationDate();
     return Jwts.builder()
         .setSubject(user.getUserName())
-        .setExpiration(date)
+        .setExpiration(expirationDate)
         .signWith(SignatureAlgorithm.HS512, secretKey)
         .claim("role", user.getRole())
         .claim("userId", user.getUserId())
@@ -40,13 +38,29 @@ public class JwtUtils {
   }
 
   public String generateRefreshToken(String login) {
-    LocalDateTime now = LocalDateTime.now();
-    Instant refreshExpirationInstant = now.plusDays(30).atZone(ZoneId.systemDefault()).toInstant();
-    Date date = Date.from(refreshExpirationInstant);
+    Date expirationDate = generateExpirationDate();
     return Jwts.builder()
         .setSubject(login)
-        .setExpiration(date)
+        .setExpiration(expirationDate)
         .signWith(SignatureAlgorithm.HS512, jwtRefreshSecret)
+        .compact();
+  }
+
+  public String generateRefreshedToken(String expiredToken) {
+    Claims claims;
+    try {
+      claims = Jwts.parser()
+          .setSigningKey(secretKey)
+          .parseClaimsJws(expiredToken)
+          .getBody();
+    } catch (ExpiredJwtException e) {
+      claims = e.getClaims();
+    }
+    Date expirationDate = generateExpirationDate();
+    return Jwts.builder()
+        .setClaims(claims)
+        .setExpiration(expirationDate)
+        .signWith(SignatureAlgorithm.HS512, secretKey)
         .compact();
   }
 
@@ -88,6 +102,27 @@ public class JwtUtils {
 
   public String getLoginFromAccessToken(String token) {
     return getLoginFromToken(token, secretKey);
+  }
+
+  public boolean isTokenExpired(String token) {
+    Date expiration = getExpirationDateFromToken(token);
+    return expiration.before(new Date());
+  }
+
+  public  Date getExpirationDateFromToken(String token) {
+    Claims claims;
+    try {
+      claims = Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody();
+    } catch (ExpiredJwtException e) {
+      claims = e.getClaims();
+    }
+    return claims.getExpiration();
+  }
+
+  private Date generateExpirationDate() {
+    LocalDateTime now = LocalDateTime.now();
+    Instant accessExpirationInstant = now.plusMinutes(15).atZone(ZoneId.systemDefault()).toInstant();
+    return Date.from(accessExpirationInstant);
   }
 
   public String getLoginFromRefreshToken(String token) {

@@ -1,8 +1,7 @@
 import * as React from 'react';
-import {useEffect, useState} from 'react';
+import {useEffect, useRef, useState} from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
 import CssBaseline from '@mui/material/CssBaseline';
 import Container from '@mui/material/Container';
 import {createTheme, ThemeProvider} from '@mui/material/styles';
@@ -12,10 +11,11 @@ import ProductService from "../../services/ProductService";
 import {Product} from "../../model/Product";
 import {Footer} from "../component/Footer";
 import {Col, Row} from "react-bootstrap";
-import {Divider, Form, Header, Icon, Table} from 'semantic-ui-react'
+import {Divider, Form, Header, Icon, Segment, Table} from 'semantic-ui-react'
 import MyHeader from 'pages/component/MyHeader';
-import {IconButton} from "@mui/material";
-import {AddAPhoto, AutoDelete} from "@mui/icons-material";
+import {Button, IconButton} from "@mui/material";
+import {AutoDelete} from "@mui/icons-material";
+import ImageService from "../../services/ImageService";
 
 
 const theme = createTheme();
@@ -28,7 +28,8 @@ export function UpdateProductPage() {
         const [price, setPrice] = useState(0);
         const [countInStock, setCountInStock] = useState(0);
         const [description, setDescription] = useState('');
-        const [imageName, setImageName] = useState('');
+        const [image, setImage] = useState('');
+        const fileInput = useRef<HTMLInputElement | null>(null);
         const navigate = useNavigate();
         /*  const updateImage = () => {
               const image: Image = {
@@ -55,9 +56,9 @@ export function UpdateProductPage() {
         const deleteProduct = () => {
             ProductService.deleteProduct(Number(productId)).then(() => navigate("/admin/products"));
         }
-       /* const deleteImage = () => {
+        const deleteImage = () => {
             ImageService.deleteImage(Number(productId)).then(() => navigate("/admin/products"));
-        }*/
+        }
 
         return (
             <ThemeProvider theme={theme}>
@@ -68,24 +69,29 @@ export function UpdateProductPage() {
                         <Row>
                             <Col md={4}>
                                 <Card sx={{height: '100%', display: 'flex', flexDirection: 'column'}}>
-                                    <CardMedia
-                                        component="img"
-                                        image="https://source.unsplash.com/random"/>
                                     <CardContent sx={{flexGrow: 1}}>
                                     </CardContent>
-                                    <IconButton color="primary"
-                                                aria-label="upload picture"
-                                                component="label">
-                                        <input hidden accept="image/*" type="file"
-                                           // onClick={updateImage}
-                                        />
-                                        <AddAPhoto/>
-                                    </IconButton>
+                                    <Segment placeholder>
+                                        <Header icon>
+                                            <img src={`data:image/png;base64,${image}`}/>
+                                        </Header>
+                                        <Button
+                                            variant="contained"
+                                            component="label"
+                                        >
+                                            Upload Photo
+                                            <input
+                                                ref={fileInput}
+                                                type="file"
+                                                hidden
+                                            />
+                                        </Button>
+                                    </Segment>
 
                                     <IconButton color="primary"
                                                 aria-label="delete picture"
                                                 component="label"
-                                    //    onClick={deleteImage}
+                                                onClick={deleteImage}
                                     >
                                         <AutoDelete/>
                                     </IconButton>

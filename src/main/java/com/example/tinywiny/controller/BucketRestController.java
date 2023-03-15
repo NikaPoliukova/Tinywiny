@@ -27,16 +27,13 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 public class BucketRestController {
-  //У МЕНЯ СУММА ЗАКАЗА БУДЕТ ДРОБНАЯ,ИСПОЛЬЗОВАТЬ INT ИЛИ DOUBLE????
+
   private final BucketService bucketService;
   private final ProductInBucketConverter converter;
   private final BucketConverter bucketConverter;
 
-
-
   @GetMapping("/{bucketId}")
   public List<ProductInBucketDto> findAllProductsInBucket(@PathVariable Long bucketId) {
-
     return converter.toProductInBucketDto(bucketService.findAllProductInBucket(bucketId));
   }
 
@@ -49,15 +46,8 @@ public class BucketRestController {
     return new OrderSumDto(sum, sumWithDiscount);
   }
 
-
-  /*//ТУТ ДОЛЖНО БЫТЬ ДРОБНОЕ ЧИСЛО
-  @GetMapping("/final-sum")
-  protected int getSumWithDiscount(@RequestParam int sum) {
-    return bucketService.getSumWithDiscount(sum);
-  }*/
-
-  @PostMapping
-  protected void addProductInBucket(@RequestBody Long productId) {
+  @PostMapping("/product/{productId}")
+  protected void addProductInBucket(@PathVariable Long productId) {
     bucketService.addProductInBucket(productId);
   }
 
@@ -82,6 +72,12 @@ public class BucketRestController {
     List<ProductInBucket> productsInBucket = bucket.getProductsInBucket();
     return bucketConverter.toBucketDto(bucket, productsInBucket);
   }
+   /*//ТУТ ДОЛЖНО БЫТЬ ДРОБНОЕ ЧИСЛО
+  @GetMapping("/final-sum")
+  protected int getSumWithDiscount(@RequestParam int sum) {
+    return bucketService.getSumWithDiscount(sum);
+  }*/
+
 /*
   @GetMapping
   public BucketDto findBucketByBucketId(@RequestBody Long bucketId) {

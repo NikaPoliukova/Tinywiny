@@ -16,23 +16,30 @@ import {Product} from "../../model/Product";
 import ProductService from "../../services/ProductService";
 import {Link, useNavigate, useParams} from "react-router-dom";
 import {Sidebar} from "../component/SideBar";
-import {Bucket} from "../../model/Bucket";
 import BucketService from "../../services/BucketService";
 import {ThemeProvider} from "react-bootstrap";
 import {createTheme} from "@mui/material";
-import {useSessionStore} from "../../store";
 
 
 const theme = createTheme();
+
 export default function Products() {
     const [products, setProducts] = useState<Array<Product>>([]);
     const {type} = useParams();
+    const navigate = useNavigate();
+
 
     useEffect(() => {
-        ProductService.findAllProductsByTypeAndPage(String(type))
-            .then(response => setProducts(response));
-    }, []);
+            ProductService.findAllProductsByTypeAndPage(String(type))
+                .then(response => {
+                    setProducts(response);
+                })
+        }
+        , []);
 
+    const addProduct = (productId : number) => {
+        BucketService.addProductInBucket(productId).then(() => navigate(`/products/type/toys`));
+    }
     return (
         <ThemeProvider theme={theme}>
 
@@ -80,7 +87,7 @@ export default function Products() {
                                             to={'/products/' + product.productId}
                                         >Open</Button>
                                         <Button
-                                            onClick={() => BucketService.addProductInBucket(Number(product.productId))}
+                                            onClick={() => addProduct(Number(product?.productId))}
                                         >Add in bucket</Button>
 
                                     </CardActions>

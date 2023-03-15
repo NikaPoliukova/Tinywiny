@@ -58,8 +58,7 @@ public class BucketService {
 
   public void addProductInBucket(Long productId) {
     final int count = 1;
-    Long userId =utilClass.getIdCurrentUser();
-    Optional<Bucket> bucket = bucketRepository.findBucketByUserUserId(userId);
+    Optional<Bucket> bucket = bucketRepository.findBucketByUserUserId(utilClass.getIdCurrentUser());
     ProductInBucket productInBucket = new ProductInBucket();
     Product product = productService.findProductByProductId(productId);
     productInBucket.setBucket(bucket.get());

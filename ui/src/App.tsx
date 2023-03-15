@@ -8,7 +8,6 @@ import ReviewsPage from "./pages/AdminPage/ReviewsPage";
 import BucketPage from "./pages/BucketPage/BucketPage";
 import OrdersPage from "./pages/AdminPage/OrdersPage";
 import GalleryPage from "./pages/GalleryPage/GalleryPage";
-import Products from "./pages/ProductsPage/ProductsPage";
 import {UserPage} from "./pages/UserPage/UserPage";
 import {ProductPage} from "./pages/ProductPage/ProductPage";
 import {OrderPage} from "./pages/OrderPage/OrderPage";
@@ -27,6 +26,8 @@ import {useSessionStore} from "./store";
 import PaymentPage from 'pages/PaymentPage/PaymentPage';
 import {createTheme, ThemeProvider} from '@mui/material/styles';
 import { Theme } from '@mui/material/styles/createTheme';
+import Products from "./pages/ProductsPage/ProductsPage";
+
 
 const theme: Theme = createTheme();
 

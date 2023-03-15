@@ -31,7 +31,6 @@ public class UserRestController {
 
   private final UserService userService;
   private final UserConverter userConverter;
-  private final UtilClass utilClass;
 
   @PutMapping
   protected void updateUser(@RequestBody UserDto user) {

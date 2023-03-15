@@ -13,10 +13,26 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4dd877d4-850b-4093-ba42-62db28456f03" name="Changes" comment="not work delete">
+    <list default="true" id="4dd877d4-850b-4093-ba42-62db28456f03" name="Changes" comment="added logout">
+      <change afterPath="$PROJECT_DIR$/ui/src/services/ImageService.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/controller/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/controller/AuthController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/src/services/AuthorizationService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/services/AuthorizationService.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/controller/BucketRestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/controller/BucketRestController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/controller/UserRestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/controller/UserRestController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/model/ProductInBucket.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/model/ProductInBucket.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/model/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/security/jwt/JwtUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/security/jwt/JwtUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/service/BucketService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tinywiny/service/BucketService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/ui/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/ui/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/src/model/ProductInBucket.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/model/ProductInBucket.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/src/pages/AdminPage/CreateNewProductPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/pages/AdminPage/CreateNewProductPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/src/pages/AdminPage/UpdateProductPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/pages/AdminPage/UpdateProductPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/src/pages/ProductsPage/ProductsPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/pages/ProductsPage/ProductsPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/src/pages/UserPage/UserPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/pages/UserPage/UserPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/src/services/BucketService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/services/BucketService.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/src/services/ProductService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/services/ProductService.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -326,14 +342,8 @@
       <workItem from="1678727290659" duration="8000" />
       <workItem from="1678738263579" duration="5011000" />
       <workItem from="1678809254724" duration="21045000" />
-      <workItem from="1678874205809" duration="3145000" />
-    </task>
-    <task id="LOCAL-00001" summary="added more classes">
-      <created>1675167662551</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1675167662551</updated>
+      <workItem from="1678874205809" duration="8491000" />
+      <workItem from="1678893911192" duration="13507000" />
     </task>
     <task id="LOCAL-00002" summary="added more classes">
       <created>1675182456395</created>
@@ -671,7 +681,14 @@
       <option name="project" value="LOCAL" />
       <updated>1678824660510</updated>
     </task>
-    <option name="localTasksCounter" value="50" />
+    <task id="LOCAL-00050" summary="added logout">
+      <created>1678879046278</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1678879046278</updated>
+    </task>
+    <option name="localTasksCounter" value="51" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -690,7 +707,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="add page ui" />
     <MESSAGE value="fix tokens after review" />
     <MESSAGE value="work userPage" />
     <MESSAGE value="update ui order and product" />
@@ -715,7 +731,8 @@
     <MESSAGE value="add cookie on frontend" />
     <MESSAGE value="add useSessionStore" />
     <MESSAGE value="not work delete" />
-    <option name="LAST_COMMIT_MESSAGE" value="not work delete" />
+    <MESSAGE value="added logout" />
+    <option name="LAST_COMMIT_MESSAGE" value="added logout" />
   </component>
   <component name="WindowStateProjectService">
     <state x="395" y="91" key="#Inspections" timestamp="1677616579289">
@@ -782,65 +799,65 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="553" y="110" key="Github.UntrackedFilesDialog/0.0.1536.824@0.0.1536.824" timestamp="1675079047942" />
-    <state width="1493" height="267" key="GridCell.Tab.0.bottom" timestamp="1678878839974">
+    <state width="1493" height="451" key="GridCell.Tab.0.bottom" timestamp="1678908450865">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="267" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1678878839974" />
+    <state width="1493" height="451" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1678908450865" />
     <state width="1493" height="320" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1674736178189" />
-    <state width="1493" height="267" key="GridCell.Tab.0.center" timestamp="1678878839974">
+    <state width="1493" height="451" key="GridCell.Tab.0.center" timestamp="1678908450865">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="267" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1678878839974" />
+    <state width="1493" height="451" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1678908450865" />
     <state width="1493" height="320" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1674736178183" />
-    <state width="1493" height="267" key="GridCell.Tab.0.left" timestamp="1678878839974">
+    <state width="1493" height="451" key="GridCell.Tab.0.left" timestamp="1678908450865">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="267" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1678878839974" />
+    <state width="1493" height="451" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1678908450865" />
     <state width="1493" height="320" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1674736178179" />
-    <state width="1493" height="267" key="GridCell.Tab.0.right" timestamp="1678878839974">
+    <state width="1493" height="451" key="GridCell.Tab.0.right" timestamp="1678908450865">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="267" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1678878839974" />
+    <state width="1493" height="451" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1678908450865" />
     <state width="1493" height="320" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1674736178187" />
-    <state width="1493" height="267" key="GridCell.Tab.1.bottom" timestamp="1678878812032">
+    <state width="1493" height="451" key="GridCell.Tab.1.bottom" timestamp="1678908441320">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="267" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1678878812032" />
+    <state width="1493" height="451" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1678908441320" />
     <state width="1493" height="320" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1674736178202" />
-    <state width="1493" height="267" key="GridCell.Tab.1.center" timestamp="1678878812032">
+    <state width="1493" height="451" key="GridCell.Tab.1.center" timestamp="1678908441320">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="267" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1678878812032" />
+    <state width="1493" height="451" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1678908441320" />
     <state width="1493" height="320" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1674736178196" />
-    <state width="1493" height="267" key="GridCell.Tab.1.left" timestamp="1678878812032">
+    <state width="1493" height="451" key="GridCell.Tab.1.left" timestamp="1678908441320">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="267" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1678878812032" />
+    <state width="1493" height="451" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1678908441320" />
     <state width="1493" height="320" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1674736178192" />
-    <state width="1493" height="267" key="GridCell.Tab.1.right" timestamp="1678878812032">
+    <state width="1493" height="451" key="GridCell.Tab.1.right" timestamp="1678908441320">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="267" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1678878812032" />
+    <state width="1493" height="451" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1678908441320" />
     <state width="1493" height="320" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1674736178199" />
-    <state width="1493" height="267" key="GridCell.Tab.2.bottom" timestamp="1678878808186">
+    <state width="1493" height="451" key="GridCell.Tab.2.bottom" timestamp="1678908208978">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="267" key="GridCell.Tab.2.bottom/0.0.1536.824@0.0.1536.824" timestamp="1678878808186" />
+    <state width="1493" height="451" key="GridCell.Tab.2.bottom/0.0.1536.824@0.0.1536.824" timestamp="1678908208978" />
     <state width="1493" height="320" key="GridCell.Tab.2.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1674736178204" />
-    <state width="1493" height="267" key="GridCell.Tab.2.center" timestamp="1678878808186">
+    <state width="1493" height="451" key="GridCell.Tab.2.center" timestamp="1678908208978">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="267" key="GridCell.Tab.2.center/0.0.1536.824@0.0.1536.824" timestamp="1678878808186" />
+    <state width="1493" height="451" key="GridCell.Tab.2.center/0.0.1536.824@0.0.1536.824" timestamp="1678908208978" />
     <state width="1493" height="320" key="GridCell.Tab.2.center/0.0.1920.1040@0.0.1920.1040" timestamp="1674736178203" />
-    <state width="1493" height="267" key="GridCell.Tab.2.left" timestamp="1678878808186">
+    <state width="1493" height="451" key="GridCell.Tab.2.left" timestamp="1678908208978">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="267" key="GridCell.Tab.2.left/0.0.1536.824@0.0.1536.824" timestamp="1678878808186" />
+    <state width="1493" height="451" key="GridCell.Tab.2.left/0.0.1536.824@0.0.1536.824" timestamp="1678908208978" />
     <state width="1493" height="320" key="GridCell.Tab.2.left/0.0.1920.1040@0.0.1920.1040" timestamp="1674736178203" />
-    <state width="1493" height="267" key="GridCell.Tab.2.right" timestamp="1678878808186">
+    <state width="1493" height="451" key="GridCell.Tab.2.right" timestamp="1678908208978">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="267" key="GridCell.Tab.2.right/0.0.1536.824@0.0.1536.824" timestamp="1678878808186" />
+    <state width="1493" height="451" key="GridCell.Tab.2.right/0.0.1536.824@0.0.1536.824" timestamp="1678908208978" />
     <state width="1493" height="320" key="GridCell.Tab.2.right/0.0.1920.1040@0.0.1920.1040" timestamp="1674736178204" />
     <state x="299" y="67" key="Maven.ArtifactSearchDialog" timestamp="1678560362411">
       <screen x="0" y="0" width="1536" height="824" />
@@ -858,10 +875,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="560" height="446" key="SwitcherDM/0.0.1536.824@0.0.1536.824" timestamp="1677930539267" />
-    <state x="361" y="132" key="Vcs.Push.Dialog.v2" timestamp="1678824675164">
+    <state x="361" y="132" key="Vcs.Push.Dialog.v2" timestamp="1678879048433">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="361" y="132" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1678824675164" />
+    <state x="361" y="132" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1678879048433" />
     <state width="775" height="419" key="XDebugger.FullValuePopup" timestamp="1678529585410">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -882,14 +899,14 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="540" y="159" key="com.intellij.testIntegration.createTest.CreateTestDialog/0.0.1536.824@0.0.1536.824" timestamp="1677707546861" />
-    <state x="217" y="141" width="1102" height="628" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2" timestamp="1678649423619">
+    <state x="217" y="141" width="1102" height="628" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2" timestamp="1678879101658">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="217" y="141" width="1102" height="628" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/0.0.1536.824@0.0.1536.824" timestamp="1678649423619" />
-    <state x="229" y="177" width="892" height="620" key="find.popup" timestamp="1678831151991">
+    <state x="217" y="141" width="1102" height="628" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/0.0.1536.824@0.0.1536.824" timestamp="1678879101658" />
+    <state x="229" y="177" width="892" height="620" key="find.popup" timestamp="1678908176720">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="229" y="177" width="892" height="620" key="find.popup/0.0.1536.824@0.0.1536.824" timestamp="1678831151991" />
+    <state x="229" y="177" width="892" height="620" key="find.popup/0.0.1536.824@0.0.1536.824" timestamp="1678908176720" />
     <state x="550" y="125" key="git4idea.branch.GitSmartOperationDialog" timestamp="1676632206659">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -898,10 +915,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="447" y="290" key="refactoring.ChangeSignatureDialog/0.0.1536.824@0.0.1536.824" timestamp="1675014427362" />
-    <state x="425" y="187" key="run.anything.popup" timestamp="1678878648768">
+    <state x="425" y="187" key="run.anything.popup" timestamp="1678898855625">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="425" y="187" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1678878648768" />
+    <state x="425" y="187" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1678898855625" />
     <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1678562861797">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -927,24 +944,9 @@
           <option name="timeStamp" value="95" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/example/tinywiny/controller/BucketRestController.java</url>
-          <line>65</line>
-          <option name="timeStamp" value="131" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/example/tinywiny/controller/BucketRestController.java</url>
-          <line>60</line>
-          <option name="timeStamp" value="133" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/example/tinywiny/controller/OrderRestController.java</url>
           <line>37</line>
           <option name="timeStamp" value="159" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/example/tinywiny/controller/ProductsRestController.java</url>
-          <line>54</line>
-          <option name="timeStamp" value="161" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/example/tinywiny/controller/ProductsRestController.java</url>
@@ -967,19 +969,29 @@
           <option name="timeStamp" value="165" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/example/tinywiny/controller/BucketRestController.java</url>
-          <line>70</line>
-          <option name="timeStamp" value="174" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/example/tinywiny/controller/AuthController.java</url>
           <line>48</line>
           <option name="timeStamp" value="189" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/example/tinywiny/security/filter/JwtFilter.java</url>
-          <line>30</line>
-          <option name="timeStamp" value="192" />
+          <url>file://$PROJECT_DIR$/src/main/java/com/example/tinywiny/controller/ProductsRestController.java</url>
+          <line>54</line>
+          <option name="timeStamp" value="199" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/example/tinywiny/controller/ProductsRestController.java</url>
+          <line>41</line>
+          <option name="timeStamp" value="201" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/example/tinywiny/service/BucketService.java</url>
+          <line>60</line>
+          <option name="timeStamp" value="203" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/example/tinywiny/controller/BucketRestController.java</url>
+          <line>50</line>
+          <option name="timeStamp" value="205" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

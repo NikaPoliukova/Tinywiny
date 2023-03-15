@@ -1,13 +1,9 @@
 import axios from "axios";
 import {Product} from "../model/Product";
+import { Buffer } from 'buffer';
 
 class ProductService {
-    async downloadImage(): Promise<any> {
-        const response = await axios.get<any>('https://localhost:8080/api/v1/file', {
-            responseType: 'arraybuffer'
-        });
-        return Buffer.from(response.data, 'binary').toString('base64');
-    }
+
 
     async uploadFile({productName,price,countInStock,description,idType, file}: any): Promise<any> {
         const formData = new FormData();
@@ -17,14 +13,14 @@ class ProductService {
         formData.append('description', description);
         formData.append('idType', idType);
         formData.append('file', file, file.name);
-        const response = await axios.post<any>('https://localhost:8080/api/v1//admin/product/create', formData, {
+        const response = await axios.post<any>('https://localhost:8080/api/v1/admin/product/create', formData, {
+            withCredentials: true,
             headers: {
                 "Content-Type": "multipart/form-data",
             },
         });
         return Buffer.from(response.data, 'binary').toString('base64');
     }
-
 
     async findAllProductsByTypeAndPage(type : string): Promise<Array<Product>> {
         const response = await axios.get<Array<Product>>('http://localhost:8080/api/v1/products/type/' + type,

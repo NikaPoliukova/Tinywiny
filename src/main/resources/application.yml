@@ -8,6 +8,12 @@ spring:
     password: postgres
     url: jdbc:postgresql://localhost:35432/tinywiny_network
 
+  servlet:
+    multipart:
+      max-file-size: -1
+      max-request-size: -1
+      file-size-threshold: 1048576
+      location: '/tmp'
 
 aws:
   region: "us-east-1"

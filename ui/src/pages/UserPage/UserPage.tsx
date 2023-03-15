@@ -1,12 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import {User} from "../../model/User";
 import UserService from "../../services/UserService";
-import { Card, Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@mui/material";
-import {Link, useParams} from "react-router-dom";
+import {Card, Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@mui/material";
+import {useParams} from "react-router-dom";
 import {Footer} from "../component/Footer";
-import {Header, Icon} from "semantic-ui-react";
+import {Button, Header, Icon} from "semantic-ui-react";
 import MyHeader from 'pages/component/MyHeader';
-import { Button } from 'semantic-ui-react'
 
 
 export const UserPage = () => {
@@ -31,12 +30,12 @@ export const UserPage = () => {
 
                 <div className="col-lg-6">
 
-                        <Button
-                            basic color='brown'
-                            content='Update profile information'
-                            size="small"
-                                href={`/users/update/${userId}`}
-                        ></Button>
+                    <Button
+                        basic color='brown'
+                        content='Update profile information'
+                        size="small"
+                        href={`/users/update/${userId}`}
+                    ></Button>
 
                 </div>
                 <Card style={{width: 1000}}>
@@ -72,12 +71,10 @@ export const UserPage = () => {
                     </TableContainer>
                 </Card>
                 <Button
-                    basic color='brown' content='My orders'
-                    component={Link}
-                    type="submit"
+                    basic color='brown'
+                    content='Update profile information'
                     size="small"
-                    sx={{mt: 1, mb: 1}}
-                    to={'/orders/' + userId}
+                    href={`/orders/${userId}`}
                 >
 
                 </Button>

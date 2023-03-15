@@ -5,33 +5,30 @@ import MyHeader from 'pages/component/MyHeader';
 import {TypeProduct} from "../../model/TypeProduct";
 import TypeProductService from "../../services/TypeProductService";
 import ProductService from "../../services/ProductService";
-
-//выводить сообщение,если не корректные параметры
+import ImageService from "../../services/ImageService";
 
 export function CreateProduct() {
     const [image, setImage] = useState('');
     const [productName, setProductName] = useState('');
-    const [price, setPrice] = useState(Number);
-    const [countInStock, setCountInStock] = useState(Number);
+    const [price, setPrice] = useState(0);
+    const [countInStock, setCountInStock] = useState(0);
     const [description, setDescription] = useState('');
-    const [idType, setIdType] = useState(Number);
+    const [idType, setIdType] = useState(0);
     const fileInput = useRef<HTMLInputElement | null>(null);
     const [types, setTypes] = useState<Array<TypeProduct>>([]);
 
     useEffect(() => {
         TypeProductService.findAllTypes()
-            .then(response => setTypes(response));
+            .then(response => setTypes(response))
+            .then(() => ImageService.downloadImage()
+                .then(response => {
+                    setImage(response)
+                }))
     }, []);
 
     const options = types.map((type, idType) => {
         return <option key={idType} value={idType}>{type.name}</option>;
     });
-    useEffect(() => {
-        ProductService.downloadImage()
-            .then(response => {
-                setImage(response);
-            });
-    }, []);
 
     const uploadProduct = () => {
         ProductService.uploadFile({

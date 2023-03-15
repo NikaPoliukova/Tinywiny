@@ -3,6 +3,7 @@ import {Bucket} from "../model/Bucket";
 import {ProductInBucket} from "../model/ProductInBucket";
 import {OrderSumDto} from "../model/OrderSumDto";
 
+
 class BucketService {
 
     async findAllProductsInBucket(bucketId: number): Promise<Array<ProductInBucket>> {
@@ -40,11 +41,10 @@ class BucketService {
         return response.data;
     }
 
-    async addProductInBucket(productId: number) {
+    async addProductInBucket(productId: number){
         const params = {productId: productId};
-        const response = await axios.post('http://localhost:8080/api/v1/bucket',
+       await axios.post('http://localhost:8080/api/v1/bucket/product/'+productId,
             {params: params}, {withCredentials: true});
-        return response.data;
     }
 
     async deleteProductInBucket(productInBucketId: number) {

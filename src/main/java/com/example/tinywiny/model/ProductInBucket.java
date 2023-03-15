@@ -3,6 +3,7 @@ package com.example.tinywiny.model;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.extern.jackson.Jacksonized;
 import org.hibernate.annotations.DynamicInsert;
 
 import javax.persistence.Entity;
@@ -18,6 +19,7 @@ import javax.persistence.Table;
 @Entity
 @DynamicInsert
 @Data
+@Jacksonized
 @NoArgsConstructor
 @Table(name = "products_in_bucket")
 public class ProductInBucket {

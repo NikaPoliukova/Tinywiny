@@ -29,12 +29,11 @@ public class ApplicationSecurityConfig {
         .cors().and()
         .csrf().disable()
         .authorizeHttpRequests(requests -> requests
-            .antMatchers("/", "/error", "/login", "/api/v1/login",
-                "/api/v1/registration", "/authorization/login", "/api/v1/sessions", "/api/v1/products/**",
-                "/api/v1/reviews").permitAll()
+            .antMatchers("/", "/error", "/api/v1/login", "/api/v1/registration",
+                "/api/v1/sessions", "/api/v1/products/**", "/api/v1/reviews").permitAll()
             .antMatchers("/swagger-ui/**", "/v3/api-docs/**", "**/swagger-resources/**",
                 "/swagger-ui.html", "/webjars/**").permitAll()
-            //.antMatchers("/api/v1/reviews").hasRole("USER")
+            .antMatchers("/api/v1/admin/**").hasRole("ADMIN")
             .anyRequest().authenticated()
         )
         .exceptionHandling(e -> e.authenticationEntryPoint

@@ -9,8 +9,9 @@ class ReviewService {
         return response.data;
     }
 
-    async saveReview(review: Review): Promise<void> {
-        await axios.post('http://localhost:8080/api/v1/reviews/create', review, {withCredentials: true});
+    async saveReview(textReview: string) {
+        await axios.post('http://localhost:8080/api/v1/reviews/create', textReview,
+            {withCredentials: true});
     }
     async deleteReview(id: number): Promise<void> {
         await axios.delete('http://localhost:8080/api/v1/admin/reviews/'+id,{withCredentials: true});

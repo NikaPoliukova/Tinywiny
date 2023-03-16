@@ -44,14 +44,14 @@ function App() {
         <Routes>
             <Route path={'/'} element={<HomePage/>}/>
             <Route path={'/login'} element={<SignIn/>}/>
-            <Route path={'/users'} element={<UsersPage/>}/>
+            <Route path={'/admin/users'} element={<UsersPage/>}/>
             <Route path={'/users/:userId'} element={<UserPage/>}/>
             <Route path={'/registration'} element={<Registry/>}/>
             <Route path={'/admin/reviews'} element={<ReviewsPage/>}/>
             <Route path={'/gallery'} element={<GalleryPage/>}/>
             <Route path={'/products/type/:type'} element={<Products/>}/>
             <Route path={'/products/:productId'} element={<ProductPage/>}/>
-            <Route path={'/orders'} element={<OrdersPage/>}/>
+            <Route path={'/admin/orders'} element={<OrdersPage/>}/>
             <Route path={'/bucket/:bucketId'} element={<BucketPage/>}/>
             <Route path={'/reviews'} element={<ReviewForUsers/>}/>
             <Route path={'/orders/:userId'} element={<MyOrdersPage/>}/>

@@ -55,6 +55,18 @@ public class ImageService {
     upload(file.getInputStream(), file.getOriginalFilename());
   }
 
+  @Modifying
+  public void addImage(Long productId, MultipartFile file) throws IOException {
+    Product product = productService.findProductByProductId(productId);
+    Image image = findImageByProductId(product.getProductId());
+    if (image != null) {
+      updateImage(file.getOriginalFilename(), productId);
+    } else {
+      saveNewImage(file.getOriginalFilename(), productId);
+    }
+    upload(file.getInputStream(), file.getOriginalFilename());
+  }
+
   public URI getImagePath(String imageName) throws URISyntaxException {
     return storageService.getImagePath(imageName);
   }

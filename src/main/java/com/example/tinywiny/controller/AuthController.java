@@ -35,20 +35,22 @@ public class AuthController {
     User user = userService.findUserByUserNameAndPassword(request.getUserName(), request.getPassword());
     if (user != null) {
       String token = jwtUtils.generateAccessToken(user);
-      //String refreshToken = jwtUtils.generateRefreshToken(user.getUserName());
+      String refreshToken = jwtUtils.generateRefreshToken(user.getUserName());
       final Cookie cookieAccess = new Cookie(TOKEN_NAME, token);
-      //final Cookie cookieRefresh = new Cookie(REFRESH_TOKEN_NAME, refreshToken);
-     // Arrays.asList(cookieRefresh, cookieAccess)
-       //   .forEach(cookie -> {
-      cookieAccess.setPath("/");
-      cookieAccess.setHttpOnly(true);
-      cookieAccess.setMaxAge((int) EXPIRATION);
-            response.addCookie(cookieAccess);
-         // });
+      final Cookie cookieRefresh = new Cookie(REFRESH_TOKEN_NAME, refreshToken);
+      Arrays.asList(cookieRefresh, cookieAccess)
+          .forEach(cookie -> {
+            cookie.setPath("/");
+            cookie.setHttpOnly(true);
+            cookie.setMaxAge((int) EXPIRATION);
+          });
+      response.addCookie(cookieAccess);
+      response.addCookie(cookieRefresh);
       response.setStatus(HttpStatus.OK.value());
     } else {
       response.setStatus(HttpStatus.CONFLICT.value());
     }
+
   }
 
   @GetMapping("/logout")

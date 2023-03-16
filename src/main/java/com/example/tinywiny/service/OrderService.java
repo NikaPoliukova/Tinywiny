@@ -37,17 +37,19 @@ public class OrderService {
   private final UserConverter userConverter;
   private final DeliveryInformationConverter deliveryInformationConverter;
   private final BucketRepository bucketRepository;
-
+  private final UtilClass utilClass;
   @Transactional
   @Modifying
   public Order save(OrderDto orderDto) {
-    User user = userRepository.findUserByUserId(orderDto.getUserId()).get();
+    Long userId = utilClass.getIdCurrentUser();
     Order order = orderConverter.toOrder(orderDto);
+    User user = userRepository.findUserByUserId(userId).get();
     UserDto userDto = userConverter.toDto(user);
     DeliveryInformation deliveryInformation = deliveryInformationConverter
         .toDeliveryInformation(orderDto.getDeliveryInformationDto(), userDto);
     order.setDeliveryInformation(deliveryInformation);
-    List<ProductInBucket> productsInBucket = bucketRepository.findBucketByUserUserId(user.getUserId()).get().getProductsInBucket();
+    List<ProductInBucket> productsInBucket =
+        bucketRepository.findBucketByUserUserId(user.getUserId()).get().getProductsInBucket();
     List<ProductInOrder> productsInOrder = addProductsInOrder(productsInBucket);
     order.setProductsInOrder(productsInOrder);
     return orderRepository.save(order);

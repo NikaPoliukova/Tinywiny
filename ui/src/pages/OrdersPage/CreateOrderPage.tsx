@@ -10,14 +10,12 @@ import OrderService from "../../services/OrderService";
 import BucketService from "../../services/BucketService";
 import {ProductInBucket} from "../../model/ProductInBucket";
 import Container from "@mui/material/Container";
-import {Bucket} from 'model/Bucket';
 import {OrderSumDto} from "../../model/OrderSumDto";
 import {useSessionStore} from "../../store";
 
 
 export default function CreateOrderPage() {
     const user = useSessionStore(state => state.user);
-
 
     const [customerName, setFirstName] = useState('');
     const [customerLastName, setLastName] = useState('');
@@ -26,25 +24,19 @@ export default function CreateOrderPage() {
     const [commentOrder, setComment] = useState('');
     const [deliveryTypeId, setDeliveryType] = useState(0);
     const [products, setProducts] = useState<Array<ProductInBucket>>([])
-    const [orderSumDto, setOrderSumDto] = useState<OrderSumDto>();
-    const [finalSum, setFinalSum] = useState(0);
-    const [bucket, setBucket] = useState<Bucket>();
-
+    const [sumProducts, setSumProducts] = useState<OrderSumDto>();
+    const bucketId = Number(user?.userId);
 
     useEffect(() => {
-        BucketService.findBucketByUserId(Number(user?.userId))
-            .then(bucket => {
-                setBucket(bucket);
-                return bucket;
+        BucketService.findAllProductsInBucket()
+            .then(products => {
+                setProducts(products);
+                return products;
             })
-            .then(bucket => BucketService.findAllProductsInBucket(Number(bucket?.bucketId))
-                .then(products => {
-                    setProducts(products);
-                    return products;
-                }))
-          BucketService.getSumProductInBucket(Number(bucket?.bucketId))
-            .then(orderSumDto => setOrderSumDto(orderSumDto))
+        BucketService.getSumProductInBucket()
+            .then(result => setSumProducts(result));
     }, []);
+
 
     const deliveryInformationDto: DeliveryInformation = {
         customerName,
@@ -60,11 +52,11 @@ export default function CreateOrderPage() {
             userId: Number(user?.userId),
             deliveryInformationDto,
             deliveryTypeId,
-            sum: finalSum
+            sum: sumProducts?.sumWithDiscount
         };
         OrderService.createOrder(order)
             .then(() => {
-                    BucketService.deleteAllProductsInBucket(Number(bucket?.bucketId))
+                    BucketService.deleteAllProductsInBucket()
                         .then(() => navigate("/products/type/toys"));
                 }
             );
@@ -119,8 +111,8 @@ export default function CreateOrderPage() {
                         </TableBody>
                     </Table>
                 </TableContainer>
-                <div>Sum order consist: {orderSumDto?.sum}</div>
-                <div>Final sum with discount : {orderSumDto?.sumWithDiscount}</div>
+                <div>Sum order consist: {sumProducts?.sum}</div>
+                <div>Final sum with discount : {sumProducts?.sumWithDiscount}</div>
             </Card>
             <h2> Add information</h2>
             <Form>

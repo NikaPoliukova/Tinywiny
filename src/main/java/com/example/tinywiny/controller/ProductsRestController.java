@@ -37,11 +37,6 @@ public class ProductsRestController {
   private final TypeProductConverter typeProductConverter;
 
 
-  @GetMapping("/file")
-  public ResponseEntity download() {
-    final InputStream in = getClass().getResourceAsStream("/download.png");
-    return ResponseEntity.ok(new InputStreamResource(in));
-  }
   @GetMapping("/products/{productId}")
   public ProductDto getProduct(@PathVariable Long productId) throws URISyntaxException {
     Product product = productService.findProductByProductId(productId);
@@ -114,10 +109,6 @@ public class ProductsRestController {
     productService.deleteProduct(productId);
   }
 
-  @DeleteMapping("/admin/image/{productId}")
-  public void deleteImage(@PathVariable Long productId) {
-    imageService.deleteImage(productId);
-  }
 }
 //GET image????
   /*@PostMapping("/products")

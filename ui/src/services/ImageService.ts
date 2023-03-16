@@ -15,15 +15,17 @@ class ImageService{
         });
         return response.data;
     }
-    uploadImage = async (image: any) => {
-        const response = await axios.post('http://localhost:8080/api/v1/files/',
-            image, {
-                withCredentials: true,
-                headers: {
-                    'Content-Type': `multipart/form-data; boundary=<calculated when request is sent>`,
-                },
+    uploadImage = async ({productId, file}: any): Promise<any>  => {
+        const formData = new FormData();
+        formData.append('productId', productId);
+        formData.append('file', file, file.name);
+        const response = await axios.post('http://localhost:8080/api/v1/file', formData,{
+            withCredentials: true,
+            headers: {
+                "Content-Type": "multipart/form-data",
+            },
             });
-        return response.data.message;
+        return Buffer.from(response.data, 'binary').toString('base64');
     }
 }
 export default new ImageService();

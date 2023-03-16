@@ -5,7 +5,6 @@ import CardContent from '@mui/material/CardContent';
 import CssBaseline from '@mui/material/CssBaseline';
 import Container from '@mui/material/Container';
 import {createTheme, ThemeProvider} from '@mui/material/styles';
-
 import {useNavigate, useParams} from "react-router-dom";
 import ProductService from "../../services/ProductService";
 import {Product} from "../../model/Product";
@@ -32,13 +31,22 @@ export function UpdateProductPage() {
         const fileInput = useRef<HTMLInputElement | null>(null);
         const navigate = useNavigate();
 
-       /* const updateImage = () => {
-              const image: Image = {
-                  imageName,
-                  //productId
-              };
-              // ImageService.updateImage(image).then(response => navigate("/products"));
-          }*/
+        useEffect(() => {
+            ProductService.getProduct(Number(productId))
+                .then(response => setProduct(response))
+                .then(() => ImageService.downloadImage()
+                    .then(response => {
+                        setImage(response)
+                    }))
+        }, []);
+
+        const uploadImage = () => {
+            ImageService.uploadImage({
+                productId,file: fileInput?.current?.files && fileInput?.current?.files[0]
+            }).then(response => {
+                setImage(response);
+            })
+        };
 
         const updateProduct = () => {
             const product: Product = {
@@ -47,12 +55,9 @@ export function UpdateProductPage() {
                 countInStock,
                 description
             };
-            ProductService.updateProduct(Number(productId), product).then(response => navigate("/admin/products"));
+            ProductService.updateProduct(Number(productId), product)
+                .then(() => navigate("/admin/products"));
         }
-        useEffect(() => {
-            ProductService.getProduct(Number(productId))
-                .then(response => setProduct(response));
-        }, []);
 
         const deleteProduct = () => {
             ProductService.deleteProduct(Number(productId)).then(() => navigate("/admin/products"));
@@ -80,12 +85,19 @@ export function UpdateProductPage() {
                                             variant="contained"
                                             component="label"
                                         >
-                                            Upload Photo
+                                            Upload File
                                             <input
                                                 ref={fileInput}
                                                 type="file"
                                                 hidden
                                             />
+                                        </Button>
+                                        <Button
+                                            variant="contained"
+                                            component="label"
+                                            onClick={uploadImage}
+                                        >
+                                            Save
                                         </Button>
                                     </Segment>
 

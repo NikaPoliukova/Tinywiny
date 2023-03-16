@@ -44,7 +44,6 @@ export const UserPage = () => {
                             <TableHead>
                                 <TableRow>
                                     <TableCell align="left">UserName</TableCell>
-                                    <TableCell align="left">Password</TableCell>
                                     <TableCell align="left">Email</TableCell>
                                     <TableCell align="left">PhoneNumber</TableCell>
                                 </TableRow>
@@ -56,9 +55,6 @@ export const UserPage = () => {
                                     <TableCell component="th" scope="row">
                                         {user?.userName}
                                     </TableCell>
-                                    <TableCell component="th" scope="row">
-                                        {user?.password}
-                                    </TableCell>
                                     <TableCell align="right">
                                         {user?.email}
                                     </TableCell>
@@ -68,16 +64,15 @@ export const UserPage = () => {
                                 </TableRow>
                             </TableBody>
                         </Table>
+                        <Button
+                            basic color='brown'
+                            content='My orders'
+                            size="small"
+                            href={`/orders/${userId}`}
+                        >
+                        </Button>
                     </TableContainer>
                 </Card>
-                <Button
-                    basic color='brown'
-                    content='Update profile information'
-                    size="small"
-                    href={`/orders/${userId}`}
-                >
-
-                </Button>
                 <Footer/>
             </div>
         );

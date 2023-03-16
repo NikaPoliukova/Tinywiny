@@ -43,7 +43,7 @@ public class Order {
   @JoinColumn(name = "id_type")
   private DeliveryType deliveryType;
 
-  @ManyToOne(fetch = FetchType.LAZY)
+  @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
   @JoinColumn(name = "delivery_information_id", referencedColumnName = "delivery_information_id")
   private DeliveryInformation deliveryInformation;
 

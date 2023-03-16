@@ -6,7 +6,7 @@ create table orders
      status_order               VARCHAR DEFAULT 'NEW',
      payment_status             VARCHAR DEFAULT 'NOT',
      user_id                    BIGINT NOT NULL references users(user_id),
-     delivery_information_id    BIGINT NOT NULL references delivery_information(delivery_information_id),
+     delivery_information_id    BIGINT references delivery_information(delivery_information_id),
      id_type                    INT NOT NULL references delivery_type(id_type),
      sum                        INT NOT NULL
 );

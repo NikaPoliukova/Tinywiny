@@ -21,4 +21,5 @@ public class UtilClass {
      Optional<com.example.tinywiny.model.User> user =userRepository.findUserByUserName(principal.getUsername());
     return user.get().getUserId();
   }
+
 }

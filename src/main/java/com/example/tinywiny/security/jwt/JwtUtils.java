@@ -27,7 +27,7 @@ public class JwtUtils {
   private static String jwtRefreshSecret;
 
   public String generateAccessToken(User user) {
-    Date expirationDate = generateExpirationDate(15);
+    Date expirationDate = generateExpirationDate(50);
     return Jwts.builder()
         .setSubject(user.getUserName())
         .setExpiration(expirationDate)
@@ -42,7 +42,7 @@ public class JwtUtils {
     return Jwts.builder()
         .setSubject(login)
         .setExpiration(expirationDate)
-        .signWith(SignatureAlgorithm.HS512, jwtRefreshSecret)
+        .signWith(SignatureAlgorithm.HS512, secretKey)
         .compact();
   }
 
@@ -56,7 +56,7 @@ public class JwtUtils {
     } catch (ExpiredJwtException e) {
       claims = e.getClaims();
     }
-    Date expirationDate = generateExpirationDate(15);
+    Date expirationDate = generateExpirationDate(50);
     return Jwts.builder()
         .setClaims(claims)
         .setExpiration(expirationDate)

@@ -25,6 +25,15 @@ function BucketPage() {
     const navigate = useNavigate();
     const [sumProducts, setSumProducts] = useState(0);
 
+    useEffect(() => {
+        BucketService.findAllProductsInBucket()
+            .then(response => {
+                setProducts(response);
+                return products;
+            })
+        BucketService.getSumProductInBucket()
+            .then(sumProducts => setSumProducts(sumProducts.sum));
+    }, []);
 
     const updateCountProductInBucket = (id: number) => {
         const productInBucket: ProductInBucket = {
@@ -37,16 +46,6 @@ function BucketPage() {
     const deleteProduct = (id: number) => {
         BucketService.deleteProductInBucket(id).then(() => navigate(`/bucket/${bucketId}`))
     }
-
-
-    useEffect(() => {
-        BucketService.findAllProductsInBucket(Number(bucketId))
-            .then(response => {
-                setProducts(response);
-                return products;
-            })
-        BucketService.getSumProductInBucket(Number(bucketId)).then(sumProducts => setSumProducts(sumProducts.sum));
-    }, []);
 
     return (
         <div>

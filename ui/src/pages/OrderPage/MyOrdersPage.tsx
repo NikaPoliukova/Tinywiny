@@ -16,12 +16,13 @@ import OrderService from "../../services/OrderService";
 import {Link, useNavigate, useParams} from "react-router-dom";
 import {Footer} from "../component/Footer";
 import MyHeader from '../component/MyHeader';
+import {useSessionStore} from "../../store";
 
 
 export default function MyOrdersPage() {
     const [orders, setOrders] = useState<Array<Order>>([]);
     const {userId} = useParams();
-
+    const user = useSessionStore(state => state.user);
      useEffect(() => {
         OrderService.findOrdersByUserId(Number(userId))
             .then(response => setOrders(response));
@@ -30,7 +31,7 @@ export default function MyOrdersPage() {
         <div>
            <MyHeader />
             <Typography>
-                <h2>Orders User {userId}</h2>
+                <h2>Orders User {user?.userName}</h2>
             </Typography>
             <Card style={{width: 1000}}>
                 <TableContainer>

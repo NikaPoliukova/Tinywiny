@@ -34,7 +34,7 @@ public class DeliveryInformation {
   @JoinColumn(name = "user_id")
   private User user;
 
-  @OneToMany(mappedBy = "deliveryInformation", fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
+  @OneToMany(mappedBy = "deliveryInformation", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
   private List<Order> orders = new ArrayList<>();
 
 }

@@ -28,33 +28,41 @@ public class JwtFilter extends OncePerRequestFilter {
   private String secretKey;
   @Value("${security.refresh_secret}")
   private static String jwtRefreshSecret;
+
   @Override
   protected void doFilterInternal(HttpServletRequest servletRequest, HttpServletResponse servletResponse, FilterChain filterChain) throws ServletException, IOException {
-    String token = getAccessTokenFromRequest(servletRequest);
-    String refreshToken = getRefreshTokenFromRequest(servletRequest);
-    if (token != null && jwtUtils.validateAccessToken(token,secretKey)) {
-      setAuthentication(token);
-//    } else if (jwtUtils.isTokenExpired(token)&& jwtUtils.validateRefreshToken(refreshToken,secretKey)) {
-//      final String refreshedToken = jwtUtils.refreshAccessToken(token);
-//      setAuthentication(refreshedToken);
+    if (servletRequest.getServletPath().equals("/api/v1/login")
+        || servletRequest.getServletPath().equals("/api/v1/registration")) {
+      filterChain.doFilter(servletRequest, servletResponse);
+    } else {
+      String token = getAccessTokenFromRequest(servletRequest);
+      String refreshToken = getRefreshTokenFromRequest(servletRequest);
+      if (token != null && jwtUtils.validateAccessToken(token, secretKey)) {
+        setAuthentication(token);
+      } else if (jwtUtils.isTokenExpired(token) && jwtUtils.validateRefreshToken(refreshToken, secretKey)) {
+        final String refreshedToken = jwtUtils.refreshAccessToken(token);
+        setAuthentication(refreshedToken);
+      }
+      filterChain.doFilter(servletRequest, servletResponse);
     }
-    filterChain.doFilter(servletRequest, servletResponse);
   }
 
   private String getAccessTokenFromRequest(HttpServletRequest request) {
-      Cookie cookie = WebUtils.getCookie(request, "JWT");
-      if (cookie != null) {
-        return cookie.getValue();
-      }
-      return  null;
+    Cookie cookie = WebUtils.getCookie(request, "JWT");
+    if (cookie != null) {
+      return cookie.getValue();
+    }
+    return null;
   }
+
   private String getRefreshTokenFromRequest(HttpServletRequest request) {
     Cookie cookie = WebUtils.getCookie(request, "JWT-REFRESH");
     if (cookie != null) {
       return cookie.getValue();
     }
-    return  null;
+    return null;
   }
+
   private void setAuthentication(String token) {
     String userName = jwtUtils.getLoginFromAccessToken(token);
     UserDetails customUserDetails = userDetailsService.loadUserByUsername(userName);

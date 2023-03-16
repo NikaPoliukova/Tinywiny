@@ -31,7 +31,8 @@ export function UpdateProductPage() {
         const [image, setImage] = useState('');
         const fileInput = useRef<HTMLInputElement | null>(null);
         const navigate = useNavigate();
-        /*  const updateImage = () => {
+
+       /* const updateImage = () => {
               const image: Image = {
                   imageName,
                   //productId

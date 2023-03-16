@@ -3,6 +3,7 @@ package com.example.tinywiny.security.filter;
 import com.example.tinywiny.security.UserDetailsServiceImpl;
 import com.example.tinywiny.security.jwt.JwtUtils;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -23,16 +24,19 @@ public class JwtFilter extends OncePerRequestFilter {
 
   private final JwtUtils jwtUtils;
   private final UserDetailsServiceImpl userDetailsService;
-
+  @Value("${security.secretKey}")
+  private String secretKey;
+  @Value("${security.refresh_secret}")
+  private static String jwtRefreshSecret;
   @Override
   protected void doFilterInternal(HttpServletRequest servletRequest, HttpServletResponse servletResponse, FilterChain filterChain) throws ServletException, IOException {
     String token = getAccessTokenFromRequest(servletRequest);
     String refreshToken = getRefreshTokenFromRequest(servletRequest);
-    if (token != null && jwtUtils.validateAccessToken(token)) {
+    if (token != null && jwtUtils.validateAccessToken(token,secretKey)) {
       setAuthentication(token);
-    } else if (jwtUtils.isTokenExpired(token)&& jwtUtils.validateRefreshToken(refreshToken)) {
-      final String refreshedToken = jwtUtils.generateRefreshedToken(token);
-      setAuthentication(refreshedToken);
+//    } else if (jwtUtils.isTokenExpired(token)&& jwtUtils.validateRefreshToken(refreshToken,secretKey)) {
+//      final String refreshedToken = jwtUtils.refreshAccessToken(token);
+//      setAuthentication(refreshedToken);
     }
     filterChain.doFilter(servletRequest, servletResponse);
   }

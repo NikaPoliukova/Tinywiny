@@ -29,7 +29,7 @@ security:
   secretKey: "secretKeyNika"
   refresh_secret: "secretRefresh"
   allowed-origin: "http://localhost:3000"
-  session-duration-minutes: 86400
+
 
 jwt:
   access_token_name: "JWT"

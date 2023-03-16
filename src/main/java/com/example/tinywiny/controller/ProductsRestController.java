@@ -42,6 +42,16 @@ public class ProductsRestController {
     final InputStream in = getClass().getResourceAsStream("/download.png");
     return ResponseEntity.ok(new InputStreamResource(in));
   }
+  @GetMapping("/products/{productId}")
+  public ProductDto getProduct(@PathVariable Long productId) throws URISyntaxException {
+    Product product = productService.findProductByProductId(productId);
+    URI imageUrl = null;
+    Image image = imageService.findImageByProductId(productId);
+    if (image != null) {
+      imageUrl = imageService.getImagePath(image.getImageName()); //как ее передать на UI?
+    }
+    return converter.toProductDto(product);
+  }
 
   @PostMapping(value = "/admin/product/create", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE,
       MediaType.APPLICATION_OCTET_STREAM_VALUE},
@@ -64,16 +74,7 @@ public class ProductsRestController {
     return ResponseEntity.ok(new InputStreamResource(file.getInputStream()));
   }
 
-  @GetMapping("/products/{productId}")
-  public ProductDto getProduct(@PathVariable Long productId) throws URISyntaxException {
-    Product product = productService.findProductByProductId(productId);
-    URI imageUrl = null;
-    Image image = imageService.findImageByProductId(productId);
-    if (image != null) {
-      imageUrl = imageService.getImagePath(image.getImageName()); //как ее передать на UI?
-    }
-    return converter.toProductDto(product);
-  }
+
 
   @PutMapping("/admin/products/{productId}")
   public void updateProduct(@PathVariable Long productId, @RequestBody ProductDto productDto) {

@@ -27,7 +27,7 @@ public class JwtUtils {
   private static String jwtRefreshSecret;
 
   public String generateAccessToken(User user) {
-    Date expirationDate = generateExpirationDate();
+    Date expirationDate = generateExpirationDate(15);
     return Jwts.builder()
         .setSubject(user.getUserName())
         .setExpiration(expirationDate)
@@ -38,7 +38,7 @@ public class JwtUtils {
   }
 
   public String generateRefreshToken(String login) {
-    Date expirationDate = generateExpirationDate();
+    Date expirationDate = generateExpirationDate(5000);
     return Jwts.builder()
         .setSubject(login)
         .setExpiration(expirationDate)
@@ -46,7 +46,7 @@ public class JwtUtils {
         .compact();
   }
 
-  public String generateRefreshedToken(String expiredToken) {
+  public String refreshAccessToken(String expiredToken) {
     Claims claims;
     try {
       claims = Jwts.parser()
@@ -56,7 +56,7 @@ public class JwtUtils {
     } catch (ExpiredJwtException e) {
       claims = e.getClaims();
     }
-    Date expirationDate = generateExpirationDate();
+    Date expirationDate = generateExpirationDate(15);
     return Jwts.builder()
         .setClaims(claims)
         .setExpiration(expirationDate)
@@ -64,9 +64,9 @@ public class JwtUtils {
         .compact();
   }
 
-  public boolean validateToken(String token) {
+  public boolean validateToken(String token, String secret) {
     try {
-      Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token);
+      Jwts.parser().setSigningKey(secret).parseClaimsJws(token);
       return true;
     } catch (ExpiredJwtException expEx) {
       log.info("Token expired");
@@ -82,17 +82,13 @@ public class JwtUtils {
     return false;
   }
 
-  private boolean validateToken(String token, String secret) {
-    Jwts.parser().setSigningKey(secret).parseClaimsJws(token);
-    return true;
+
+  public boolean validateAccessToken(String accessToken,String secret) {
+    return validateToken(accessToken,secret);
   }
 
-  public boolean validateAccessToken(String accessToken) {
-    return validateToken(accessToken);
-  }
-
-  public boolean validateRefreshToken(String refreshToken) {
-    return validateToken(refreshToken);
+  public boolean validateRefreshToken(String refreshToken,String secret) {
+    return validateToken(refreshToken,secret);
   }
 
   private String getLoginFromToken(String token, String secret) {
@@ -119,13 +115,13 @@ public class JwtUtils {
     return claims.getExpiration();
   }
 
-  private Date generateExpirationDate() {
+  private Date generateExpirationDate(int min) {
     LocalDateTime now = LocalDateTime.now();
-    Instant accessExpirationInstant = now.plusMinutes(15).atZone(ZoneId.systemDefault()).toInstant();
+    Instant accessExpirationInstant = now.plusMinutes(min).atZone(ZoneId.systemDefault()).toInstant();
     return Date.from(accessExpirationInstant);
   }
 
   public String getLoginFromRefreshToken(String token) {
-    return getLoginFromToken(token, jwtRefreshSecret);
+    return getLoginFromToken(token, secretKey);
   }
 }

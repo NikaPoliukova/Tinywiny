@@ -143,6 +143,7 @@ export default function CreateOrderPage() {
                 <div>Тип доставки</div>
                 <Form.Group>
                     <select value={deliveryTypeId} onChange={event => setDeliveryType(Number(event.target.value))}>
+                        <option >select delivery type</option>
                         <option value={1}>Белпочта</option>
                         <option value={2}>SDEK</option>
                     </select>

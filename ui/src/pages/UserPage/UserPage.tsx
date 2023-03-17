@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {User} from "../../model/User";
 import UserService from "../../services/UserService";
-import {Card, Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@mui/material";
+import {Card, Container, Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@mui/material";
 import {useParams} from "react-router-dom";
 import {Footer} from "../component/Footer";
 import {Button, Header, Icon} from "semantic-ui-react";
@@ -18,8 +18,9 @@ export const UserPage = () => {
                 .then(response => setUser(response));
         }, []);
         return (
-            <div className="card">
+         <div>
                 <MyHeader/>
+        <Container>
                 <div>
                     <Header as='h2' icon textAlign='center'>
                         <Icon name='user' circular size='big'/>
@@ -74,7 +75,8 @@ export const UserPage = () => {
                     </TableContainer>
                 </Card>
                 <Footer/>
-            </div>
+            </Container>
+</div>
         );
     }
     return (

@@ -11,11 +11,7 @@ import lombok.Setter;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ProductDto {
-  Long productId;
-  String productName;
-  int price;
-  String description;
-  int countInStock;
-  int idType;
+public class StatusOrder {
+  Long orderId;
+  String statusOrder;
 }

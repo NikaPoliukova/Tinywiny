@@ -4,6 +4,7 @@ import com.example.tinywiny.converter.DeliveryInformationConverter;
 import com.example.tinywiny.converter.OrderConverter;
 import com.example.tinywiny.converter.UserConverter;
 import com.example.tinywiny.dto.OrderDto;
+import com.example.tinywiny.dto.StatusOrder;
 import com.example.tinywiny.dto.UserDto;
 import com.example.tinywiny.model.DeliveryInformation;
 import com.example.tinywiny.model.Order;
@@ -94,10 +95,10 @@ public class OrderService {
     return orderRepository.getOrderStatus(orderId);
   }
 
-  public void updateOrderStatus(String status, Long orderId) {
-    Order order = findOrderByOrderId(orderId);
+  public void updateOrderStatus(StatusOrder status) {
+    Order order = findOrderByOrderId(status.getOrderId());
     if (order != null && !status.equals(order.getStatusOrder())) {
-      order.setStatusOrder(status);
+      order.setStatusOrder(status.getStatusOrder());
       orderRepository.save(order);
     }
   }

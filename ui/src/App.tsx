@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import {Route, Routes} from 'react-router-dom';
 import UsersPage from './pages/UsersPage/UsersPage';
-import HomePage from "./pages/HomePage/HomePage";
+
 import {Registry} from "./pages/RegistrationPage/RegistryPage";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ReviewsPage from "./pages/AdminPage/ReviewsPage";
@@ -27,6 +27,7 @@ import PaymentPage from 'pages/PaymentPage/PaymentPage';
 import {createTheme, ThemeProvider} from '@mui/material/styles';
 import { Theme } from '@mui/material/styles/createTheme';
 import Products from "./pages/ProductsPage/ProductsPage";
+import Bucket from "./pages/HomePage/HomePage";
 
 
 const theme: Theme = createTheme();
@@ -42,7 +43,7 @@ function App() {
     return (
         <ThemeProvider theme={theme}>
         <Routes>
-            <Route path={'/'} element={<HomePage/>}/>
+            <Route path={'/'} element={<Bucket/>}/>
             <Route path={'/login'} element={<SignIn/>}/>
             <Route path={'/admin/users'} element={<UsersPage/>}/>
             <Route path={'/users/:userId'} element={<UserPage/>}/>

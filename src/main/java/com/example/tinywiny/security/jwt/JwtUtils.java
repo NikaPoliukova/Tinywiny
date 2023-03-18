@@ -49,18 +49,12 @@ public class JwtUtils {
   public String refreshAccessToken(String expiredToken) {
     Claims claims;
     try {
-      claims = Jwts.parser()
-          .setSigningKey(secretKey)
-          .parseClaimsJws(expiredToken)
-          .getBody();
+      claims = Jwts.parser().setSigningKey(secretKey).parseClaimsJws(expiredToken).getBody();
     } catch (ExpiredJwtException e) {
       claims = e.getClaims();
     }
     Date expirationDate = generateExpirationDate(50);
-    return Jwts.builder()
-        .setClaims(claims)
-        .setExpiration(expirationDate)
-        .signWith(SignatureAlgorithm.HS512, secretKey)
+    return Jwts.builder().setClaims(claims).setExpiration(expirationDate).signWith(SignatureAlgorithm.HS512, secretKey)
         .compact();
   }
 
@@ -83,12 +77,12 @@ public class JwtUtils {
   }
 
 
-  public boolean validateAccessToken(String accessToken,String secret) {
-    return validateToken(accessToken,secret);
+  public boolean validateAccessToken(String accessToken, String secret) {
+    return validateToken(accessToken, secret);
   }
 
-  public boolean validateRefreshToken(String refreshToken,String secret) {
-    return validateToken(refreshToken,secret);
+  public boolean validateRefreshToken(String refreshToken, String secret) {
+    return validateToken(refreshToken, secret);
   }
 
   private String getLoginFromToken(String token, String secret) {
@@ -105,7 +99,7 @@ public class JwtUtils {
     return expiration.before(new Date());
   }
 
-  public  Date getExpirationDateFromToken(String token) {
+  public Date getExpirationDateFromToken(String token) {
     Claims claims;
     try {
       claims = Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody();
@@ -119,6 +113,9 @@ public class JwtUtils {
     LocalDateTime now = LocalDateTime.now();
     Instant accessExpirationInstant = now.plusMinutes(min).atZone(ZoneId.systemDefault()).toInstant();
     return Date.from(accessExpirationInstant);
+  }
+  public Claims getTokenClaims(final String token) {
+    return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody();
   }
 
   public String getLoginFromRefreshToken(String token) {

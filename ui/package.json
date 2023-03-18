@@ -24,6 +24,7 @@
     "semantic-ui-css": "^2.5.0",
     "semantic-ui-react": "^2.1.4",
     "styled-components": "^5.3.8",
+    "ts-react-google-login-component": "^1.1.9",
     "typescript": "^4.9.5",
     "web-vitals": "^2.1.4"
   },
@@ -60,6 +61,7 @@
     "framer-motion": "^10.2.4",
     "react-grid-gallery": "^1.0.0",
     "react-hook-form": "^7.43.5",
+    "react-icons": "^4.8.0",
     "react-router-dom": "^6.8.1",
     "zustand": "^4.3.3"
   }

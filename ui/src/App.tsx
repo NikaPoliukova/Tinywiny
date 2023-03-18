@@ -25,9 +25,11 @@ import SignIn from "./pages/LoginPage/LoginPage";
 import {useSessionStore} from "./store";
 import PaymentPage from 'pages/PaymentPage/PaymentPage';
 import {createTheme, ThemeProvider} from '@mui/material/styles';
-import { Theme } from '@mui/material/styles/createTheme';
+import {Theme} from '@mui/material/styles/createTheme';
 import Products from "./pages/ProductsPage/ProductsPage";
-import Bucket from "./pages/HomePage/HomePage";
+
+import MyPagination from "./pages/HomePage/HomePage";
+import ReviewUpdate from "./pages/HomePage/HomePage";
 
 
 const theme: Theme = createTheme();
@@ -43,7 +45,7 @@ function App() {
     return (
         <ThemeProvider theme={theme}>
         <Routes>
-            <Route path={'/'} element={<Bucket/>}/>
+            <Route path={'/'} element={<ReviewUpdate/>}/>
             <Route path={'/login'} element={<SignIn/>}/>
             <Route path={'/admin/users'} element={<UsersPage/>}/>
             <Route path={'/users/:userId'} element={<UserPage/>}/>

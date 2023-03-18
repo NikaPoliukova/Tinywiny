@@ -52,16 +52,16 @@ public class ProductsRestController {
       MediaType.APPLICATION_OCTET_STREAM_VALUE},
       produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
   public ResponseEntity uploadNewProduct(@RequestPart("productName") final String productName,
-                                         @RequestPart("price") final int price,
-                                         @RequestPart("countInStock") final int countInStock,
+                                         @RequestPart("price") final String price,
+                                         @RequestPart("countInStock") final String countInStock,
                                          @RequestPart("description") final String description,
-                                         @RequestPart("idType") final int idType,
+                                         @RequestPart("idType") final String idType,
                                          @RequestPart("file") final MultipartFile file) throws IOException {
     Product product = new Product();
-    TypeProduct typeProduct = typeProductService.getType(idType);
+    TypeProduct typeProduct = typeProductService.getType(Integer.parseInt(idType));
     product.setProductName(productName);
-    product.setPrice(price);
-    product.setCountInStock(countInStock);
+    product.setPrice(Integer.parseInt(price));
+    product.setCountInStock(Integer.parseInt(countInStock));
     product.setDescription(description);
     product.setTypeProduct(typeProduct);
     productService.save(product);

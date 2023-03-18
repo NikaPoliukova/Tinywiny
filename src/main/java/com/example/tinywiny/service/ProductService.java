@@ -31,9 +31,9 @@ public class ProductService {
   @Transactional
   @Modifying
   public Product save(Product product) {
-    if (productRepository.findProductByProductName(product.getProductName()).isPresent()) {
-      throw new RuntimeException("User already exists");
-    }
+   /* if (productRepository.findProductByProductName(product.getProductName()).isPresent()) {
+      throw new RuntimeException("Product name already exists");
+    }*/
     return productRepository.save(product);
   }
 

@@ -8,6 +8,12 @@ class ReviewService {
             {withCredentials: true});
         return response.data;
     }
+    async getReviewsByPage(currentPage : number, pageSize : number): Promise<Array<Review>> {
+        const params ={page: currentPage,size: pageSize}
+        const response = await axios.get<Array<Review>>('http://localhost:8080/api/v1/reviews',
+            {params: params, withCredentials: true});
+        return response.data;
+    }
 
     async saveReview(textReview : string) {
         await axios.post('http://localhost:8080/api/v1/reviews/create', textReview,

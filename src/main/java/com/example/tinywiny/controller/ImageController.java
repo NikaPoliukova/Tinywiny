@@ -36,8 +36,8 @@ public class ImageController {
       MediaType.APPLICATION_OCTET_STREAM_VALUE},
       produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
   public void uploadFile(@RequestPart("file") final MultipartFile file,
-                         @RequestPart("productId") final Long productId) throws IOException {
-    imageService.addImage(productId, file);
+                         @RequestPart("productId") final String productId) throws IOException {
+    imageService.addImage(Long.parseLong(productId), file);
 
   }
 

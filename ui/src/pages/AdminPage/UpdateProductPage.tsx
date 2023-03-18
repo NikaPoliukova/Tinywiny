@@ -23,10 +23,9 @@ export function UpdateProductPage() {
     const Product = () => {
         const {productId} = useParams();
         const [product, setProduct] = useState<Product>();
-        const [productName, setProductName] = useState('');
         const [price, setPrice] = useState(0);
         const [countInStock, setCountInStock] = useState(0);
-        const [description, setDescription] = useState('');
+        const [description, setDescription] = useState<string>();
         const [image, setImage] = useState('');
         const fileInput = useRef<HTMLInputElement | null>(null);
         const navigate = useNavigate();
@@ -49,13 +48,13 @@ export function UpdateProductPage() {
         };
 
         const updateProduct = () => {
-            const product: Product = {
-                productName,
+            const productUpdate: Product = {
+                productName: product?.productName,
                 price,
                 countInStock,
                 description
             };
-            ProductService.updateProduct(Number(productId), product)
+            ProductService.updateProduct(Number(productId), productUpdate)
                 .then(() => navigate("/admin/products"));
         }
 
@@ -125,9 +124,7 @@ export function UpdateProductPage() {
                                     <Table.Row>
                                         <Table.Cell width={2}>Product name:</Table.Cell>
                                         <Table.Cell>{product?.productName}</Table.Cell>
-                                        <Form.Input fluid placeholder='Write new product name'
-                                                    value={productName}
-                                                    onChange={e => setProductName(e.target.value)}/>
+
                                     </Table.Row>
                                     <Table.Row>
                                         <Table.Cell width={2}>Price, BUN:</Table.Cell>

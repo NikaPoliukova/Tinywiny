@@ -50,10 +50,7 @@ public class ProductService {
   }
 
   private Product prepareProductForUpdate(ProductDto productDto, Product product) {
-    if (productDto.getProductName() != null) {
-      product.setProductName(productDto.getProductName());
-    }
-    if (productDto.getPrice() != 0) {
+     if (productDto.getPrice() != 0) {
       product.setPrice(productDto.getPrice());
     }
     if (productDto.getDescription() != null) {

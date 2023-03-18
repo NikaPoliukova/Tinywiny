@@ -25,7 +25,8 @@ public class AwsService {
   @Transactional
   @Modifying
   public void uploadFile(InputStream stream, String fileName) {
-    PutObjectRequest request = new PutObjectRequest("imgbucket", fileName, stream, new ObjectMetadata());
+    ObjectMetadata metadata = new ObjectMetadata();
+    PutObjectRequest request = new PutObjectRequest("imgbucket", fileName, stream, metadata);
     client.putObject(request);
   }
 

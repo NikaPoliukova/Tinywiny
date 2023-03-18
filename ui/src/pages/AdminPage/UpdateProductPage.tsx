@@ -41,7 +41,7 @@ export function UpdateProductPage() {
 
         const uploadImage = () => {
             ImageService.uploadImage({
-                productId,file: fileInput?.current?.files && fileInput?.current?.files[0]
+                productId, file: fileInput?.current?.files && fileInput?.current?.files[0]
             }).then(response => {
                 setImage(response);
             })
@@ -111,7 +111,8 @@ export function UpdateProductPage() {
                             </Col>
                             <Form.Button
                                 onClick={deleteProduct}
-                            >Delete product</Form.Button>
+                            >Delete product
+                            </Form.Button>
                             <Divider horizontal>
                                 <Header as='h4'>
                                     <Icon name='setting'/>

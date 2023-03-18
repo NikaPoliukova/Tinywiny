@@ -1,10 +1,12 @@
 package com.example.tinywiny.service;
 
-import com.example.tinywiny.converter.ProductConverter;
-import com.example.tinywiny.converter.TypeProductConverter;
 import com.example.tinywiny.dto.ProductDto;
 import com.example.tinywiny.dto.TypeProduct;
 import com.example.tinywiny.model.Product;
+import com.example.tinywiny.model.ProductInBucket;
+import com.example.tinywiny.model.ProductInOrder;
+import com.example.tinywiny.repository.ProductInBucketRepository;
+import com.example.tinywiny.repository.ProductInOrderRepository;
 import com.example.tinywiny.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -23,17 +25,14 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class ProductService {
   private final ProductRepository productRepository;
-  private final ProductConverter converter;
+  private final ProductInBucketRepository productInBucketRepository;
+  private final ProductInOrderRepository productInOrderRepository;
   private final TypeProductService typeProductService;
-  private final TypeProductConverter typeProductConverter;
 
 
   @Transactional
   @Modifying
   public Product save(Product product) {
-   /* if (productRepository.findProductByProductName(product.getProductName()).isPresent()) {
-      throw new RuntimeException("Product name already exists");
-    }*/
     return productRepository.save(product);
   }
 
@@ -50,7 +49,7 @@ public class ProductService {
   }
 
   private Product prepareProductForUpdate(ProductDto productDto, Product product) {
-     if (productDto.getPrice() != 0) {
+    if (productDto.getPrice() != 0) {
       product.setPrice(productDto.getPrice());
     }
     if (productDto.getDescription() != null) {
@@ -96,15 +95,14 @@ public class ProductService {
     }
     return product.get();
   }
-/*
-  public int findProductPrice(Long productId) {
-    return productRepository.findProductPrice(productId);
-  }*/
 
   public void deleteProduct(Long productId) {
-    productRepository.deleteProductByProductId(productId);
+    ProductInBucket productInBucket = productInBucketRepository.findProductInBucketById(productId);
+    ProductInOrder productInOrder = productInOrderRepository.
+        findProductInOrderByProduct(findProductByProductId(productId));
+    if (productInBucket == null && productInOrder == null)
+      productRepository.deleteProductByProductId(productId);
   }
-
 
   public List<Product> findAllProducts() {
     return productRepository.findAll();

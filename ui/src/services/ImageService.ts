@@ -2,13 +2,19 @@ import axios from "axios";
 import {Buffer} from "buffer";
 
 class ImageService{
-    async downloadImage(): Promise<any> {
+    async getImage(): Promise<any> {
         const response = await axios.get<any>('http://localhost:8080/api/v1/file', {
             withCredentials: true,
             responseType: 'arraybuffer'
         });
         return Buffer.from(response.data, 'binary').toString('base64');
     }
+    async getProductImage(productId : number):Promise<string> {
+        const response = await axios.get<any>('http://localhost:8080/api/v1/file/'+productId, {
+            withCredentials: true});
+        return Buffer.from(response.data, 'binary').toString('base64');
+    }
+
     deleteImage = async (productId : number) => {
         const response = await axios.delete(`http://localhost:8080/api/v1/admin/image/` +productId, {
             withCredentials: true

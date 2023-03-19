@@ -26,14 +26,15 @@ export function UpdateProductPage() {
         const [price, setPrice] = useState(0);
         const [countInStock, setCountInStock] = useState(0);
         const [description, setDescription] = useState<string>();
-        const [image, setImage] = useState('');
+        const [image, setImage] = useState<any>();
+        const [imageUri, setImageURI] = useState<string>();
         const fileInput = useRef<HTMLInputElement | null>(null);
         const navigate = useNavigate();
 
         useEffect(() => {
             ProductService.getProduct(Number(productId))
                 .then(response => setProduct(response))
-                .then(() => ImageService.downloadImage()
+                .then(() => ImageService.getProductImage(Number(productId))
                     .then(response => {
                         setImage(response)
                     }))

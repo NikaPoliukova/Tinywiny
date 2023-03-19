@@ -60,6 +60,7 @@ const deleteReview = () =>{
                                         fullWidth
                                         variant="contained"
                                         sx={{mt: 1, mb: 1}}
+                                        onClick={deleteReview}
                                     >
                                         Delete
                                     </Button>

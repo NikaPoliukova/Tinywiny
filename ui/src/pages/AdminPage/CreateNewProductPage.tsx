@@ -1,5 +1,5 @@
 import React, {useEffect, useRef, useState} from 'react'
-import {Form, Segment} from 'semantic-ui-react'
+import {Form, Header, Segment} from 'semantic-ui-react'
 import {Button, Container} from "@mui/material";
 import MyHeader from 'pages/component/MyHeader';
 import {TypeProduct} from "../../model/TypeProduct";
@@ -18,10 +18,11 @@ export function CreateProduct() {
     const fileInput = useRef<HTMLInputElement | null>(null);
     const [types, setTypes] = useState<Array<TypeProduct>>([]);
     const navigate = useNavigate();
+
     useEffect(() => {
         TypeProductService.findAllTypes()
             .then(response => setTypes(response))
-            .then(() => ImageService.downloadImage()
+           .then(() => ImageService.getImage()
                 .then(response => {
                     setImage(response)
                 }))
@@ -46,6 +47,9 @@ export function CreateProduct() {
             <MyHeader/>
             <Container>
                 <Segment placeholder>
+                    <Header icon>
+                        <img src={`data:image/png;base64,${image}`}/>
+                    </Header>
                     <Button variant="contained"
                             component="label">
                         Add photo

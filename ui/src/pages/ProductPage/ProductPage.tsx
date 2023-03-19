@@ -2,7 +2,6 @@ import * as React from 'react';
 import {useEffect, useState} from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
 import CssBaseline from '@mui/material/CssBaseline';
 import Container from '@mui/material/Container';
 import {createTheme, ThemeProvider} from '@mui/material/styles';
@@ -16,7 +15,8 @@ import {Col, Row} from "react-bootstrap";
 
 import {Divider, Header, Icon, Table} from 'semantic-ui-react'
 import MyHeader from 'pages/component/MyHeader';
-import {ProductInBucket} from "../../model/ProductInBucket";
+import BucketService from "../../services/BucketService";
+import ImageService from "../../services/ImageService";
 
 
 const theme = createTheme();
@@ -25,22 +25,24 @@ export function ProductPage() {
     const Product = () => {
         const {productId} = useParams();
         const [product, setProduct] = useState<Product>();
-       //const [user];
-        //const [bucket]
-
-        const navigate = useNavigate();
-     /*  const addProductInBucket = () => {
-            const product: ProductInBucket = {
-                productId,
-                bucketId
-            };
-            ProductService.addProductInBucket(product).then(response => navigate("/products/toys"));
-        }*/
-
+        const [image, setImage] = useState('');
+        console.log(image);
         useEffect(() => {
             ProductService.getProduct(Number(productId))
-                .then(response => setProduct(response));
+                .then(response => setProduct(response))
+
+                .then(() => ImageService.getProductImage(Number(productId))
+                    .then(response => setImage(response)
+
+                    ))
         }, []);
+
+
+        const navigate = useNavigate();
+        const addProductInBucket = () => {
+            BucketService.addProductInBucket(Number(productId)).then(response => navigate("/products/type/toys"));
+        }
+
         return (
             <ThemeProvider theme={theme}>
                 <CssBaseline/>
@@ -51,13 +53,9 @@ export function ProductPage() {
                             <Col md={4}>
                                 <Card sx={{height: '100%', display: 'flex', flexDirection: 'column'}}
                                 >
-                                    <CardMedia
-                                        component="img"
-                                        sx={{
-                                            pt: '1%',
-                                        }}
-                                        image="https://source.unsplash.com/random"
-                                    />
+                                    <Header icon>
+                                        <img src={`data:image/png;base64,${image}`}/>
+                                    </Header>
                                     <CardContent sx={{flexGrow: 1}}>
                                     </CardContent>
                                 </Card>
@@ -94,7 +92,7 @@ export function ProductPage() {
                                 type="submit"
                                 variant="contained"
                                 sx={{mt: 1, mb: 1}}
-                               // onClick={addProductInBucket}
+                                onClick={addProductInBucket}
                             >
                                 Add in bucket
                             </Button>

@@ -49,7 +49,6 @@ public class ImageController {
   public void uploadFile(@RequestPart("file") final MultipartFile file,
                          @RequestPart("productId") final String productId) throws IOException {
     imageService.addImage(Long.parseLong(productId), file);
-
   }
 
   @DeleteMapping("/admin/image/{productId}")

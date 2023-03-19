@@ -6,6 +6,9 @@ import {useNavigate} from "react-router-dom";
 import {Col, Row} from "react-bootstrap";
 import Card from "@mui/material/Card";
 import MyHeader from 'pages/component/MyHeader';
+import {Footer} from "../component/Footer";
+import Pagination from '@mui/material/Pagination';
+import Stack from '@mui/material/Stack';
 
 
 function ReviewForUsers() {
@@ -43,24 +46,30 @@ function ReviewForUsers() {
                                     </Comment.Content>
                                 </Comment>
                             ))}
-                            <Form>
-                                <Form.TextArea label='Add review' placeholder='Write review...'
-                                               value={textReview}
-                                               onChange={e => setText(e.target.value)}/>
-                                <Button
-                                    type="submit"
-                                    variant="contained"
-                                    sx={{mt: 3, mb: 2}}
-                                    onClick={addReview}
-                                >
-                                    Add
-                                </Button>
-                            </Form>
+                            <Stack spacing={2}>
+                                <Pagination count={3} />
+                            </Stack>
+
                         </Comment.Group>
                     </Card>
                 </Col>
             </Row>
+            <Form>
+                <Form.TextArea label='Add review' placeholder='Write review...'
+                               value={textReview}
+                               onChange={e => setText(e.target.value)}/>
+                <Button
+                    type="submit"
+                    variant="contained"
+                    sx={{mt: 3, mb: 2}}
+                    onClick={addReview}
+                >
+                    Add
+                </Button>
+            </Form>
+            <Footer />
         </Container>
+
     )
 };
 

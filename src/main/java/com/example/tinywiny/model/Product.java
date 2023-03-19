@@ -1,6 +1,7 @@
 package com.example.tinywiny.model;
 
 import com.example.tinywiny.dto.TypeProduct;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -12,6 +13,7 @@ import java.util.List;
 @Entity
 @NoArgsConstructor
 @Data
+@AllArgsConstructor
 @Table(name = "products")
 public class Product {
   @Id

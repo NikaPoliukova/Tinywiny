@@ -56,8 +56,12 @@ public class AuthController {
   @GetMapping("/logout")
   public void logout(HttpServletRequest request, HttpServletResponse response) {
     final Cookie cookie = new Cookie(TOKEN_NAME, "");
+    final Cookie cookieRef = new Cookie(REFRESH_TOKEN_NAME, "");
     cookie.setMaxAge(0);
+    cookieRef.setMaxAge(0);
+
     response.addCookie(cookie);
+     response.addCookie(cookieRef);
     request.getSession().invalidate();
   }
 }

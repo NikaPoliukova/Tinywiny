@@ -34,8 +34,6 @@ public class JwtFilter extends OncePerRequestFilter {
   private final UserDetailsServiceImpl userDetailsService;
   @Value("${security.secretKey}")
   private String secretKey;
-  @Value("${security.refresh_secret}")
-  private static String jwtRefreshSecret;
 
   @Override
   protected void doFilterInternal(HttpServletRequest servletRequest, HttpServletResponse servletResponse,

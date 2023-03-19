@@ -34,7 +34,7 @@ public class ApplicationSecurityConfig {
         .authorizeHttpRequests(requests -> requests
             .antMatchers("/", "/error", "/api/v1/login", "/api/v1/registration",
                 "/api/v1/sessions", "/api/v1/products/**", "/api/v1/reviews").permitAll()
-            .antMatchers("/oauth2/**").permitAll()
+            .antMatchers("/oauth2/**","/oauth/**").permitAll()
             .antMatchers("/swagger-ui/**", "/v3/api-docs/**", "**/swagger-resources/**",
                 "/swagger-ui.html", "/webjars/**").permitAll()
             .antMatchers("/api/v1/admin/**").hasRole("ADMIN")
@@ -44,7 +44,6 @@ public class ApplicationSecurityConfig {
         .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
         .and()
         .oauth2Login()
-
         .successHandler(successAuthHandler)
         .and()
         .addFilterBefore(jwtFilter, OAuth2LoginAuthenticationFilter.class)

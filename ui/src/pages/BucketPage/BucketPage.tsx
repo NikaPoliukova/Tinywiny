@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Card, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography} from "@mui/material";
+import {Card, Container, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography} from "@mui/material";
 import {Button, Icon, Table} from 'semantic-ui-react'
 import BucketService from "../../services/BucketService";
 import {useNavigate, useParams} from "react-router-dom";
@@ -74,6 +74,7 @@ function BucketPage() {
     return (
         <div>
             <MyHeader/>
+            <Container>
             <Typography component="h1" variant="h5">
                 <React.Fragment><Icon name='bitbucket' size='big'/>Bucket</React.Fragment>
             </Typography>
@@ -131,6 +132,7 @@ function BucketPage() {
                 size="small"
                 href={`/orders/create`}
             ></Button>
+            </Container>
             <Footer/>
         </div>
     );

@@ -15,8 +15,7 @@ public class SuccessAuthHandler extends SimpleUrlAuthenticationSuccessHandler {
   private static final String redirectUrl = "http://localhost:3000";
 
   @Override
-  public void onAuthenticationSuccess(HttpServletRequest request,
-                                      HttpServletResponse response,
+  public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
                                       Authentication authentication) throws IOException {
     getRedirectStrategy().sendRedirect(request, response, redirectUrl);
   }

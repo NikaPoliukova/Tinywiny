@@ -17,6 +17,7 @@ import React from "react";
 import AuthorizationService from "../../services/AuthorizationService";
 import {Link, useNavigate} from "react-router-dom";
 import HeaderForNoAuthorized from "pages/component/HeaderForNoAuthorized";
+import {GoogleLogin} from "@react-oauth/google";
 
 
 const theme = createTheme();
@@ -29,19 +30,15 @@ const SignIn = () => {
     const [alertType, setAlertType] = React.useState(infoAlertType);
     const [alertText, setAlertText] = React.useState('Input credentials');
     const [alertTitle, setAlertTitle] = React.useState('Info');
-
     const [userName, setUserName] = React.useState("");
     const [password, setPassword] = React.useState("");
-
     const navigate = useNavigate();
     const handleLoginChange = (event: { target: { value: React.SetStateAction<string>; }; }) => {
         setUserName(event.target.value);
     }
-
     const handlePasswordChange = (event: { target: { value: React.SetStateAction<string>; }; }) => {
         setPassword(event.target.value);
     }
-
     const handleSubmit = async (event: { preventDefault: () => void; }) => {
         event.preventDefault();
         const authorizationStatus = await AuthorizationService.login(userName, password);
@@ -64,6 +61,7 @@ const SignIn = () => {
             return;
         }
     };
+
 
     return (
 
@@ -130,6 +128,7 @@ const SignIn = () => {
                             sx={{mt: 1, mb: 1}}
                         >
                         </Button>
+                        if you don't have account
                         <Button
                             basic color='brown' content='Registration'
                             component={Link}
@@ -137,9 +136,8 @@ const SignIn = () => {
                             size="small"
                             sx={{mt: 1, mb: 1}}
                             to={'/registration'}
-                        >
+                        >                        </Button>
 
-                        </Button>
                         <Button
                             basic color='brown' content='Google Sign-In'
                             component={Link}
@@ -148,9 +146,8 @@ const SignIn = () => {
                             sx={{mt: 1, mb: 1}}
                             to={'http://localhost:8080/oauth2/authorization/google'}
                         >
-
                         </Button>
-                                      </Box>
+                    </Box>
 
                 </Box>
             </Container>

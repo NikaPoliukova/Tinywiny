@@ -36,10 +36,10 @@ public class ImageController {
     return ResponseEntity.ok(new InputStreamResource(in));
   }
   @GetMapping("/file/{productId}")
-  public String getProductImage(@PathVariable Long productId) throws URISyntaxException {
+  public URI getProductImage(@PathVariable Long productId) throws URISyntaxException {
      Image image = imageService.findImageByProductId(productId);
     if (image != null) {
-     return  imageService.getImagePath(image.getImageName()).toString();
+     return  imageService.getImagePath(image.getImageName());
     }return null;
   }
 

@@ -20,7 +20,6 @@ public class DeliveryInformationService {
   private final UserConverter userConverter;
   private final DeliveryInformationRepository repository;
   private final DeliveryInformationConverter converter;
-  private final DeliveryTypeRepository deliveryTypeRepository;
 
   public void save(DeliveryInformationDto DeliveryInformationDto) {
     UserDto userDto = userConverter.toDto(userService.findUserByUserId(DeliveryInformationDto.getUserId()));

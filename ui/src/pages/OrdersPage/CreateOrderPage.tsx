@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from 'react';
-import {Button, Card, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography} from "@mui/material";
+import {Card, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography} from "@mui/material";
 import Header from '../component/MyHeader';
 import {Footer} from "../component/Footer";
 import {useNavigate} from "react-router-dom";
 import {DeliveryInformation} from "../../model/DeliveryInformation";
-import {Form, Table} from "semantic-ui-react";
+import {Button, Form, Table} from "semantic-ui-react";
 import {Order} from "../../model/Order";
 import OrderService from "../../services/OrderService";
 import BucketService from "../../services/BucketService";
@@ -25,7 +25,7 @@ export default function CreateOrderPage() {
     const [deliveryTypeId, setDeliveryType] = useState(0);
     const [products, setProducts] = useState<Array<ProductInBucket>>([])
     const [sumProducts, setSumProducts] = useState<OrderSumDto>();
-    const bucketId = Number(user?.userId);
+
 
     useEffect(() => {
         BucketService.findAllProductsInBucket()
@@ -64,15 +64,15 @@ export default function CreateOrderPage() {
     return (
         <React.Fragment>
             <Header/>
-            <Container maxWidth="sm">
+            <Container >
                 <Typography
-                    component="h1"
-                    variant="h2"
-                    align="center"
-                    color="text.primary">
+                    style={{color: 'var(--primary-color)'}}
+                    component="h2"
+                    variant="h3"
+                    align="center">
                     Create order
                 </Typography>
-            </Container>
+
             <Card style={{width: 1000}}
                   sx={{
                       marginTop: 10,
@@ -143,16 +143,20 @@ export default function CreateOrderPage() {
                 <div>Тип доставки</div>
                 <Form.Group>
                     <select value={deliveryTypeId} onChange={event => setDeliveryType(Number(event.target.value))}>
-                        <option >select delivery type</option>
+                        <option>select delivery type</option>
                         <option value={1}>Белпочта</option>
                         <option value={2}>SDEK</option>
                     </select>
                 </Form.Group>
-                <Button color="secondary"
-                        variant="contained"
+                <Button basic color='brown'
+                        type="submit"
+                        variant="outlined"
+                        sx={{mt: 3, mb: 2}}
                         onClick={createOrder}
                 >Create order</Button>
+
             </Form>
+            </Container>
             <Footer/>
         </React.Fragment>
     );

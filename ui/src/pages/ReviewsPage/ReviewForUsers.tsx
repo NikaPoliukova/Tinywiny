@@ -47,7 +47,7 @@ function ReviewForUsers() {
                                 </Comment>
                             ))}
                             <Stack spacing={2}>
-                                <Pagination count={3} />
+                                <Pagination count={3}/>
                             </Stack>
 
                         </Comment.Group>
@@ -59,15 +59,17 @@ function ReviewForUsers() {
                                value={textReview}
                                onChange={e => setText(e.target.value)}/>
                 <Button
+                    basic color='brown'
+                    content='Add'
                     type="submit"
-                    variant="contained"
+                    size="small"
                     sx={{mt: 3, mb: 2}}
                     onClick={addReview}
                 >
                     Add
                 </Button>
             </Form>
-            <Footer />
+            <Footer/>
         </Container>
 
     )

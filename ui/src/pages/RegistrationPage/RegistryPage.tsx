@@ -1,22 +1,12 @@
 import * as React from 'react';
 import {useState} from 'react';
-import {
-    Alert, AlertTitle,
-    Avatar,
-    Box,
-    Button,
-    Container,
-    createTheme,
-    CssBaseline,
-    TextField,
-    ThemeProvider,
-    Typography
-} from "@mui/material";
+import {Avatar, Box, Container, createTheme, CssBaseline, TextField, ThemeProvider, Typography} from "@mui/material";
 import {Footer} from "../component/Footer";
 import {User} from "../../model/User";
 import UserService from "../../services/UserService";
 import {useNavigate} from "react-router-dom";
 import HeaderForNoAuthorized from "../component/HeaderForNoAuthorized";
+import {Button} from 'semantic-ui-react'
 
 
 const theme = createTheme();
@@ -124,22 +114,20 @@ export function Registry() {
                             onChange={handlePhoneNumberChange}
                         />
                         <Button
+                            basic color='brown'
                             type="submit"
-                            fullWidth
-                            variant="contained"
+                            variant="outlined"
                             sx={{mt: 3, mb: 2}}
                             onClick={addUser}
                         >
                             Registry
                         </Button>
                         <Button
-                            type="submit"
-                            fullWidth
-                            variant="contained"
-                            sx={{mt: 3, mb: 2}}
+                            basic color='brown'
+                            content='Login'
                             href="/login"
-                        >
-                            Log In
+                            variant="outlined"
+                            sx={{my: 1, mx: 1.5}}>
                         </Button>
 
                     </Box>

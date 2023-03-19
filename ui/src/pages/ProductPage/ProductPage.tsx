@@ -9,11 +9,10 @@ import {createTheme, ThemeProvider} from '@mui/material/styles';
 import {useNavigate, useParams} from "react-router-dom";
 import ProductService from "../../services/ProductService";
 import {Product} from "../../model/Product";
-import Button from "@mui/material/Button";
 import {Footer} from "../component/Footer";
 import {Col, Row} from "react-bootstrap";
 
-import {Divider, Header, Icon, Table} from 'semantic-ui-react'
+import {Button, Divider, Header, Icon, Table} from 'semantic-ui-react'
 import MyHeader from 'pages/component/MyHeader';
 import BucketService from "../../services/BucketService";
 import ImageService from "../../services/ImageService";
@@ -33,7 +32,6 @@ export function ProductPage() {
 
                 .then(() => ImageService.getProductImage(Number(productId))
                     .then(response => setImage(response)
-
                     ))
         }, []);
 
@@ -88,15 +86,17 @@ export function ProductPage() {
                                     </Table.Row>
                                 </Table.Body>
                             </Table>
-                            <Button
-                                type="submit"
-                                variant="contained"
-                                sx={{mt: 1, mb: 1}}
-                                onClick={addProductInBucket}
-                            >
-                                Add in bucket
-                            </Button>
                         </Row>
+                        <Button
+                            basic color='brown'
+                            type="submit"
+                            variant="outlined"
+                            size="small"
+                            sx={{mt: 1, mb: 1}}
+                            onClick={addProductInBucket}
+                        >
+                            Add in bucket
+                        </Button>
                     </Container>
                 </main>
                 <Footer/>

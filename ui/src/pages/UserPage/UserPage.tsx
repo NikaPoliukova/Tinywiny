@@ -43,7 +43,7 @@ export const UserPage = () => {
                     <TableContainer>
                         <Table sx={{minWidth: 800}} aria-label="simple table">
                             <TableHead>
-                                <TableRow>
+                                <TableRow >
                                     <TableCell align="left">UserName</TableCell>
                                     <TableCell align="left">Email</TableCell>
                                     <TableCell align="left">PhoneNumber</TableCell>

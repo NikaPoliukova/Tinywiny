@@ -4,16 +4,20 @@ import com.example.tinywiny.dto.TypeProduct;
 import com.example.tinywiny.model.Image;
 import com.example.tinywiny.model.Product;
 import com.example.tinywiny.repository.ImageRepository;
+import com.example.tinywiny.repository.ProductRepository;
 import com.example.tinywiny.service.amazonService.AwsService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.http.MediaType;
+import org.springframework.mock.web.MockMultipartFile;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -31,6 +35,8 @@ class ImageServiceTest {
   private ImageRepository imageRepository;
   @Mock
   private ProductService productService;
+  @Mock
+  private ProductRepository productRepository;
   @InjectMocks
   private ImageService imageService;
 
@@ -65,26 +71,90 @@ class ImageServiceTest {
 
   @Test
   void addImageWhereNoImage() throws IOException {
+    MockMultipartFile file = new MockMultipartFile("file", "hello.txt", MediaType.TEXT_PLAIN_VALUE,
+        "Hello, World!".getBytes());
+
     when(productService.findProductByProductName(any(String.class))).thenReturn(prepareProduct());
-    when(imageRepository.findImageByProductId(any(Long.class))).thenReturn(prepareImage());
+    when(imageRepository.findImageByProductId(any(Long.class))).thenReturn(null);
     doNothing().when(imageRepository).setNewImage(any(String.class), any(Long.class));
-    doNothing().when(storageService).uploadFile(any(InputStream.class),any(String.class));
-   // imageService.addImage(any(String.class),MultipartFile);
+    doNothing().when(storageService).uploadFile(any(InputStream.class), any(String.class));
+    imageService.addImage("product", file);
     verify(productService).findProductByProductName(any(String.class));
     verify(imageRepository).setNewImage(any(String.class), any(Long.class));
+    verify(imageRepository).findImageByProductId(any(Long.class));
     verify(storageService).uploadFile(any(InputStream.class), any(String.class));
   }
 
   @Test
-  void addProductImage() {
+  void addImageWithImage() throws IOException {
+    MockMultipartFile file = new MockMultipartFile("file", "hello.txt", MediaType.TEXT_PLAIN_VALUE,
+        "Hello, World!".getBytes());
+
+    when(productService.findProductByProductName(any(String.class))).thenReturn(prepareProduct());
+    when(imageRepository.findImageByProductId(any(Long.class))).thenReturn(prepareImage());
+    doNothing().when(imageRepository).updateImage(any(String.class), any(Long.class));
+    doNothing().when(storageService).uploadFile(any(InputStream.class), any(String.class));
+    imageService.addImage("product", file);
+    verify(productService).findProductByProductName(any(String.class));
+    verify(imageRepository).findImageByProductId(any(Long.class));
+    verify(imageRepository).updateImage(any(String.class), any(Long.class));
+    verify(storageService).uploadFile(any(InputStream.class), any(String.class));
   }
 
   @Test
-  void getImagePath() {
+  void addProductImageByIdWithoutImage() throws IOException {
+    MockMultipartFile file = new MockMultipartFile("file", "hello.txt", MediaType.TEXT_PLAIN_VALUE,
+        "Hello, World!".getBytes());
+
+    when(productService.findProductByProductId(any(Long.class))).thenReturn(prepareProduct());
+    when(imageRepository.findImageByProductId(any(Long.class))).thenReturn(null);
+    doNothing().when(imageRepository).setNewImage(any(String.class), any(Long.class));
+    doNothing().when(storageService).uploadFile(any(InputStream.class), any(String.class));
+    imageService.addProductImage(1L, file);
+
+    verify(productService).findProductByProductId(any(Long.class));
+    verify(imageRepository).setNewImage(any(String.class), any(Long.class));
+    verify(imageRepository).findImageByProductId(any(Long.class));
+    verify(storageService).uploadFile(any(InputStream.class), any(String.class));
+  }
+
+  @Test
+  void addProductImageByIdWithImage() throws IOException {
+    MockMultipartFile file = new MockMultipartFile("file", "hello.txt", MediaType.TEXT_PLAIN_VALUE,
+        "Hello, World!".getBytes());
+
+    when(productService.findProductByProductId(any(Long.class))).thenReturn(prepareProduct());
+    when(imageRepository.findImageByProductId(any(Long.class))).thenReturn(prepareImage());
+    doNothing().when(imageRepository).updateImage(any(String.class), any(Long.class));
+    doNothing().when(storageService).uploadFile(any(InputStream.class), any(String.class));
+    imageService.addProductImage(1L, file);
+
+    verify(productService).findProductByProductId(any(Long.class));
+    verify(imageRepository).findImageByProductId(any(Long.class));
+    verify(imageRepository).updateImage(any(String.class), any(Long.class));
+    verify(storageService).uploadFile(any(InputStream.class), any(String.class));
+  }
+
+  @Test
+  void getImagePath() throws URISyntaxException {
+    URI uri = new URI("image");
+    when(storageService.getImagePath(any(String.class))).thenReturn(uri);
+    imageService.getImagePath("image");
+    verify(storageService).getImagePath(any(String.class));
   }
 
   @Test
   void deleteImage() {
+    when(productService.findProductByProductId(any(Long.class))).thenReturn(prepareProduct());
+    when(imageRepository.findImageByProductId(any(Long.class))).thenReturn(prepareImage());
+    doNothing().when(storageService).deleteImage(any(String.class));
+    doNothing().when(imageRepository).deleteImageByProductId(any(Long.class));
+    imageService.deleteImage(5L);
+
+    verify(productService).findProductByProductId(any(Long.class));
+    verify(imageRepository).findImageByProductId(any(Long.class));
+    verify(storageService).deleteImage(any(String.class));
+    verify(imageRepository).deleteImageByProductId(any(Long.class));
   }
 
   private Image prepareImage() {
@@ -94,5 +164,6 @@ class ImageServiceTest {
   private Product prepareProduct() {
     return new Product(1L, "productName", 123, "description", 2, new TypeProduct(), new ArrayList<>(), new ArrayList<>());
   }
+
 
 }

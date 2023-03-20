@@ -36,9 +36,8 @@ security:
   secretKey: "secretKeyNika"
   refresh_secret: "secretRefresh"
   allowed-origin: "http://localhost:3000"
-  bcrypt-secret: "secret"
 
-
+secret: "SECRET"
 
 jwt:
   access_token_name: "JWT"

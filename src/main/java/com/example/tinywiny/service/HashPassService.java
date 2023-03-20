@@ -11,11 +11,8 @@ public class HashPassService {
 
   private final BCrypt.Hasher hasher;
 
-  @Value("${security.bcrypt-secret}")
-  private String secretKey;
-
-  public HashPassService() {
-    hasher = BCrypt.with(new SecureRandom(secretKey.getBytes()));
+  public HashPassService(@Value("${secret}") String secret) {
+    hasher = BCrypt.with(new SecureRandom(secret.getBytes()));
   }
 
   public boolean verify(String password, String hashPass) {

@@ -66,9 +66,9 @@ public class ImageService {
     Product product = productService.findProductByProductId(productId);
     Image image = findImageByProductId(product.getProductId());
     if (image != null) {
-      updateImage(file.getOriginalFilename(), productId);
+      updateImage(file.getOriginalFilename(), product.getProductId());
     } else {
-      saveNewImage(file.getOriginalFilename(), productId);
+      saveNewImage(file.getOriginalFilename(), product.getProductId());
     }
     upload(file.getInputStream(), file.getOriginalFilename());
   }

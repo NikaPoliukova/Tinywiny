@@ -3,6 +3,7 @@ package com.example.tinywiny.controller;
 import com.example.tinywiny.converter.ProductConverter;
 import com.example.tinywiny.converter.TypeProductConverter;
 import com.example.tinywiny.dto.ProductDto;
+import com.example.tinywiny.dto.ProductDtoWithImage;
 import com.example.tinywiny.dto.TypeProduct;
 import com.example.tinywiny.dto.TypeProductDto;
 import com.example.tinywiny.model.Image;
@@ -20,7 +21,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -38,14 +38,16 @@ public class ProductsRestController {
 
 
   @GetMapping("/products/{productId}")
-  public ProductDto getProduct(@PathVariable Long productId) throws URISyntaxException {
+  public ProductDtoWithImage getProduct(@PathVariable Long productId) throws URISyntaxException {
     Product product = productService.findProductByProductId(productId);
     URI imageUrl = null;
     Image image = imageService.findImageByProductId(productId);
     if (image != null) {
-      imageUrl = imageService.getImagePath(image.getImageName()); //как ее передать на UI?
+      imageUrl = imageService.getImagePath(image.getImageName());
     }
-    return converter.toProductDto(product);
+    ProductDto productDto = converter.toProductDto(product);
+    return productService.productConverter(productDto, imageUrl);
+
   }
 
   @PostMapping(value = "/admin/product/create", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE,
@@ -70,7 +72,6 @@ public class ProductsRestController {
   }
 
 
-
   @PutMapping("/admin/products/{productId}")
   public void updateProduct(@PathVariable Long productId, @RequestBody ProductDto productDto) {
     productService.updateProduct(productDto, productId);
@@ -82,12 +83,14 @@ public class ProductsRestController {
   }
 
   @GetMapping("/products/type/{typeName}")
-  public List<ProductDto> findAllProductsByTypeAndPage(@PathVariable String typeName,
+  public List<ProductDtoWithImage> findAllProductsByTypeAndPage(@PathVariable String typeName,
                                                        @RequestParam(value = "pageNumber", required = false, defaultValue = "1") Integer pageNumber,
-                                                       @RequestParam(value = "pageSize", required = false, defaultValue = "20") Integer pageSize) {
+                                                       @RequestParam(value = "pageSize", required = false, defaultValue = "20") Integer pageSize) throws URISyntaxException {
     Page<Product> page = productService.findAllProductsByTypeAndPage(typeName, pageNumber - 1, pageSize);
     List<Product> products = page.getContent();
-    return converter.toProductDto(products);
+    List<ProductDto> productsDto = converter.toProductDto(products);
+
+    return productService.productConverter(productsDto);
   }
 
   @GetMapping("/admin/products")

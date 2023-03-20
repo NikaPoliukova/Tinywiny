@@ -27,7 +27,6 @@ export function UpdateProductPage() {
         const [countInStock, setCountInStock] = useState(0);
         const [description, setDescription] = useState<string>();
         const [image, setImage] = useState<any>();
-        const [imageUri, setImageURI] = useState<string>();
         const fileInput = useRef<HTMLInputElement | null>(null);
         const navigate = useNavigate();
 
@@ -45,7 +44,7 @@ export function UpdateProductPage() {
                 productId, file: fileInput?.current?.files && fileInput?.current?.files[0]
             }).then(response => {
                 setImage(response);
-            })
+            }).then(()=>navigate(`/admin/products/${product?.productId}`))
         };
 
         const updateProduct = () => {
@@ -79,7 +78,7 @@ export function UpdateProductPage() {
                                     </CardContent>
                                     <Segment placeholder>
                                         <Header icon>
-                                            <img src={`data:image/png;base64,${image}`}/>
+                                            <img src={`${image}`}/>
                                         </Header>
                                         <Button
                                             variant="contained"

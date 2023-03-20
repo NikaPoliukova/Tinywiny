@@ -13,18 +13,22 @@ CREATE TABLE products
 INSERT INTO products (product_name,price, description, count_in_stock, id_type )
 VALUES ('toy1', 125, 'its cool', 1, 4);
 INSERT INTO products (product_name,price, description, count_in_stock, id_type )
-VALUES ('rainbow', 125, 'Это круто', 1, 1);
+VALUES ('флажки', 125, 'в прекрасном цвете', 1, 1);
 INSERT INTO products (product_name,price, description, count_in_stock, id_type )
 VALUES ('toy2', 105, 'Это круто', 3, 2);
 INSERT INTO products (product_name,price, description, count_in_stock, id_type )
-VALUES ('toy1', 125, 'Это круто', 1, 3);
+VALUES ('wings', 125, 'розовые', 1, 3);
 INSERT INTO products (product_name,price, description, count_in_stock, id_type )
-VALUES ('toy5', 125, 'Это круто', 1, 1);
+VALUES ('wings', 130, 'белые', 2, 3);
 INSERT INTO products (product_name,price, description, count_in_stock, id_type )
-VALUES ('flags', 125, 'Это круто', 1, 4);
+VALUES ('цветочек', 30, 'Это круто', 1, 1);
 INSERT INTO products (product_name,price, description, count_in_stock, id_type )
-VALUES ('toy85', 125, 'Это круто', 8, 2);
+VALUES ('венок', 40, 'Красивый белый венок', 5, 1);
 INSERT INTO products (product_name,price, description, count_in_stock, id_type )
-VALUES ('wigth', 125, 'Это круто', 2, 4);
+VALUES ('грибки', 125, 'Это круто', 1, 4);
+INSERT INTO products (product_name,price, description, count_in_stock, id_type )
+VALUES ('mobil', 125, 'В прекрасном цвете', 2, 2);
+INSERT INTO products (product_name,price, description, count_in_stock, id_type )
+VALUES ('фикус', 125, 'Это круто', 2, 4);
 INSERT INTO products (product_name,price, description, count_in_stock, id_type )
 VALUES ('flags', 125, 'Это круто', 1, 4);

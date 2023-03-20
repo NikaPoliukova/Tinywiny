@@ -37,7 +37,7 @@ public class ApplicationSecurityConfig {
             .antMatchers("/oauth2/**","/oauth/**").permitAll()
             .antMatchers("/swagger-ui/**", "/v3/api-docs/**", "**/swagger-resources/**",
                 "/swagger-ui.html", "/webjars/**").permitAll()
-            .antMatchers("/api/v1/admin/**").hasRole("ADMIN")
+            .antMatchers("/api/v1/admin/products","/api/v1/admin/**").hasRole("ADMIN")
             .anyRequest().authenticated()
         )
         .exceptionHandling(e -> e.authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED)))

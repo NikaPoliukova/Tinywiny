@@ -12,7 +12,7 @@ class ImageService{
     async getProductImage(productId : number):Promise<any> {
         const response = await axios.get<any>('http://localhost:8080/api/v1/file/'+productId, {
             withCredentials: true});
-        return Buffer.from(response.data, 'binary').toString('base64');
+        return response.data;
     }
 
     deleteImage = async (productId : number) => {

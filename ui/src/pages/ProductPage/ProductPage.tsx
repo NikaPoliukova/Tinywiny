@@ -25,7 +25,7 @@ export function ProductPage() {
         const {productId} = useParams();
         const [product, setProduct] = useState<Product>();
         const [image, setImage] = useState('');
-        console.log(image);
+
         useEffect(() => {
             ProductService.getProduct(Number(productId))
                 .then(response => setProduct(response))
@@ -46,14 +46,14 @@ export function ProductPage() {
                 <CssBaseline/>
                 <MyHeader/>
                 <main>
-                    <Container className="mt-3">
+                    <Container>
                         <Row>
                             <Col md={4}>
-                                <Card sx={{height: '100%', display: 'flex', flexDirection: 'column'}}
+                                <Card
+                                     sx={{height: '100%', display: 'flex', flexDirection: 'column'}}
                                 >
-                                    <Header icon>
-                                        <img src={`data:image/png;base64,${image}`}/>
-                                    </Header>
+                                    <img src={`${image}`}/>
+
                                     <CardContent sx={{flexGrow: 1}}>
                                     </CardContent>
                                 </Card>

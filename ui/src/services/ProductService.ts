@@ -21,7 +21,7 @@ class ProductService {
         return Buffer.from(response.data, 'binary').toString('base64');
     }
 
-    async findAllProductsByTypeAndPage(type : string): Promise<Array<Product>> {
+    async findAllProductsByTypeAndPage(type : string): Promise<Array<any>> {
         const response = await axios.get<Array<Product>>('http://localhost:8080/api/v1/products/type/' + type,
             {withCredentials: true});
         return response.data;
@@ -32,8 +32,8 @@ class ProductService {
         return response.data;
     }
 
-    async getProduct(productId: number): Promise<Product> {
-        const response = await axios.get<Product>('http://localhost:8080/api/v1/products/' + productId,
+    async getProduct(productId: number): Promise<any> {
+        const response = await axios.get<any>('http://localhost:8080/api/v1/products/' + productId,
             {withCredentials: true});
         return response.data;
     }

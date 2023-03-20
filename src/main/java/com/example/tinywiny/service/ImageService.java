@@ -40,6 +40,7 @@ public class ImageService {
   public void updateImage(String imageName, Long productId) {
     imageRepository.updateImage(imageName, productId);
   }
+
   @Transactional
   @Modifying
   public void upload(InputStream stream, String fileName) {
@@ -61,7 +62,7 @@ public class ImageService {
 
   @Transactional
   @Modifying
-  public void addImage(Long productId, MultipartFile file) throws IOException {
+  public void addProductImage(Long productId, MultipartFile file) throws IOException {
     Product product = productService.findProductByProductId(productId);
     Image image = findImageByProductId(product.getProductId());
     if (image != null) {
@@ -75,6 +76,7 @@ public class ImageService {
   public URI getImagePath(String imageName) throws URISyntaxException {
     return storageService.getImagePath(imageName);
   }
+
   @Transactional
   @Modifying
   public void deleteImage(Long productId) {
@@ -86,16 +88,6 @@ public class ImageService {
     storageService.deleteImage(imageName);
     imageRepository.deleteImageByProductId(productId);
   }
-
-
- /* public Image findImageByImageName(String imageName) {
-    if (imageName == null) {
-      throw new RuntimeException("no image");
-    } else {
-      return imageRepository.findImageByImageName(imageName);
-    }
-  }*/
-
 }
 
 

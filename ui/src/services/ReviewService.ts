@@ -16,6 +16,7 @@ class ReviewService {
     }
 
     async saveReview(textReview : string) {
+        console.log(textReview);
         await axios.post('http://localhost:8080/api/v1/reviews/create', textReview,
             {withCredentials: true});
     }

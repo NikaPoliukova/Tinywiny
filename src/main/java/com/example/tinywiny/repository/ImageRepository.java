@@ -9,8 +9,6 @@ import org.springframework.data.repository.query.Param;
 
 public interface ImageRepository extends JpaRepository<Image, Long> {
 
-  Image findImageByImageName(@Param("imageName") String imageName);
-
   Image findImageByProductId(@Param("productId") Long productId);
 
   @Modifying

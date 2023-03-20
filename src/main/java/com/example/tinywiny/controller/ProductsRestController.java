@@ -89,7 +89,6 @@ public class ProductsRestController {
     Page<Product> page = productService.findAllProductsByTypeAndPage(typeName, pageNumber - 1, pageSize);
     List<Product> products = page.getContent();
     List<ProductDto> productsDto = converter.toProductDto(products);
-
     return productService.productConverter(productsDto);
   }
 

@@ -48,7 +48,7 @@ public class ImageController {
       produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
   public void uploadFile(@RequestPart("file") final MultipartFile file,
                          @RequestPart("productId") final String productId) throws IOException {
-    imageService.addImage(Long.parseLong(productId), file);
+    imageService.addProductImage(Long.parseLong(productId), file);
   }
 
   @DeleteMapping("/admin/image/{productId}")

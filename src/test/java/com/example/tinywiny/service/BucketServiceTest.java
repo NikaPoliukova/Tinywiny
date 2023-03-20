@@ -66,7 +66,6 @@ class BucketServiceTest {
   void updateCountProduct() {
     when(productInBucketRepository.findProductInBucketById(any(Long.class))).thenReturn(prepareProductInBucket());
     when(productInBucketRepository.save(any(ProductInBucket.class))).thenReturn(prepareProductInBucket());
-
     assertEquals(prepareProductInBucket(), bucketService.updateCountProduct(prepareProductInBucketDto()));
   }
 
@@ -110,7 +109,6 @@ class BucketServiceTest {
   void deleteProductInBucket() {
     doNothing().when(productInBucketRepository).deleteProductInBucketById(any(Long.class));
     bucketService.deleteProductInBucket(1L);
-
     verify(productInBucketRepository).deleteProductInBucketById(any());
   }
 
@@ -127,7 +125,6 @@ class BucketServiceTest {
   void createBucket() {
     doNothing().when(bucketRepository).createBucket(any(Long.class));
     bucketService.createBucket(1L);
-
     verify(bucketRepository).createBucket(any());
   }
 

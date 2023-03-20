@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Card, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography} from "@mui/material";
+import {Card, Container, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography} from "@mui/material";
 import {Footer} from "../component/Footer";
 import MyHeader from '../component/MyHeader';
 import {Product} from "../../model/Product";
@@ -20,6 +20,7 @@ const ProductsUpdatePage = () => {
     return (
         <div>
             <MyHeader/>
+            <Container >
             <Typography component="h1" variant="h5">
                 <h1>All products</h1>
             </Typography>
@@ -32,6 +33,7 @@ const ProductsUpdatePage = () => {
                                 <Table.HeaderCell>Name product</Table.HeaderCell>
                                 <Table.HeaderCell>Price</Table.HeaderCell>
                                 <Table.HeaderCell>Type product</Table.HeaderCell>
+                                <Table.HeaderCell>Count in stock</Table.HeaderCell>
                                 <Table.HeaderCell>Description</Table.HeaderCell>
                             </Table.Row>
                         </TableHead>
@@ -51,6 +53,9 @@ const ProductsUpdatePage = () => {
                                     </TableCell>
                                     <TableCell component="th" scope="row">
                                         {product.idType}
+                                    </TableCell>
+                                    <TableCell component="th" scope="row">
+                                        {product.countInStock}
                                     </TableCell>
                                     <TableCell component="th" scope="row">
                                         {product.description}
@@ -75,6 +80,7 @@ const ProductsUpdatePage = () => {
                 </TableContainer>
             </Card>
             <Footer/>
+            </Container>
         </div>
     );
 };

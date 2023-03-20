@@ -1,5 +1,6 @@
 package com.example.tinywiny.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -13,6 +14,7 @@ import javax.persistence.Table;
 @Entity
 @NoArgsConstructor
 @Data
+@AllArgsConstructor
 @Table(name = "image")
 public class Image {
 

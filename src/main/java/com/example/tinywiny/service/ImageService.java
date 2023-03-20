@@ -35,17 +35,35 @@ public class ImageService {
     return imageRepository.findImageByProductId(productId);
   }
 
+  @Transactional
+  @Modifying
   public void updateImage(String imageName, Long productId) {
     imageRepository.updateImage(imageName, productId);
   }
 
+  @Transactional
+  @Modifying
   public void upload(InputStream stream, String fileName) {
     storageService.uploadFile(stream, fileName);
   }
 
+  @Transactional
   @Modifying
   public void addImage(String productName, MultipartFile file) throws IOException {
     Product product = productService.findProductByProductName(productName);
+    Image image = findImageByProductId(product.getProductId());
+    if (image != null) {
+      updateImage(file.getOriginalFilename(), product.getProductId());
+    } else {
+      saveNewImage(file.getOriginalFilename(), product.getProductId());
+    }
+    upload(file.getInputStream(), file.getOriginalFilename());
+  }
+
+  @Transactional
+  @Modifying
+  public void addProductImage(Long productId, MultipartFile file) throws IOException {
+    Product product = productService.findProductByProductId(productId);
     Image image = findImageByProductId(product.getProductId());
     if (image != null) {
       updateImage(file.getOriginalFilename(), product.getProductId());
@@ -59,6 +77,8 @@ public class ImageService {
     return storageService.getImagePath(imageName);
   }
 
+  @Transactional
+  @Modifying
   public void deleteImage(Long productId) {
     Product product = productService.findProductByProductId(productId);
     if (product == null) {
@@ -68,16 +88,6 @@ public class ImageService {
     storageService.deleteImage(imageName);
     imageRepository.deleteImageByProductId(productId);
   }
-
-
- /* public Image findImageByImageName(String imageName) {
-    if (imageName == null) {
-      throw new RuntimeException("no image");
-    } else {
-      return imageRepository.findImageByImageName(imageName);
-    }
-  }*/
-
 }
 
 

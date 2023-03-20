@@ -4,6 +4,7 @@ import com.example.tinywiny.converter.DeliveryInformationConverter;
 import com.example.tinywiny.converter.OrderConverter;
 import com.example.tinywiny.converter.ProductInOrderConverter;
 import com.example.tinywiny.dto.OrderDto;
+import com.example.tinywiny.dto.StatusOrder;
 import com.example.tinywiny.model.Order;
 import com.example.tinywiny.service.OrderService;
 import com.example.tinywiny.service.ProductInOrderService;
@@ -58,9 +59,6 @@ public class OrderRestController {
   @GetMapping("/order/{orderId}")
   public OrderDto findOrderByOrderId(@PathVariable Long orderId) {
     Order order = orderService.findOrderByOrderId(orderId);
-    //DeliveryInformationDto deliveryInformationDto = deliveryInformationConverter.toDeliveryInformationDto(order.getDeliveryInformation());
-    // List<ProductInOrderDto> productInOrderDto = productInOrderConverter
-    //.toProductInOrderDto(productInOrderService.findAllProductsByOrder(orderId));
     return orderConverter.toOrderDto(order, order.getDeliveryInformation(),
         productInOrderService.findAllProductsByOrder(orderId));
   }
@@ -71,8 +69,8 @@ public class OrderRestController {
   }
 
   @PutMapping("/status")
-  public void updateOrderStatus(@RequestBody String status, Long orderId) {
-    orderService.updateOrderStatus(status, orderId);
+  public void updateOrderStatus(@RequestBody StatusOrder status) {
+    orderService.updateOrderStatus(status);
   }
 
   @GetMapping("/status/{orderId}")

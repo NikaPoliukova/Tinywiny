@@ -7,7 +7,9 @@ import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.InputStream;
 import java.net.URI;
@@ -20,9 +22,11 @@ public class AwsService {
   private final AmazonS3 client;
   @Value("${aws.image-placeholder-path}")
   private String placeholderPath;
-
+  @Transactional
+  @Modifying
   public void uploadFile(InputStream stream, String fileName) {
-    PutObjectRequest request = new PutObjectRequest("imgbucket", fileName, stream, new ObjectMetadata());
+    ObjectMetadata metadata = new ObjectMetadata();
+    PutObjectRequest request = new PutObjectRequest("imgbucket", fileName, stream, metadata);
     client.putObject(request);
   }
 
@@ -33,7 +37,8 @@ public class AwsService {
     }
     return new URI(placeholderPath);
   }
-
+  @Transactional
+  @Modifying
   public void deleteImage(String oldImage) {
     DeleteObjectRequest request = new DeleteObjectRequest("imgbucket", oldImage);
     client.deleteObject(request);

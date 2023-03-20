@@ -1,5 +1,3 @@
-import {Image} from "./Image";
-
 export interface Product {
     productId?: number;
     productName?: string;
@@ -7,5 +5,6 @@ export interface Product {
     description?: string;
     countInStock?: number;
     idType?: number;
+    image?: URL;
 
 }

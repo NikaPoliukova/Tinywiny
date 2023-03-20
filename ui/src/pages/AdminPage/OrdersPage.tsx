@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {
     Button,
-    Card, Select,
+    Card,
     Table,
     TableBody,
     TableCell,
@@ -16,6 +16,7 @@ import OrderService from "../../services/OrderService";
 import {Link, useNavigate} from "react-router-dom";
 import {Footer} from "../component/Footer";
 import Grid from "@mui/material/Grid";
+import {StatusOrder} from "../../model/StatusOrder";
 
 
 const OrdersPage = () => {
@@ -23,20 +24,24 @@ const OrdersPage = () => {
     const navigate = useNavigate();
     const statuses = ['NEW', 'PROCESS', 'FINISH'];
     const [statusOrder, setStatus] = useState<string>('');
-    //const [orderId, setOrderId] = useState(Number);
-
-    const options = statuses.map((status, orderId) => {
-        return <option key={orderId}>{status}</option>;
-    });
-    const updateStatus = (orderId: number) => {
-        OrderService.updateOrderStatus(statusOrder, orderId).then(() => navigate("/admin"))
-    }
 
     useEffect(() => {
         OrderService.findAllOrdersByPage()
             .then(response => setOrders(response))
         ;
     }, []);
+    const options = statuses.map((status, orderId) => {
+        return <option key={orderId}>{status}</option>;
+    });
+
+    const updateStatus = (orderId: number) => {
+        const status: StatusOrder = {
+            orderId,
+            statusOrder
+        };
+        console.log(status)
+        OrderService.updateOrderStatus(status).then(() => navigate("/admin/orders"))
+    }
 
     return (
         <div>
@@ -70,18 +75,18 @@ const OrdersPage = () => {
                                     <TableCell component="th" scope="row">
                                         {order.statusOrder}
                                         <Grid item xs={12} sm={5}>
-                                            <select value={statusOrder} onChange={(event) =>
-                                                setStatus(event.target.value)}>
+                                            <select
+                                                onChange={(e) => setStatus(e.target.value)}>
                                                 {options}
                                             </select>
+                                            <Button
+                                                type="submit"
+                                                fullWidth
+                                                onClick={() => updateStatus(Number(order.orderId))}
+                                            >
+                                                update status
+                                            </Button>
                                         </Grid>
-                                        <Button
-                                            type="submit"
-                                            fullWidth
-                                            onClick={() => updateStatus(Number(order.orderId))}
-                                        >
-                                            update status
-                                        </Button>
                                     </TableCell>
                                     <TableCell component="th" scope="row">
                                         {order.commentOrder}

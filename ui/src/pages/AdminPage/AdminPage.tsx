@@ -28,7 +28,7 @@ export const AdminPage = () => {
                 <Button type="submit"
                         variant="contained"
                         sx={{mt: 3, mb: 2}}
-                        href="/orders"> Open list orders </Button>
+                        href="/admin/orders"> Open list orders </Button>
             </ Grid>
             <div>Просмотреть все отзывы</div>
             < Grid  container spacing={4}>
@@ -42,7 +42,7 @@ export const AdminPage = () => {
                 <Button type="submit"
                         variant="contained"
                         sx={{mt: 3, mb: 2}}
-                        href="/users"> Open list users </Button>
+                        href="/admin/users"> Open list users </Button>
             </ Grid>
             <div>Редактировать продукт</div>
             < Grid  container spacing={4}>

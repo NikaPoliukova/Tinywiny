@@ -7,7 +7,6 @@ import com.example.tinywiny.service.ReviewService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
-
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,8 +28,8 @@ public class ReviewRestController {
   private final ReviewConverter converter;
 
   @PostMapping("/reviews/create")
-  protected ReviewDto createReview(@RequestBody ReviewDto review) {
-    return converter.toReviewDto(reviewService.save(review));
+  protected void createReview(@RequestBody String textReview) {
+    converter.toReviewDto(reviewService.save(textReview));
   }
 
   @GetMapping("/reviews")

@@ -83,7 +83,7 @@ function PricingContent() {
                         <Icon name='user' size='big' color='brown'/>
                     </Button>
                     <Button
-                       onClick={()=>AuthorizationService.logout()}>
+                       onClick={()=>AuthorizationService.logout().then(()=>navigate('/login'))}>
                         <Icon name='log out' size='big' color='brown'/>
                     </Button>
                 </Toolbar>

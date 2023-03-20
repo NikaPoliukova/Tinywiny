@@ -85,13 +85,6 @@ public class UserService {
   }
 
   private User prepareUserForUpdate(UserDto userDto, User user) {
-    if (!userDto.getUserName().isBlank()) {
-      if (userRepository.findUserByUserName(userDto.getUserName()).isPresent()) {
-        throw new RuntimeException("this name already exist");
-      } else {
-        user.setUserName(userDto.getUserName());
-      }
-    }
     if (!userDto.getPassword().isBlank()) {
       String hashPass = hashPassService.hashPass(userDto.getPassword());
       user.setPassword(hashPass);

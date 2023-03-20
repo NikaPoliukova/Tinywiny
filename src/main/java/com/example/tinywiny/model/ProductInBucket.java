@@ -1,6 +1,7 @@
 package com.example.tinywiny.model;
 
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.extern.jackson.Jacksonized;
@@ -21,6 +22,7 @@ import javax.persistence.Table;
 @Data
 @Jacksonized
 @NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "products_in_bucket")
 public class ProductInBucket {
 

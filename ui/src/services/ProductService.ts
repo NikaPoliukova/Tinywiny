@@ -4,7 +4,6 @@ import { Buffer } from 'buffer';
 
 class ProductService {
 
-
     async uploadFile({productName,price,countInStock,description,idType, file}: any): Promise<any> {
         const formData = new FormData();
         formData.append('productName', productName);
@@ -13,7 +12,7 @@ class ProductService {
         formData.append('description', description);
         formData.append('idType', idType);
         formData.append('file', file, file.name);
-        const response = await axios.post<any>('https://localhost:8080/api/v1/admin/product/create', formData, {
+        const response = await axios.post<any>('http://localhost:8080/api/v1/admin/product/create', formData, {
             withCredentials: true,
             headers: {
                 "Content-Type": "multipart/form-data",
@@ -22,7 +21,7 @@ class ProductService {
         return Buffer.from(response.data, 'binary').toString('base64');
     }
 
-    async findAllProductsByTypeAndPage(type : string): Promise<Array<Product>> {
+    async findAllProductsByTypeAndPage(type : string): Promise<Array<any>> {
         const response = await axios.get<Array<Product>>('http://localhost:8080/api/v1/products/type/' + type,
             {withCredentials: true});
         return response.data;
@@ -33,8 +32,8 @@ class ProductService {
         return response.data;
     }
 
-    async getProduct(productId: number): Promise<Product> {
-        const response = await axios.get<Product>('http://localhost:8080/api/v1/products/' + productId,
+    async getProduct(productId: number): Promise<any> {
+        const response = await axios.get<any>('http://localhost:8080/api/v1/products/' + productId,
             {withCredentials: true});
         return response.data;
     }
@@ -46,7 +45,7 @@ class ProductService {
     }
 
     async deleteProduct(productId : number): Promise<void> {
-        const response = await axios.post('http://localhost:8080/api/v1/admin/products/' +productId,
+        const response = await axios.delete('http://localhost:8080/api/v1/admin/products/' +productId,
             {withCredentials: true});
         return response.data;
     }

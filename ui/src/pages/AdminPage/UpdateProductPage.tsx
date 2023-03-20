@@ -5,7 +5,6 @@ import CardContent from '@mui/material/CardContent';
 import CssBaseline from '@mui/material/CssBaseline';
 import Container from '@mui/material/Container';
 import {createTheme, ThemeProvider} from '@mui/material/styles';
-
 import {useNavigate, useParams} from "react-router-dom";
 import ProductService from "../../services/ProductService";
 import {Product} from "../../model/Product";
@@ -24,34 +23,40 @@ export function UpdateProductPage() {
     const Product = () => {
         const {productId} = useParams();
         const [product, setProduct] = useState<Product>();
-        const [productName, setProductName] = useState('');
         const [price, setPrice] = useState(0);
         const [countInStock, setCountInStock] = useState(0);
-        const [description, setDescription] = useState('');
-        const [image, setImage] = useState('');
+        const [description, setDescription] = useState<string>();
+        const [image, setImage] = useState<any>();
         const fileInput = useRef<HTMLInputElement | null>(null);
         const navigate = useNavigate();
-        /*  const updateImage = () => {
-              const image: Image = {
-                  imageName,
-                  //productId
-              };
-              // ImageService.updateImage(image).then(response => navigate("/products"));
-          }*/
+
+        useEffect(() => {
+            ProductService.getProduct(Number(productId))
+                .then(response => setProduct(response))
+                .then(() => ImageService.getProductImage(Number(productId))
+                    .then(response => {
+                        setImage(response)
+                    }))
+        }, []);
+
+        const uploadImage = () => {
+            ImageService.uploadImage({
+                productId, file: fileInput?.current?.files && fileInput?.current?.files[0]
+            }).then(response => {
+                setImage(response);
+            }).then(()=>navigate(`/admin/products/${product?.productId}`))
+        };
 
         const updateProduct = () => {
-            const product: Product = {
-                productName,
+            const productUpdate: Product = {
+                productName: product?.productName,
                 price,
                 countInStock,
                 description
             };
-            ProductService.updateProduct(Number(productId), product).then(response => navigate("/admin/products"));
+            ProductService.updateProduct(Number(productId), productUpdate)
+                .then(() => navigate("/admin/products"));
         }
-        useEffect(() => {
-            ProductService.getProduct(Number(productId))
-                .then(response => setProduct(response));
-        }, []);
 
         const deleteProduct = () => {
             ProductService.deleteProduct(Number(productId)).then(() => navigate("/admin/products"));
@@ -73,18 +78,25 @@ export function UpdateProductPage() {
                                     </CardContent>
                                     <Segment placeholder>
                                         <Header icon>
-                                            <img src={`data:image/png;base64,${image}`}/>
+                                            <img src={`${image}`}/>
                                         </Header>
                                         <Button
                                             variant="contained"
                                             component="label"
                                         >
-                                            Upload Photo
+                                            Upload File
                                             <input
                                                 ref={fileInput}
                                                 type="file"
                                                 hidden
                                             />
+                                        </Button>
+                                        <Button
+                                            variant="contained"
+                                            component="label"
+                                            onClick={uploadImage}
+                                        >
+                                            Save
                                         </Button>
                                     </Segment>
 
@@ -99,7 +111,8 @@ export function UpdateProductPage() {
                             </Col>
                             <Form.Button
                                 onClick={deleteProduct}
-                            >Delete product</Form.Button>
+                            >Delete product
+                            </Form.Button>
                             <Divider horizontal>
                                 <Header as='h4'>
                                     <Icon name='setting'/>
@@ -112,9 +125,7 @@ export function UpdateProductPage() {
                                     <Table.Row>
                                         <Table.Cell width={2}>Product name:</Table.Cell>
                                         <Table.Cell>{product?.productName}</Table.Cell>
-                                        <Form.Input fluid placeholder='Write new product name'
-                                                    value={productName}
-                                                    onChange={e => setProductName(e.target.value)}/>
+
                                     </Table.Row>
                                     <Table.Row>
                                         <Table.Cell width={2}>Price, BUN:</Table.Cell>

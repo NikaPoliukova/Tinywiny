@@ -67,9 +67,10 @@ export default function Products() {
                         {products.map((product) => (
                             <Grid item key={product.productId} xs={12} sm={6} md={4}>
                                 <Card sx={{height: '100%', display: 'flex', flexDirection: 'column'}}>
-                                    <CardMedia
-                                        component="img"
-                                        image="https://source.unsplash.com/random"/>
+                                    <CardMedia>
+                                        <img src={`${product?.image}`}/>
+
+                                    </CardMedia>
                                     <CardContent sx={{flexGrow: 1}}>
                                         <Typography>
                                             {product.productName}

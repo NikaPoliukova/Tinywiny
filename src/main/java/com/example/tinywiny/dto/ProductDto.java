@@ -18,6 +18,4 @@ public class ProductDto {
   String description;
   int countInStock;
   int idType;
-
-
 }

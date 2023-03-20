@@ -1,6 +1,7 @@
 package com.example.tinywiny.service;
 
 import at.favre.lib.crypto.bcrypt.BCrypt;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.security.SecureRandom;
@@ -10,8 +11,8 @@ public class HashPassService {
 
   private final BCrypt.Hasher hasher;
 
-  public HashPassService() {
-    hasher = BCrypt.with(new SecureRandom("secret".getBytes()));
+  public HashPassService(@Value("${secret}") String secret) {
+    hasher = BCrypt.with(new SecureRandom(secret.getBytes()));
   }
 
   public boolean verify(String password, String hashPass) {

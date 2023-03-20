@@ -8,6 +8,7 @@ import com.example.tinywiny.dto.ProductInBucketDto;
 import com.example.tinywiny.model.Bucket;
 import com.example.tinywiny.model.ProductInBucket;
 import com.example.tinywiny.service.BucketService;
+import com.example.tinywiny.service.UtilClass;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -31,15 +32,18 @@ public class BucketRestController {
   private final BucketService bucketService;
   private final ProductInBucketConverter converter;
   private final BucketConverter bucketConverter;
-
-  @GetMapping("/{bucketId}")
-  public List<ProductInBucketDto> findAllProductsInBucket(@PathVariable Long bucketId) {
-    return converter.toProductInBucketDto(bucketService.findAllProductInBucket(bucketId));
+  private final UtilClass utilClass;
+  @GetMapping
+  public List<ProductInBucketDto> findAllProductsInBucket() {
+    Long userId= utilClass.getIdCurrentUser();
+    Bucket bucket = bucketService.findBucketByUserId(userId);
+    return converter.toProductInBucketDto(bucketService.findAllProductInBucket(bucket.getBucketId()));
   }
 
   @GetMapping("/sum/all")
-  public OrderSumDto getSumProductInBucket(@RequestParam Long bucketId) {
-    Bucket bucket = bucketService.findBucketByBucketId(bucketId);
+  public OrderSumDto getSumProductInBucket() {
+    Long userId= utilClass.getIdCurrentUser();
+    Bucket bucket = bucketService.findBucketByUserId(userId);
     List<ProductInBucket> productInBucket = bucketService.findAllProductInBucket(bucket.getBucketId());
     int sum = bucketService.getSumProductInBucket(productInBucket);
     int sumWithDiscount = bucketService.getSumWithDiscount(sum);
@@ -61,9 +65,11 @@ public class BucketRestController {
     bucketService.deleteProductInBucket(productInBucketId);
   }
 
-  @DeleteMapping("/{bucketId}")
-  public void deleteAllProductsInBucket(@PathVariable Long bucketId) {
-    bucketService.deleteAllProductsInBucket(bucketId);
+  @DeleteMapping
+  public void deleteAllProductsInBucket() {
+    Long userId= utilClass.getIdCurrentUser();
+    Bucket bucket = bucketService.findBucketByUserId(userId);
+    bucketService.deleteAllProductsInBucket(bucket.getBucketId());
   }
 
   @GetMapping("/user")

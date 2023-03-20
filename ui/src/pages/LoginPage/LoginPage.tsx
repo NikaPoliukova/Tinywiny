@@ -17,6 +17,7 @@ import React from "react";
 import AuthorizationService from "../../services/AuthorizationService";
 import {Link, useNavigate} from "react-router-dom";
 import HeaderForNoAuthorized from "pages/component/HeaderForNoAuthorized";
+import Toolbar from "@mui/material/Toolbar";
 
 
 const theme = createTheme();
@@ -68,7 +69,7 @@ const SignIn = () => {
     return (
 
         <ThemeProvider theme={theme}>
-            <HeaderForNoAuthorized />
+            <HeaderForNoAuthorized/>
             <Box sx={{
                 display: 'flex',
                 flexDirection: 'column',
@@ -88,6 +89,7 @@ const SignIn = () => {
                 >
                     <Avatar sx={{m: 1, bgcolor: 'secondary.main'}}>
                         <PersonIcon/>
+
                     </Avatar>
                     <Typography component="h1" variant="h5">
                         Sign in
@@ -127,20 +129,26 @@ const SignIn = () => {
                             type="submit"
                             size="small"
                             sx={{mt: 1, mb: 1}}
-                                                >
+                        >
+                        </Button>
+                        <Button
+                            basic color='brown'
+                            content='Registration'
+                            href="/registration"
+                            variant="outlined"
+                            sx={{my: 1, mx: 1.5}}>
                         </Button>
 
+                        <Button
+                            basic color='brown' content='Google Sign-In'
+                            component={Link}
+                            type="submit"
+                            size="small"
+                            sx={{mt: 1, mb: 1}}
+                            to={'http://localhost:8080/oauth2/authorization/google'}
+                        >
+                        </Button>
                     </Box>
-                    <Button
-                        basic color='brown' content='Registration'
-                        component={Link}
-                        type="submit"
-                        size="small"
-                        sx={{mt: 1, mb: 1}}
-                        to={'/registration'}
-                    >
-
-                    </Button>
 
                 </Box>
             </Container>

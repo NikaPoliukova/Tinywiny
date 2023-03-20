@@ -1,17 +1,17 @@
-import HeaderForNoAuthorized from 'pages/component/HeaderForNoAuthorized';
-import * as React from 'react';
+import React from 'react'
+import {Container} from 'semantic-ui-react'
+import MyHeader from 'pages/component/MyHeader';
 
-function App() {
+
+function ReviewUpdate() {
+
 
     return (
-      <div>
-          <HeaderForNoAuthorized/>
-          <h2 color='red'>Hello</h2>
-      </div>
+        <Container>
+            <MyHeader/>
 
-    );
-}
+        </Container>
+    )
+};
 
-export default App;
-
-
+export default ReviewUpdate

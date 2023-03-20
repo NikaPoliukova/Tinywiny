@@ -6,8 +6,8 @@ import {OrderSumDto} from "../model/OrderSumDto";
 
 class BucketService {
 
-    async findAllProductsInBucket(bucketId: number): Promise<Array<ProductInBucket>> {
-        const response = await axios.get<Array<ProductInBucket>>('http://localhost:8080/api/v1/bucket/' + bucketId,
+    async findAllProductsInBucket(): Promise<Array<ProductInBucket>> {
+        const response = await axios.get<Array<ProductInBucket>>('http://localhost:8080/api/v1/bucket',
             {withCredentials: true});
         return response.data;
     }
@@ -33,17 +33,16 @@ class BucketService {
          return response.data;
      }*/
 
-    async getSumProductInBucket(bucketId: number): Promise<OrderSumDto> {
-        const params = {bucketId: bucketId};
+    async getSumProductInBucket(): Promise<OrderSumDto> {
         const response = await axios.get<OrderSumDto>('http://localhost:8080/api/v1/bucket/sum/all',
-            {params, withCredentials: true}
+            {withCredentials: true}
         );
         return response.data;
     }
 
-    async addProductInBucket(productId: number){
+    async addProductInBucket(productId: number) {
         const params = {productId: productId};
-       await axios.post('http://localhost:8080/api/v1/bucket/product/'+productId,
+        await axios.post('http://localhost:8080/api/v1/bucket/product/' + productId,
             {params: params}, {withCredentials: true});
     }
 
@@ -54,8 +53,8 @@ class BucketService {
         return response.data;
     }
 
-    async deleteAllProductsInBucket(bucketId: number): Promise<void> {
-        const response = await axios.delete('http://localhost:8080/api/v1/bucket/' + bucketId,
+    async deleteAllProductsInBucket(): Promise<void> {
+        const response = await axios.delete('http://localhost:8080/api/v1/bucket',
             {withCredentials: true});
         return response.data;
     }

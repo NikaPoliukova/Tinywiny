@@ -4,6 +4,7 @@ import com.example.tinywiny.converter.DeliveryInformationConverter;
 import com.example.tinywiny.converter.OrderConverter;
 import com.example.tinywiny.converter.UserConverter;
 import com.example.tinywiny.dto.OrderDto;
+import com.example.tinywiny.dto.StatusOrder;
 import com.example.tinywiny.dto.UserDto;
 import com.example.tinywiny.model.DeliveryInformation;
 import com.example.tinywiny.model.Order;
@@ -37,17 +38,19 @@ public class OrderService {
   private final UserConverter userConverter;
   private final DeliveryInformationConverter deliveryInformationConverter;
   private final BucketRepository bucketRepository;
-
+  private final UtilClass utilClass;
   @Transactional
   @Modifying
   public Order save(OrderDto orderDto) {
-    User user = userRepository.findUserByUserId(orderDto.getUserId()).get();
+    Long userId = utilClass.getIdCurrentUser();
     Order order = orderConverter.toOrder(orderDto);
+    User user = userRepository.findUserByUserId(userId).get();
     UserDto userDto = userConverter.toDto(user);
     DeliveryInformation deliveryInformation = deliveryInformationConverter
         .toDeliveryInformation(orderDto.getDeliveryInformationDto(), userDto);
     order.setDeliveryInformation(deliveryInformation);
-    List<ProductInBucket> productsInBucket = bucketRepository.findBucketByUserUserId(user.getUserId()).get().getProductsInBucket();
+    List<ProductInBucket> productsInBucket =
+        bucketRepository.findBucketByUserUserId(user.getUserId()).get().getProductsInBucket();
     List<ProductInOrder> productsInOrder = addProductsInOrder(productsInBucket);
     order.setProductsInOrder(productsInOrder);
     return orderRepository.save(order);
@@ -92,10 +95,10 @@ public class OrderService {
     return orderRepository.getOrderStatus(orderId);
   }
 
-  public void updateOrderStatus(String status, Long orderId) {
-    Order order = findOrderByOrderId(orderId);
+  public void updateOrderStatus(StatusOrder status) {
+    Order order = findOrderByOrderId(status.getOrderId());
     if (order != null && !status.equals(order.getStatusOrder())) {
-      order.setStatusOrder(status);
+      order.setStatusOrder(status.getStatusOrder());
       orderRepository.save(order);
     }
   }

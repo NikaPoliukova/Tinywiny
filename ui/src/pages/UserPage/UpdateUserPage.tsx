@@ -4,7 +4,7 @@ import UserService from "../../services/UserService";
 import {Card, TableContainer} from "@mui/material";
 import {useNavigate} from "react-router-dom";
 import {Footer} from "../component/Footer";
-import {Form, Header, Icon, Table} from "semantic-ui-react";
+import {Button, Form, Header, Icon, Table} from "semantic-ui-react";
 import MyHeader from 'pages/component/MyHeader';
 import {useSessionStore} from "../../store";
 
@@ -12,13 +12,12 @@ import {useSessionStore} from "../../store";
 export const UpdateUserPage = () => {
     const Profile = () => {
         const me = useSessionStore(state => state.user);
-        const [userName, setUserName] = useState("");
         const [password, setPassword] = useState("");
         const [email, setEmail] = useState("");
         const [phoneNumber, setPhoneNumber] = useState("");
         const navigate = useNavigate();
         const userId = me?.userId;
-
+        const userName = me?.userName;
         const updateUser = () => {
             const user: User = {
                 userId,
@@ -43,13 +42,7 @@ export const UpdateUserPage = () => {
                     <TableContainer>
                         <Table>
                             <Table.Body>
-                                <Table.Row>
-                                    <Table.Cell width={1}>User Name</Table.Cell>
 
-                                    <Form.Input fluid placeholder='Write new name'
-                                                value={userName}
-                                                onChange={e => setUserName(e.target.value)}/>
-                                </Table.Row>
                                 <Table.Row>
                                     <Table.Cell width={1}>Password</Table.Cell>
 
@@ -72,9 +65,15 @@ export const UpdateUserPage = () => {
                                 </Table.Row>
                             </Table.Body>
                         </Table>
-                        <Form.Button
-                            onClick={updateUser}
-                        >Update user</Form.Button>
+                        <Button
+                            basic color='brown'
+                            type="submit"
+                            content='Update information'
+                            variant="outlined"
+                            sx={{mt: 3, mb: 2}}
+                            onClick={updateUser}>
+                        </Button>
+
                     </TableContainer>
                 </Card>
                 <Footer/>

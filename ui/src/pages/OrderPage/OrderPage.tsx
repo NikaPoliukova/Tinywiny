@@ -47,6 +47,22 @@ export const OrderPage = () => {
                                 <Table.Cell>Comment</Table.Cell>
                                 <Table.Cell>{order?.commentOrder}</Table.Cell>
                             </Table.Row>
+                            <Table.Row>
+                                <Table.Cell>Sum order, BUN:</Table.Cell>
+                                <Table.Cell>{order?.sum}</Table.Cell>
+                            </Table.Row>
+                            <Table.Row>
+                                <Table.Cell>Address delivery</Table.Cell>
+                                <Table.Cell>{order?.deliveryInformationDto?.addressDelivery}</Table.Cell>
+                            </Table.Row>
+                            <Table.Row>
+                                <Table.Cell>Name customer</Table.Cell>
+                                <Table.Cell>{order?.deliveryInformationDto?.customerName}</Table.Cell>
+                            </Table.Row>
+                            <Table.Row>
+                                <Table.Cell>Lastname customer</Table.Cell>
+                                <Table.Cell>{order?.deliveryInformationDto?.customerLastName}</Table.Cell>
+                            </Table.Row>
                         </Table.Body>
                     </Table>
                 </div>

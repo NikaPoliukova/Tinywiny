@@ -15,6 +15,13 @@ spring:
       file-size-threshold: 1048576
       location: '/tmp'
 
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: "239227747068-e478rem1hleala71fu6ddftjt5057ubl.apps.googleusercontent.com"
+            client-secret: "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"
 aws:
   region: "us-east-1"
   s3:
@@ -29,7 +36,8 @@ security:
   secretKey: "secretKeyNika"
   refresh_secret: "secretRefresh"
   allowed-origin: "http://localhost:3000"
-  session-duration-minutes: 86400
+
+secret: "SECRET"
 
 jwt:
   access_token_name: "JWT"

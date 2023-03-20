@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import {Route, Routes} from 'react-router-dom';
 import UsersPage from './pages/UsersPage/UsersPage';
-import HomePage from "./pages/HomePage/HomePage";
+
 import {Registry} from "./pages/RegistrationPage/RegistryPage";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ReviewsPage from "./pages/AdminPage/ReviewsPage";
@@ -25,8 +25,11 @@ import SignIn from "./pages/LoginPage/LoginPage";
 import {useSessionStore} from "./store";
 import PaymentPage from 'pages/PaymentPage/PaymentPage';
 import {createTheme, ThemeProvider} from '@mui/material/styles';
-import { Theme } from '@mui/material/styles/createTheme';
+import {Theme} from '@mui/material/styles/createTheme';
 import Products from "./pages/ProductsPage/ProductsPage";
+
+import MyPagination from "./pages/HomePage/HomePage";
+import ReviewUpdate from "./pages/HomePage/HomePage";
 
 
 const theme: Theme = createTheme();
@@ -42,16 +45,16 @@ function App() {
     return (
         <ThemeProvider theme={theme}>
         <Routes>
-            <Route path={'/'} element={<HomePage/>}/>
+            <Route path={'/'} element={<ReviewUpdate/>}/>
             <Route path={'/login'} element={<SignIn/>}/>
-            <Route path={'/users'} element={<UsersPage/>}/>
+            <Route path={'/admin/users'} element={<UsersPage/>}/>
             <Route path={'/users/:userId'} element={<UserPage/>}/>
             <Route path={'/registration'} element={<Registry/>}/>
             <Route path={'/admin/reviews'} element={<ReviewsPage/>}/>
             <Route path={'/gallery'} element={<GalleryPage/>}/>
             <Route path={'/products/type/:type'} element={<Products/>}/>
             <Route path={'/products/:productId'} element={<ProductPage/>}/>
-            <Route path={'/orders'} element={<OrdersPage/>}/>
+            <Route path={'/admin/orders'} element={<OrdersPage/>}/>
             <Route path={'/bucket/:bucketId'} element={<BucketPage/>}/>
             <Route path={'/reviews'} element={<ReviewForUsers/>}/>
             <Route path={'/orders/:userId'} element={<MyOrdersPage/>}/>

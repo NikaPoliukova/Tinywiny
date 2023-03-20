@@ -3,6 +3,7 @@ package com.example.tinywiny.controller;
 import com.example.tinywiny.converter.ProductConverter;
 import com.example.tinywiny.converter.TypeProductConverter;
 import com.example.tinywiny.dto.ProductDto;
+import com.example.tinywiny.dto.ProductDtoWithImage;
 import com.example.tinywiny.dto.TypeProduct;
 import com.example.tinywiny.dto.TypeProductDto;
 import com.example.tinywiny.model.Image;
@@ -20,7 +21,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -37,26 +37,33 @@ public class ProductsRestController {
   private final TypeProductConverter typeProductConverter;
 
 
-  @GetMapping("/file")
-  public ResponseEntity download() {
-    final InputStream in = getClass().getResourceAsStream("/download.png");
-    return ResponseEntity.ok(new InputStreamResource(in));
+  @GetMapping("/products/{productId}")
+  public ProductDtoWithImage getProduct(@PathVariable Long productId) throws URISyntaxException {
+    Product product = productService.findProductByProductId(productId);
+    URI imageUrl = null;
+    Image image = imageService.findImageByProductId(productId);
+    if (image != null) {
+      imageUrl = imageService.getImagePath(image.getImageName());
+    }
+    ProductDto productDto = converter.toProductDto(product);
+    return productService.productConverter(productDto, imageUrl);
+
   }
 
   @PostMapping(value = "/admin/product/create", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE,
       MediaType.APPLICATION_OCTET_STREAM_VALUE},
       produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
   public ResponseEntity uploadNewProduct(@RequestPart("productName") final String productName,
-                                         @RequestPart("price") final int price,
-                                         @RequestPart("countInStock") final int countInStock,
+                                         @RequestPart("price") final String price,
+                                         @RequestPart("countInStock") final String countInStock,
                                          @RequestPart("description") final String description,
-                                         @RequestPart("idType") final int idType,
+                                         @RequestPart("idType") final String idType,
                                          @RequestPart("file") final MultipartFile file) throws IOException {
     Product product = new Product();
-    TypeProduct typeProduct = typeProductService.getType(idType);
+    TypeProduct typeProduct = typeProductService.getType(Integer.parseInt(idType));
     product.setProductName(productName);
-    product.setPrice(price);
-    product.setCountInStock(countInStock);
+    product.setPrice(Integer.parseInt(price));
+    product.setCountInStock(Integer.parseInt(countInStock));
     product.setDescription(description);
     product.setTypeProduct(typeProduct);
     productService.save(product);
@@ -64,16 +71,6 @@ public class ProductsRestController {
     return ResponseEntity.ok(new InputStreamResource(file.getInputStream()));
   }
 
-  @GetMapping("/products/{productId}")
-  public ProductDto getProduct(@PathVariable Long productId) throws URISyntaxException {
-    Product product = productService.findProductByProductId(productId);
-    URI imageUrl = null;
-    Image image = imageService.findImageByProductId(productId);
-    if (image != null) {
-      imageUrl = imageService.getImagePath(image.getImageName()); //как ее передать на UI?
-    }
-    return converter.toProductDto(product);
-  }
 
   @PutMapping("/admin/products/{productId}")
   public void updateProduct(@PathVariable Long productId, @RequestBody ProductDto productDto) {
@@ -86,12 +83,13 @@ public class ProductsRestController {
   }
 
   @GetMapping("/products/type/{typeName}")
-  public List<ProductDto> findAllProductsByTypeAndPage(@PathVariable String typeName,
+  public List<ProductDtoWithImage> findAllProductsByTypeAndPage(@PathVariable String typeName,
                                                        @RequestParam(value = "pageNumber", required = false, defaultValue = "1") Integer pageNumber,
-                                                       @RequestParam(value = "pageSize", required = false, defaultValue = "20") Integer pageSize) {
+                                                       @RequestParam(value = "pageSize", required = false, defaultValue = "20") Integer pageSize) throws URISyntaxException {
     Page<Product> page = productService.findAllProductsByTypeAndPage(typeName, pageNumber - 1, pageSize);
     List<Product> products = page.getContent();
-    return converter.toProductDto(products);
+    List<ProductDto> productsDto = converter.toProductDto(products);
+    return productService.productConverter(productsDto);
   }
 
   @GetMapping("/admin/products")
@@ -113,10 +111,6 @@ public class ProductsRestController {
     productService.deleteProduct(productId);
   }
 
-  @DeleteMapping("/admin/image/{productId}")
-  public void deleteImage(@PathVariable Long productId) {
-    imageService.deleteImage(productId);
-  }
 }
 //GET image????
   /*@PostMapping("/products")

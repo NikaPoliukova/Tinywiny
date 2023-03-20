@@ -6,11 +6,14 @@ import com.example.tinywiny.model.User;
 import com.example.tinywiny.security.PrincipalUser;
 import com.example.tinywiny.service.UserService;
 import com.example.tinywiny.service.UtilClass;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,6 +27,7 @@ import java.util.List;
 
 
 @Slf4j
+@Validated
 @RequestMapping("/api/v1/users")
 @RestController
 @RequiredArgsConstructor

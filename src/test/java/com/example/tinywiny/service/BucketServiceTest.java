@@ -128,15 +128,15 @@ class BucketServiceTest {
     verify(bucketRepository).createBucket(any());
   }
 
-  private Bucket prepareBucket() {
+  public static Bucket prepareBucket() {
     return new Bucket(1L, new User(), List.of(prepareProductInBucket()));
   }
 
-  private ProductInBucket prepareProductInBucket() {
+  public static ProductInBucket prepareProductInBucket() {
     return new ProductInBucket(1L, 1, null, prepareProduct());
   }
 
-  private Product prepareProduct() {
+  public static Product prepareProduct() {
     return new Product(1L, "productName", 123, "description", 2, new TypeProduct(), new ArrayList<>(), new ArrayList<>());
   }
 

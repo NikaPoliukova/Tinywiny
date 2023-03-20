@@ -55,7 +55,7 @@ class DeliveryInformationServiceTest {
     assertEquals(prepareDeliveryInformation(), actual);
   }
 
-  private DeliveryInformation prepareDeliveryInformation() {
+  public static DeliveryInformation prepareDeliveryInformation() {
     return new DeliveryInformation(1L, "customerName", "customerLastName", "customerSurname", "addressDelivery", new User(), List.of(new Order()));
   }
 

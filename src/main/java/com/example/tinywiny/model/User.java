@@ -24,7 +24,7 @@ import java.util.List;
 @DynamicInsert
 @Data
 @Jacksonized
-
+@AllArgsConstructor
 @Table(name = "users")
 public class User {
 
@@ -48,15 +48,5 @@ public class User {
 
   private String role;
 
-  /*@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-  private List<Order> orders = new ArrayList<>();
 
-  @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-  private List<Review> reviews = new ArrayList<>();
-
-  @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-  private List<DeliveryInformation> deliveryInformation = new ArrayList<>();*/
-
- /* @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
-  private Bucket bucket;*/
 }

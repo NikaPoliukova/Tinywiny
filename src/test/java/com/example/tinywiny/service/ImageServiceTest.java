@@ -20,6 +20,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 
+import static com.example.tinywiny.service.BucketServiceTest.prepareProduct;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
@@ -160,10 +161,4 @@ class ImageServiceTest {
   private Image prepareImage() {
     return new Image(1L, "image.png", 2L);
   }
-
-  private Product prepareProduct() {
-    return new Product(1L, "productName", 123, "description", 2, new TypeProduct(), new ArrayList<>(), new ArrayList<>());
-  }
-
-
 }

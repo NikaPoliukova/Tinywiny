@@ -53,7 +53,7 @@ export default function CreateOrderPage() {
             deliveryInformationDto,
             deliveryTypeId,
             sum: sumProducts?.sumWithDiscount
-        };
+        }
         OrderService.createOrder(order)
             .then(() => {
                     BucketService.deleteAllProductsInBucket()

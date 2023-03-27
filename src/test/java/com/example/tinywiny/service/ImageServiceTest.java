@@ -1,8 +1,6 @@
 package com.example.tinywiny.service;
 
-import com.example.tinywiny.dto.TypeProduct;
 import com.example.tinywiny.model.Image;
-import com.example.tinywiny.model.Product;
 import com.example.tinywiny.repository.ImageRepository;
 import com.example.tinywiny.repository.ProductRepository;
 import com.example.tinywiny.service.amazonService.AwsService;
@@ -18,7 +16,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.ArrayList;
 
 import static com.example.tinywiny.service.BucketServiceTest.prepareProduct;
 import static org.junit.jupiter.api.Assertions.assertEquals;

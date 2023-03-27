@@ -42,6 +42,8 @@ class BucketServiceTest {
   private ProductRepository productRepository;
   @InjectMocks
   private BucketService bucketService;
+  @Mock
+  private UtilClass utilClass;
 
 
   @Test
@@ -52,7 +54,6 @@ class BucketServiceTest {
 
     assertEquals(List.of(new ProductInBucket(1L, 1, null, prepareProduct())), actual);
   }
-
 
   @Test
   void findBucketByUserId() {
@@ -73,8 +74,9 @@ class BucketServiceTest {
   void addProductInBucket() {
     when(bucketRepository.findBucketByUserUserId(any(Long.class))).thenReturn(Optional.of(prepareBucket()));
     when(productService.findProductByProductId(any(Long.class))).thenReturn(prepareProduct());
+    when(utilClass.getIdCurrentUser()).thenReturn(3L);
     when(productInBucketRepository.save(any(ProductInBucket.class))).thenReturn(prepareProductInBucket());
-    bucketService.addProductInBucket(1L);
+    bucketService.addProductInBucket(3L);
 
     verify(bucketRepository).findBucketByUserUserId(any());
     verify(productService).findProductByProductId(any());

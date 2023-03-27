@@ -38,7 +38,9 @@ public class OrderService {
   private final UserConverter userConverter;
   private final DeliveryInformationConverter deliveryInformationConverter;
   private final BucketRepository bucketRepository;
+  private final ProductService productService;
   private final UtilClass utilClass;
+
   @Transactional
   @Modifying
   public Order save(OrderDto orderDto) {
@@ -53,7 +55,12 @@ public class OrderService {
         bucketRepository.findBucketByUserUserId(user.getUserId()).get().getProductsInBucket();
     List<ProductInOrder> productsInOrder = addProductsInOrder(productsInBucket);
     order.setProductsInOrder(productsInOrder);
-    return orderRepository.save(order);
+    Order orderNew = orderRepository.save(order);
+    List<ProductInOrder> listProducts = orderNew.getProductsInOrder();
+    for (ProductInOrder productInOrder : listProducts) {
+     productService.updateCountProductInStock(productInOrder);
+    }
+    return orderNew;
   }
 
   private List<ProductInOrder> addProductsInOrder(List<ProductInBucket> productInBucket) {

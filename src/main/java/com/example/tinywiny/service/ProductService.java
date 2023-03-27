@@ -56,7 +56,7 @@ public class ProductService {
 
   }
 
-  private Product prepareProductForUpdate(ProductDto productDto, Product product) {
+  public Product prepareProductForUpdate(ProductDto productDto, Product product) {
     if (productDto.getPrice() != 0) {
       product.setPrice(productDto.getPrice());
     }
@@ -70,16 +70,6 @@ public class ProductService {
       product.setTypeProduct(typeProductService.getType(productDto.getIdType()));
     }
     return product;
-  }
-
-  @Transactional
-  @Modifying
-  public void updateCountInStock(int count, Long productId) {
-    Optional<Product> product = productRepository.findProductByProductId(productId);
-    if (product.isPresent() && count >= 0) {
-      product.get().setCountInStock(count);
-      productRepository.save(product.get());
-    }
   }
 
   public Page<Product> findAllProductsByTypeAndPage(String typeName, int pageNumber, int pageSize) {
@@ -114,6 +104,17 @@ public class ProductService {
 
   public List<Product> findAllProducts() {
     return productRepository.findAll();
+  }
+
+  @Transactional
+  @Modifying
+  public void updateCountProductInStock(ProductInOrder productInOrder) {
+    Product product = productRepository.findProductByProductId(productInOrder.getProduct().getProductId()).get();
+    int currentCount = product.getCountInStock();
+    if (currentCount != 0 && currentCount >= productInOrder.getCount()) {
+      product.setCountInStock(currentCount - productInOrder.getCount());
+      productRepository.save(product);
+    }
   }
 
   public ProductDtoWithImage productConverter(ProductDto productDto, URI image) {

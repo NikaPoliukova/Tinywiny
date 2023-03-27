@@ -78,20 +78,5 @@ public class BucketRestController {
     List<ProductInBucket> productsInBucket = bucket.getProductsInBucket();
     return bucketConverter.toBucketDto(bucket, productsInBucket);
   }
-   /*//ТУТ ДОЛЖНО БЫТЬ ДРОБНОЕ ЧИСЛО
-  @GetMapping("/final-sum")
-  protected int getSumWithDiscount(@RequestParam int sum) {
-    return bucketService.getSumWithDiscount(sum);
-  }*/
 
-/*
-  @GetMapping
-  public BucketDto findBucketByBucketId(@RequestBody Long bucketId) {
-    return bucketConverter.toBucket(bucketService.findBucketByBucketId(bucketId));
-  }
-
-  @GetMapping("/sum/all")
-  protected int getSumProductInBucket(@RequestBody List<ProductInBucketDto> productInBucketDto) {
-    return bucketService.getSumProductInBucket(productInBucketDto);
-  }*/
 }

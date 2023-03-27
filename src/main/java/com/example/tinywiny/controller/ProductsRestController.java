@@ -4,10 +4,12 @@ import com.example.tinywiny.converter.ProductConverter;
 import com.example.tinywiny.converter.TypeProductConverter;
 import com.example.tinywiny.dto.ProductDto;
 import com.example.tinywiny.dto.ProductDtoWithImage;
+import com.example.tinywiny.dto.ProductInOrderDto;
 import com.example.tinywiny.dto.TypeProduct;
 import com.example.tinywiny.dto.TypeProductDto;
 import com.example.tinywiny.model.Image;
 import com.example.tinywiny.model.Product;
+import com.example.tinywiny.model.ProductInOrder;
 import com.example.tinywiny.service.ImageService;
 import com.example.tinywiny.service.ProductService;
 import com.example.tinywiny.service.TypeProductService;
@@ -75,11 +77,6 @@ public class ProductsRestController {
   @PutMapping("/admin/products/{productId}")
   public void updateProduct(@PathVariable Long productId, @RequestBody ProductDto productDto) {
     productService.updateProduct(productDto, productId);
-  }
-
-  @PutMapping("/products/update/count-in-stock")
-  public void updateCountInStock(@RequestBody ProductDto product) {
-    productService.updateCountInStock(product.getCountInStock(), product.getProductId());
   }
 
   @GetMapping("/products/type/{typeName}")

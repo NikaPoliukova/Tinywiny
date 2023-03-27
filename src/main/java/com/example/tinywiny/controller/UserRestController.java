@@ -45,7 +45,7 @@ public class UserRestController {
   @GetMapping
   protected List<UserDto> findAllUsersByPage(@RequestParam(value = "pageNumber", required = false, defaultValue = "1") Integer pageNumber,
                                              @RequestParam(value = "pageSize", required = false, defaultValue = "20") Integer pageSize) {
-    Page<User> page = userService.getUserByPage(pageNumber - 1, pageSize);
+    Page<User> page = userService.getUsersByPage(pageNumber - 1, pageSize);
     List<User> users = page.getContent();
     return userConverter.toDto(users);
   }

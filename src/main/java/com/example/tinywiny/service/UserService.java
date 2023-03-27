@@ -79,7 +79,7 @@ public class UserService {
     return user.get();
   }
 
-  public Page<User> getUserByPage(int pageNumber, int pageSize) {
+  public Page<User> getUsersByPage(int pageNumber, int pageSize) {
     Pageable page = PageRequest.of(pageNumber, pageSize);
     return userRepository.findAllBy(page);
   }
